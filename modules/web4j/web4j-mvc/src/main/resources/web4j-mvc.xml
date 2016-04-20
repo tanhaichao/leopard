@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<!-- 自定义数据类型 -->
+		<property name="converters">
+			<list>
+				<bean class="io.leopard.web4j.editor.OnlyDateConverter" />
+				<bean class="io.leopard.web4j.editor.MonthConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="leopardWebBindingInitializer" class="io.leopard.web4j.editor.LeopardWebBindingInitializer">
+		<property name="conversionService" ref="conversionService" />
+	</bean>
+
+	<bean class="io.leopard.web4j.mvc.LeopardRequestMappingHandlerAdapter">
+		<property name="webBindingInitializer" ref="leopardWebBindingInitializer" />
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+
+		<property name="customArgumentResolvers">
+			<list>
+				<bean class="io.leopard.web4j.resolver.SpeicalParameterHandlerMethodArgumentResolver" />
+				<bean class="io.leopard.web4j.resolver.PathRegexHandlerMethodArgumentResolver" />
+			</list>
+		</property>
+	</bean>
+</beans>

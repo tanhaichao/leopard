@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.leopard.io/schema/monitor" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans" targetNamespace="http://www.leopard.io/schema/monitor"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="http://www.springframework.org/schema/beans/spring-beans.xsd" />
+
+	<xsd:element name="monitor">
+		<xsd:annotation>
+			<xsd:documentation>监控配置信息</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="notifier">
+						<xsd:complexType>
+							<xsd:attribute name="name" type="xsd:string" />
+							<xsd:attribute name="mobile" type="xsd:string" />
+							<xsd:attribute name="email" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+
+					<xsd:element name="redis">
+						<xsd:complexType>
+							<xsd:attribute name="server" type="xsd:string" />
+							<xsd:attribute name="redis-ref" type="xsd:string" />
+							<xsd:attribute name="maxMemory" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+
+					<xsd:element name="alarm">
+						<xsd:complexType>
+							<xsd:attribute name="sms" type="xsd:boolean" default="false" />
+							<xsd:attribute name="windows" type="xsd:boolean" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="base">
+						<xsd:complexType>
+							<xsd:attribute name="threadCount" type="xsd:int" default="1024" />
+							<xsd:attribute name="systemLoadAverage" type="xsd:float" default="5.0" />
+
+							<xsd:attribute name="usedHeapMemory" type="xsd:string" default="4G" />
+
+							<xsd:attribute name="freeHeapMemory" type="xsd:string" default="100M" />
+							<xsd:attribute name="freePhysicalMemory" type="xsd:string" default="800M" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attribute name="enable" type="xsd:boolean" default="true" />
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>  

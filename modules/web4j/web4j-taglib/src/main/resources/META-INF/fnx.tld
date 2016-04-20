@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<description>Leopard Framework JSP Tag Library</description>
+	<tlib-version>3.0</tlib-version>
+	<short-name>fnx</short-name>
+	<uri>http://www.leopard.io/tags/fnx</uri>
+
+	<function>
+		<description>Date对象按默认时间格式输出</description>
+		<name>time</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.util.Date time(java.util.Date)</function-signature>
+	</function>
+
+	<function>
+		<name>escape</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String escape(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>noescape</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String noescape(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>escapeJavascript</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String escapeJavascript(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>escapeJsParam</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String escapeJavascriptParam(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>escapeJavascriptParam</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String escapeJavascriptParam(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>escapeHTMLTags</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String escapeHTMLTags(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>urlEncode</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String urlEncode(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>unixTime</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.Integer unixTime(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>timestamp</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.Long timestamp(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>b2i</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.Integer b2i(java.lang.Boolean)</function-signature>
+	</function>
+	<function>
+		<name>replaceSpace</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String replaceSpace(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>转html链接可点击</description>
+		<name>convertUrl</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String convertUrl(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>space</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String space(java.lang.Integer)</function-signature>
+	</function>
+
+	<function>
+		<description>根据uid获取通行证账号</description>
+		<name>passport</name>
+		<function-class>org.leopard.web4j.taglib.JstlFunctions</function-class>
+		<function-signature>java.lang.String passport(java.lang.Long)</function-signature>
+	</function>
+	
+
+
+
+</taglib>   

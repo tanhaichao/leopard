@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.leopard.io/schema/leopard" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans"
+	targetNamespace="http://www.leopard.io/schema/leopard" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="http://www.springframework.org/schema/beans/spring-beans.xsd" />
+
+	<xsd:element name="dataSource">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	基础数据源配置<br/>
+	例子:<br/>
+	<leopard:admin type="default" /><br/>
+	]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="host" type="xsd:string" use="required" />
+					<xsd:attribute name="database" type="xsd:string" use="required" />
+
+					<xsd:attribute name="user" type="xsd:string" use="required" />
+					<xsd:attribute name="password" type="xsd:string" use="required" />
+					<xsd:attribute name="maxPoolSize" type="xsd:int" default="15" />
+					<xsd:attribute name="port" type="xsd:int" default="3306" />
+					<xsd:attribute name="memcacheServer" type="xsd:string" use="required" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="component-scan">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	component-scan<br/>
+	例子:<br/>
+	<leopard:component-scan base-package="io.leopard.news.dao" /><br/>
+	]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="clazz" type="xsd:string" fixed="io.leopard.data4j.schema.ComponentScanBeanDefinitionParser" />
+
+			<xsd:attribute name="base-package" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	The comma-separated list of packages to scan for annotated components.
+					]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="timer-scan">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	timer-scan<br/>
+	例子:<br/>
+	<leopard:timer-scan base-package="io.leopard.news.timer" /><br/>
+	]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="base-package" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	存放定时器类的package
+					]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="performance">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	performance<br/>
+	例子:<br/>
+	<leopard:performance enable="true"/><br/>
+	]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="enable" type="xsd:boolean" use="required" />
+
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="connection-limit">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	connection-limit<br/>
+	例子:<br/>
+	<leopard:connection-limit seconds="2" redis-ref="redis" /><br/>
+	]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="seconds" type="xsd:int" use="required" />
+			<xsd:attribute name="redis-ref" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- <xsd:element name="env"> <xsd:annotation> <xsd:documentation><![CDATA[ 环境配置<br/> 例子:<br/> <leopard:env configFile="app.properties" /><br/> ]]></xsd:documentation> </xsd:annotation> <xsd:complexType> 
+		<xsd:attribute name="configFile" default="app.properties"> <xsd:simpleType> <xsd:restriction base="xsd:NMTOKEN"> <xsd:enumeration value="app.properties" /> <xsd:enumeration value="admin.properties" /> 
+		</xsd:restriction> </xsd:simpleType> </xsd:attribute> </xsd:complexType> </xsd:element> -->
+
+	<xsd:element name="config">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	后台管理员登陆过滤器<br/>
+	例子:<br/>
+	<leopard:config admin="default" /><br/>
+	]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="adminType" default="default">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+							]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="default" />
+						<xsd:enumeration value="mysql" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+
+			<xsd:attribute name="performance" default="disable">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	是否启用方法级别的性能监控.
+							]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="disable" />
+						<xsd:enumeration value="enable" />
+						<xsd:enumeration value="false" />
+						<xsd:enumeration value="true" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+
+			<xsd:attribute name="sessionRedis" type="xsd:string" />
+
+			<xsd:attribute name="convert" default="enable">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	是否启用Leopard参数转换(Integer、Long默认值为0，Boolean默认值为false)
+							]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="disable" />
+						<xsd:enumeration value="enable" />
+						<xsd:enumeration value="false" />
+						<xsd:enumeration value="true" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+
+			<xsd:attribute name="sessionExpiry" type="xsd:int" default="86400" />
+
+			<xsd:attribute name="content" type="xsd:string" />
+
+
+			<xsd:attribute name="xss" default="false">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	是否启用XSS漏洞防范.
+							]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="disable" />
+						<xsd:enumeration value="enable" />
+						<xsd:enumeration value="false" />
+						<xsd:enumeration value="true" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+
+			<xsd:attribute name="csrf" default="false">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	是否启用CSRF漏洞防范.
+							]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="disable" />
+						<xsd:enumeration value="enable" />
+						<xsd:enumeration value="false" />
+						<xsd:enumeration value="true" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+
+			<xsd:attribute name="domainWhiteListJdbcRef" type="xsd:string" default="">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	域名白名单JDBC数据源，MySQL表结构Leopard会自动创建，默认不启用mysql配置.
+							]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="redis">
+		<xsd:annotation>
+
+			<xsd:documentation><![CDATA[
+	Redis连接对象<br/>
+	例子:<br/>
+	<leopard:redis id="redis" server="113.108.228.100:6311" log="true" /><br/>
+	]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="server" type="xsd:string" use="required" />
+					<xsd:attribute name="log" type="xsd:boolean" default="true" />
+					<xsd:attribute name="maxActive" type="xsd:string" default="128" /><!-- 使用string类型才可以支持占位符 -->
+					<xsd:attribute name="initialPoolSize" type="xsd:string" default="0" /><!-- 使用string类型才可以支持占位符 -->
+					<xsd:attribute name="timeout" type="xsd:int" default="3000" />
+					<xsd:attribute name="enableBackup" type="xsd:boolean" default="false" />
+					<xsd:attribute name="backupTime" type="xsd:string" default="04:01" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="memdb">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	Memdb对象<br/>
+	例子:<br/>
+	<leopard:memdb id="memdb" redis-ref="redis" channel="memdb_queue:default" maxSize="100" /><br/>
+	]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="redis-ref" type="xsd:string" use="required" />
+					<xsd:attribute name="channel" type="xsd:string" use="required" />
+					<xsd:attribute name="maxSize" type="xsd:int" default="100" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="memcache">
+		<xsd:annotation>
+			<xsd:documentation>Memcache接口操作对象</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="server" type="xsd:string" use="required" />
+					<xsd:attribute name="sanitizeKeys" type="xsd:boolean" default="true" />
+
+					<xsd:attribute name="maxActive" type="xsd:string" default="64" /><!-- 使用string类型才可以支持占位符 -->
+					<xsd:attribute name="initialPoolSize" type="xsd:string" default="0" /><!-- 使用string类型才可以支持占位符 -->
+					<xsd:attribute name="timeout" type="xsd:int" default="3000" />
+
+					<xsd:attribute name="type" default="redis">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
+
+							]]></xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+								<xsd:enumeration value="redis" />
+								<xsd:enumeration value="memcached" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="jdbc">
+		<xsd:annotation>
+			<xsd:documentation>MySQL操作对象</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="host" type="xsd:string" use="required" />
+					<xsd:attribute name="database" type="xsd:string" use="required" />
+					<xsd:attribute name="user" type="xsd:string" use="required" />
+					<xsd:attribute name="password" type="xsd:string" use="required" />
+					<xsd:attribute name="maxPoolSize" type="xsd:string" />
+					<xsd:attribute name="port" type="xsd:string" />
+					<xsd:attribute name="dataSourceId" type="xsd:string" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="mysql-dsn">
+		<xsd:annotation>
+			<xsd:documentation>MySQL数据源</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="dataSourceId" type="xsd:string" />
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="counter">
+		<xsd:annotation>
+			<xsd:documentation>计数器</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="redis-ref" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="redis-dsn">
+		<xsd:annotation>
+			<xsd:documentation>Redis数据源</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="log" type="xsd:boolean" default="false" />
+			<xsd:attribute name="maxActive" type="xsd:string" default="128" /><!-- 使用string类型才可以支持占位符 -->
+			<xsd:attribute name="initialPoolSize" type="xsd:string" default="0" /><!-- 使用string类型才可以支持占位符 -->
+			<xsd:attribute name="timeout" type="xsd:int" default="3000" />
+			<xsd:attribute name="enableBackup" type="xsd:boolean" default="false" />
+			<xsd:attribute name="backupTime" type="xsd:string" default="04:01" />
+
+			<xsd:attribute name="createConnectionFactory" default="false">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+					是否生成JedisConnectionFactory对象
+							]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="false" />
+						<xsd:enumeration value="true" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+
+			<xsd:attribute name="hash" default="none">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+
+							]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="none" />
+						<xsd:enumeration value="default" />
+						<xsd:enumeration value="yyuid" />
+						<xsd:enumeration value="passport" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="mongo-dsn">
+		<xsd:annotation>
+			<xsd:documentation>Mongo数据源</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="database" type="xsd:string" use="required" />
+			<xsd:attribute name="collectionName" type="xsd:string" use="required" />
+
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="dfs-dsn">
+		<xsd:annotation>
+			<xsd:documentation>DFS数据源</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="type" default="gridfs">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="gridfs" />
+						<xsd:enumeration value="mysql" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="queue-dsn">
+		<xsd:annotation>
+			<xsd:documentation>RabbitMQ数据源</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="memcache-dsn">
+		<xsd:annotation>
+			<xsd:documentation>Memcache数据源</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+
+			<xsd:attribute name="maxActive" type="xsd:string" default="64" /><!-- 使用string类型才可以支持占位符 -->
+			<xsd:attribute name="initialPoolSize" type="xsd:string" default="0" /><!-- 使用string类型才可以支持占位符 -->
+			<xsd:attribute name="timeout" type="xsd:int" default="3000" />
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="signature">
+		<xsd:annotation>
+
+			<xsd:documentation><![CDATA[
+	签名验证<br/>
+	例子:<br/>
+	<leopard:signature id="signatureService" redis-ref="signatureRedisLog4jImpl" publicKey="" redisKey="" useBase16=""/><br/>
+
+	]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="server" type="xsd:string" />
+					<xsd:attribute name="redis-ref" type="xsd:string" />
+
+					<xsd:attribute name="publicKey" type="xsd:string" use="required" />
+					<xsd:attribute name="redisKey" type="xsd:string" use="required" />
+
+					<xsd:attribute name="useBase16" type="xsd:boolean" default="false" />
+					<xsd:attribute name="checkUsed" type="xsd:boolean" default="true" />
+
+
+					<xsd:attribute name="maxActive" type="xsd:string" default="64" /><!-- 使用string类型才可以支持占位符 -->
+					<xsd:attribute name="initialPoolSize" type="xsd:string" default="0" /><!-- 使用string类型才可以支持占位符 -->
+					<xsd:attribute name="timeout" type="xsd:int" default="3000" />
+
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="server">
+		<xsd:annotation>
+			<xsd:documentation>服务器信息配置</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="resin-ip" minOccurs="0" maxOccurs="unbounded" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- -->
+
+
+
+	<!-- -->
+
+	<xsd:element name="tx">
+		<xsd:annotation>
+			<xsd:documentation>事务</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="jdbcId" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>  

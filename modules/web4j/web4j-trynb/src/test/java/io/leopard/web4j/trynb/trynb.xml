@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trynb xmlns="http://www.leopard.io/schema/trynb" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.leopard.io/schema/trynb http://www.leopard.io/schema/trynb.xsd">
+
+	<error url="/" page="/error" />
+</trynb>
