@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs id="FAQ" title="常见问题">
+    <part id="General">
+        <faq id="transaction">
+            <question>Redis、Memcache、MemDB接口，测试时的事务回滚是如何实现的？</question>
+            <answer>
+                <p>......</p>
+            </answer>
+        </faq>
+        <faq id="dns">
+            <question>DNS是如何实现的？</question>
+            <answer>
+                <p>......</p>
+            </answer>
+        </faq>
+        <faq id="web.xml">
+            <question>web.xml简化是如何实现的？</question>
+            <answer>
+                <p>......</p>
+            </answer>
+        </faq>
+        <faq id="web.xml">
+            <question>如何编写集成测试代码(开发阶段调试用)？为什么需要编写集成测试代码？</question>
+            <answer>
+                <p>......</p>
+            </answer>
+        </faq>
+    </part>
+</faqs>

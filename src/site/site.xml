@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+http://maven.apache.org/doxia/doxia-sitetools/doxia-decoration-model/decoration.html
+-->
+<project name="Leopard">
+	<bannerLeft>
+		<name>Leopard - 互联网后端开发框架</name>
+		<href>index.html</href>
+	</bannerLeft>
+	<body>
+		<breadcrumbs>
+			<item name="向上" href="../index.html" />
+		</breadcrumbs>
+		<menu name="Main">
+			<item name="Introduction" href="/index.html" />
+		</menu>
+		
+		<menu name="Get Leopard">
+			<item name="Download" href="/download.html" />
+			<item name="Leopard2E" href="http://leopard2e.leopard.io/update/" target="_blank"/>
+			<item name="Release Notes" href="/release-notes.html"/>
+		</menu>
+
+		<menu name="Documentation">
+			<item name="使用手册" href="/doc/" target="_blank"/>
+			<item name="Leopard论坛" href="http://bbs.leopard.io/" target="_blank"/>
+		</menu>
+		
+		<menu name="项目信息">
+			<item name="项目团队" href="/team-list.html"/>			
+			<item name="源代码库" href="/source-repository.html"/>
+		</menu>
+		
+		<!-- 
+		${reports}
+		 -->
+	</body>
+</project>
