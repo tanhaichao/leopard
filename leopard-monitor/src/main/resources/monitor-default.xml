@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monitor enable="false" xmlns="http://www.leopard.io/schema/monitor" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.leopard.io/schema/monitor http://www.leopard.io/schema/monitor.xsd?a ">
+	<alarm sms="false" />
+	<base />
+	<notifier />
+</monitor>
