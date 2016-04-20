@@ -1,0 +1,28 @@
+ ------
+ JettyTest
+ ------
+ 谭海潮
+ ------
+ 2013-04-22
+ ------
+ 
+JettyTest例子：
+  	
+  	文件存放目录xxx-web/src/test/java/JettyTest.java
+  	
++---+
+
+package io.leopard.blog;
+
+import org.junit.Ignore;
+import io.leopard.test4j.jetty.JettyServer;
+
+@Ignore
+public class JettyTest {
+
+	public static void main(String[] args) throws Exception {
+		JettyServer.start();
+	}
+
+}
+

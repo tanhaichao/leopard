@@ -1,0 +1,25 @@
+ ------
+ Download
+ ------
+ 谭海潮
+ ------
+ 2015-01-18
+ ------
+
+下载
+
++---+
+在主pom.xml中，配置如下信息：
+<project>
+  [...]  
+  <parent>
+	<groupId>io.leopard</groupId>
+	<artifactId>leopard-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+  </parent>
+		  
+  [...]
+</project>
+
+
++---+

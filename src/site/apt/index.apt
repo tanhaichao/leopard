@@ -1,0 +1,96 @@
+ ------
+ Introduction
+ ------
+ 谭海潮
+ ------
+ 2015-01-18
+ ------
+ 
+Leopard (Leopard推广，人人有责！)
+
++---+
+
+Leopard是一个针对互联网后端做了相当多约定、规范设计的开源Java／Java EE全功能栈（full-stack）的应用程序框架。
+Leopard的愿景是让大家更加专注于业务系统开发，使业务系统开发更加简洁、高效。减少重复性工作，提升开发效率，降低项目熟悉和交接成本。
+
+Leopard架封装了很多互联网业务系统开发中常用的代码，如简化测试代码编写、多层数据存储、简化配置(Spring、web.xml)、JSP标签、
+通行证验证、分布式session、管理员登录过滤器、权限判断、方法耗时监控、异常报警等等、页面特殊参数等等。
+
+Leopard测试：
+	Memcache、Redis、Memdb等常用数据接口基于H2做了一遍实现，增加事务回滚功能，不需要手动清理脏数据，省掉Memcached、Redis的测试环境准备。
+	使用H2替代MySQL，测试前不需要准备MySQL测试环境。
+	测试数据在内存中进行操作，减少网络请求，提高测试程序运行效率。
+	使用Tson(简化版的Json)简化JavaBean对象的构造，并采用默认值测试的设计，减少一些构造测试数据的编码工作。
++---+
+
+* Leopard在线使用手册
+	
+	{{http://leopard.io/doc/}}
+
+
+
+
+* Leopard Maven Archetype
+
+	通过Maven Archetype生成基于Leopard单模块项目
+  	
++---+
+
+mvn io.leopard.maven.plugins:leopard-maven-plugin:0.0.1:sexample -DgroupId=com.baidu.example
+
++---+
+
+	通过Maven Archetype生成基于Leopard多模块项目
+  	
++---+
+
+mvn io.leopard.maven.plugins:leopard-maven-plugin:0.0.1:lexample -DgroupId=com.baidu.example
+
++---+
+
+
+* Usage
+
+	可以使用以下配置加入您的pom.xml!!!!
+  	
++---+
+在主pom.xml中，配置如下信息：
+<project>
+  [...]  
+  <parent>
+	<groupId>io.leopard</groupId>
+	<artifactId>leopard-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+  </parent>
+  [...]
+</project>
+
+
+各模块pom.xml中根据需要可以引入以下依赖：
+
+<project>
+  [...]  
+ <dependency>	
+	<groupId>com.duowan.leopard</groupId>
+	<artifactId>leopard-data</artifactId>	
+ </dependency>
+
+ <dependency>	
+	<groupId>com.duowan.leopard</groupId>
+	<artifactId>leopard-test</artifactId>	
+ </dependency>
+
+ <dependency>	
+	<groupId>com.duowan.leopard</groupId>
+	<artifactId>leopard-web</artifactId>	
+ </dependency>
+
+  [...]
+</project>
+
+
++---+
+
+
+
+

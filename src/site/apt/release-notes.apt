@@ -1,0 +1,349 @@
+ ------
+ Release-Notes
+ ------
+ 谭海潮
+ ------
+ 2013-04-23
+ ------
+ 
+Leopard release notes
+
+
++---+
+Leopard版本升级说明:
+命名格式:主版本号.子版本号.修正版本号
+      Major.Minor.Revision
+
+主版本号(Major):在进行了重大修改或局部修正累积较多，主版本号加 1； 存在较多兼容性问题。
+子版本号(Minor):在原有的基础上增加了部分功能时，子版本号加 1，修正版本号复位为 0； 存在很小的兼容性问题，一般是编译时就能发现问题。
+修正版本号(Revision):在进行了局部修改或 bug 修正时，修正版本号加 1； 完全兼容旧版。
+
++---+
+
+
+
++---+
+
+Build 1.1.2-SNAPSHOT
+
+New Features:
+* [ID-0] - <leopard:config/>标签做了限制，只允许使用一次.
+* [ID-0] - Leopard已知异常，日志输出到warning.log(ConnectionLimitException、AdminIpForbiddenRuntimeException)
+* [ID-0] - 访问频率限制改成使用拦截器实现，之前是在Filter实现，出现异常errorpage.xml无法拦截.
+* [ID-0] - errorpage.xml 支持将当前exception以哪一种级别输出(debug、info、warn、error).
+
+
+升级需要特别注意的地方:
+1、如果不需要CSRF、XSS漏洞防范，关闭方法:<leopard:config csrf="false" xss="false" />
+
++---+
+
+
++---+
+
+Build 1.1.1-SNAPSHOT
+
+New Features:
+* [ID-0] - 权限控制组件(permissionService)改成默认启用，相关配置已删除.
+* [ID-0] - 域名(duowan.com|yy.com|kuaikuai.cn)占位符不再需要手动设置，Leopard会自动将值设置为占位符名称.
+* [ID-0] - 单元测试增加Myibatis支持.
+* [ID-0] - 单元测试表结构文件可以放在src/test/resources，每个模块可以使用不同的表结构文件(实现一个项目多个数据库的单元测试)。
+* [ID-0] - [安全组件]CSRF和JSON劫持漏洞防范，管理后台(/admin/目录)除/index.do外，其他页面必须传递referer.
+* [ID-0] - [安全组件]前台页面(JsonView、UpdatedRedirectView)增加token验证，防范CSRF和JSON劫持漏洞，也可以手工设置注解@Csrf启用或关闭token检查
+* [ID-0] - [安全组件]XSS检查更换了新的实现.
+* [ID-0] - [安全组件]增加JspChecker，用于扫描JSP文件是否存在内容输出未做转义（防XSS）。
+* [ID-0] - 增加Leopard过滤器层的耗时监控.
+
+* [ID-0] - <leopard:config domainWhiteListJdbcRef="jdbc"/>，域名白名单配置支持存在MySQL
+* [ID-0] - 解决<leopard:config/>配置覆盖问题
+* [ID-0] - pageNotFound.do自动使用当前展现语言(freemarker还是JSP).
+* [ID-0] - <leopard:signature/>增加checkUsed属性.
+
+
+升级需要特别注意的地方:
+1、/webservice/目录会默认加上IP限制
+2、XSS检查测试还不完全，目前只在信息推送系统、公告系统测试
+3、CSRF漏洞防范默认开启，所有返回值是JsonView的接口都会受影响，如果不需要防范CSRF的JsonView接口，可以通过@Csrf(enable=false)
+4、CSRF漏洞防范默认开启，前端JS要改动。
+5、关闭CSRF、XSS漏洞防范，<leopard:config csrf="false" xss="false" />
+
++---+
+
++---+
+
+Build 1.0.7
+
+New Features:
+* [ID-0] - 单元测试时，支持redis pub/sub
+
++---+
+
++---+
+
+Build 1.0.2
+
+New Features:
+* [ID-0] - 增加DownloadView.
+* [ID-0] - JsonView增加来源检查防范Json劫持.
+* [ID-0] - 增加CSRF漏洞防范
+* [ID-0] - [业务组件]增加RepeatSubmitBiz(防重复提交).
+* [ID-0] - [业务组件]增加SortedSetBiz(有序集合Redis、JVM内存两种存储，带自动同步机制).
+* [ID-0] - <leopard:redis-dsn/>增加createConnectionFactory属性，可生成JedisConnectionFactory供spring-data-redis使用.
+* [ID-0] - 增加RsyncMap，简单实现Map数据在多JVM同步.
+* [ID-0] - 增加JsonCache，相同的json字符串直接使用缓存中的对象，减少反序列化操作。并自动将bean设为只读，防止被修改。
+
+
++---+
+
++---+
+
+Build 1.0.1
+
+New Features:
+* [ID-0] - 增加CaptchaView和页面特殊参数(sessCaptcha)，轻松实现验证码功能.
+* [ID-0] - 增加WebServer类判断当前是否web环境.
+
++---+
+
++---+
+
+Build 1.0.0
+
+New Features:
+* [ID-0] - ubuntu桌面开发环境兼容性测试通过.
+
++---+
+
++---+
+
+Build 0.30
+
+Bug Fixed:
+* [ID-0] - 修复log4j日志切换问题
+* [ID-0] - 修复<leopard:redis-dsn/> log属性无效问题
+
+New Features:
+* [ID-0] - 增加log4j日志自动压缩功能(暂时只对all.log、redis.log启用)
+
++---+
+
++---+
+
+Build 0.23
+
+New Features:
+* [ID-0] - Redis操作增加randomKey接口
+
+
++---+
+
+
+
+
++---+
+
+Build 0.21
+
+Improvements:
+* [ID-0] - StatementParameter允许设置参数值为null.
+* [ID-0] - Eclipse工作区有Leopard源码时，不需要手工拷贝tld文件到src/main/webapp/WEB-INF.
+
+New Features:
+* [ID-0] - Jdbc增加queryForPage接口
+
+
++---+
+
++---+
+
+Build 0.20
+
+Bug Fixed:
+* [ID-0] - 修复<leopard:redis-dns/>name属性字符串分割的bug.
+
+
+Improvements:
+* [ID-0] - xxxxxxxx
+
+New Features:
+* [ID-0] - 所有leopard.game.yy.com域名换成leopard.yy.com
+* [ID-0] - 增加IPubSub接口，轻松实现消息通知到其他resin。
+
+
++---+
+
++---+
+
+Build 0.19
+
+New Features:
+* [ID-0] - 增加/log/resin/external.access.log，记录外部接口耗时。
+
++---+
+
++---+
+
+Build 0.18
+
+Bug Fixed:
+* [ID-0] - 修改RedisConnectionListenerImpl里面的map元素可能存在无限增长的bug。
+
+New Features:
+* [ID-0] - redis连接创建后，永不回收，原来是60秒不使用就会被回收。
+* [ID-0] - <leopard:redis/>增加initialPoolSize属性，用于设置初始化连接数量。
+
++---+
+
++---+
+
+Build 0.16
+
+New Features:
+* [ID-0] - 页面随机延迟功能，可以用来测试客户端、前端，在遇到糟糕的网络情况下的用户体验。
+* [ID-0] - 增加/log/resin/datasource.log，Redis、Jdbc等数据源获取连接耗时太久(>=10ms)，会在这个文件输出日志。
+* [ID-0] - 方法耗时监控增加编码、数据源两个分类，包括Json、Base64、Base16、EncryptUtil、RedisImpl.getResource()的接口耗时统计。
+
++---+
+
+
++---+
+
+Build 0.15
+
+New Features:
+* [ID-0] - 增加<leopard:monitor />
+* [ID-0] - 增加<leopard:signature/>、支持使用base16编码、异步记录已使用的key.
+* [ID-0] - 增加errorlog报警功能.
+* [ID-0] - 监控系统页面，IP无权限访问时，支持使用UDB登录的通行证验证。
+* [ID-0] - redis连接池默认最大连接数改为:128，原来是32
++---+
+
++---+
+
+Build 0.14
+
+New Features:
+* [ID-0] - redis数据源标签name属性支持表达式,<leopard:redis-dns name="user(1-8)"/>
+* [ID-0] - dsn.properties，支持redis数据源的key合并成一个，如:user.redis=127.0.0.1:6311
++---+
+
++---+
+
+Build 0.13
+
+Improvements:
+* [ID-0] - 自动对/webservice/、/monitor/目录做IP访问权限判断。
+
+New Features:
+* [ID-0] - 增加OkTextView，出现异常时Leopard会自动捕获异常，并将异常消息返回的用户。
+* [ID-0] - /monitor/performance.do功能增强
+* [ID-0] - 增加数据源连接统计页面(/monitor/connection.do)
+* [ID-0] - 增加线程数量统计页面(/monitor/thread.do)
++---+
+
+
++---+
+
+Build 0.0.40
+
+Improvements:
+* [ID-0] - 修改JsonView、PagingJsonView
+* [ID-0] - 去掉JsonpView
+
++---+
+
+
++---+
+
+Build 0.0.37
+
+Improvements:
+* [ID-0] - 增加FileCacheView，轻松将HttpServletResponse的输出流存入memcached。
+* [ID-0] - MemoryDb接口改名为Memdb，并将MemdbRsyncImpl改成基于redis的发布/订阅机制实现。
+
+New Features:
+* [ID-0] - 增加<leopard:memdb/>标签
++---+
+
++---+
+
+Build 0.0.31
+
+New Features:
+* [ID-0] - 新增<leopard:config />标签，例子:<leopard:config adminType="hiido" adminRole="true" performance="true" distributedSession="false"/>
+* [ID-0] - 使用<leopard:config distributedSession="false" />禁用分布式session.
+* [ID-0] - 增加查看Leopard配置信息页面(/leopard/status.do)。
+* [ID-0] - 增加<leopard:env configFile="admin.properties" />，可以为特殊模块(后台)指定配置文件.
+* [ID-0] - 删除了/admin/applicationContext.xml,/admin/center_admin/applicationContext.xml配置文件.
+* [ID-0] - tablib:fnx的URL换成http://leopard.game.yy.com/tags/fnx
+* [ID-0] - tablib:<dw:xxx/>标签的URL换成http://leopard.game.yy.com/tags/dw
++---+
+
++---+
+
+Build 0.0.30
+
+New Features:
+* [ID-0] - 性能监控统计数据，增加"今天的查询"、"慢查询"、"很慢查询".
+* [ID-0] - 加了堆栈信息监控（根据入口进行方法性能监控），方便按入口方法查询相关的性能信息。
+* [ID-0] - SimpleTimer类isDefaultEnabled方法默认返回true，不再区分是否resin环境.
+
++---+
+
++---+
+
+Build 0.0.29
+
+Improvements:
+* [ID-0] - xxx
+
+New Features:
+* [ID-0] - 增加ServerUtil.getServerIp()获取当前服务器IP。
+* [ID-0] - 页面参数(PageParameter)增加cookieLoginedUsername。
+* [ID-0] - 增加注销接口/udb/logout.do.
+
++---+
+
++---+
+
+Build 0.0.28
+
+Improvements:
+* [ID-0] - 页面参数支持自定义数据类型(OnlyDate、Month)，底层实现改动较大.
+* [ID-0] - @RequestMapping改用RequestMappingHandlerMapping实现，底层实现改动较大.
+* [ID-0] - 管理员登录过滤器合并到UserinfoFilter(前台用户登录过期)类实现。
+
+New Features:
+* [ID-0] - 允许WEB-INF/jsp/404.jsp、error.jsp两个文件不存在，当JSP文件不存在时Leopard会使用默认视图显示提示信息。
+* [ID-0] - JettyTest、UserinfoFilter(登录过滤器)支持自定义contextPath。
+
++---+
+
+
+  	
++---+
+
+Build 0.0.25
+
+Bug Fixed:
+* [ID-0] - 修复Jetty8，useFileMappedBuffer=false设置失效的bug.
+
+Improvements:
+* [ID-0] - Spring自定义页面参数默认值,Integer、Long默认值为0，Boolean默认值为false.
+* [ID-0] - config/host/host-dev.properties迁移到config/dev/dns.properties
+* [ID-0] - 删除xxx-dao、xxx-service模块的src/main/resources/applicationContext.xml
+* [ID-0] - 集成测试入口配置文件改成src/test/resources/integrationTest.xml(原来是spring.xml)
+
+New Features:
+* [ID-0] - 增加<leopard:timer/>标签，例子:<leopard:timer-scan base-package="com.duowan.news.timer" />
+* [ID-0] - JettyTest支持在JRE运行，并支持端口占用检查.
+* [ID-0] - config/dev/dns.properties文件允许不存在
+* [ID-0] - udbsdk.properties文件不存在，则不启用UDB登陆验证
+* [ID-0] - 没有设置memcache(Spring Bean)，则不启用分布式session
+* [ID-0] - 增加JsonpView
+* [ID-0] - MessageView、TextView、JsonView、WebserviceView、JsonpView几个常用视图改成直接使用response输出内容，
+	    省去拷贝粘贴message.jsp、message.json.jsp、message.text.jsp等JSP文件。
+
++---+
+
+
