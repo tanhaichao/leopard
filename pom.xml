@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard</groupId>
+	<artifactId>leopard</artifactId>
+	<version>0.0.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Leopard</name>
+	<description>Leopard的愿景，让大家更加专注于业务系统开发，使业务系统开发更加简洁、高效。减少重复性工作，提升开发效率，降低项目熟悉和交接成本。</description>
+	<url>http://leopard.io/</url>
+	<inceptionYear>2014</inceptionYear>
+
+	<parent>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard-parent</artifactId>
+		<version>0.5</version>
+	</parent>
+
+
+	<scm>
+		<url>https://github.com/tanhaichao/leopard</url>
+		<connection>scm:svn:https://github.com/tanhaichao/leopard/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard/trunk</developerConnection>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/tanhaichao/leopard/issues</url>
+	</issueManagement>
+
+
+
+	<developers>
+		<developer>
+			<name>谭海潮</name>
+			<email>tanhaichao@leopard.io</email>
+			<organization>Leopard小组</organization>
+			<roles>
+				<role>代码编写</role>
+				<role>推广</role>
+				<role>培训</role>
+			</roles>
+			<properties>
+				<picUrl>/faces/tanhaichao.jpg</picUrl>
+			</properties>
+		</developer>
+		<developer>
+			<name>卢轩华</name>
+			<email>luxuanhua@leopard.io</email>
+			<organization>Leopard小组</organization>
+			<roles>
+				<role>文档编写</role>
+				<role>推广</role>
+				<role>培训</role>
+				<role>社区建设</role>
+			</roles>
+			<properties>
+				<picUrl>/faces/luxuanhua.jpg</picUrl>
+			</properties>
+		</developer>
+	</developers>
+
+
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-admin</artifactId>
+				<version>0.0.2-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-session</artifactId>
+				<version>0.0.3-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+
+
+
+
+
+
+
+
+
+
+	<profiles>
+		<profile>
+			<id>site</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-site-plugin</artifactId>
+						<configuration>
+							<encoding>utf8</encoding>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.6</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>project-team</report>
+							<report>mailing-list</report>
+							<report>cim</report>
+							<report>issue-tracking</report>
+							<report>license</report>
+							<report>scm</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+
+
+	<modules>
+		<module>leopard-lang</module>
+		<module>leopard-schema</module>
+		<module>leopard-data</module>
+		<module>leopard-log</module>
+		<module>leopard-biz</module>
+		<module>leopard-monitor</module>
+		<module>leopard-web</module>
+	</modules>
+
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>http://leopard.io/nexus/content/repositories/framework-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+</project>
