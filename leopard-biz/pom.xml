@@ -7,7 +7,7 @@
 	</parent>
 	<artifactId>leopard-biz</artifactId>
 	<name>Leopard-Biz</name>
-	<description>乱七八糟喂成熟的业务组件</description>
+	<description>乱七八糟未成熟的业务组件</description>
 	
 	
 	<dependencies>
