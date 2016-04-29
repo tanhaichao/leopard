@@ -3,8 +3,10 @@ package io.leopard.web.mvc;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -25,9 +27,25 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 	private ObjectMapper mapper; // can reuse, share
 
+	@Value("${xparam.underline}")
+	private String underline;
+
 	public MappingJacksonResponseBodyAdvice() {
-		this.formatWriter = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES).writer().withDefaultPrettyPrinter();
-		this.mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+
+	}
+
+	@PostConstruct
+	public void init() {
+		boolean enable = !"false".equals(underline);
+		System.err.println("MappingJacksonResponseBodyAdvice underline:" + underline + " enable:" + enable);
+		if (enable) {
+			this.formatWriter = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES).writer().withDefaultPrettyPrinter();
+			this.mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+		}
+		else {
+			this.formatWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+			this.mapper = new ObjectMapper();
+		}
 	}
 
 	@Override
