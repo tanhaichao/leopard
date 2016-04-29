@@ -1,6 +1,5 @@
 package io.leopard.web.mvc;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,13 +29,13 @@ public class XParamController {
 	@Test
 	public void testAdd() throws Exception {
 		JettyServer.start("src/test/webapp");
-		{
-			String str = Httpnb.doGet("http://localhost/passport/login.leo?uid=1");
-			System.out.println("str:" + str);
-		}
-		String result = Httpnb.doGet("http://localhost/welcome.do");
+		String result = Httpnb.doGet("http://localhost/add.do");
 		System.out.println("result:" + result);
-		Assert.assertEquals("{\"status\":\"RuntimeException\",\"message\":\"ok\",\"data\":null}", result);
+		// Assert.assertEquals("{\"status\":\"RuntimeException\",\"message\":\"ok\",\"data\":null}", result);
+	}
+
+	public static void main(String[] args) throws Exception {
+		JettyServer.start("src/test/webapp");
 	}
 
 	public static class User {
