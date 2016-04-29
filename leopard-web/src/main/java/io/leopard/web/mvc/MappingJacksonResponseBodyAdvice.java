@@ -37,7 +37,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 	@PostConstruct
 	public void init() {
 		boolean enable = !"false".equals(underline);
-		System.err.println("MappingJacksonResponseBodyAdvice underline:" + underline + " enable:" + enable);
+		// System.err.println("MappingJacksonResponseBodyAdvice underline:" + underline + " enable:" + enable);
 		if (enable) {
 			this.formatWriter = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES).writer().withDefaultPrettyPrinter();
 			this.mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
