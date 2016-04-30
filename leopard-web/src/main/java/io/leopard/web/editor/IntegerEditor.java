@@ -6,7 +6,6 @@ public class IntegerEditor extends PropertyEditorSupport {
 
 	@Override
 	public Object getValue() {
-		// new Exception().printStackTrace();
 		Object value = super.getValue();
 		if (value == null) {
 			value = new Integer(0);
