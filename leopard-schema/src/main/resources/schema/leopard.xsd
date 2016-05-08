@@ -186,7 +186,6 @@
 			<xsd:attribute name="timeout" type="xsd:int" default="3000" />
 			<xsd:attribute name="enableBackup" type="xsd:boolean" default="false" />
 			<xsd:attribute name="backupTime" type="xsd:string" default="04:01" />
-			<xsd:attribute name="password" type="xsd:string" default="" />
 
 			<xsd:attribute name="createConnectionFactory" default="false">
 				<xsd:annotation>

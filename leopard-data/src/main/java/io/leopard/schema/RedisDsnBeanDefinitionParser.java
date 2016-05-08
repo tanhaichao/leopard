@@ -86,7 +86,7 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 		String enableBackup = element.getAttribute("enableBackup");
 		String backupTime = element.getAttribute("backupTime");
 		String timeout = element.getAttribute("timeout");
-		String password = element.getAttribute("password");
+		// String password = element.getAttribute("password");
 
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSourceManager.getRedisHashImpl());
 
@@ -112,9 +112,9 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 		if (StringUtils.isNotEmpty(initialPoolSize)) {
 			builder.addPropertyValue("initialPoolSize", Integer.valueOf(initialPoolSize));
 		}
-		if (StringUtils.isNotEmpty(password)) {
-			builder.addPropertyValue("password", password);
-		}
+		// if (StringUtils.isNotEmpty(password)) {
+		// builder.addPropertyValue("password", password);
+		// }
 		if (StringUtils.isNotEmpty(enableBackup)) {
 			builder.addPropertyValue("enableBackup", Boolean.valueOf(enableBackup));
 		}
@@ -141,7 +141,7 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 		String enableBackup = element.getAttribute("enableBackup");
 		String backupTime = element.getAttribute("backupTime");
 		String timeout = element.getAttribute("timeout");
-		String password= element.getAttribute("password");
+		// String password = element.getAttribute("password");
 		// String createConnectionFactory = element.getAttribute("createConnectionFactory");
 
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSourceManager.getRedisImpl());
@@ -160,11 +160,14 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 		if (StringUtils.isNotEmpty(timeout)) {
 			builder.addPropertyValue("timeout", Integer.valueOf(timeout));
 		}
-		if (StringUtils.isNotEmpty(password)) {
-			builder.addPropertyValue("password", password);
-		}
+		// if (StringUtils.isNotEmpty(password)) {
+		// builder.addPropertyValue("password", password);
+		// }
 		String server = this.getServer(name);
+		System.out.println("redis-dsn server:" + server);
+		String password = null;
 		builder.addPropertyValue("server", server);
+		builder.addPropertyValue("password", password);
 
 		builder.setScope(BeanDefinition.SCOPE_SINGLETON);
 		builder.setLazyInit(false);
@@ -174,55 +177,7 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 		return RegisterComponentUtil.registerComponent(parserContext, builder, id);
 	}
 
-	// <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-	// <property name="maxActive" value="1000" />
-	// <property name="maxIdle" value="50" />
-	// <property name="maxWait" value="1000" />
-	// <property name="testOnBorrow" value="true" />
-	// </bean>
-	// protected void createJedisPoolConfig(ParserContext parserContext, String beanId, int maxActive) {
-	// BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSourceClassUtil.getJedisPoolConfig());
-	// builder.addPropertyValue("maxActive", maxActive);
-	// builder.addPropertyValue("maxIdle", maxActive);
-	// // ahai 20131024 已建立的连接不回收，高并发时建立连接会很耗资源
-	// builder.addPropertyValue("minEvictableIdleTimeMillis", -1);
-	//
-	// builder.setScope(BeanDefinition.SCOPE_SINGLETON);
-	// RegisterComponentUtil.registerComponent(parserContext, builder, beanId + "PoolConfig");
-	// }
-
-	// protected void createJedisConnectionFactory(ParserContext parserContext, String beanId, String server, long timeout) {
-	// BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSourceClassUtil.getSpringJedisConnectionFactory());
-	// builder.addPropertyValue("server", server);
-	// builder.addPropertyValue("timeout", timeout);
-	// // builder.addPropertyValue("password", "test");
-	// builder.addPropertyValue("usePool", "true");
-	// builder.addPropertyReference("poolConfig", beanId + "PoolConfig");
-	// // ahai 20131024 已建立的连接不回收，高并发时建立连接会很耗资源
-	//
-	// builder.setScope(BeanDefinition.SCOPE_SINGLETON);
-	// RegisterComponentUtil.registerComponent(parserContext, builder, beanId + "ConnectionFactory");
-	// }
-
-	// <bean id="gameInfoJedisConnectionFactory"
-	// class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-	// <property name="hostName" value="${mq.redis.host}" />
-	// <property name="port" value="${mq.redis.port}" />
-	// <property name="password" value="${mq.redis.password}" />
-	// <property name="timeout" value="15000"></property>
-	// <property name="poolConfig" ref="jedisPoolConfig" />
-	// <property name="usePool" value="true"></property>
-	// </bean>
-
 	protected String getServer(String name) {
 		return "${" + name + ".redis}";
-		// String key = name + ".redis";
-		// String value = System.getProperty(key);
-		// System.err.println("redis dsn name:" + name + " value:" + value);
-		// if (StringUtils.isNotEmpty(value)) {
-		// return value;
-		// }
-
-		// return "${" + name + ".redis.host}:${" + name + ".redis.port}";
 	}
 }
