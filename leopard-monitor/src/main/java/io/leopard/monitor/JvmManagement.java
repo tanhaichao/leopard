@@ -1,7 +1,5 @@
 package io.leopard.monitor;
 
-import io.leopard.burrow.util.ListUtil;
-
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
@@ -12,12 +10,15 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import io.leopard.burrow.util.ListUtil;
+
 public class JvmManagement {
 
 	private static RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
 
-	@SuppressWarnings("restriction")
-	private static com.sun.management.OperatingSystemMXBean operatingSystemMXBean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+	// @SuppressWarnings("restriction")
+	// private static com.sun.management.OperatingSystemMXBean operatingSystemMXBean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+	// private static OperatingSystemMXBean operatingSystemMXBean = null;
 
 	private static MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
 	private static ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
@@ -94,28 +95,32 @@ public class JvmManagement {
 	}
 
 	public static double getSystemLoadAverage() {
-		return operatingSystemMXBean.getSystemLoadAverage();
+		// return operatingSystemMXBean.getSystemLoadAverage();
+		return 0;// TODO
 	}
 
 	@SuppressWarnings("restriction")
 	public static long getProcessCpuTime() {
-		return operatingSystemMXBean.getProcessCpuTime();
+		// return operatingSystemMXBean.getProcessCpuTime();
+		return 0;// TODO
 	}
 
 	@SuppressWarnings("restriction")
 	public static long getFreePhysicalMemorySize() {
-		return operatingSystemMXBean.getFreePhysicalMemorySize();
+		// return operatingSystemMXBean.getFreePhysicalMemorySize();
+		return 0;// TODO
 	}
 
 	@SuppressWarnings("restriction")
 	public static long getTotalSwapSpaceSize() {
-		return operatingSystemMXBean.getTotalSwapSpaceSize();
+		// return operatingSystemMXBean.getTotalSwapSpaceSize();
+		return 0;// TODO
 	}
 
 	@SuppressWarnings("restriction")
 	public static long getTotalPhysicalMemorySize() {
-		// operatingSystemMXBean.getCommittedVirtualMemorySize()
-		return operatingSystemMXBean.getTotalPhysicalMemorySize();
+		// return operatingSystemMXBean.getTotalPhysicalMemorySize();
+		return 0;// TODO
 	}
 
 	public static void printMemoryPool() {
