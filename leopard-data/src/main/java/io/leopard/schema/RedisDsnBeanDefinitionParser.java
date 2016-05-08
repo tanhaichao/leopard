@@ -164,11 +164,9 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 		// builder.addPropertyValue("password", password);
 		// }
 		String server = this.getServer(name);
-		System.out.println("redis-dsn server:" + server);
-		
-		String password = null;
+		// System.out.println("redis-dsn server:" + server);
+
 		builder.addPropertyValue("server", server);
-		builder.addPropertyValue("password", password);
 
 		builder.setScope(BeanDefinition.SCOPE_SINGLETON);
 		builder.setLazyInit(false);
