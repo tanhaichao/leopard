@@ -86,6 +86,7 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 		String enableBackup = element.getAttribute("enableBackup");
 		String backupTime = element.getAttribute("backupTime");
 		String timeout = element.getAttribute("timeout");
+		String password = element.getAttribute("password");
 
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSourceManager.getRedisHashImpl());
 
@@ -111,7 +112,9 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 		if (StringUtils.isNotEmpty(initialPoolSize)) {
 			builder.addPropertyValue("initialPoolSize", Integer.valueOf(initialPoolSize));
 		}
-
+		if (StringUtils.isNotEmpty(password)) {
+			builder.addPropertyValue("password", password);
+		}
 		if (StringUtils.isNotEmpty(enableBackup)) {
 			builder.addPropertyValue("enableBackup", Boolean.valueOf(enableBackup));
 		}
@@ -138,6 +141,7 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 		String enableBackup = element.getAttribute("enableBackup");
 		String backupTime = element.getAttribute("backupTime");
 		String timeout = element.getAttribute("timeout");
+		String password= element.getAttribute("password");
 		// String createConnectionFactory = element.getAttribute("createConnectionFactory");
 
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSourceManager.getRedisImpl());
@@ -156,7 +160,9 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 		if (StringUtils.isNotEmpty(timeout)) {
 			builder.addPropertyValue("timeout", Integer.valueOf(timeout));
 		}
-
+		if (StringUtils.isNotEmpty(password)) {
+			builder.addPropertyValue("password", password);
+		}
 		String server = this.getServer(name);
 		builder.addPropertyValue("server", server);
 

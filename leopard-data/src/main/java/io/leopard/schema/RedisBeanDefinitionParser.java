@@ -22,6 +22,7 @@ public class RedisBeanDefinitionParser extends AbstractSingleBeanDefinitionParse
 		String enableBackup = element.getAttribute("enableBackup");
 		String backupTime = element.getAttribute("backupTime");
 		String timeout = element.getAttribute("timeout");
+		String password = element.getAttribute("password");
 
 		if (StringUtils.isNotEmpty(server)) {
 			builder.addPropertyValue("server", server);
@@ -32,7 +33,9 @@ public class RedisBeanDefinitionParser extends AbstractSingleBeanDefinitionParse
 		if (StringUtils.isNotEmpty(initialPoolSize)) {
 			builder.addPropertyValue("initialPoolSize", Integer.valueOf(initialPoolSize));
 		}
-
+		if (StringUtils.isNotEmpty(password)) {
+			builder.addPropertyValue("password", password);
+		}
 		if (StringUtils.isNotEmpty(enableBackup)) {
 			builder.addPropertyValue("enableBackup", Boolean.valueOf(enableBackup));
 		}

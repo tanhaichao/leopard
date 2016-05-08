@@ -50,160 +50,6 @@
 		</xsd:complexType>
 	</xsd:element>
 
-	<xsd:element name="timer-scan">
-		<xsd:annotation>
-			<xsd:documentation><![CDATA[
-	timer-scan<br/>
-	例子:<br/>
-	<leopard:timer-scan base-package="io.leopard.news.timer" /><br/>
-	]]></xsd:documentation>
-		</xsd:annotation>
-		<xsd:complexType>
-			<xsd:attribute name="base-package" type="xsd:string" use="required">
-				<xsd:annotation>
-					<xsd:documentation><![CDATA[
-	存放定时器类的package
-					]]></xsd:documentation>
-				</xsd:annotation>
-			</xsd:attribute>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="performance">
-		<xsd:annotation>
-			<xsd:documentation><![CDATA[
-	performance<br/>
-	例子:<br/>
-	<leopard:performance enable="true"/><br/>
-	]]></xsd:documentation>
-		</xsd:annotation>
-		<xsd:complexType>
-			<xsd:attribute name="enable" type="xsd:boolean" use="required" />
-
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="connection-limit">
-		<xsd:annotation>
-			<xsd:documentation><![CDATA[
-	connection-limit<br/>
-	例子:<br/>
-	<leopard:connection-limit seconds="2" redis-ref="redis" /><br/>
-	]]></xsd:documentation>
-		</xsd:annotation>
-		<xsd:complexType>
-			<xsd:attribute name="seconds" type="xsd:int" use="required" />
-			<xsd:attribute name="redis-ref" type="xsd:string" use="required" />
-		</xsd:complexType>
-	</xsd:element>
-
-	<!-- <xsd:element name="env"> <xsd:annotation> <xsd:documentation><![CDATA[ 环境配置<br/> 例子:<br/> <leopard:env configFile="app.properties" /><br/> ]]></xsd:documentation> </xsd:annotation> <xsd:complexType> 
-		<xsd:attribute name="configFile" default="app.properties"> <xsd:simpleType> <xsd:restriction base="xsd:NMTOKEN"> <xsd:enumeration value="app.properties" /> <xsd:enumeration value="admin.properties" /> 
-		</xsd:restriction> </xsd:simpleType> </xsd:attribute> </xsd:complexType> </xsd:element> -->
-
-	<xsd:element name="config">
-		<xsd:annotation>
-			<xsd:documentation><![CDATA[
-	后台管理员登陆过滤器<br/>
-	例子:<br/>
-	<leopard:config admin="default" /><br/>
-	]]></xsd:documentation>
-		</xsd:annotation>
-		<xsd:complexType>
-			<xsd:attribute name="adminType" default="default">
-				<xsd:annotation>
-					<xsd:documentation><![CDATA[
-							]]></xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:NMTOKEN">
-						<xsd:enumeration value="default" />
-						<xsd:enumeration value="mysql" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:attribute>
-
-			<xsd:attribute name="performance" default="disable">
-				<xsd:annotation>
-					<xsd:documentation><![CDATA[
-	是否启用方法级别的性能监控.
-							]]></xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:NMTOKEN">
-						<xsd:enumeration value="disable" />
-						<xsd:enumeration value="enable" />
-						<xsd:enumeration value="false" />
-						<xsd:enumeration value="true" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:attribute>
-
-			<xsd:attribute name="sessionRedis" type="xsd:string" />
-
-			<xsd:attribute name="convert" default="enable">
-				<xsd:annotation>
-					<xsd:documentation><![CDATA[
-	是否启用Leopard参数转换(Integer、Long默认值为0，Boolean默认值为false)
-							]]></xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:NMTOKEN">
-						<xsd:enumeration value="disable" />
-						<xsd:enumeration value="enable" />
-						<xsd:enumeration value="false" />
-						<xsd:enumeration value="true" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:attribute>
-
-			<xsd:attribute name="sessionExpiry" type="xsd:int" default="86400" />
-
-			<xsd:attribute name="content" type="xsd:string" />
-
-
-			<xsd:attribute name="xss" default="false">
-				<xsd:annotation>
-					<xsd:documentation><![CDATA[
-	是否启用XSS漏洞防范.
-							]]></xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:NMTOKEN">
-						<xsd:enumeration value="disable" />
-						<xsd:enumeration value="enable" />
-						<xsd:enumeration value="false" />
-						<xsd:enumeration value="true" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:attribute>
-
-			<xsd:attribute name="csrf" default="false">
-				<xsd:annotation>
-					<xsd:documentation><![CDATA[
-	是否启用CSRF漏洞防范.
-							]]></xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:NMTOKEN">
-						<xsd:enumeration value="disable" />
-						<xsd:enumeration value="enable" />
-						<xsd:enumeration value="false" />
-						<xsd:enumeration value="true" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:attribute>
-
-			<xsd:attribute name="domainWhiteListJdbcRef" type="xsd:string" default="">
-				<xsd:annotation>
-					<xsd:documentation><![CDATA[
-	域名白名单JDBC数据源，MySQL表结构Leopard会自动创建，默认不启用mysql配置.
-							]]></xsd:documentation>
-				</xsd:annotation>
-			</xsd:attribute>
-
-		</xsd:complexType>
-	</xsd:element>
 
 
 	<xsd:element name="redis">
@@ -225,6 +71,7 @@
 					<xsd:attribute name="timeout" type="xsd:int" default="3000" />
 					<xsd:attribute name="enableBackup" type="xsd:boolean" default="false" />
 					<xsd:attribute name="backupTime" type="xsd:string" default="04:01" />
+					<xsd:attribute name="password" type="xsd:string" default="" />
 				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>
@@ -339,6 +186,7 @@
 			<xsd:attribute name="timeout" type="xsd:int" default="3000" />
 			<xsd:attribute name="enableBackup" type="xsd:boolean" default="false" />
 			<xsd:attribute name="backupTime" type="xsd:string" default="04:01" />
+			<xsd:attribute name="password" type="xsd:string" default="" />
 
 			<xsd:attribute name="createConnectionFactory" default="false">
 				<xsd:annotation>
@@ -364,7 +212,7 @@
 					<xsd:restriction base="xsd:NMTOKEN">
 						<xsd:enumeration value="none" />
 						<xsd:enumeration value="default" />
-						<xsd:enumeration value="yyuid" />
+						<xsd:enumeration value="uid" />
 						<xsd:enumeration value="passport" />
 					</xsd:restriction>
 				</xsd:simpleType>
