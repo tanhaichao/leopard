@@ -52,7 +52,7 @@ public class RedisMonitor implements IMonitor {
 		if (redis != null) {
 			return redis;
 		}
-		redis = new RedisImpl(server, 1, 0, false, 0);
+		redis = new RedisImpl(server, 1, 0, false, 0, null);// TODO ahai 没有redis密码
 		redis.init();
 		redisMap.put(server, redis);
 		return redis;

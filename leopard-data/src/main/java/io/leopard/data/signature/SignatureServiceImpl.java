@@ -25,6 +25,8 @@ public class SignatureServiceImpl extends ContextImpl implements SignatureServic
 	private int timeout;
 	private int initialPoolSize;// 默认初始化连接数量
 
+	private String password;
+
 	private SignatureQueueManager queueManager;
 
 	public void setRedis(Redis redis) {
@@ -67,7 +69,7 @@ public class SignatureServiceImpl extends ContextImpl implements SignatureServic
 	public void init() {
 		SignatureDaoRedisImpl signatureDaoRedisImpl = new SignatureDaoRedisImpl();
 		if (redis == null) {
-			this.redis = new RedisImpl(server, maxActive, initialPoolSize, false, timeout);
+			this.redis = new RedisImpl(server, maxActive, initialPoolSize, false, timeout, password);
 			redis.init();
 		}
 
