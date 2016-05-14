@@ -6,7 +6,7 @@ import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import io.leopard.data4j.mongo.MongoImpl;
+import io.leopard.data.mongo.MongoImpl;
 import io.leopard.data4j.schema.RegisterComponentUtil;
 
 /**
@@ -17,7 +17,6 @@ import io.leopard.data4j.schema.RegisterComponentUtil;
  */
 public class MongoDsnBeanDefinitionParser implements BeanDefinitionParser {
 
-	
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		String id = element.getAttribute("id");
