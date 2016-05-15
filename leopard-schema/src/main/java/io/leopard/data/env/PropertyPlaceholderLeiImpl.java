@@ -2,8 +2,11 @@ package io.leopard.data.env;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -39,7 +42,22 @@ public class PropertyPlaceholderLeiImpl implements PropertyPlaceholderLei {
 		catch (IOException e) {
 			throw new RuntimeException(e.getMessage());
 		}
-		System.out.println("content:" + content);
-		return resource;
+
+		Pattern p = Pattern.compile("^[^#=\\s]+$", Pattern.MULTILINE);
+		Matcher m = p.matcher(content);
+		StringBuffer sb = new StringBuffer();
+		while (m.find()) {
+			String body = m.group();
+			String replacement = this.decrypt(body);
+			m.appendReplacement(sb, replacement);
+		}
+		m.appendTail(sb);
+		// System.out.println("content:" + sb.toString());
+		return new ByteArrayResource(sb.toString().getBytes());
+	}
+
+	protected String decrypt(String body) {
+		System.err.println("decrypt:" + body);
+		return body;
 	}
 }
