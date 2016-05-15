@@ -48,7 +48,7 @@ public class PropertyPlaceholderLeiImpl implements PropertyPlaceholderLei {
 		StringBuffer sb = new StringBuffer();
 		while (m.find()) {
 			String body = m.group();
-			String replacement = this.decrypt(body);
+			String replacement = this.decode(body);
 			m.appendReplacement(sb, replacement);
 		}
 		m.appendTail(sb);
@@ -56,8 +56,13 @@ public class PropertyPlaceholderLeiImpl implements PropertyPlaceholderLei {
 		return new ByteArrayResource(sb.toString().getBytes());
 	}
 
-	protected String decrypt(String body) {
-		System.err.println("decrypt:" + body);
-		return body;
+	private PropertyDecoder propertyDecoder;
+
+	protected String decode(String encode) {
+		if (propertyDecoder == null) {
+			propertyDecoder = new PropertyDecoderImpl();
+		}
+		// System.err.println("decode:" + encode);
+		return propertyDecoder.decode(encode);
 	}
 }
