@@ -2,8 +2,6 @@ package io.leopard.data.env;
 
 import org.apache.commons.lang.SystemUtils;
 
-import io.leopard.data4j.env.ClassLoaderUtil;
-
 /**
  * windows开发环境
  * 

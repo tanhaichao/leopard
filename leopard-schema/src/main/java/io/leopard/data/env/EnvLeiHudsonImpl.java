@@ -7,8 +7,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.SystemUtils;
 import org.springframework.util.StringUtils;
 
-import io.leopard.data4j.env.ClassLoaderUtil;
-
 /**
  * hudson机器环境.
  * 
