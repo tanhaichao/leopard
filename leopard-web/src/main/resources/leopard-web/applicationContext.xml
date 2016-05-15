@@ -59,7 +59,7 @@
 	<import resource="classpath:/leopard-mvc-trynb.xml" />
 
 
-	<import resource="classpath*:/monitor.xml" />
+	<import resource="classpath*:/leopard-plugin.xml" />
 	<import resource="classpath:/applicationContext.xml" />
 	<!-- <import resource="resources.xml" /> -->
 
