@@ -7,7 +7,7 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 import io.leopard.data.counter.CounterRedisImpl;
-import io.leopard.data4j.schema.RegisterComponentUtil;
+import io.leopard.data.schema.RegisterComponentUtil;
 
 /**
  * 计数器.

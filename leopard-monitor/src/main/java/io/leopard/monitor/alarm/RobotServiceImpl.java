@@ -1,7 +1,7 @@
 package io.leopard.monitor.alarm;
 
 import io.leopard.commons.utility.ServerUtil;
-import io.leopard.data4j.env.EnvUtil;
+import io.leopard.data.env.EnvUtil;
 
 import org.springframework.util.StringUtils;
 

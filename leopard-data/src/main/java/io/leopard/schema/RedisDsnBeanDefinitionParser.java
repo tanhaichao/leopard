@@ -13,7 +13,7 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 import io.leopard.burrow.lang.AssertUtil;
-import io.leopard.data4j.schema.RegisterComponentUtil;
+import io.leopard.data.schema.RegisterComponentUtil;
 
 /**
  * Redis数据源标签

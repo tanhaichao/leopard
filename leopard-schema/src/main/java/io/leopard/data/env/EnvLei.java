@@ -1,4 +1,4 @@
-package io.leopard.data4j.env;
+package io.leopard.data.env;
 
 /**
  * 环境配置.

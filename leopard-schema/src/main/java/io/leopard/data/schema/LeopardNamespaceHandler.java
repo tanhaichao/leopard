@@ -1,4 +1,4 @@
-package io.leopard.data4j.schema;
+package io.leopard.data.schema;
 
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;

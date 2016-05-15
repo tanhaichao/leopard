@@ -1,4 +1,4 @@
-package io.leopard.data4j.schema;
+package io.leopard.data.schema;
 
 import java.util.ArrayList;
 import java.util.List;

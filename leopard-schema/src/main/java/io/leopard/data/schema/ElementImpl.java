@@ -1,4 +1,4 @@
-package io.leopard.data4j.schema;
+package io.leopard.data.schema;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

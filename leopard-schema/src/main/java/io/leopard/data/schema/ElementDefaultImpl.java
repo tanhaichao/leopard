@@ -1,4 +1,4 @@
-package io.leopard.data4j.schema;
+package io.leopard.data.schema;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
