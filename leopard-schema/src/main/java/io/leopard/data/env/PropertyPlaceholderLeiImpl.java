@@ -12,6 +12,14 @@ import org.springframework.core.io.Resource;
 
 public class PropertyPlaceholderLeiImpl implements PropertyPlaceholderLei {
 
+	public PropertyDecoder getPropertyDecoder() {
+		return propertyDecoder;
+	}
+
+	public void setPropertyDecoder(PropertyDecoder propertyDecoder) {
+		this.propertyDecoder = propertyDecoder;
+	}
+
 	@Override
 	public Resource[] getResources(String env) {
 		Resource dsnResource = new ClassPathResource("/" + env + "/app.properties");
@@ -68,7 +76,8 @@ public class PropertyPlaceholderLeiImpl implements PropertyPlaceholderLei {
 
 	protected String decode(String encode) {
 		if (propertyDecoder == null) {
-			propertyDecoder = new PropertyDecoderImpl();
+			// propertyDecoder = new PropertyDecoderImpl();
+			return encode;
 		}
 		// System.err.println("decode:" + encode);
 		return propertyDecoder.decode(encode);
