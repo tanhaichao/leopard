@@ -27,10 +27,10 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 		}
 		catch (NoUniqueBeanDefinitionException e) {
 			logger.error(e.getMessage(), e);
-			propertyDecoder = null;
+			propertyDecoder = new PropertyDecoderImpl();
 		}
 		catch (NoSuchBeanDefinitionException e) {
-			propertyDecoder = null;
+			propertyDecoder = new PropertyDecoderImpl();
 		}
 		String env = EnvUtil.getEnv();
 		PropertyPlaceholderLeiImpl propertyPlaceholderLeiImpl = new PropertyPlaceholderLeiImpl();
