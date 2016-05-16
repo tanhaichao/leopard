@@ -47,15 +47,15 @@ public class PropertyPlaceholderLeiImpl implements PropertyPlaceholderLei {
 		Matcher m = p.matcher(content);
 		StringBuffer sb = new StringBuffer();
 		while (m.find()) {
-			String body = m.group();
+			String line = m.group();
 			// System.err.println("body:" + body);
 			String replacement;
 			try {
-				replacement = this.decode(body);
+				replacement = this.decode(line);
 			}
 			catch (Exception e) {
-				System.err.println("app.properties解密出错:" + e.getMessage());
-				replacement = body;
+				System.err.println("app.properties解密出错:" + e.getMessage() + " line:" + line);
+				replacement = line;
 			}
 			m.appendReplacement(sb, replacement);
 		}
