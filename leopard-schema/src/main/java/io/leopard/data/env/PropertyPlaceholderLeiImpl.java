@@ -17,7 +17,7 @@ public class PropertyPlaceholderLeiImpl implements PropertyPlaceholderLei {
 	}
 
 	public void setPropertyDecoder(PropertyDecoder propertyDecoder) {
-		System.err.println("propertyDecoder:" + propertyDecoder);
+		// System.err.println("propertyDecoder:" + propertyDecoder);
 		this.propertyDecoder = propertyDecoder;
 	}
 
