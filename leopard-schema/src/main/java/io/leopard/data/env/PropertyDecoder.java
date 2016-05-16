@@ -13,9 +13,8 @@ public interface PropertyDecoder {
 	 * 二、Leopard会调用PropertyDecoder.decode(encode)方法进行解密<br/>
 	 * 三、Leopard默认解密的publickey是"12345678901234567890123456789012"。注意密文是由AESUtil.encrypt("str", publickey)方法进行加密。<br/>
 	 * 四、自定义PropertyDecoder实现<br/>
-	 * 1、创建文件META-INF/services/io.leopard.data.env.PropertyDecoder<br/>
-	 * 2、内容写入自定义实现类名.<br/>
-	 * 五、默认加密内容(整个文件)<br/>
+	 * 1、创建io.leopard.data.env.PropertyDecoder的实现类
+	 * 2、注册Spring Bean<br/>
 	 * String decode = PropertyDecoderImpl.encode("app2.properties");<br/>
 	 * System.out.println(decode);<br/>
 	 */
