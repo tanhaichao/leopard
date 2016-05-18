@@ -17,7 +17,7 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private static final MediaType jsonType = MediaType.valueOf("text/plain;charset=UTF-8");
+	private static final MediaType jsonType = MediaType.valueOf("text/json;charset=UTF-8");
 
 	@Override
 	public boolean canRead(Class<?> clazz, MediaType mediaType) {
