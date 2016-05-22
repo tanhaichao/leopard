@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -22,6 +23,9 @@ import org.springframework.web.servlet.mvc.condition.RequestCondition;
 import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+
+import io.leopard.redis.Redis;
+import io.leopard.web.session.StoreRedisImpl;
 
 public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 
@@ -45,6 +49,16 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 	}
 
 	protected void initApplicationContext(ApplicationContext context) throws BeansException {
+		try {
+			Redis redis = (Redis) context.getBean("sessionRedis");
+			StoreRedisImpl.setRedis(redis);
+		}
+		catch (NoSuchBeanDefinitionException e) {
+			logger.warn("没有配置sessionRedis，不启用分布式session.");
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 		super.initApplicationContext(context);
 		requestMappingInfoBuilder = new RequestMappingInfoBuilderImpl(context);
 	}
