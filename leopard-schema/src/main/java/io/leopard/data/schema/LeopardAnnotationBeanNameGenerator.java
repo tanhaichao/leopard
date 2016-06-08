@@ -1,5 +1,6 @@
 package io.leopard.data.schema;
 
+import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.AnnotationBeanNameGenerator;
@@ -8,8 +9,18 @@ public class LeopardAnnotationBeanNameGenerator extends AnnotationBeanNameGenera
 
 	@Override
 	protected String buildDefaultBeanName(BeanDefinition definition) {
+		String beanName = null;
+		if (definition instanceof AnnotatedBeanDefinition) {
+			boolean hasProtectedAnnotation = ((AnnotatedBeanDefinition) definition).getMetadata().hasAnnotation("io.leopard.beans.Protected");
+			if (hasProtectedAnnotation) {
+				beanName = definition.getBeanClassName();
+			}
+		}
+		
+		if (beanName == null) {
+			beanName = super.buildDefaultBeanName(definition);
+		}
 
-		String beanName = super.buildDefaultBeanName(definition);
 		beanName = this.replaceBeanName(beanName);
 		this.initPrimaryBean(definition);
 		return beanName;
