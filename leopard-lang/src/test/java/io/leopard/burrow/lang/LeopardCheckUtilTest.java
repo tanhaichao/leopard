@@ -1,22 +1,19 @@
 package io.leopard.burrow.lang;
 
+import java.util.ArrayList;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import io.leopard.burrow.util.ListUtil;
 import io.leopard.core.exception.ForbiddenException;
 import io.leopard.core.exception.forbidden.IpForbiddenException;
 import io.leopard.core.exception.invalid.DateInvalidException;
 import io.leopard.core.exception.invalid.DateTimeInvalidException;
-import io.leopard.core.exception.invalid.GameIdInvalidException;
-import io.leopard.core.exception.invalid.ImidInvalidException;
 import io.leopard.core.exception.invalid.IpInvalidException;
-import io.leopard.core.exception.invalid.ServerIdInvalidException;
 import io.leopard.core.exception.invalid.UidInvalidException;
 import io.leopard.core.exception.invalid.UsernameInvalidException;
 import io.leopard.core.exception.other.NotLoginException;
-
-import java.util.ArrayList;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 public class LeopardCheckUtilTest {
 
@@ -69,31 +66,6 @@ public class LeopardCheckUtilTest {
 	}
 
 	@Test
-	public void isValidGameId() {
-		LeopardCheckUtil.isValidGameId("ddt");
-		try {
-			LeopardCheckUtil.isValidGameId("");
-			Assert.fail("怎么没有抛异常?");
-		}
-		catch (GameIdInvalidException e) {
-
-		}
-
-	}
-
-	@Test
-	public void isServerId() {
-		LeopardCheckUtil.isServerId("s1");
-		try {
-			LeopardCheckUtil.isServerId("");
-			Assert.fail("怎么没有抛异常?");
-		}
-		catch (ServerIdInvalidException e) {
-
-		}
-	}
-
-	@Test
 	public void isValidUsername() {
 		LeopardCheckUtil.isValidUsername("username");
 		try {
@@ -118,18 +90,6 @@ public class LeopardCheckUtilTest {
 	}
 
 	@Test
-	public void isValidImid() {
-		LeopardCheckUtil.isValidImid(1);
-		try {
-			LeopardCheckUtil.isValidImid(0);
-			Assert.fail("怎么没有抛异常?");
-		}
-		catch (ImidInvalidException e) {
-
-		}
-	}
-
-	@Test
 	public void isValidPassport() {
 		LeopardCheckUtil.isValidPassport("username");
 		try {
@@ -137,19 +97,6 @@ public class LeopardCheckUtilTest {
 			Assert.fail("怎么没有抛异常?");
 		}
 		catch (UsernameInvalidException e) {
-
-		}
-	}
-
-	@Test
-	public void isGameId() {
-		LeopardCheckUtil.isGameId("ddt", "s1");
-		LeopardCheckUtil.isGameId("ddt");
-		try {
-			LeopardCheckUtil.isGameId("");
-			Assert.fail("怎么没有抛异常?");
-		}
-		catch (GameIdInvalidException e) {
 
 		}
 	}
@@ -207,18 +154,6 @@ public class LeopardCheckUtilTest {
 			Assert.fail("怎么没有抛异常?");
 		}
 		catch (IpInvalidException e) {
-
-		}
-	}
-
-	@Test
-	public void isValidServerId() {
-		LeopardCheckUtil.isValidServerId("s1");
-		try {
-			LeopardCheckUtil.isValidServerId("");
-			Assert.fail("怎么没有抛异常?");
-		}
-		catch (ServerIdInvalidException e) {
 
 		}
 	}
