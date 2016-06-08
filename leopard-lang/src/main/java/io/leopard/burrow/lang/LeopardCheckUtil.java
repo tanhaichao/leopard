@@ -1,21 +1,18 @@
 package io.leopard.burrow.lang;
 
+import java.util.List;
+
 import io.leopard.burrow.util.DateTime;
 import io.leopard.burrow.util.ListUtil;
 import io.leopard.core.exception.ForbiddenException;
 import io.leopard.core.exception.forbidden.IpForbiddenException;
 import io.leopard.core.exception.invalid.DateInvalidException;
 import io.leopard.core.exception.invalid.DateTimeInvalidException;
-import io.leopard.core.exception.invalid.GameIdInvalidException;
-import io.leopard.core.exception.invalid.ImidInvalidException;
 import io.leopard.core.exception.invalid.IpInvalidException;
 import io.leopard.core.exception.invalid.PassportInvalidException;
-import io.leopard.core.exception.invalid.ServerIdInvalidException;
 import io.leopard.core.exception.invalid.UidInvalidException;
 import io.leopard.core.exception.invalid.UsernameInvalidException;
 import io.leopard.core.exception.other.NotLoginException;
-
-import java.util.List;
 
 /**
  * 参数合法性判断(出错抛异常)..
@@ -77,28 +74,6 @@ public class LeopardCheckUtil {
 	}
 
 	/**
-	 * 是否合法的gameid .
-	 * 
-	 * @param gameId
-	 */
-	public static void isValidGameId(String gameId) {
-		if (!LeopardValidUtil.isValidGameId(gameId)) {
-			throw new GameIdInvalidException(gameId);
-		}
-	}
-
-	/**
-	 * 是否合法的serverid .
-	 * 
-	 * @param serverId
-	 */
-	public static void isServerId(String serverId) {
-		if (!LeopardValidUtil.isValidServerId(serverId)) {
-			throw new ServerIdInvalidException(serverId);
-		}
-	}
-
-	/**
 	 * 是否合法的用户名..
 	 * 
 	 * @param username
@@ -121,17 +96,6 @@ public class LeopardCheckUtil {
 	}
 
 	/**
-	 * 是否合法的YYUID..
-	 * 
-	 * @param username
-	 */
-	public static void isValidImid(long imid) {
-		if (!LeopardValidUtil.isValidImid(imid)) {
-			throw new ImidInvalidException(imid);
-		}
-	}
-
-	/**
 	 * 是否合法的passport .
 	 * 
 	 * @param passport
@@ -140,28 +104,6 @@ public class LeopardCheckUtil {
 		if (!LeopardValidUtil.isValidPassport(passport)) {
 			throw new PassportInvalidException(passport);
 		}
-	}
-
-	/**
-	 * 判断是否合法的gameid .
-	 * 
-	 * @param gameId
-	 */
-	public static void isGameId(String gameId) {
-		if (!LeopardValidUtil.isValidGameId(gameId)) {
-			throw new GameIdInvalidException(gameId);
-		}
-	}
-
-	/**
-	 * 判断是否合法的gameid和serverid .
-	 * 
-	 * @param gameId
-	 * @param serverId
-	 */
-	public static void isGameId(String gameId, String serverId) {
-		isGameId(gameId);
-		isServerId(serverId);
 	}
 
 	/**
@@ -206,17 +148,6 @@ public class LeopardCheckUtil {
 	public static void isValidIp(String ip) {
 		if (!LeopardValidUtil.isValidIp(ip)) {
 			throw new IpInvalidException(ip);
-		}
-	}
-
-	/**
-	 * 判断是否合法的serverid .
-	 * 
-	 * @param serverId
-	 */
-	public static void isValidServerId(String serverId) {
-		if (!LeopardValidUtil.isValidServerId(serverId)) {
-			throw new ServerIdInvalidException(serverId);
 		}
 	}
 
