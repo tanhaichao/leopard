@@ -14,9 +14,10 @@ public class LeopardAnnotationBeanNameGenerator extends AnnotationBeanNameGenera
 			boolean hasProtectedAnnotation = ((AnnotatedBeanDefinition) definition).getMetadata().hasAnnotation("io.leopard.beans.Protected");
 			if (hasProtectedAnnotation) {
 				beanName = definition.getBeanClassName();
+				System.err.println("beanName:" + beanName);
 			}
 		}
-		
+
 		if (beanName == null) {
 			beanName = super.buildDefaultBeanName(definition);
 		}
