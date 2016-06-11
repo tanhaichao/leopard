@@ -9,3 +9,6 @@
 	7、最近访问记录
 	
 	
+Leopard-MVC:
+	1、Ajax和Freemarker共用一个接口。
+	
