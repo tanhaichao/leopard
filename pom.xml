@@ -16,7 +16,17 @@
 		<version>0.6</version>
 	</parent>
 
-
+	<properties>
+		<leopard.unified.version>${project.version}</leopard.unified.version>
+		<leopard.version>${leopard.unified.version}</leopard.version>
+		<leopard-data.version>${leopard.unified.version}</leopard-data.version>
+		<topnb.version>${leopard.unified.version}</topnb.version>
+		<leopard-lang.version>${leopard.unified.version}</leopard-lang.version>
+		<leopard-mvc.version>${leopard.unified.version}</leopard-mvc.version>
+		<leopard-test.version>${leopard.unified.version}</leopard-test.version>
+		<leopard-security.version>${leopard.unified.version}</leopard-security.version>
+	</properties>
+	
 	<scm>
 		<url>https://github.com/tanhaichao/leopard</url>
 		<connection>scm:svn:https://github.com/tanhaichao/leopard/trunk</connection>
@@ -68,13 +78,13 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-admin</artifactId>
-				<version>0.0.2-SNAPSHOT</version>
+				<version>${leopard.unified.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-session</artifactId>
-				<version>0.0.3-SNAPSHOT</version>
+				<version>${leopard.unified.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
