@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard</artifactId>
-		<version>0.9.6</version>
+		<version>0.9.7-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-lang</artifactId>
 	<name>Leopard-Lang</name>
