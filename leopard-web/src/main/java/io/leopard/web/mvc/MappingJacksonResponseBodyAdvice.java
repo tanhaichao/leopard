@@ -90,9 +90,19 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 		request.setAttribute("result.data", data);
 
 		if (StringUtils.isNotEmpty(callback)) {
+			if (!isValidCallback(callback)) {
+				callback = "callback";
+			}
 			return callback + "(" + json + ");";
 		}
 		return json;
 	}
 
+	protected static boolean isValidCallback(String callback) {
+		if (StringUtils.isEmpty(callback)) {
+			throw new IllegalArgumentException("参数callback不能为空.");
+		}
+		boolean isValidCallback = callback.matches("^[a-zA-Z0-9_\\.]+$");
+		return isValidCallback;
+	}
 }
