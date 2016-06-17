@@ -59,6 +59,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
+		boolean callback = "true".equals(request.getParameter("callback"));
 		boolean format = "true".equals(request.getParameter("format"));
 		// System.err.println("write t:" + t);
 
@@ -87,6 +88,9 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 		request.setAttribute("result.json", json);
 		request.setAttribute("result.data", data);
 
+		if (callback) {
+			return callback + "(" + json + ");";
+		}
 		return json;
 	}
 
