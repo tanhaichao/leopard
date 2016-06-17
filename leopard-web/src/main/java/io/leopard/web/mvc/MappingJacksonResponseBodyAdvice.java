@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -59,7 +60,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
-		boolean callback = "true".equals(request.getParameter("callback"));
+		String callback = request.getParameter("callback");
 		boolean format = "true".equals(request.getParameter("format"));
 		// System.err.println("write t:" + t);
 
@@ -88,7 +89,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 		request.setAttribute("result.json", json);
 		request.setAttribute("result.data", data);
 
-		if (callback) {
+		if (StringUtils.isNotEmpty(callback)) {
 			return callback + "(" + json + ");";
 		}
 		return json;
