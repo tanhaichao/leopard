@@ -46,7 +46,7 @@ public class LeopardAnnotationBeanNameGenerator extends AnnotationBeanNameGenera
 	protected void initPrimaryBean(BeanDefinition definition) {
 		String className = definition.getBeanClassName();
 		if (className.endsWith("DaoCacheImpl")) {
-			System.err.println("setPrimary className:" + className);
+			// System.err.println("setPrimary className:" + className);
 			definition.setPrimary(true);
 		}
 		if (className.endsWith("ServiceTestImpl")) {
