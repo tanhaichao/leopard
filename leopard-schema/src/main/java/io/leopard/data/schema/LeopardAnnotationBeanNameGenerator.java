@@ -14,7 +14,7 @@ public class LeopardAnnotationBeanNameGenerator extends AnnotationBeanNameGenera
 			boolean hasProtectedAnnotation = ((AnnotatedBeanDefinition) definition).getMetadata().hasAnnotation("io.leopard.beans.Protected");
 			if (hasProtectedAnnotation) {
 				beanName = definition.getBeanClassName();
-				System.err.println("beanName:" + beanName);
+				// System.err.println("beanName:" + beanName);
 			}
 		}
 
@@ -46,6 +46,7 @@ public class LeopardAnnotationBeanNameGenerator extends AnnotationBeanNameGenera
 	protected void initPrimaryBean(BeanDefinition definition) {
 		String className = definition.getBeanClassName();
 		if (className.endsWith("DaoCacheImpl")) {
+			System.err.println("setPrimary className:" + className);
 			definition.setPrimary(true);
 		}
 		if (className.endsWith("ServiceTestImpl")) {
