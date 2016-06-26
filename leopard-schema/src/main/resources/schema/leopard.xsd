@@ -276,6 +276,16 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<xsd:element name="captcha">
+		<xsd:annotation>
+			<xsd:documentation>验证码数据源</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="jdbc" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
 
 	<xsd:element name="signature">
 		<xsd:annotation>
