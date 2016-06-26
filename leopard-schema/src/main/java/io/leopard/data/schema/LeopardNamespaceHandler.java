@@ -28,6 +28,7 @@ public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
 		registerParser("queue-dsn", "io.leopard.schema.QueueDsnBeanDefinitionParser");
 		registerParser("memcache-dsn", "io.leopard.schema.MemcacheDsnBeanDefinitionParser");
 		registerParser("counter", "io.leopard.schema.CounterBeanDefinitionParser");
+		registerParser("captcha", "io.leopard.schema.CaptchaBeanDefinitionParser");
 		registerParser("signature", "io.leopard.schema.SignatureBeanDefinitionParser");
 		registerParser("tx", "io.leopard.schema.TxBeanDefinitionParser");
 
