@@ -68,6 +68,13 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 		map.put("status", "success");
 		map.put("data", data);
 
+		if (true) {// TODO 这里加上开发环境判断
+			Object debugInfo = request.getAttribute("debug");
+			if (debugInfo != null) {
+				map.put("debug", debugInfo);
+			}
+		}
+
 		String json = null;
 		if (format) {
 			try {
