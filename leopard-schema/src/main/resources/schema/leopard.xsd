@@ -282,7 +282,7 @@
 		</xsd:annotation>
 		<xsd:complexType>
 			<xsd:attribute name="id" type="xsd:string" use="required" />
-			<xsd:attribute name="jdbc" type="xsd:string" use="required" />
+			<xsd:attribute name="jdbc-ref" type="xsd:string" use="required" />
 		</xsd:complexType>
 	</xsd:element>
 
