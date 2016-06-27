@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.lang.reflect.FieldUtils;
 
+
 public class FieldUtil {
 
 	public static List<Field> listFields(Object bean) {
