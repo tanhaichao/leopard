@@ -33,6 +33,7 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 
 	@Override
 	protected void initApplicationContext() throws BeansException {
+		// new Exception("initApplicationContext").printStackTrace();
 		// 修改拦截器排序
 		try {
 			Field field = AbstractHandlerMapping.class.getDeclaredField("interceptors");
@@ -48,7 +49,9 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 		super.initApplicationContext();
 	}
 
+	@Override
 	protected void initApplicationContext(ApplicationContext context) throws BeansException {
+
 		try {
 			Redis redis = (Redis) context.getBean("sessionRedis");
 			StoreRedisImpl.setRedis(redis);
