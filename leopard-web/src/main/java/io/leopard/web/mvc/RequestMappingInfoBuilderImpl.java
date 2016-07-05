@@ -16,6 +16,7 @@ public class RequestMappingInfoBuilderImpl implements RequestMappingInfoBuilder 
 
 	public RequestMappingInfoBuilderImpl(ApplicationContext context) {
 		Map<String, RequestMappingInfoBuilder> matchingBeans = BeanFactoryUtils.beansOfTypeIncludingAncestors(context, RequestMappingInfoBuilder.class, true, false);
+		System.err.println("matchingBeans:" + matchingBeans);
 		if (!matchingBeans.isEmpty()) {
 			this.builders = new ArrayList<RequestMappingInfoBuilder>(matchingBeans.values());
 			AnnotationAwareOrderComparator.sort(this.builders);
@@ -28,6 +29,7 @@ public class RequestMappingInfoBuilderImpl implements RequestMappingInfoBuilder 
 			return;
 		}
 		for (RequestMappingInfoBuilder builder : builders) {
+			System.err.println("builder:" + builder);
 			builder.getHeaders(annotation, method, headers);
 		}
 	}
