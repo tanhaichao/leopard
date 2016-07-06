@@ -87,6 +87,10 @@ public class EnumUtil {
 		return (E) map.get(key);
 	}
 
+	public static synchronized <E extends Enum<E>> Map<Object, Enum<?>> toMap(Class<E> clazz) {
+		return toMap(clazz.getName(), clazz);
+	}
+
 	@SuppressWarnings("unchecked")
 	protected static synchronized <E extends Enum<E>> Map<Object, Enum<?>> toMap(Object key, Class<E> clazz) {
 		Map<Object, Enum<?>> map = cache.get(key);
