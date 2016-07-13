@@ -1,5 +1,6 @@
 package io.leopard.data.env;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.StringUtils;
 
 public class EnvUtil {
@@ -70,5 +71,24 @@ public class EnvUtil {
 		int index = path.lastIndexOf("/");
 		String moduleName = path.substring(index + 1);
 		return moduleName;
+	}
+
+	/**
+	 * 是否web环境.
+	 * 
+	 * @return
+	 */
+	public static boolean isWebserver() {
+		throw new NotImplementedException();
+	}
+
+	/**
+	 * 是否单元测试
+	 * 
+	 * @return
+	 */
+	public static boolean isJunit() {
+		String junit = System.getProperty("env.junit");
+		return "true".equals(junit);
 	}
 }
