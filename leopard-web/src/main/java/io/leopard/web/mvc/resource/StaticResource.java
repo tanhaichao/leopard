@@ -9,6 +9,7 @@ import java.net.URL;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.springframework.core.io.Resource;
+import org.springframework.util.StringUtils;
 
 /**
  * 静态资源文件
@@ -23,6 +24,9 @@ public class StaticResource implements Resource {
 	private File file;
 
 	public StaticResource(File dir, String path) {
+		if (StringUtils.isEmpty(path) || "/".equals(path)) {
+			throw new IllegalArgumentException("非法文件路径[" + path + "]");
+		}
 		this.path = path;
 		this.file = new File(dir, path);
 	}
