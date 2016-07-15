@@ -122,7 +122,7 @@ public class ResourcesDispatcherServlet extends DispatcherServlet {
 		}
 		if (resourceHandlers != null) {
 			for (ResourceHandler handler : resourceHandlers) {
-				logger.info("path:" + path);
+				// logger.info("path:" + path);
 				Resource resource = handler.doHandler(path, request, response);
 				if (resource != null) {
 					return resource;
