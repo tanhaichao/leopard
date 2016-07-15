@@ -17,7 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 import io.leopard.web.servlet.ResourceTransformer;
 
 public class ResourceTransformerImpl implements ResourceTransformer {
-	private List<ResourceTransformer> transformers =new ArrayList<ResourceTransformer>()	;
+	private List<ResourceTransformer> transformers = new ArrayList<ResourceTransformer>();
 
 	public void setBeanFactory(WebApplicationContext context) {
 		{
@@ -36,6 +36,7 @@ public class ResourceTransformerImpl implements ResourceTransformer {
 				resource = transformer.transform(request, resource);
 			}
 		}
+		// System.err.println("resource:"+resource);
 		return resource;
 	}
 
