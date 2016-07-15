@@ -37,7 +37,7 @@ final class StringToEnumConverterFactory implements ConverterFactory<String, Enu
 
 		@Override
 		public T convert(String source) {
-			System.err.println("StringToEnum source:" + source + " enumType:" + enumType.getName());
+			// System.err.println("StringToEnum source:" + source + " enumType:" + enumType.getName());
 			// new Exception("StringToEnum source:" + source + " enumType:" + enumType.getName()).printStackTrace();
 			if (source == null) {
 				source = "";
