@@ -1,7 +1,5 @@
 package io.leopard.web.mvc.resource;
 
-import io.leopard.web.servlet.ResourceHandler;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,24 +15,43 @@ import org.springframework.core.io.Resource;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import io.leopard.web.servlet.ResourceHandler;
+import io.leopard.web.servlet.ResourceTransformer;
+
 public class ResourcesDispatcherServlet extends DispatcherServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	private List<ResourceTransformer> transformers;
 	private List<ResourceHandler> resourceHandlers;
 
 	@Override
 	protected WebApplicationContext initWebApplicationContext() {
 		WebApplicationContext context = super.initWebApplicationContext();
-		Map<String, ResourceHandler> matchingBeans = BeanFactoryUtils.beansOfTypeIncludingAncestors(context, ResourceHandler.class, true, false);
-		if (!matchingBeans.isEmpty()) {
-			this.resourceHandlers = new ArrayList<ResourceHandler>(matchingBeans.values());
-			AnnotationAwareOrderComparator.sort(this.resourceHandlers);
+		{
+			Map<String, ResourceHandler> matchingBeans = BeanFactoryUtils.beansOfTypeIncludingAncestors(context, ResourceHandler.class, true, false);
+			if (!matchingBeans.isEmpty()) {
+				this.resourceHandlers = new ArrayList<ResourceHandler>(matchingBeans.values());
+				AnnotationAwareOrderComparator.sort(this.resourceHandlers);
+			}
+		}
+		{
+			Map<String, ResourceTransformer> matchingBeans = BeanFactoryUtils.beansOfTypeIncludingAncestors(context, ResourceTransformer.class, true, false);
+			if (!matchingBeans.isEmpty()) {
+				this.transformers = new ArrayList<ResourceTransformer>(matchingBeans.values());
+				AnnotationAwareOrderComparator.sort(this.transformers);
+			}
 		}
 		return context;
 	}
 
 	protected void process(HttpServletRequest request, HttpServletResponse response, Resource resource) throws ServletException, IOException {
+		if (transformers != null) {
+			for (ResourceTransformer transformer : transformers) {
+				transformer.transform(request, resource);
+			}
+		}
+
 		LeopardResourceHttpRequestHandler handler = new LeopardResourceHttpRequestHandler(super.getServletContext(), resource);
 		handler.handleRequest(request, response);
 	}
