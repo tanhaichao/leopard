@@ -16,13 +16,12 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import io.leopard.web.servlet.ResourceHandler;
-import io.leopard.web.servlet.ResourceTransformer;
 
 public class ResourcesDispatcherServlet extends DispatcherServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<ResourceTransformer> transformers;
+	private ResourceTransformerImpl transformer = new ResourceTransformerImpl();
 	private List<ResourceHandler> resourceHandlers;
 
 	@Override
@@ -35,22 +34,15 @@ public class ResourcesDispatcherServlet extends DispatcherServlet {
 				AnnotationAwareOrderComparator.sort(this.resourceHandlers);
 			}
 		}
-		{
-			Map<String, ResourceTransformer> matchingBeans = BeanFactoryUtils.beansOfTypeIncludingAncestors(context, ResourceTransformer.class, true, false);
-			if (!matchingBeans.isEmpty()) {
-				this.transformers = new ArrayList<ResourceTransformer>(matchingBeans.values());
-				AnnotationAwareOrderComparator.sort(this.transformers);
-			}
-		}
+
+		this.transformer.setBeanFactory(context);
+
 		return context;
 	}
 
 	protected void process(HttpServletRequest request, HttpServletResponse response, Resource resource) throws ServletException, IOException {
-		if (transformers != null) {
-			for (ResourceTransformer transformer : transformers) {
-				transformer.transform(request, resource);
-			}
-		}
+
+		resource = transformer.transform(request, resource);
 
 		LeopardResourceHttpRequestHandler handler = new LeopardResourceHttpRequestHandler(super.getServletContext(), resource);
 		handler.handleRequest(request, response);
