@@ -41,15 +41,17 @@ public class ResourcesDispatcherServlet extends DispatcherServlet {
 
 	protected void noHandlerFound(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String uri = request.getRequestURI();
+		// System.err.println("noHandlerFound start:" + uri);
 		if (resourceHandlers != null) {
 			for (ResourceHandler handler : resourceHandlers) {
 				Resource resource = handler.doHandler(uri, request, response);
-				if (resource != null) {
+				if (resource != null && resource.exists()) {
 					this.process(request, response, resource);
 					return;
 				}
 			}
 		}
+		// System.err.println("noHandlerFound end:" + uri);
 		super.noHandlerFound(request, response);
 	}
 }
