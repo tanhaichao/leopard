@@ -59,7 +59,7 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 		// header('Access-Control-Allow-Origin:*');
 		// header('Access-Control-Allow-Methods:POST');
 		// header('Access-Control-Allow-Headers:x-requested-with,content-type');
-		// outputMessage.getHeaders().setAccessControlAllowOrigin("");
+		outputMessage.getHeaders().setAccessControlAllowOrigin("*");// FIXME 暂时的写法
 		// outputMessage.getHeaders().setAccessControlAllowMethods(allowedMethods);
 		// outputMessage.getHeaders().setAccessControlAllowHeaders(allowedHeaders);
 
