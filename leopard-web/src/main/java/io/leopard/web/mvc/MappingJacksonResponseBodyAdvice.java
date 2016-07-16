@@ -31,10 +31,6 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 	@Value("${xparam.underline}")
 	private String underline;
 
-	public MappingJacksonResponseBodyAdvice() {
-
-	}
-
 	@PostConstruct
 	public void init() {
 		boolean enable = !"false".equals(underline);
