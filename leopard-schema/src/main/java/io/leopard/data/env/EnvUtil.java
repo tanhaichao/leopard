@@ -25,7 +25,6 @@ public class EnvUtil {
 	// return project;
 	// }
 
-	
 	public static void setProjectName(String projectName) {
 		System.setProperty(NAME_PROJECTNO, projectName);
 	}
@@ -51,10 +50,7 @@ public class EnvUtil {
 	public static boolean isDevEnv() {
 		String env = EnvUtil.getEnv();
 		// AssertData.notEmpty(env, "未配置环境变量" + NAME_ENV + ".");
-		if (env == null || env.length() == 0) {
-			throw new IllegalArgumentException("未配置环境变量" + NAME_ENV + ".");
-		}
-		return EnvUtil.ENV_DEV.equalsIgnoreCase(env);
+		return EnvUtil.ENV_PROD.equalsIgnoreCase(env);
 	}
 
 	protected static String getenv(String name) {
