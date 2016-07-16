@@ -50,7 +50,7 @@ public class EnvUtil {
 	public static boolean isDevEnv() {
 		String env = EnvUtil.getEnv();
 		// AssertData.notEmpty(env, "未配置环境变量" + NAME_ENV + ".");
-		return EnvUtil.ENV_PROD.equalsIgnoreCase(env);
+		return !EnvUtil.ENV_PROD.equalsIgnoreCase(env);
 	}
 
 	protected static String getenv(String name) {
