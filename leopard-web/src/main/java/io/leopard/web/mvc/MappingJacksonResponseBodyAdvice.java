@@ -22,6 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
+import io.leopard.data.env.EnvUtil;
+
 public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
 	private ObjectWriter formatWriter;
@@ -64,7 +66,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 		map.put("status", "success");
 		map.put("data", data);
 
-		if (true) {// TODO 这里加上开发环境判断
+		if (EnvUtil.isDevEnv()) {// TODO 这里加上开发环境判断
 			Object debugInfo = request.getAttribute("debug");
 			if (debugInfo != null) {
 				map.put("debug", debugInfo);
