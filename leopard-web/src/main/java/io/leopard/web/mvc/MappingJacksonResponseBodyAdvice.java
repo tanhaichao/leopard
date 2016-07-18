@@ -30,6 +30,8 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 	private ObjectMapper mapper; // can reuse, share
 
+	private VoFiller voFiller = new VoFillerImpl();
+
 	@Value("${xparam.underline}")
 	private String underline;
 
@@ -64,14 +66,15 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("status", "success");
-		map.put("data", data);
 
 		if (EnvUtil.isDevEnv()) {// TODO 这里加上开发环境判断
 			Object debugInfo = request.getAttribute("debug");
 			if (debugInfo != null) {
 				map.put("debug", debugInfo);
 			}
+			data = voFiller.fill(data);
 		}
+		map.put("data", data);
 
 		String json = null;
 		if (format) {
