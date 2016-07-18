@@ -30,13 +30,15 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 	private ObjectMapper mapper; // can reuse, share
 
-	private VoFiller voFiller = new VoFillerImpl();
+	private VoFillerImpl voFiller = new VoFillerImpl();
 
 	@Value("${xparam.underline}")
 	private String underline;
 
 	@PostConstruct
 	public void init() {
+		voFiller.init();
+
 		boolean enable = !"false".equals(underline);
 		// System.err.println("MappingJacksonResponseBodyAdvice underline:" + underline + " enable:" + enable);
 		if (enable) {
