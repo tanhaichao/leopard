@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import io.leopard.json.Json;
 import io.leopard.lang.Paging;
 import io.leopard.lang.PagingImpl;
 
@@ -50,5 +51,13 @@ public class BeanUtil {
 		return target;
 		// String json = Json.toJson(obj);
 		// return Json.toObject(json, clazz, true);
+	}
+
+	public static <T> T convert2(Object obj, Class<T> clazz) {
+		if (obj == null) {
+			return null;
+		}
+		String json = Json.toJson(obj);
+		return Json.toObject(json, clazz, true);
 	}
 }
