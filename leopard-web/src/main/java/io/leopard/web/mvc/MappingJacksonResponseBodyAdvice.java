@@ -35,7 +35,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 	@Value("${xparam.underline}")
 	private String underline;
 
-	@Value("${json.format}")
+	@Value("${leopard.mvc.json.format}")
 	private String format;
 
 	@PostConstruct
