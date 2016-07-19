@@ -35,6 +35,9 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 	@Value("${xparam.underline}")
 	private String underline;
 
+	@Value("${json.format}")
+	private String format;
+
 	@PostConstruct
 	public void init() {
 		voFiller.init();
@@ -63,8 +66,12 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
 		String callback = request.getParameter("callback");
-		boolean format = "true".equals(request.getParameter("format"));
-		// System.err.println("write t:" + t);
+
+		String format = request.getParameter("format");
+		if (format == null) {
+			format = this.format;
+		}
+		boolean isFormat = "true".equals(format);
 
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("status", "success");
@@ -79,7 +86,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 		map.put("data", data);
 
 		String json = null;
-		if (format) {
+		if (isFormat) {
 			try {
 				json = formatWriter.writeValueAsString(map);
 			}
