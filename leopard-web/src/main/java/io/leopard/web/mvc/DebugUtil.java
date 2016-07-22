@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import io.leopard.web.servlet.RequestUtil;
+
 /**
  * 调试信息.
  * 
@@ -14,11 +16,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class DebugUtil {
 
 	public static void setDebug(Object obj) {
-		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-		if (attr == null) {
+		HttpServletRequest request = RequestUtil.getCurrentRequest();
+		if (request == null) {
 			return;
 		}
-		HttpServletRequest request = attr.getRequest();
 		request.setAttribute("debug", obj);
 	}
 }
