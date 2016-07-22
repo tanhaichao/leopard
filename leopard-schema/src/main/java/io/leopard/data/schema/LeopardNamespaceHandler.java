@@ -12,7 +12,7 @@ public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
 
 	@Override
 	public void init() {
-		System.err.println("LeopardNamespaceHandler init useH2:" + System.getProperty("useH2"));
+		// System.err.println("LeopardNamespaceHandler init useH2:" + System.getProperty("useH2"));
 
 		registerBeanDefinitionParser("component-scan", new ComponentScanBeanDefinitionParser());
 
