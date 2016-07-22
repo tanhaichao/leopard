@@ -26,7 +26,7 @@ public class CaptchaBeanDefinitionParser implements BeanDefinitionParser {
 			clazz = Class.forName("io.leopard.web.captcha.kit.CaptchaServiceImpl");
 		}
 		catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		}
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(clazz);
