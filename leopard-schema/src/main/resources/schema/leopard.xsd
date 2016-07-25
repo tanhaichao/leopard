@@ -286,6 +286,16 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<xsd:element name="token">
+		<xsd:annotation>
+			<xsd:documentation>Token数据源</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="jdbc-ref" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
 
 	<xsd:element name="signature">
 		<xsd:annotation>
