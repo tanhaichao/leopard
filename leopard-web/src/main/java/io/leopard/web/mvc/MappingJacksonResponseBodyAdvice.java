@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 import io.leopard.data.env.EnvUtil;
+import io.leopard.web.servlet.JsonDebugger;
 
 public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
@@ -77,9 +78,13 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 		map.put("status", "success");
 
 		if (EnvUtil.isDevEnv()) {// TODO 这里加上开发环境判断
-			Object debugInfo = request.getAttribute("debug");
-			if (debugInfo != null) {
-				map.put("debug", debugInfo);
+			// Object debugInfo = request.getAttribute("debug");
+			// if (debugInfo != null) {
+			// map.put("debug", debugInfo);
+			// }
+			Map<String, Object> debugMap = JsonDebugger.getDebugMap();
+			if (debugMap != null) {
+				map.putAll(debugMap);
 			}
 			data = voFiller.fill(data);
 		}
