@@ -20,6 +20,7 @@ public class CaptchaBeanDefinitionParser implements BeanDefinitionParser {
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		final String beanId = element.getAttribute("id");
 		String jdbcId = element.getAttribute("jdbc-ref");
+		String redisId = element.getAttribute("redis-ref");
 
 		Class<?> clazz;
 		try {
@@ -31,6 +32,7 @@ public class CaptchaBeanDefinitionParser implements BeanDefinitionParser {
 		}
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(clazz);
 		builder.addPropertyReference("jdbc", jdbcId);
+		builder.addPropertyReference("redis", redisId);
 		builder.setScope(BeanDefinition.SCOPE_SINGLETON);
 		BeanDefinition beanDefinition = RegisterComponentUtil.registerComponent(parserContext, builder, beanId);
 		return beanDefinition;
