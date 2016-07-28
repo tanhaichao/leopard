@@ -103,6 +103,7 @@ public class FreeModelAndView extends ModelAndView {
 		// for (Object element : list) {
 		// this.serialize(element);
 		// }
+		
 	}
 
 	protected String getTypeName(Field field) {
