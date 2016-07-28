@@ -6,20 +6,15 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-public class ImageListSerializer extends AbstractJsonSerializer<List<String>> {
+public class ImageListSerializer extends JsonSerializer<List<String>> {
 
 	// ["/test/DSC_7348.jpg","/test/DSC_7352.jpg","/test/DSC_7353.jpg"]
 
 	@Override
 	public void serialize(List<String> list, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
-		List<String> urlList = serialize(list);
-		jgen.writeObject(urlList);
-	}
-
-	@Override
-	public List<String> serialize(List<String> list) {
 		List<String> urlList = null;
 		if (list != null) {
 			urlList = new ArrayList<String>();
@@ -30,7 +25,7 @@ public class ImageListSerializer extends AbstractJsonSerializer<List<String>> {
 				}
 			}
 		}
-		return urlList;
+		jgen.writeObject(urlList);
 	}
 
 }
