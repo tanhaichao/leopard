@@ -17,6 +17,7 @@ import io.leopard.jdbc.LeopardBeanFactoryAware;
  */
 public abstract class AbstractJsonSerializer<T> extends JsonSerializer<T> {
 
+	
 	public AbstractJsonSerializer() {
 		this.inject();
 	}
