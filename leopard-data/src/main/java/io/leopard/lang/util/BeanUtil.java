@@ -53,6 +53,14 @@ public class BeanUtil {
 		// return Json.toObject(json, clazz, true);
 	}
 
+	public static <T> List<T> convert2(List<?> list, Class<T> clazz) {
+		if (list == null) {
+			return null;
+		}
+		String json = Json.toJson(list);
+		return Json.toListObject(json, clazz);
+	}
+
 	public static <T> T convert2(Object obj, Class<T> clazz) {
 		if (obj == null) {
 			return null;
