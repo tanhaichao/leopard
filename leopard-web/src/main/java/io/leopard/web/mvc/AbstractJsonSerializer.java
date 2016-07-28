@@ -18,7 +18,7 @@ import io.leopard.jdbc.LeopardBeanFactoryAware;
 public abstract class AbstractJsonSerializer<T> extends JsonSerializer<T> {
 
 	public AbstractJsonSerializer() {
-
+		this.inject();
 	}
 
 	protected void inject() {
@@ -28,6 +28,7 @@ public abstract class AbstractJsonSerializer<T> extends JsonSerializer<T> {
 				continue;
 			}
 			Object bean = this.findBean(field.getType());
+			field.setAccessible(true);
 			try {
 				field.set(this, bean);
 			}

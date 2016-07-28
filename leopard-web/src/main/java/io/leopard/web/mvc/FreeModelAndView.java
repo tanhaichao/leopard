@@ -5,13 +5,11 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
+@Deprecated
 public class FreeModelAndView extends ModelAndView {
 
 	private final static Set<String> simpleClassNameSet = new HashSet<String>();
@@ -39,74 +37,72 @@ public class FreeModelAndView extends ModelAndView {
 
 	@Override
 	public ModelAndView addObject(String attributeName, Object attributeValue) {
-		if (attributeValue != null) {
-			String className = attributeValue.getClass().getName();
-			if (!simpleClassNameSet.contains(className)) {
-				try {
-					this.serialize(attributeValue);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		// if (attributeValue != null) {
+		// String className = attributeValue.getClass().getName();
+		// if (!simpleClassNameSet.contains(className)) {
+		// try {
+		// this.serialize(attributeValue);
+		// }
+		// catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// }
+		// }
 		return super.addObject(attributeName, attributeValue);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected void serialize(Object attributeValue) throws Exception {
-		if (attributeValue == null) {
-			return;
-		}
-		// System.err.println("serialize:" + attributeValue.getClass().getName());
-
-		Class<?> clazz = attributeValue.getClass();
-		while (true) {
-			for (Field field : clazz.getDeclaredFields()) {
-				field.setAccessible(true);
-				JsonSerialize anno = field.getAnnotation(JsonSerialize.class);
-				if (anno == null) {
-					if (field.getType().equals(List.class)) {
-						this.list(field, attributeValue);
-					}
-					else if (!simpleClassNameSet.contains(field.getType().getName())) {
-						serialize(field.get(attributeValue));
-					}
-					continue;
-				}
-				Class<?> jsonClazz = anno.using();
-				if (!AbstractJsonSerializer.class.isAssignableFrom(jsonClazz)) {
-					continue;
-				}
-				// System.out.println("anno:" + anno);
-
-				Object value = field.get(attributeValue);
-				AbstractJsonSerializer jsonSerializer = (AbstractJsonSerializer) jsonClazz.newInstance();
-				Object newValue = jsonSerializer.serialize(value);
-				field.set(attributeValue, newValue);
-
-			}
-			if (clazz.getSuperclass() == null) {
-				break;
-			}
-			clazz = clazz.getSuperclass();
-		}
-	}
+	// @SuppressWarnings({ "unchecked", "rawtypes" })
+	// protected void serialize(Object attributeValue) throws Exception {
+	// if (attributeValue == null) {
+	// return;
+	// }
+	// // System.err.println("serialize:" + attributeValue.getClass().getName());
+	//
+	// Class<?> clazz = attributeValue.getClass();
+	// while (true) {
+	// for (Field field : clazz.getDeclaredFields()) {
+	// field.setAccessible(true);
+	// JsonSerialize anno = field.getAnnotation(JsonSerialize.class);
+	// if (anno == null) {
+	// if (field.getType().equals(List.class)) {
+	// this.list(field, attributeValue);
+	// }
+	// else if (!simpleClassNameSet.contains(field.getType().getName())) {
+	// serialize(field.get(attributeValue));
+	// }
+	// continue;
+	// }
+	// Class<?> jsonClazz = anno.using();
+	// if (!AbstractJsonSerializer.class.isAssignableFrom(jsonClazz)) {
+	// continue;
+	// }
+	// Object value = field.get(attributeValue);
+	// AbstractJsonSerializer jsonSerializer = (AbstractJsonSerializer) jsonClazz.newInstance();
+	// Object newValue = jsonSerializer.serialize(value);
+	// field.set(attributeValue, newValue);
+	//
+	// }
+	// if (clazz.getSuperclass() == null) {
+	// break;
+	// }
+	// clazz = clazz.getSuperclass();
+	// }
+	// }
 
 	@SuppressWarnings("rawtypes")
 	protected void list(Field field, Object attributeValue) throws Exception {
-		String typeName = this.getTypeName(field);
-		if (simpleClassNameSet.contains(typeName)) {
-			return;
-		}
-		// System.err.println("list:" + field.getName());
-		List list = (List) field.get(attributeValue);
-		if (list == null) {
-			return;
-		}
-		for (Object element : list) {
-			this.serialize(element);
-		}
+		// String typeName = this.getTypeName(field);
+		// if (simpleClassNameSet.contains(typeName)) {
+		// return;
+		// }
+		// // System.err.println("list:" + field.getName());
+		// List list = (List) field.get(attributeValue);
+		// if (list == null) {
+		// return;
+		// }
+		// for (Object element : list) {
+		// this.serialize(element);
+		// }
 	}
 
 	protected String getTypeName(Field field) {
