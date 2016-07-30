@@ -17,11 +17,7 @@ public class DailyAutoRollingFileAppender extends io.leopard.data4j.log.DailyAut
 	@Override
 	public void append(LoggingEvent event) {
 		super.append(event);
-
-		if (logger.match(event.getLevel())) {
-			event.getThrowableInformation().getThrowable();
-		}
-
+		logger.log(event);
 		if (true) {
 			String message = event.getRenderedMessage();
 			System.err.println("message:" + message);
