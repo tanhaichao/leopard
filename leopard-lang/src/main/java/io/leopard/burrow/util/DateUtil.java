@@ -24,8 +24,7 @@ public class DateUtil {
 	/**
 	 * Date转字符串，格式为yyyy-MM-dd HH:mm:ss
 	 * 
-	 * @param date
-	 *            日期
+	 * @param date 日期
 	 * @return 字符串
 	 */
 	public static String date2String(Date date) {
@@ -39,8 +38,7 @@ public class DateUtil {
 	/**
 	 * 获取日期
 	 * 
-	 * @param date
-	 *            日期
+	 * @param date 日期
 	 * @return 若date为空，返回当前日期
 	 */
 	public static Date defaultDate(Date date) {
@@ -53,10 +51,8 @@ public class DateUtil {
 	/**
 	 * 获取日期
 	 * 
-	 * @param date
-	 *            日期
-	 * @param defaultDate
-	 *            默认日期
+	 * @param date 日期
+	 * @param defaultDate 默认日期
 	 * @return 若date为空，返回defaultDate转换后的日期
 	 */
 	public static Date defaultDate(Date date, long defaultDate) {
@@ -69,10 +65,8 @@ public class DateUtil {
 	/**
 	 * 获取日期
 	 * 
-	 * @param date
-	 *            日期
-	 * @param defaultDate
-	 *            默认日期
+	 * @param date 日期
+	 * @param defaultDate 默认日期
 	 * @return 若date为空，返回defaultDate
 	 */
 	public static Date defaultDate(Date date, Date defaultDate) {
@@ -85,10 +79,8 @@ public class DateUtil {
 	/**
 	 * 根据formatString将Date转成字符串
 	 * 
-	 * @param date
-	 *            日期
-	 * @param formatString
-	 *            转换格式
+	 * @param date 日期
+	 * @param formatString 转换格式
 	 * @return 字符串
 	 */
 	public static String date2String(Date date, String formatString) {
@@ -118,10 +110,8 @@ public class DateUtil {
 	/**
 	 * 字符串转成Date
 	 * 
-	 * @param dateString
-	 *            字符串日期
-	 * @param defaultDate
-	 *            默认日期
+	 * @param dateString 字符串日期
+	 * @param defaultDate 默认日期
 	 * @return 若出现异常返回默认日期
 	 */
 	public static Date str2Date(String dateString, Date defaultDate) {
@@ -138,12 +128,9 @@ public class DateUtil {
 	/**
 	 * 字符串日期转Date
 	 * 
-	 * @param dateString
-	 *            字符串日期
-	 * @param formatDate
-	 *            转换格式
-	 * @param defaultDate
-	 *            默认日起
+	 * @param dateString 字符串日期
+	 * @param formatDate 转换格式
+	 * @param defaultDate 默认日起
 	 * @return 若发生异常返回默认日期
 	 */
 	public static Date str2Date(String dateString, String formatDate, Date defaultDate) {
@@ -160,8 +147,7 @@ public class DateUtil {
 	/**
 	 * 当前时间增加指定的分钟数
 	 * 
-	 * @param minute
-	 *            分钟数
+	 * @param minute 分钟数
 	 * @return 增加分钟数后的Date
 	 */
 	public static Date addTime(final int minute) {
@@ -174,8 +160,7 @@ public class DateUtil {
 	/**
 	 * 将Date的HH-mm-ss置为零
 	 * 
-	 * @param date
-	 *            日期Date
+	 * @param date 日期Date
 	 * @return 转换后的Date
 	 */
 	public static Date getOnlyDate(Date date) {
@@ -186,10 +171,8 @@ public class DateUtil {
 	/**
 	 * 日期Date增加指定天数
 	 * 
-	 * @param date
-	 *            日期Date
-	 * @param daynum
-	 *            天数
+	 * @param date 日期Date
+	 * @param daynum 天数
 	 * @return 增加天数后的Date
 	 */
 	public static Date addDate(final Date date, final int daynum) {
@@ -198,12 +181,19 @@ public class DateUtil {
 	}
 
 	/**
+	 * 获取今天的日期
+	 * 
+	 * @return
+	 */
+	public static Date getToday() {
+		return getOnlyDate(new Date());
+	}
+
+	/**
 	 * 日期Date增加指定分钟数
 	 * 
-	 * @param startDate
-	 *            日期Date
-	 * @param minute
-	 *            分钟数
+	 * @param startDate 日期Date
+	 * @param minute 分钟数
 	 * @return 增加分钟数后的Date
 	 */
 	public static Date addTime(final Date startDate, final int minute) {
@@ -225,8 +215,7 @@ public class DateUtil {
 	/**
 	 * 根据Date获取字符串日期yyyy-MM-dd
 	 * 
-	 * @param date
-	 *            日期Date
+	 * @param date 日期Date
 	 * @return 字符串日期
 	 */
 	public static String getDate(Date date) {
@@ -240,8 +229,7 @@ public class DateUtil {
 	/**
 	 * 根据Date获取字符串日期yyyy-MM-dd HH:mm:ss
 	 * 
-	 * @param date
-	 *            日期Date
+	 * @param date 日期Date
 	 * @return 字符串日期
 	 */
 	public static String getTime(Date date) {
@@ -255,10 +243,8 @@ public class DateUtil {
 	/**
 	 * 根据指定格式从Date获取字符串日期
 	 * 
-	 * @param date
-	 *            日期Date
-	 * @param format
-	 *            转换格式
+	 * @param date 日期Date
+	 * @param format 转换格式
 	 * @return 字符串日期
 	 */
 	public static String getTime(Date date, String format) {
@@ -274,8 +260,7 @@ public class DateUtil {
 	/**
 	 * 时间值（毫秒数）转Date
 	 * 
-	 * @param time
-	 *            毫秒数
+	 * @param time 毫秒数
 	 * @return 日期Date
 	 */
 	public static Date toDate(Long time) {
@@ -288,8 +273,7 @@ public class DateUtil {
 	/**
 	 * 根据Date获取时间戳
 	 * 
-	 * @param date
-	 *            日期Date
+	 * @param date 日期Date
 	 * @return 时间值，以毫秒为单位
 	 */
 	public static long getTimestamp(final Date date) {
@@ -299,8 +283,7 @@ public class DateUtil {
 	/**
 	 * 字符串日期转Date
 	 * 
-	 * @param datetime
-	 *            字符串日期
+	 * @param datetime 字符串日期
 	 * @return 日期Date
 	 */
 	public static Date toDate(String datetime) {
@@ -350,8 +333,7 @@ public class DateUtil {
 	/**
 	 * 返回时间值(2010-01-01 00:00:00)增加指定秒数后的日期Date
 	 * 
-	 * @param time
-	 *            秒数
+	 * @param time 秒数
 	 * @return 增加秒数后的Date
 	 */
 	public static Date toLongDate(Double time) {
@@ -364,8 +346,7 @@ public class DateUtil {
 	/**
 	 * 返回时间值(2010-01-01 00:00:00)增加指定秒数后的日期Date
 	 * 
-	 * @param time
-	 *            秒数
+	 * @param time 秒数
 	 * @return 增加秒数后的Date
 	 */
 	public static Date toLongDate(int time) {
@@ -379,8 +360,7 @@ public class DateUtil {
 	/**
 	 * 根据Date获取秒数
 	 * 
-	 * @param date
-	 *            日期Date
+	 * @param date 日期Date
 	 * @return 秒数
 	 */
 	public static int getSecond(final Date date) {
@@ -404,8 +384,7 @@ public class DateUtil {
 	/**
 	 * 获取当前时间x秒前/后的时间
 	 * 
-	 * @param second
-	 *            （-x：前 x：后）
+	 * @param second （-x：前 x：后）
 	 * @return
 	 */
 	public static Date getBeforeSecond(Date date, int second) {
@@ -418,10 +397,8 @@ public class DateUtil {
 	/**
 	 * 字符串日期根据指定格式转换成Date
 	 * 
-	 * @param dateString
-	 *            字符串日期
-	 * @param formatString
-	 *            转换格式
+	 * @param dateString 字符串日期
+	 * @param formatString 转换格式
 	 * @return 转换后的Date
 	 */
 	public static Date str2Date(String dateString, String formatString) {
@@ -460,10 +437,8 @@ public class DateUtil {
 	/**
 	 * 判断date1是否早于date2
 	 * 
-	 * @param date1
-	 *            日期1
-	 * @param date2
-	 *            日期2
+	 * @param date1 日期1
+	 * @param date2 日期2
 	 * @return boolean
 	 */
 	public static boolean before(Date date1, Date date2) {
@@ -482,10 +457,8 @@ public class DateUtil {
 	/**
 	 * 判断两个时间值是否为同一时间
 	 * 
-	 * @param second1
-	 *            时间1
-	 * @param second2
-	 *            时间2
+	 * @param second1 时间1
+	 * @param second2 时间2
 	 * @return boolean
 	 */
 	public static boolean isEqualsDay(int second1, int second2) {
@@ -518,8 +491,7 @@ public class DateUtil {
 	/**
 	 * 根据秒数获取小时
 	 * 
-	 * @param second
-	 *            描述
+	 * @param second 描述
 	 * @return 小时
 	 */
 	public static int getHour(int second) {
@@ -530,10 +502,8 @@ public class DateUtil {
 	/**
 	 * 获取两个时间值(以秒为单位)相差的天数
 	 * 
-	 * @param postSecond
-	 *            时间1
-	 * @param currentSecond
-	 *            时间2
+	 * @param postSecond 时间1
+	 * @param currentSecond 时间2
 	 * @return 相差的天数
 	 */
 	public static int getDiffDayCount(int postSecond, int currentSecond) {
@@ -547,10 +517,8 @@ public class DateUtil {
 	/**
 	 * 计算二个时间相差的天数</br>
 	 * 
-	 * @param date1
-	 *            日期
-	 * @param date2
-	 *            日期
+	 * @param date1 日期
+	 * @param date2 日期
 	 * @return 相差的天数
 	 */
 	public static int getDays(String date1, String date2) {
