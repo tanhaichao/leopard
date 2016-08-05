@@ -1,7 +1,5 @@
 package io.leopard.web.mvc;
 
-import io.leopard.web.mvc.resource.ResourcesDispatcherServlet;
-
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
@@ -13,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
-public class LeopardDispatcherServlet extends ResourcesDispatcherServlet {
+public class LeopardDispatcherServlet extends OptionsDispatcherServlet {
 
 	private static final long serialVersionUID = 1L;
 
