@@ -31,7 +31,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 	private ObjectMapper mapper; // can reuse, share
 
-	private VoFillerImpl voFiller = new VoFillerImpl();
+	// private VoFillerImpl voFiller = new VoFillerImpl();
 
 	@Value("${xparam.underline}")
 	private String underline;
@@ -41,7 +41,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 	@PostConstruct
 	public void init() {
-		voFiller.init();
+		// voFiller.init();
 
 		boolean enable = !"false".equals(underline);
 		// System.err.println("MappingJacksonResponseBodyAdvice underline:" + underline + " enable:" + enable);
@@ -81,7 +81,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 			if (debugMap != null) {
 				map.putAll(debugMap);
 			}
-			data = voFiller.fill(data);
+			// data = voFiller.fill(data);
 		}
 		map.put("data", data);
 
