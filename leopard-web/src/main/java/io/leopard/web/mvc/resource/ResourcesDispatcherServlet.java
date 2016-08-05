@@ -147,6 +147,19 @@ public class ResourcesDispatcherServlet extends DispatcherServlet {
 	protected void transform(HttpServletRequest request, HttpServletResponse response, Resource resource) throws ServletException, IOException {
 		resource = transformer.transform(request, resource);
 		LeopardResourceHttpRequestHandler handler = new LeopardResourceHttpRequestHandler(super.getServletContext(), resource);
-		handler.handleRequest(request, response);
+
+		try {
+			handler.afterPropertiesSet();
+		}
+		catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		try {
+			handler.handleRequest(request, response);
+		}
+		catch (NullPointerException e) {
+			logger.error("uri:" + request.getRequestURI());
+			throw e;
+		}
 	}
 }
