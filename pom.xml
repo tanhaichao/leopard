@@ -17,6 +17,8 @@
 	</parent>
 
 	<properties>
+		<spring.version>4.3.2.RELEASE</spring.version>
+
 		<leopard.unified.version>${project.version}</leopard.unified.version>
 		<leopard.version>${leopard.unified.version}</leopard.version>
 		<leopard-data.version>${leopard.unified.version}</leopard-data.version>
