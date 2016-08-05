@@ -6,31 +6,37 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.web.context.WebApplicationContext;
+
 import io.leopard.web.mvc.resource.ResourcesDispatcherServlet;
 
 public class OptionsDispatcherServlet extends ResourcesDispatcherServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public void setDispatchOptionsRequest(boolean dispatchOptionsRequest) {
-		logger.info("dispatchOptionsRequest:" + dispatchOptionsRequest);
-		super.setDispatchOptionsRequest(dispatchOptionsRequest);
+	private OptionsHandler optionsHandler;
+
+	@Override
+	protected WebApplicationContext initWebApplicationContext() {
+		WebApplicationContext context = super.initWebApplicationContext();
+		try {
+			optionsHandler = context.getBean(OptionsHandler.class);
+		}
+		catch (NoSuchBeanDefinitionException e) {
+
+		}
+		return context;
 	}
 
 	@Override
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (true) {
-			super.doOptions(request, response);
-			return;
+		if (optionsHandler != null) {
+			boolean handled = optionsHandler.doOptions(request, response);
+			if (handled) {
+				return;
+			}
 		}
-		logger.info("doOptions:" + request.getRequestURI());
-
-		// header('Access-Control-Allow-Headers:x-requested-with,content-type');
-
-		response.addHeader("Access-Control-Allow-Headers", "x-requested-with,content-type");
-		response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		// super.doOptions(request, response);
-		return;
+		super.doOptions(request, response);
 	}
 }
