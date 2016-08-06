@@ -20,8 +20,6 @@ public class LeopardWebBindingInitializer extends ConfigurableWebBindingInitiali
 
 		// new CustomBooleanEditor(true)//
 
-		new Exception("ok").printStackTrace();
-
 		binder.registerCustomEditor(Date.class, new DefaultDateEditor());
 		// binder.registerCustomEditor(boolean.class, new BooleanEditor());
 		// binder.registerCustomEditor(int.class, new IntegerEditor());

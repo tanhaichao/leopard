@@ -7,7 +7,6 @@ public class LeopardFormattingConversionServiceFactoryBean extends FormattingCon
 
 	@Override
 	public FormattingConversionService getObject() {
-		// new Exception("o").printStackTrace();
 		return super.getObject();
 	}
 }
