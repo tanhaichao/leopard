@@ -12,7 +12,7 @@ public class OnlyDateConverter implements Converter<String, OnlyDate> {
 
 	@Override
 	public OnlyDate convert(String source) {
-		logger.info("OnlyDateConverter source:" + source);
+		// logger.info("OnlyDateConverter source:" + source);
 		if (StringUtils.isEmpty(source)) {
 			return null;
 		}

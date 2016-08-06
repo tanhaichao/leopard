@@ -8,12 +8,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.convert.converter.Converter;
 
 public class MonthConverter implements Converter<String, Month> {
-	
+
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Override
 	public Month convert(String source) {
-		logger.info("MonthConverter source:" + source);
+		// logger.info("MonthConverter source:" + source);
 		if (StringUtils.isEmpty(source)) {
 			return null;
 		}
