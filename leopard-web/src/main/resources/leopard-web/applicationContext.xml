@@ -27,7 +27,7 @@
 
 
 
-	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	<bean id="conversionService" class="io.leopard.web.editor.LeopardFormattingConversionServiceFactoryBean">
 		<!-- 自定义数据类型 -->
 		<property name="converters">
 			<list>
@@ -37,6 +37,7 @@
 			</list>
 		</property>
 	</bean>
+
 
 	<bean id="leopardWebBindingInitializer" class="io.leopard.web.editor.LeopardWebBindingInitializer">
 		<property name="conversionService" ref="conversionService" />
