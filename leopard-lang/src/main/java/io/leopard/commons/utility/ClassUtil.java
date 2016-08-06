@@ -31,4 +31,17 @@ public class ClassUtil {
 		}
 	}
 
+	public static Class<?> getRealClass(Class<?> clazz) {
+		while (true) {
+			String className = clazz.getName();
+			if (className.indexOf("$$") == -1) {
+				return clazz;
+			}
+			clazz = clazz.getSuperclass();
+			if (clazz == null || clazz.equals(Object.class)) {
+				throw new RuntimeException("获取真实class出错.");
+			}
+		}
+	}
+
 }
