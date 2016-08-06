@@ -12,13 +12,13 @@ import java.io.Serializable;
  */
 public class Month implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	private final long time;
 
 	public Month() {
 		this(System.currentTimeMillis());
+		new Exception("Month").printStackTrace();
 	}
 
 	public Month(java.util.Date date) {

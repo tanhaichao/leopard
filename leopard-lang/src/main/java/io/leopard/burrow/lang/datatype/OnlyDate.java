@@ -28,8 +28,7 @@ public class OnlyDate implements Serializable {
 
 	public OnlyDate(String datetime) {
 		this(getMillis(datetime));
-		// System.err.println("here3");
-		// new Exception("here3").printStackTrace();
+		// new Exception("OnlyDate").printStackTrace();
 	}
 
 	public OnlyDate(long time) {

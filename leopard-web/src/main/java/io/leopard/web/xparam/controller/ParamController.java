@@ -25,10 +25,11 @@ public class ParamController {
 	 */
 	@RequestMapping
 	@ResponseBody
-	public String mvc(long shopId, Date time, Month month, OnlyDate date, Mvcparam param) {
+	public String mvc(long shopId, Date ptime, Date time, Month pmonth, OnlyDate pdate, Mvcparam param) {
 		logger.info("time:" + time);
-		logger.info("month:" + month);
-		logger.info("date:" + date);
+		logger.info("ptime:" + ptime);
+		logger.info("pmonth:" + pmonth);
+		logger.info("pdate:" + pdate);
 		logger.info("param:" + Json.toJson(param));
 		return "shopId:" + shopId;
 	}
