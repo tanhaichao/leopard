@@ -10,7 +10,7 @@ public class DefaultDateEditor extends PropertyEditorSupport {
 
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
-		System.out.println("DefaultDateEditor setAsText:" + text);
+		// System.out.println("DefaultDateEditor setAsText:" + text);
 		if (text == null || text.length() == 0) {
 			super.setValue(null);
 		}
