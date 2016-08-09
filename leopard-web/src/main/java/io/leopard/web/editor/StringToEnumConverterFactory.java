@@ -4,6 +4,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 
 import io.leopard.burrow.lang.inum.EnumUtil;
+import io.leopard.burrow.lang.inum.Inum;
 
 /**
  * Converts from a String to a {@link java.lang.Enum} by calling {@link Enum#valueOf(Class, String)}.
@@ -37,13 +38,21 @@ final class StringToEnumConverterFactory implements ConverterFactory<String, Enu
 
 		@Override
 		public T convert(String source) {
-			// System.err.println("StringToEnum source:" + source + " enumType:" + enumType.getName());
-			// new Exception("StringToEnum source:" + source + " enumType:" + enumType.getName()).printStackTrace();
 			if (source == null) {
 				source = "";
 			}
+			// System.err.println("enumType:" + enumType.getName());
+			Object key;
+			if (Inum.class.isAssignableFrom(enumType)) {
+				key = Integer.parseInt(source);
+				// System.err.println("enumType:" + enumType.getName() + " key:" + key);
+			}
+			else {
+				key = source;
+			}
+
 			try {
-				return (T) EnumUtil.toEnum(source, enumType);
+				return (T) EnumUtil.toEnum(key, enumType);
 			}
 			catch (IllegalArgumentException e) {
 				if (source.length() == 0) {
