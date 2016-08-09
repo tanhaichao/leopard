@@ -11,6 +11,16 @@ import java.math.BigDecimal;
 public class DecimalUtil {
 
 	/**
+	 * 4舍5入，保留2位小数点
+	 * 
+	 * @param num
+	 * @return
+	 */
+	public static double scale(double num) {
+		return new BigDecimal(num).setScale(2, java.math.BigDecimal.ROUND_HALF_UP).doubleValue();
+	}
+
+	/**
 	 * 提供精确的加法运算。
 	 * 
 	 * @param v1 被加数
