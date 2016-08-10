@@ -25,7 +25,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import io.leopard.redis.Redis;
-import io.leopard.web.mvc.condition.LeopardHeadersRequestCondition;
+import io.leopard.web.mvc.condition.ServerNameRequestCondition;
 import io.leopard.web.session.StoreRedisImpl;
 
 public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
@@ -104,7 +104,7 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 				i++;
 			}
 		}
-		RequestCondition<?> customCondition = new LeopardHeadersRequestCondition(headers);
+		RequestCondition<?> customCondition = new ServerNameRequestCondition(headers);
 		return new RequestMappingInfo(new PatternsRequestCondition(patterns, getUrlPathHelper(), getPathMatcher(), false, this.useTrailingSlashMatch(), this.getFileExtensions()),
 				new RequestMethodsRequestCondition(annotation.method()), new ParamsRequestCondition(annotation.params()), new HeadersRequestCondition(),
 				new ConsumesRequestCondition(annotation.consumes(), headers), new ProducesRequestCondition(annotation.produces(), headers, getContentNegotiationManager()), customCondition);

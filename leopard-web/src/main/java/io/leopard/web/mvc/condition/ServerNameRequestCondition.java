@@ -18,11 +18,11 @@ import org.springframework.web.servlet.mvc.condition.ConsumesRequestCondition;
 import org.springframework.web.servlet.mvc.condition.NameValueExpression;
 import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
 
-public class LeopardHeadersRequestCondition extends AbstractRequestCondition<LeopardHeadersRequestCondition> {
+public class ServerNameRequestCondition extends AbstractRequestCondition<ServerNameRequestCondition> {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private final static LeopardHeadersRequestCondition PRE_FLIGHT_MATCH = new LeopardHeadersRequestCondition();
+	private final static ServerNameRequestCondition PRE_FLIGHT_MATCH = new ServerNameRequestCondition();
 
 	private final Set<HeaderExpression> expressions;
 
@@ -32,11 +32,11 @@ public class LeopardHeadersRequestCondition extends AbstractRequestCondition<Leo
 	 * 
 	 * @param headers media type expressions with syntax defined in {@link RequestMapping#headers()}; if 0, the condition will match to every request
 	 */
-	public LeopardHeadersRequestCondition(String... headers) {
+	public ServerNameRequestCondition(String... headers) {
 		this(parseExpressions(headers));
 	}
 
-	private LeopardHeadersRequestCondition(Collection<HeaderExpression> conditions) {
+	private ServerNameRequestCondition(Collection<HeaderExpression> conditions) {
 		this.expressions = Collections.unmodifiableSet(new LinkedHashSet<HeaderExpression>(conditions));
 	}
 
@@ -75,19 +75,19 @@ public class LeopardHeadersRequestCondition extends AbstractRequestCondition<Leo
 	 * Returns a new instance with the union of the header expressions from "this" and the "other" instance.
 	 */
 	@Override
-	public LeopardHeadersRequestCondition combine(LeopardHeadersRequestCondition other) {
+	public ServerNameRequestCondition combine(ServerNameRequestCondition other) {
 		// new Exception().printStackTrace();
 		// logger.info("combine:" + expressions + " headers:" + StringUtils.join(headers, ","));
 		Set<HeaderExpression> set = new LinkedHashSet<HeaderExpression>(this.expressions);
 		set.addAll(other.expressions);
-		return new LeopardHeadersRequestCondition(set);
+		return new ServerNameRequestCondition(set);
 	}
 
 	/**
 	 * Returns "this" instance if the request matches all expressions; or {@code null} otherwise.
 	 */
 	@Override
-	public LeopardHeadersRequestCondition getMatchingCondition(HttpServletRequest request) {
+	public ServerNameRequestCondition getMatchingCondition(HttpServletRequest request) {
 		// logger.info("getMatchingCondition:" + request.getRequestURI());
 		if (CorsUtils.isPreFlightRequest(request)) {
 			return PRE_FLIGHT_MATCH;
@@ -111,7 +111,7 @@ public class LeopardHeadersRequestCondition extends AbstractRequestCondition<Leo
 	 * It is assumed that both instances have been obtained via {@link #getMatchingCondition(HttpServletRequest)} and each instance contains the matching header expression only or is otherwise empty.
 	 */
 	@Override
-	public int compareTo(LeopardHeadersRequestCondition other, HttpServletRequest request) {
+	public int compareTo(ServerNameRequestCondition other, HttpServletRequest request) {
 		logger.info("compareTo:" + request.getRequestURI());
 		return other.expressions.size() - this.expressions.size();
 	}
@@ -150,10 +150,8 @@ public class LeopardHeadersRequestCondition extends AbstractRequestCondition<Leo
 
 		@Override
 		protected boolean matchValue(HttpServletRequest request) {
-			String value2 = request.getHeader(name);
-			System.err.println("matchValue name:" + name + " value:" + value + " value2:" + value2);
-			// return value.indexOf("," + value2 + ",") != -1;
-			return valueList.contains(value2);
+			String serverName = request.getServerName();
+			return valueList.contains(serverName);
 		}
 	}
 
