@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import io.leopard.redis.Redis;
+import io.leopard.web.mvc.condition.LeopardHeadersRequestCondition;
 import io.leopard.web.session.StoreRedisImpl;
 
 public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
@@ -71,12 +72,10 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 		RequestMappingInfo info = null;
 		RequestMapping methodAnnotation = AnnotationUtils.findAnnotation(method, RequestMapping.class);
 		if (methodAnnotation != null) {
-			RequestCondition<?> methodCondition = getCustomMethodCondition(method);
-			info = createRequestMappingInfo(methodAnnotation, methodCondition, method);
+			info = createRequestMappingInfo2(methodAnnotation, method);
 			RequestMapping typeAnnotation = AnnotationUtils.findAnnotation(handlerType, RequestMapping.class);
 			if (typeAnnotation != null) {
-				RequestCondition<?> typeCondition = getCustomTypeCondition(handlerType);
-				info = createRequestMappingInfo(typeAnnotation, typeCondition, null).combine(info);
+				info = createRequestMappingInfo2(typeAnnotation, null).combine(info);
 			}
 		}
 		return info;
@@ -85,7 +84,7 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 	/**
 	 * Created a RequestMappingInfo from a RequestMapping annotation.
 	 */
-	protected RequestMappingInfo createRequestMappingInfo(RequestMapping annotation, RequestCondition<?> customCondition, Method method) {
+	protected RequestMappingInfo createRequestMappingInfo2(RequestMapping annotation, Method method) {
 		String[] patterns;
 		if (method != null && annotation.value().length == 0) {
 			patterns = new String[] { this.createPattern(method.getName()) };
@@ -115,8 +114,10 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 				i++;
 			}
 		}
+		RequestCondition<?> customCondition = new LeopardHeadersRequestCondition(headers);
+
 		return new RequestMappingInfo(new PatternsRequestCondition(patterns, getUrlPathHelper(), getPathMatcher(), false, this.useTrailingSlashMatch(), this.getFileExtensions()),
-				new RequestMethodsRequestCondition(annotation.method()), new ParamsRequestCondition(annotation.params()), new HeadersRequestCondition(headers),
+				new RequestMethodsRequestCondition(annotation.method()), new ParamsRequestCondition(annotation.params()), new HeadersRequestCondition(),
 				new ConsumesRequestCondition(annotation.consumes(), headers), new ProducesRequestCondition(annotation.produces(), headers, getContentNegotiationManager()), customCondition);
 	}
 
