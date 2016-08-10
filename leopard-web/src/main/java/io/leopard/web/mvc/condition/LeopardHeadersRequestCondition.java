@@ -88,7 +88,7 @@ public class LeopardHeadersRequestCondition extends AbstractRequestCondition<Leo
 	 */
 	@Override
 	public LeopardHeadersRequestCondition getMatchingCondition(HttpServletRequest request) {
-		logger.info("getMatchingCondition:" + request.getRequestURI());
+		// logger.info("getMatchingCondition:" + request.getRequestURI());
 		if (CorsUtils.isPreFlightRequest(request)) {
 			return PRE_FLIGHT_MATCH;
 		}

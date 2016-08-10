@@ -93,16 +93,6 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 			patterns = resolveEmbeddedValuesInPatterns(annotation.value());
 		}
 		Map<String, String> headerMap = new LinkedHashMap<String, String>();
-		{
-			for (String header : annotation.headers()) {
-				int index = header.indexOf("=");
-				String key = header.substring(0, index);
-				String value = header.substring(index + 1);
-				if (!headerMap.containsKey(key)) {
-					headerMap.put(key, value);
-				}
-			}
-		}
 		requestMappingInfoBuilder.getHeaders(annotation, method, headerMap);
 		// System.out.println("headerMap:" + headerMap);
 		String[] headers = new String[headerMap.size()];
@@ -115,7 +105,6 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 			}
 		}
 		RequestCondition<?> customCondition = new LeopardHeadersRequestCondition(headers);
-
 		return new RequestMappingInfo(new PatternsRequestCondition(patterns, getUrlPathHelper(), getPathMatcher(), false, this.useTrailingSlashMatch(), this.getFileExtensions()),
 				new RequestMethodsRequestCondition(annotation.method()), new ParamsRequestCondition(annotation.params()), new HeadersRequestCondition(),
 				new ConsumesRequestCondition(annotation.consumes(), headers), new ProducesRequestCondition(annotation.produces(), headers, getContentNegotiationManager()), customCondition);
