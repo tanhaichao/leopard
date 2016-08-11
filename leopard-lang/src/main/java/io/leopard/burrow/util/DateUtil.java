@@ -190,6 +190,16 @@ public class DateUtil {
 	}
 
 	/**
+	 * 获取今天的日期
+	 * 
+	 * @return
+	 */
+	public static Date getTodayLastTime() {
+		Date today = getOnlyDate(new Date());
+		return new Date(today.getTime() + DateTime.DAY_MILLIS - 1000L);
+	}
+
+	/**
 	 * 日期Date增加指定分钟数
 	 * 
 	 * @param startDate 日期Date
