@@ -58,7 +58,7 @@ public class BeanUtil {
 			return null;
 		}
 		String json = Json.toJson(list);
-		return Json.toListObject(json, clazz);
+		return Json.toListObject(json, clazz, true);
 	}
 
 	public static <T> T convert2(Object obj, Class<T> clazz) {
