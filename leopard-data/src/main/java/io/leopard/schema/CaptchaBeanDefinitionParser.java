@@ -38,7 +38,7 @@ public class CaptchaBeanDefinitionParser implements BeanDefinitionParser {
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(clazz);
 		builder.addPropertyReference("jdbc", jdbcId);
 		builder.addPropertyReference("redis", redisId);
-		builder.addPropertyReference("tableName", tableName);
+		builder.addPropertyValue("tableName", tableName);
 		builder.setScope(BeanDefinition.SCOPE_SINGLETON);
 		BeanDefinition beanDefinition = RegisterComponentUtil.registerComponent(parserContext, builder, beanId);
 		return beanDefinition;
