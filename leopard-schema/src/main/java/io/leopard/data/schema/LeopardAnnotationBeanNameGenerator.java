@@ -51,7 +51,7 @@ public class LeopardAnnotationBeanNameGenerator extends AnnotationBeanNameGenera
 		}
 		if (className.endsWith("ServiceTestImpl")) {
 			definition.setPrimary(true);
-			System.out.println("className:" + className);
+			// System.out.println("className:" + className);
 		}
 	}
 
