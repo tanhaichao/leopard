@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns="http://www.leopard.io/schema/leopard" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans"
-	targetNamespace="http://www.leopard.io/schema/leopard" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:schema xmlns="http://www.leopard.io/schema/leopard" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans" targetNamespace="http://www.leopard.io/schema/leopard"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
 
 	<xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="http://www.springframework.org/schema/beans/spring-beans.xsd" />
 
@@ -284,6 +284,7 @@
 			<xsd:attribute name="id" type="xsd:string" use="required" />
 			<xsd:attribute name="jdbc-ref" type="xsd:string" use="required" />
 			<xsd:attribute name="redis-ref" type="xsd:string" use="required" />
+			<xsd:attribute name="table" type="xsd:string" />
 		</xsd:complexType>
 	</xsd:element>
 
