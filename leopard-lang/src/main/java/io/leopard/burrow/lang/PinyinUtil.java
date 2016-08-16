@@ -59,9 +59,6 @@ public class PinyinUtil {
 	}
 
 	public static String getPinyin(String content, String split) {
-		if ("山西省".equals(content)) {
-			return "shanxisheng2";
-		}
 		// TODO 转拼音没有做缓存.
 		StringBuilder sb = new StringBuilder();
 		for (char c : content.toCharArray()) {
