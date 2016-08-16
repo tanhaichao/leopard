@@ -19,7 +19,7 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	// TODO ahai 这里使用application/json是否会有安全性问题?
-	private static final MediaType jsonType = MediaType.valueOf("text/json;charset=UTF-8");
+	private static final MediaType jsonType = MediaType.valueOf("application/json;charset=UTF-8");
 
 	@Override
 	public boolean canRead(Class<?> clazz, MediaType mediaType) {
