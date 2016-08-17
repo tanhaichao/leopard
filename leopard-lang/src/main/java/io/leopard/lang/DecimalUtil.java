@@ -11,6 +11,33 @@ import java.math.BigDecimal;
 public class DecimalUtil {
 
 	/**
+	 * 判断是否2位小数点.
+	 * 
+	 * @param num
+	 */
+	public static void isScale(double num) {
+		int count = count(num);
+		if (count > 2) {
+			throw new IllegalArgumentException("小数点位数不能超过2位[" + count + "].");
+		}
+	}
+
+	/**
+	 * 获取小数点位数
+	 * 
+	 * @param num
+	 */
+	protected static int count(double num) {
+		String s = Double.toString(num);
+		int index = s.indexOf(".");
+		if (index == 0) {
+			return 0;
+		}
+		int count = s.length() - index - 1;
+		return count;
+	}
+
+	/**
 	 * 4舍5入，保留2位小数点
 	 * 
 	 * @param num

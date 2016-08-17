@@ -33,4 +33,24 @@ public class DecimalUtilTest {
 		Assert.assertEquals(4.02, DecimalUtil.scale(4.0241), 0);
 		Assert.assertEquals(4.02, DecimalUtil.scale(4.0249), 0);
 	}
+
+	@Test
+	public void count() {
+		Assert.assertEquals(2, DecimalUtil.count(1.11));
+		Assert.assertEquals(3, DecimalUtil.count(1.111));
+		Assert.assertEquals(1, DecimalUtil.count(1));
+	}
+
+	@Test
+	public void isScale() {
+		DecimalUtil.isScale(1);
+		DecimalUtil.isScale(1.11);
+		try {
+			DecimalUtil.isScale(1.111);
+			Assert.fail("怎么没有抛异常.");
+		}
+		catch (IllegalArgumentException e) {
+
+		}
+	}
 }
