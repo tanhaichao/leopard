@@ -27,7 +27,7 @@ public class DecimalUtil {
 	 * 
 	 * @param num
 	 */
-	protected static int count(double num) {
+	public static int count(double num) {
 		String s = Double.toString(num);
 		int index = s.indexOf(".");
 		if (index == 0) {
