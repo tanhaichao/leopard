@@ -52,7 +52,7 @@ public class LogDaoLog4jImpl implements LogDao {
 			return appender;
 		}
 
-		String conversionPattern = "%d{yyyy-MM-dd HH:mm:ss} - %m%n";
+		String conversionPattern = "%d{yyyy-MM-dd HH:mm:ss} - [%c] - %m%n";
 
 		org.apache.log4j.PatternLayout layout = new PatternLayout();
 		layout.setConversionPattern(conversionPattern);
