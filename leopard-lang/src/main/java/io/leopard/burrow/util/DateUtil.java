@@ -190,6 +190,15 @@ public class DateUtil {
 	}
 
 	/**
+	 * 获取明天的日期
+	 * 
+	 * @return
+	 */
+	public static Date getTomorrow() {
+		return getOnlyDate(DateUtil.addDate(new Date(), 1));
+	}
+
+	/**
 	 * 获取今天的日期
 	 * 
 	 * @return
