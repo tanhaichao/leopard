@@ -170,7 +170,7 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 			}
 			for (String regex : regexList) {
 				boolean matches = serverName.matches(regex);
-				System.err.println("regex:" + regex + " serverName:" + serverName + " matches:" + matches);
+				// System.err.println("regex:" + regex + " serverName:" + serverName + " matches:" + matches);
 				if (matches) {
 					return true;
 				}
