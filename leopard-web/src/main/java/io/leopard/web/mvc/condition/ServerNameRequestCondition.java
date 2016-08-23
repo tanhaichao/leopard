@@ -122,6 +122,7 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 	static class HeaderExpression extends AbstractNameValueExpression<String> {
 
 		protected final List<String> valueList = new ArrayList<String>();
+		protected final List<String> regexList = new ArrayList<String>();
 
 		public HeaderExpression(String expression) {
 			super(expression);
@@ -129,8 +130,18 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 
 			for (int i = 0; i < values.length; i++) {
 				values[i] = values[i].trim();
-				valueList.add(values[i]);
+				if (values[i].startsWith("*.")) {
+
+				}
+				else {
+					valueList.add(values[i]);
+				}
 			}
+		}
+
+		public void addRegex(String pattern) {
+			String regex = pattern.replace("*.", "^[A-Za-z0-9_\\-]\\.");
+			regexList.add(regex + "$");
 		}
 
 		@Override
@@ -151,7 +162,17 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 		@Override
 		protected boolean matchValue(HttpServletRequest request) {
 			String serverName = request.getServerName();
-			return valueList.contains(serverName);
+			boolean contains = valueList.contains(serverName);
+			if (contains) {
+				return true;
+			}
+			for (String regex : regexList) {
+				boolean matches = serverName.matches(regex);
+				if (matches) {
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 
