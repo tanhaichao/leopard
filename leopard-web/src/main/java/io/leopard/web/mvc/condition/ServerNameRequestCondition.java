@@ -131,7 +131,7 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 			for (int i = 0; i < values.length; i++) {
 				values[i] = values[i].trim();
 				if (values[i].startsWith("*.")) {
-
+					this.addRegex(values[i]);
 				}
 				else {
 					valueList.add(values[i]);
@@ -140,7 +140,7 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 		}
 
 		public void addRegex(String pattern) {
-			String regex = pattern.replace("*.", "^[A-Za-z0-9_\\-]\\.");
+			String regex = pattern.replace("*.", "^[A-Za-z0-9_\\-]+\\.");
 			regexList.add(regex + "$");
 		}
 
@@ -156,18 +156,21 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 
 		@Override
 		protected boolean matchName(HttpServletRequest request) {
+			// System.err.println("matchName name:" + name + " request:" + request.getHeader("*.onloon.co"));
 			return request.getHeader(name) != null;
 		}
 
 		@Override
 		protected boolean matchValue(HttpServletRequest request) {
 			String serverName = request.getServerName();
+			// System.err.println("matchValue:" + serverName);
 			boolean contains = valueList.contains(serverName);
 			if (contains) {
 				return true;
 			}
 			for (String regex : regexList) {
 				boolean matches = serverName.matches(regex);
+				System.err.println("regex:" + regex + " serverName:" + serverName + " matches:" + matches);
 				if (matches) {
 					return true;
 				}
