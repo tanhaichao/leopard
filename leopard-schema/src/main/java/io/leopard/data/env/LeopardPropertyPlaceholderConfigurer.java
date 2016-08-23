@@ -11,6 +11,7 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 	private ResolvePlaceholderLei resolvePlaceholderLei = new ResolvePlaceholderLeiImpl();
 
 	public LeopardPropertyPlaceholderConfigurer() {
+		// System.err.println("LeopardPropertyPlaceholderConfigurer new.");
 		super.setIgnoreResourceNotFound(true);
 		super.setOrder(999);
 		super.setIgnoreUnresolvablePlaceholders(true);
