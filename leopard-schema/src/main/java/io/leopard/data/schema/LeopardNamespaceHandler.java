@@ -3,7 +3,13 @@ package io.leopard.data.schema;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
+import io.leopard.data.env.AppInitializerImpl;
+
 public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
+
+	public LeopardNamespaceHandler() {
+		new AppInitializerImpl().init();
+	}
 
 	public boolean isUseH2() {
 		String useH2 = System.getProperty("useH2");
