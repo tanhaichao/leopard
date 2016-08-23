@@ -112,7 +112,7 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 	 */
 	@Override
 	public int compareTo(ServerNameRequestCondition other, HttpServletRequest request) {
-		logger.info("compareTo:" + request.getRequestURI());
+		// logger.info("compareTo:" + request.getRequestURI());
 		return other.expressions.size() - this.expressions.size();
 	}
 
