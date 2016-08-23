@@ -12,7 +12,23 @@ import redis.clients.jedis.JedisPoolConfig;
 
 public class DataSourceManager {
 
+	public static interface DataSourceProxy {
+		Class<?> findClass(Class<?> clazz);
+	}
+
+	private static DataSourceProxy proxy = null;
+
+	public static void setProxy(DataSourceProxy proxy) {
+		DataSourceManager.proxy = proxy;
+	}
+
 	public static Class<?> findClass(Class<?> clazz) {
+		if (proxy != null) {
+			Class<?> clazz2 = proxy.findClass(clazz);
+			if (clazz2 != null) {
+				return clazz2;
+			}
+		}
 		return clazz;
 	}
 
