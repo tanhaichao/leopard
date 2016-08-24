@@ -22,7 +22,7 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private final static ServerNameRequestCondition PRE_FLIGHT_MATCH = new ServerNameRequestCondition(null);
+	private final static ServerNameRequestCondition PRE_FLIGHT_MATCH = new ServerNameRequestCondition((ExtensiveDomain) null);
 
 	private final Set<HeaderExpression> expressions;
 
