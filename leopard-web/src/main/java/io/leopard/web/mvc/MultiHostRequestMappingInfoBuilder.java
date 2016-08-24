@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.leopard.web.mvc.condition.ExtensiveDomain;
+
 /**
  * 多hosts.
  * 
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MultiHostRequestMappingInfoBuilder implements RequestMappingInfoBuilder {
 
 	@Override
-	public void getHeaders(RequestMapping annotation, Method method, Map<String, String> headers) {
+	public void getHeaders(RequestMapping annotation, Method method, ExtensiveDomain extensiveDomain, Map<String, String> headers) {
 		if ("login".equals(method.getName())) {
 			return;
 		}

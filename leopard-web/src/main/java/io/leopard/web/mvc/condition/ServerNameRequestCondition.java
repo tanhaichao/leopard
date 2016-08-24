@@ -22,7 +22,7 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private final static ServerNameRequestCondition PRE_FLIGHT_MATCH = new ServerNameRequestCondition();
+	private final static ServerNameRequestCondition PRE_FLIGHT_MATCH = new ServerNameRequestCondition(null);
 
 	private final Set<HeaderExpression> expressions;
 
@@ -32,19 +32,19 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 	 * 
 	 * @param headers media type expressions with syntax defined in {@link RequestMapping#headers()}; if 0, the condition will match to every request
 	 */
-	public ServerNameRequestCondition(String... headers) {
-		this(parseExpressions(headers));
+	public ServerNameRequestCondition(ExtensiveDomain extensiveDomain, String... headers) {
+		this(parseExpressions(extensiveDomain, headers));
 	}
 
 	private ServerNameRequestCondition(Collection<HeaderExpression> conditions) {
 		this.expressions = Collections.unmodifiableSet(new LinkedHashSet<HeaderExpression>(conditions));
 	}
 
-	private static Collection<HeaderExpression> parseExpressions(String... headers) {
+	private static Collection<HeaderExpression> parseExpressions(ExtensiveDomain extensiveDomain, String... headers) {
 		Set<HeaderExpression> expressions = new LinkedHashSet<HeaderExpression>();
 		if (headers != null) {
 			for (String header : headers) {
-				HeaderExpression expr = new HeaderExpression(header);
+				HeaderExpression expr = new HeaderExpression(extensiveDomain, header);
 				if ("Accept".equalsIgnoreCase(expr.name) || "Content-Type".equalsIgnoreCase(expr.name)) {
 					continue;
 				}
@@ -122,26 +122,16 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 	static class HeaderExpression extends AbstractNameValueExpression<String> {
 
 		protected final List<String> valueList = new ArrayList<String>();
-		protected final List<String> regexList = new ArrayList<String>();
+		private ExtensiveDomain extensiveDomain;
 
-		public HeaderExpression(String expression) {
+		public HeaderExpression(ExtensiveDomain extensiveDomain, String expression) {
 			super(expression);
+			this.extensiveDomain = extensiveDomain;
 			String[] values = value.split(",");
-
 			for (int i = 0; i < values.length; i++) {
 				values[i] = values[i].trim();
-				if (values[i].startsWith("*.")) {
-					this.addRegex(values[i]);
-				}
-				else {
-					valueList.add(values[i]);
-				}
+				valueList.add(values[i]);
 			}
-		}
-
-		public void addRegex(String pattern) {
-			String regex = pattern.replace("*.", "^[A-Za-z0-9_\\-]+\\.");
-			regexList.add(regex + "$");
 		}
 
 		@Override
@@ -168,10 +158,10 @@ public class ServerNameRequestCondition extends AbstractRequestCondition<ServerN
 			if (contains) {
 				return true;
 			}
-			for (String regex : regexList) {
-				boolean matches = serverName.matches(regex);
-				// System.err.println("regex:" + regex + " serverName:" + serverName + " matches:" + matches);
-				if (matches) {
+
+			if (extensiveDomain != null) {
+				boolean match = extensiveDomain.match(serverName);
+				if (match) {
 					return true;
 				}
 			}

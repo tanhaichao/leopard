@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import io.leopard.redis.Redis;
+import io.leopard.web.mvc.condition.ExtensiveDomain;
 import io.leopard.web.mvc.condition.ServerNameRequestCondition;
 import io.leopard.web.session.StoreRedisImpl;
 
@@ -93,7 +94,8 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 			patterns = resolveEmbeddedValuesInPatterns(annotation.value());
 		}
 		Map<String, String> headerMap = new LinkedHashMap<String, String>();
-		requestMappingInfoBuilder.getHeaders(annotation, method, headerMap);
+		ExtensiveDomain extensiveDomain = new ExtensiveDomain();
+		requestMappingInfoBuilder.getHeaders(annotation, method, extensiveDomain, headerMap);
 		// System.out.println("headerMap:" + headerMap);
 		String[] headers = new String[headerMap.size()];
 		{
@@ -104,7 +106,7 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 				i++;
 			}
 		}
-		RequestCondition<?> customCondition = new ServerNameRequestCondition(headers);
+		RequestCondition<?> customCondition = new ServerNameRequestCondition(extensiveDomain, headers);
 		return new RequestMappingInfo(new PatternsRequestCondition(patterns, getUrlPathHelper(), getPathMatcher(), false, this.useTrailingSlashMatch(), this.getFileExtensions()),
 				new RequestMethodsRequestCondition(annotation.method()), new ParamsRequestCondition(annotation.params()), new HeadersRequestCondition(),
 				new ConsumesRequestCondition(annotation.consumes(), headers), new ProducesRequestCondition(annotation.produces(), headers, getContentNegotiationManager()), customCondition);

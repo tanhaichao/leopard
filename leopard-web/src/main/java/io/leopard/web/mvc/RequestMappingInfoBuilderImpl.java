@@ -10,6 +10,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.leopard.web.mvc.condition.ExtensiveDomain;
+
 public class RequestMappingInfoBuilderImpl implements RequestMappingInfoBuilder {
 
 	private List<RequestMappingInfoBuilder> builders;
@@ -24,13 +26,13 @@ public class RequestMappingInfoBuilderImpl implements RequestMappingInfoBuilder 
 	}
 
 	@Override
-	public void getHeaders(RequestMapping annotation, Method method, Map<String, String> headers) {
+	public void getHeaders(RequestMapping annotation, Method method, ExtensiveDomain extensiveDomain, Map<String, String> headers) {
 		if (builders == null) {
 			return;
 		}
 		for (RequestMappingInfoBuilder builder : builders) {
 			// System.err.println("builder:" + builder);
-			builder.getHeaders(annotation, method, headers);
+			builder.getHeaders(annotation, method, extensiveDomain, headers);
 		}
 	}
 
