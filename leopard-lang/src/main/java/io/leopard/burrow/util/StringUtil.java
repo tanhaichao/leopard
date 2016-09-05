@@ -13,6 +13,7 @@ import java.util.UUID;
 //import org.apache.commons.codec.binary.Base64;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.RandomUtils;
 
 /**
  * 字符串转换工具类
@@ -49,10 +50,23 @@ public class StringUtil {// NOPMD
 	// }
 
 	/**
+	 * 功能描述：生成指定长度随机数字字符串key
+	 * 
+	 * @param len
+	 * @return
+	 */
+	public static String generateNumberKey(int len) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < len; i++) {
+			builder.append(RandomUtils.nextInt(10));
+		}
+		return builder.toString();
+	}
+
+	/**
 	 * 对SQL语句进行转义
 	 * 
-	 * @param param
-	 *            SQL语句
+	 * @param param SQL语句
 	 * @return 转义后的字符串
 	 */
 	public static String escapeSQLParam(final String param) {
@@ -99,8 +113,7 @@ public class StringUtil {// NOPMD
 	/**
 	 * 对字符串进行转义
 	 * 
-	 * @param content
-	 *            文本
+	 * @param content 文本
 	 * @return 转义后的字符串
 	 */
 	public static String escapePattern(final String content) {// NOPMD
@@ -124,8 +137,7 @@ public class StringUtil {// NOPMD
 	/**
 	 * 对html标签进行转义
 	 * 
-	 * @param str
-	 *            字符串
+	 * @param str 字符串
 	 * @return 转义后的字符串
 	 */
 	public static String escapeHTMLTags(final String str) {
@@ -161,10 +173,11 @@ public class StringUtil {// NOPMD
 	}
 
 	/**
-	 * 转换javascript参数</br> 将'换成\'</br> 将"转换成&quot;
+	 * 转换javascript参数</br>
+	 * 将'换成\'</br>
+	 * 将"转换成&quot;
 	 * 
-	 * @param str
-	 *            需要转换的内容
+	 * @param str 需要转换的内容
 	 * @return 转换后的内容
 	 */
 	public static String escapeJavascriptParam(final String str) {
@@ -199,8 +212,7 @@ public class StringUtil {// NOPMD
 	/**
 	 * 如果字符串为空,返回null;否则，返回字符串</br>
 	 * 
-	 * @param str
-	 *            字符串
+	 * @param str 字符串
 	 * @return 字符串
 	 */
 	public static String emptyToNull(String str) {
@@ -215,10 +227,8 @@ public class StringUtil {// NOPMD
 	/**
 	 * 判断字符串1与字符串2是否不相等
 	 * 
-	 * @param str1
-	 *            字符串1
-	 * @param str2
-	 *            字符串2
+	 * @param str1 字符串1
+	 * @param str2 字符串2
 	 * @return 结果
 	 */
 	public static boolean notEquals(String str1, String str2) {
@@ -228,8 +238,7 @@ public class StringUtil {// NOPMD
 	/**
 	 * URL编码</br>
 	 * 
-	 * @param str
-	 *            需要编码的字符
+	 * @param str 需要编码的字符
 	 * @return 编码后的内容
 	 */
 	public static String urlEncode(String str) {
@@ -247,8 +256,7 @@ public class StringUtil {// NOPMD
 	/**
 	 * URL解码</br>
 	 * 
-	 * @param str
-	 *            需要解码的内容
+	 * @param str 需要解码的内容
 	 * @return 解码后的内容
 	 */
 	public static String urlDecode(String str) {
@@ -266,10 +274,8 @@ public class StringUtil {// NOPMD
 	/**
 	 * 在不满足指定位数的数字前面填充0
 	 * 
-	 * @param number
-	 *            数字
-	 * @param minlen
-	 *            位数
+	 * @param number 数字
+	 * @param minlen 位数
 	 * @return String
 	 */
 	public static String fixed(int number, int minlen) {
@@ -288,8 +294,7 @@ public class StringUtil {// NOPMD
 	/**
 	 * 返回字符串的hashcode
 	 * 
-	 * @param str
-	 *            字符串
+	 * @param str 字符串
 	 * @return 哈希值
 	 */
 	public static long getHashCode(String str) {
@@ -304,10 +309,8 @@ public class StringUtil {// NOPMD
 	/**
 	 * 构造请求地址
 	 * 
-	 * @param url
-	 *            path
-	 * @param params
-	 *            参数对
+	 * @param url path
+	 * @param params 参数对
 	 * @return 生成的请求地址
 	 */
 
@@ -398,8 +401,7 @@ public class StringUtil {// NOPMD
 	/**
 	 * 获取字节数(一个中文相当于2个字节).
 	 * 
-	 * @param str
-	 *            字符串
+	 * @param str 字符串
 	 * @return 字节数
 	 */
 	public static int getBytes(String str) {
@@ -417,10 +419,8 @@ public class StringUtil {// NOPMD
 	/**
 	 * 获取字符串缩写
 	 * 
-	 * @param len
-	 *            长度
-	 * @param content
-	 *            内容
+	 * @param len 长度
+	 * @param content 内容
 	 * @return
 	 */
 	public static String getShortString(int length, String content) {
