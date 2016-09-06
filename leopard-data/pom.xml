@@ -34,7 +34,6 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-lang</artifactId>
-			<version>0.9.7-SNAPSHOT</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
