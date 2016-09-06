@@ -161,7 +161,6 @@
 
 
 	<modules>
-		<module>leopard-lang</module>
 		<module>leopard-schema</module>
 		<module>leopard-data</module>
 		<module>leopard-log</module>
