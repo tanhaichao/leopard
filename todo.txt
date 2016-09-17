@@ -8,6 +8,7 @@
 	
 	7、最近访问记录
 	8、事务配置放到mysql标签的属性来完成
+	9、多环境properties支持
 	
 	
 Leopard-MVC:
