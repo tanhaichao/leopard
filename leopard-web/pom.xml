@@ -126,6 +126,11 @@
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-monitor</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-upload</artifactId>
+		</dependency>
 	</dependencies>
 
 
