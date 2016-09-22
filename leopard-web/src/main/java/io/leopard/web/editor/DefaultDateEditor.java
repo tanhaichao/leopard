@@ -25,6 +25,9 @@ public class DefaultDateEditor extends PropertyEditorSupport {
 			if (time > 0) {
 				super.setValue(new Date(time));
 			}
+			else if (time == 0) {
+				super.setValue(new Date(1));
+			}
 			else {
 				throw new IllegalArgumentException("未知时间格式[" + text + "].");
 			}
