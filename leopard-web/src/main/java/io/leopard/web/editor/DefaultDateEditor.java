@@ -11,7 +11,7 @@ public class DefaultDateEditor extends PropertyEditorSupport {
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
 		// System.out.println("DefaultDateEditor setAsText:" + text);
-		if (text == null || text.length() == 0) {
+		if (text == null || text.length() == 0 || "undefined".equals(text)) {
 			super.setValue(null);
 		}
 		else if (DateTime.isDateTime(text)) {
