@@ -15,7 +15,12 @@ public class DefaultDateEditor extends PropertyEditorSupport {
 			super.setValue(null);
 		}
 		else if (DateTime.isDateTime(text)) {
-			super.setValue(DateUtil.toDate(text));
+			if ("1970-01-01 08:00:00".equals(text)) {
+				super.setValue(new Date(1));
+			}
+			else {
+				super.setValue(DateUtil.toDate(text));
+			}
 		}
 		else if (DateTime.isDate(text)) {
 			super.setValue(DateUtil.toDate(text + " 00:00:00"));
