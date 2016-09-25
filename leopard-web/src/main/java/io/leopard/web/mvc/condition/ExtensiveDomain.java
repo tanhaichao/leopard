@@ -13,6 +13,7 @@ import java.util.Set;
  */
 public class ExtensiveDomain {
 
+	protected final List<String> nonList = new ArrayList<String>();
 	protected final List<String> regexList = new ArrayList<String>();
 
 	private final Set<String> IGNORE_DOMAIN_SET = new HashSet<String>();
@@ -27,6 +28,15 @@ public class ExtensiveDomain {
 	}
 
 	/**
+	 * 非域名
+	 * 
+	 * @param domain
+	 */
+	public void addNonDomain(String domain) {
+		nonList.add(domain);
+	}
+
+	/**
 	 * 泛域名
 	 * 
 	 * @param domain
@@ -37,6 +47,13 @@ public class ExtensiveDomain {
 	}
 
 	public boolean match(String serverName) {
+		if (!nonList.isEmpty()) {
+			for (String domain : nonList) {
+				if (serverName.endsWith(domain)) {
+					return true;
+				}
+			}
+		}
 		if (IGNORE_DOMAIN_SET.contains(serverName)) {
 			return false;
 		}
