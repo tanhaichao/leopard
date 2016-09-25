@@ -49,7 +49,7 @@ public class ExtensiveDomain {
 	public boolean match(String serverName) {
 		if (!nonList.isEmpty()) {
 			for (String domain : nonList) {
-				if (serverName.endsWith(domain)) {
+				if (!serverName.endsWith(domain)) {
 					return true;
 				}
 			}
