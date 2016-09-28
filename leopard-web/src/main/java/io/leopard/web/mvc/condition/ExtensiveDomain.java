@@ -14,6 +14,7 @@ import java.util.Set;
 public class ExtensiveDomain {
 
 	protected final List<String> nonList = new ArrayList<String>();
+	protected final List<String> nonIgnoreList = new ArrayList<String>();
 	protected final List<String> regexList = new ArrayList<String>();
 
 	private final Set<String> IGNORE_DOMAIN_SET = new HashSet<String>();
@@ -32,8 +33,9 @@ public class ExtensiveDomain {
 	 * 
 	 * @param domain
 	 */
-	public void addNonDomain(String domain) {
+	public void addNonDomain(String domain, String ignoreDomain) {
 		nonList.add(domain);
+		nonIgnoreList.add(ignoreDomain);
 	}
 
 	/**
@@ -48,10 +50,16 @@ public class ExtensiveDomain {
 
 	public boolean match(String serverName) {
 		if (!nonList.isEmpty()) {
+			int index = 0;
 			for (String domain : nonList) {
+				String ignoreDomai = this.nonIgnoreList.get(index);
+				if (serverName.endsWith(ignoreDomai)) {
+					continue;
+				}
 				if (!serverName.endsWith(domain)) {
 					return true;
 				}
+				index++;
 			}
 		}
 		if (IGNORE_DOMAIN_SET.contains(serverName)) {
