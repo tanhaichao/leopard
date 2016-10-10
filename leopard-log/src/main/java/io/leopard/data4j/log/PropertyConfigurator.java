@@ -20,7 +20,7 @@ public class PropertyConfigurator {
 		if (SystemUtils.IS_OS_LINUX) {
 			String env = System.getenv("ENV");
 			String jettyHome = System.getenv("JETTY_HOME");
-			if (StringUtils.isNotEmpty(env) || StringUtils.isNotEmpty(jettyHome)) {
+			if (StringUtils.isNotEmpty(env) && StringUtils.isNotEmpty(jettyHome)) {
 				return true;
 			}
 		}
