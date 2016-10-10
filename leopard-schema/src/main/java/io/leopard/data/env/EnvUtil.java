@@ -47,6 +47,11 @@ public class EnvUtil {
 		return env;
 	}
 
+	public static boolean isProdEnv() {
+		String env = EnvUtil.getEnv();
+		return EnvUtil.ENV_PROD.equalsIgnoreCase(env);
+	}
+
 	public static boolean isDevEnv() {
 		String env = EnvUtil.getEnv();
 		// AssertData.notEmpty(env, "未配置环境变量" + NAME_ENV + ".");
