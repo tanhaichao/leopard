@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>leopard</artifactId>
 		<groupId>io.leopard</groupId>
-		<version>0.9.10</version>
+		<version>0.9.11-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>leopard-web</artifactId>
@@ -14,7 +14,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-data</artifactId>
-			<version>0.9.10</version><!--$NO-MVN-MAN-VER$ -->
+			<version>0.9.11-SNAPSHOT</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-schema</artifactId>
-			<version>0.9.10</version>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
