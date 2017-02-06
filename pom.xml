@@ -182,9 +182,14 @@
 		<module>leopard-biz</module>
 		<module>leopard-monitor</module>
 		<module>leopard-web</module>
+		<module>leopard-freemarker</module>
 		
 		<module>javahost</module>
 		<module>leopard-lang-parent</module>
+		<module>leopard-test-parent</module>
+		<module>leopard-data-parent</module>
+		<module>leopard-mvc-parent</module>
+		<module>leopard-security-parent</module>
 	</modules>
 
 
