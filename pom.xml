@@ -182,6 +182,8 @@
 		<module>leopard-biz</module>
 		<module>leopard-monitor</module>
 		<module>leopard-web</module>
+		
+		<module>javahost</module>
 	</modules>
 
 
