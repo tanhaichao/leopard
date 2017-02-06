@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard</groupId>
+	<artifactId>leopard-lang-parent</artifactId>
+	<version>0.9.11-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Leopard-Lang</name>
+	<description>命令行程序、Http操作、Json、Servlet、定时器等类库</description>
+
+	<parent>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
+	</parent>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- test -->
+
+			<!-- test -->
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>leopard-timer</module>
+		<module>leopard-command</module>
+		<module>leopard-servlet</module>
+		<module>leopard-json</module>
+		<module>leopard-httpnb</module>
+		<module>leopard-exception</module>
+		<module>leopard-util</module>
+	</modules>
+
+</project>
