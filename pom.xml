@@ -190,6 +190,7 @@
 		<module>leopard-data-parent</module>
 		<module>leopard-mvc-parent</module>
 		<module>leopard-security-parent</module>
+		<module>leopard-cloud-parent</module>
 	</modules>
 
 
