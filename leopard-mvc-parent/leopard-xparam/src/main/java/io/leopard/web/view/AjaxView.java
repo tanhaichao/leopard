@@ -46,7 +46,7 @@ public class AjaxView extends AbstractView {
 		this.message = "";
 	}
 
-	public String getStatus() {
+	public String getStatusCode() {
 		return status;
 	}
 
