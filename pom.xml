@@ -184,6 +184,7 @@
 		<module>leopard-web</module>
 		
 		<module>javahost</module>
+		<module>leopard-lang-parent</module>
 	</modules>
 
 

@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard-test-parent</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
+	</parent>
+	<artifactId>leopard-jetty-test</artifactId>
+	<name>Leopard-Jetty-Test</name>
+	<description>提供启动Jetty、访问Http接口、停止Jetty的类库，简化经过Jetty的接口单元测试。目前多用于Leopard各设计web的模块，业务系统有MVCUnit，一般情况下不需要用到Leopard-Jetty-Test。</description>
+
+	<dependencies>
+		<!-- test -->
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-httpnb</artifactId>
+			<version>0.0.3</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-jetty</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<!-- test -->
+	</dependencies>
+</project>

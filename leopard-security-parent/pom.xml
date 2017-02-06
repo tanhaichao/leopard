@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard</groupId>
+	<artifactId>leopard-security-parent</artifactId>
+	<version>0.9.11-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Leopard权限认证框架</name>
+	<description>管理员权限、接口IP认证、接口签名认证等功能</description>
+
+	<parent>
+		<groupId>io.leopard.depend</groupId>
+		<artifactId>depend</artifactId>
+		<version>0.9.8</version>
+	</parent>
+
+	<scm>
+		<url>https://github.com/tanhaichao/leopard-security</url>
+		<connection>scm:svn:https://github.com/tanhaichao/leopard-security/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-security/trunk</developerConnection>
+	</scm>
+
+	<properties>
+		<leopard.unified.version>${project.version}</leopard.unified.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-mock</artifactId>
+				<version>${leopard.unified.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-jetty</artifactId>
+				<version>${leopard.unified.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-cache</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-kit</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-jdbc</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-servlet</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-xparam</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-passport</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>leopard-admin</module>
+		<module>leopard-allow</module>
+	</modules>
+</project>

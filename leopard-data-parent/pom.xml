@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard</groupId>
+	<artifactId>leopard-data-parent</artifactId>
+	<version>0.9.11-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Leopard-Data</name>
+	<description>MySQL、Memcached、Redis、Queue、MongoDB、内存数据库、Cache等</description>
+
+	<parent>
+		<groupId>io.leopard.depend</groupId>
+		<artifactId>depend</artifactId>
+		<version>0.9.6</version>
+	</parent>
+
+	<scm>
+		<url>https://github.com/tanhaichao/leopard-data</url>
+		<connection>scm:svn:https://github.com/tanhaichao/leopard-data/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-data/trunk</developerConnection>
+	</scm>
+
+
+	<properties>
+		<leopard.unified.version>${project.version}</leopard.unified.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-json</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-httpnb</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-exception</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-util</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-timer</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
+		<module>leopard-jdbc</module>
+		<module>leopard-redis</module>
+		<module>leopard-memcache</module>
+		<module>leopard-mongo</module>
+		<module>leopard-memdb</module>
+		<module>leopard-cache</module>
+		<module>leopard-queue</module>
+		<module>leopard-dfs</module>
+		<module>leopard-kit</module>
+		<module>leopard-rpc</module>
+	</modules>
+
+</project>

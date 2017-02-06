@@ -1,0 +1,18 @@
+待开发的功能:
+	1、图片参数，支持上传和URL地址
+	2、某个接口用到图片上传参数，自动注册一个上传接口？如何实现?
+	3、图片上传，是异步调用独立接口，还是同步和普通参数一起上传，由前端决定？
+	4、图片上传需要支持尺寸信息
+
+
+	5、securityCode和captcha，在Leopard-MVC做验证，找当前类的对应接口.
+	6、一个接口支持2个TimeRange参数，如何实现?
+	7、测试contentType为text/plain的问题
+	8、测试contentType为application/json、text/json的安全问题
+	9、测试错误message中括号过滤的安全问题.
+	10、图片验证码的生成和检查合并到一个方法定义
+
+		
+
+
+

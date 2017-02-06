@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard</groupId>
+	<artifactId>leopard-mvc-parent</artifactId>
+	<version>0.9.11-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Leopard MVC框架</name>
+	<description>请求特殊参数、通行证验证、异常处理、验证码、访问频率限制、分布式session、服务器代理等</description>
+
+	<parent>
+		<groupId>io.leopard.depend</groupId>
+		<artifactId>depend</artifactId>
+		<version>0.9.6</version>
+	</parent>
+
+	<scm>
+		<url>https://github.com/tanhaichao/leopard-mvc</url>
+		<connection>scm:svn:https://github.com/tanhaichao/leopard-mvc/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-mvc/trunk</developerConnection>
+	</scm>
+
+	<properties>
+		<leopard.unified.version>${project.version}</leopard.unified.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.freemarker</groupId>
+				<artifactId>freemarker</artifactId>
+				<version>2.3.23</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-mock</artifactId>
+				<version>${leopard.unified.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-test</artifactId>
+				<version>${leopard.unified.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-jetty-test</artifactId>
+				<version>${leopard.unified.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-jdbc</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-json</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-exception</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-servlet</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-redis</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>1.2.6</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>leopard-xparam</module>
+		<module>leopard-trynb</module>
+		<module>leopard-session</module>
+		<module>leopard-passport</module>
+		<module>leopard-captcha</module>
+		<module>leopard-frequency</module>
+		<module>leopard-proxy</module>
+		<module>leopard-convert</module>
+		<module>leopard-lang</module>
+		<module>leopard-chart</module>
+		<module>leopard-upload</module>
+	</modules>
+
+</project>

@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard</groupId>
+	<artifactId>leopard-cloud-parent</artifactId>
+	<version>0.9.11-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Leopard-Cloud</name>
+	<description>云计算接口</description>
+
+	<parent>
+		<groupId>io.leopard.depend</groupId>
+		<artifactId>depend</artifactId>
+		<version>0.9.8</version>
+	</parent>
+
+	<scm>
+		<url>https://github.com/tanhaichao/leopard-cloud</url>
+		<connection>scm:svn:https://github.com/tanhaichao/leopard-cloud/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-cloud/trunk</developerConnection>
+	</scm>
+
+	<properties>
+		<leopard.unified.version>${project.version}</leopard.unified.version>
+	</properties>
+
+
+	<modules>
+		<module>leopard-aliyun</module>
+	</modules>
+</project>

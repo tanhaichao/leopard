@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard</groupId>
+	<artifactId>leopard-test-parent</artifactId>
+	<version>0.9.11-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Leopard测试框架</name>
+	<description>集成测试、Jetty测试等</description>
+
+	<parent>
+		<groupId>io.leopard.depend</groupId>
+		<artifactId>depend</artifactId>
+		<version>0.9.6</version>
+	</parent>
+
+	<scm>
+		<url>https://github.com/tanhaichao/leopard-test</url>
+		<connection>scm:svn:https://github.com/tanhaichao/leopard-test/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-test/trunk</developerConnection>
+	</scm>
+
+	<properties>
+		<spring.version>4.3.2.RELEASE</spring.version>
+
+		<jdk.version>1.8</jdk.version>
+		<leopard.unified.version>${project.version}</leopard.unified.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>javahost</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-jdbc</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-json</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-util</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>leopard-jetty</module>
+		<module>leopard-test</module>
+		<module>leopard-mock</module>
+		<module>leopard-jetty-test</module>
+		<module>leopard-tomcat</module>
+		<module>leopard-jetty-jsp</module>
+		<module>leopard-jetty-handler</module>
+		<module>leopard-treedata</module>
+		<module>leopard-mocknb</module>
+	</modules>
+
+</project>

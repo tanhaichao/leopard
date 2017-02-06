@@ -1,0 +1,93 @@
+开发框架
+	文档系统
+		apidoc-maven-plugin	#f6d5aa
+		apidoc-web	#dfd961
+	
+	配置框架
+		自定义Spring标签	#f0d48a
+		连接池智能优化配置		#eda994	
+		JavaHost		#b9763f	
+						
+	数据源框架
+		缓存
+		Jdbc	#b49a3d
+		Redis	#ebe378
+		Memcached	#b68334
+		Memdb	#f5e351
+		PubSub  #dfad70
+		RsyncMap	#d6a680
+
+	MVC框架
+		请求特殊参数	#dbdc7f
+		分布式Session	#aec1ad
+		通行证验证	#9f6652
+		异常处理	#ebe378
+	
+	权限
+		IP访问限制		#b9763f
+		管理员权限验证	#bf6e5d
+			
+测试框架
+	单元测试
+		Jdbc	#ee82a2
+		Memcached	#b49a3d
+		Redis	#e8e596
+		DFS	#eee469
+		Queue	#f0d48a
+		
+	其他测试
+		集成测试	#ebe378 
+		MVC测试	#f5e351
+		Mock测试	#dbdc7f
+	
+运维系统
+	监控报警
+		方法耗时监控 	#aaa1cc
+		接口耗时监控		#e0b5c9
+		线程监控		 #e098b0
+		异常报警	#ee82a2
+			
+	移动运维
+		在线部署	#ecc099
+		在线回滚	#eeb798
+		在线查错	#f0d48a
+	安全框架
+		XSS防范	#efd95f
+		CSRF防范		#eee469
+		JSONP劫持		#dbdc7f
+	数据备份
+		增量备份	#ee82a2
+		全量备份 	#eda99
+		异地备份	#eeb798
+	
+小牛云开发平台
+	API文档系统	
+		权限控制	#9b4c3f
+	性能分析系统	#8a6e9e
+		索引、缓存等	#9b4c3f
+	接口测试系统
+		APIWatch	#9b4c3f
+		异常日志	#8f5c85
+		账号切换	#8f5c85
+		表单构造	#8f5c85
+	APIUnit
+		在线运行单元测试	#8f5c85
+	AutoUnit	
+		测试模板扩展		#f6d5aa
+		数据源事物	#9d4e87
+		默认值测试	#716084		
+	时光机测试平台
+		快照	#a97d32
+		数据隔离和共享	#b49a3d
+		测试记录和回放	#dfad70
+		
+	烂代码分析系统	
+		代码复杂度	#8f5c85
+		接口定义标准度	#4a5072
+		
+	在线设计系统		
+		需求管理	#9b4c3f
+		数据模型设计		#aaa1cc
+		代码生成系统		#8a6e9e
+
+	
