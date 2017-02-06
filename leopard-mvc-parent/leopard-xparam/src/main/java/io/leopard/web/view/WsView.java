@@ -39,7 +39,7 @@ public class WsView extends AbstractView {
 		this.data = data;
 	}
 
-	public String getStatus() {
+	public String getStatusCode() {
 		return status;
 	}
 
