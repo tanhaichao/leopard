@@ -8,16 +8,10 @@
 	<description>管理员权限、接口IP认证、接口签名认证等功能</description>
 
 	<parent>
-		<groupId>io.leopard.depend</groupId>
-		<artifactId>depend</artifactId>
-		<version>0.9.8</version>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
 	</parent>
-
-	<scm>
-		<url>https://github.com/tanhaichao/leopard-security</url>
-		<connection>scm:svn:https://github.com/tanhaichao/leopard-security/trunk</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-security/trunk</developerConnection>
-	</scm>
 
 	<properties>
 		<leopard.unified.version>${project.version}</leopard.unified.version>

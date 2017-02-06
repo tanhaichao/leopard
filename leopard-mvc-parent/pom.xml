@@ -8,16 +8,10 @@
 	<description>请求特殊参数、通行证验证、异常处理、验证码、访问频率限制、分布式session、服务器代理等</description>
 
 	<parent>
-		<groupId>io.leopard.depend</groupId>
-		<artifactId>depend</artifactId>
-		<version>0.9.6</version>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
 	</parent>
-
-	<scm>
-		<url>https://github.com/tanhaichao/leopard-mvc</url>
-		<connection>scm:svn:https://github.com/tanhaichao/leopard-mvc/trunk</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-mvc/trunk</developerConnection>
-	</scm>
 
 	<properties>
 		<leopard.unified.version>${project.version}</leopard.unified.version>

@@ -8,17 +8,10 @@
 	<description>MySQL、Memcached、Redis、Queue、MongoDB、内存数据库、Cache等</description>
 
 	<parent>
-		<groupId>io.leopard.depend</groupId>
-		<artifactId>depend</artifactId>
-		<version>0.9.6</version>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
 	</parent>
-
-	<scm>
-		<url>https://github.com/tanhaichao/leopard-data</url>
-		<connection>scm:svn:https://github.com/tanhaichao/leopard-data/trunk</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-data/trunk</developerConnection>
-	</scm>
-
 
 	<properties>
 		<leopard.unified.version>${project.version}</leopard.unified.version>

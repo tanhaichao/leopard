@@ -8,16 +8,10 @@
 	<description>集成测试、Jetty测试等</description>
 
 	<parent>
-		<groupId>io.leopard.depend</groupId>
-		<artifactId>depend</artifactId>
-		<version>0.9.6</version>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
 	</parent>
-
-	<scm>
-		<url>https://github.com/tanhaichao/leopard-test</url>
-		<connection>scm:svn:https://github.com/tanhaichao/leopard-test/trunk</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-test/trunk</developerConnection>
-	</scm>
 
 	<properties>
 		<spring.version>4.3.2.RELEASE</spring.version>

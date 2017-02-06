@@ -7,21 +7,14 @@
 	<description>规范、简化Freemarker，自带常用自定义Freemarker指令、方法。</description>
 
 	<parent>
-		<groupId>io.leopard.depend</groupId>
-		<artifactId>depend</artifactId>
-		<version>0.9.6</version>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
 	</parent>
 
 	<properties>
 		<leopard.unified.version>${project.version}</leopard.unified.version>
 	</properties>
-
-	<scm>
-		<url>https://github.com/tanhaichao/leopard-freemarker</url>
-		<connection>scm:svn:https://github.com/tanhaichao/leopard-freemarker/trunk</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-freemarker/trunk</developerConnection>
-	</scm>
-
 
 
 	<dependencyManagement>
