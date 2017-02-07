@@ -44,7 +44,7 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		System.err.println("UnderlineHandlerMethodArgumentResolver supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
+//		System.err.println("UnderlineHandlerMethodArgumentResolver supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
 		String name = parameter.getParameterName();
 		if (StringUtils.isEmpty(name)) {
 			return false;
