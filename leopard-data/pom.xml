@@ -34,47 +34,58 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-lang</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-httpnb</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-json</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jdbc</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-kit</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-queue</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-dfs</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-redis</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-mongo</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-memcache</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-cache</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

@@ -13,36 +13,6 @@
 		<version>0.9.11-SNAPSHOT</version>
 	</parent>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-json</artifactId>
-				<version>0.9.11-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-httpnb</artifactId>
-				<version>0.9.11-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-exception</artifactId>
-				<version>0.9.11-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-util</artifactId>
-				<version>0.9.11-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-timer</artifactId>
-				<version>0.9.11-SNAPSHOT</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
 	<modules>
 		<module>leopard-jdbc</module>
 		<module>leopard-redis</module>
