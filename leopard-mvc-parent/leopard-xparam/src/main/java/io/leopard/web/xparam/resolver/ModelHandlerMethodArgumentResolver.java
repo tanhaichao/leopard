@@ -83,7 +83,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			else {
 				String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(fieldName);
 				// logger.info("resolveName name:" + fieldName + " underlineName:" + underlineName);
-				String value = req.getParameter(underlineName);
+				String value = RequestBodyArgumentResolver.getParameter(req, underlineName);
 				if (value == null) {
 					continue;
 				}

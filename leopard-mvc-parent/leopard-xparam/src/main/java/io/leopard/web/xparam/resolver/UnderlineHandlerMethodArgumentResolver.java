@@ -64,15 +64,14 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
 		String underlineName = camelToUnderline(name);
 		// logger.info("resolveName name:" + name + " underlineName:" + underlineName);
-		String value = req.getParameter(underlineName);
+		String value = RequestBodyArgumentResolver.getParameter(req, underlineName);
 		return value;
 	}
 
-	
 	public static String getParameter(HttpServletRequest request, String name) {
-		String value = request.getParameter(name);
+		String value = RequestBodyArgumentResolver.getParameter(request, name);
 		if (enable && value == null) {
-			value = request.getParameter(camelToUnderline(name));
+			value = RequestBodyArgumentResolver.getParameter(request, camelToUnderline(name));
 		}
 		return value;
 	}

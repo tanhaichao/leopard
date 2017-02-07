@@ -49,10 +49,13 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		simpleClassSet.add(MultipartFile.class.getName());
 	}
 
+	private Map<Integer, Class<?>> clazzMap = new ConcurrentHashMap<Integer, Class<?>>();
+
 	private Map<Integer, Class<?>> modelMap = new ConcurrentHashMap<Integer, Class<?>>();
 
 	@Value("${xparam.underline}")
 	private String underline;
+
 	private static ObjectMapper mapper; // can reuse, share
 
 	@PostConstruct
@@ -81,6 +84,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			Type[] args = ((ParameterizedType) parameter.getGenericParameterType()).getActualTypeArguments();
 			Class<?> clazz = (Class<?>) args[0];
 			boolean isModel = isModelClass(clazz);
+			clazzMap.put(parameter.hashCode(), clazz);
 			if (isModel) {
 				modelMap.put(parameter.hashCode(), clazz);
 				System.err.println("name:" + name + " typeName:" + args[0] + " isModel:" + isModel);
@@ -101,7 +105,15 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		name = name.replaceFirst("List$", "");
 		name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
 		String[] values = req.getParameterValues(name);
+
 		int hashCode = parameter.hashCode();
+
+		if (values == null) {
+			String value = RequestBodyArgumentResolver.getParameterForRequestBody(req, name);
+			Class<?> clazz = clazzMap.get(hashCode);
+			return Json.toListObject(value, clazz);
+		}
+
 		Class<?> clazz = modelMap.get(hashCode);
 		if (clazz != null) {
 			return toList(clazz, values);

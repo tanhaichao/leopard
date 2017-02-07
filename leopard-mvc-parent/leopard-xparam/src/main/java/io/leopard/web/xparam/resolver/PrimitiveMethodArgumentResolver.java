@@ -1,6 +1,7 @@
 package io.leopard.web.xparam.resolver;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,22 +52,15 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest webRequest) throws Exception {
 		// System.err.println("PrimitiveMethodArgumentResolver resolveName name:" + name);
-		Object arg = null;
-
 		if (UnderlineHandlerMethodArgumentResolver.isEnable()) {
 			name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
 		}
-
-		String[] paramValues = webRequest.getParameterValues(name);
-		if (paramValues != null) {
-			arg = (paramValues.length == 1 ? paramValues[0] : paramValues);
+		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
+		Object value = RequestBodyArgumentResolver.getParameter(request, name);
+		if (value == null) {
+			value = this.getDefaultValue(parameter);
 		}
-
-		if (arg == null) {
-			arg = this.getDefaultValue(parameter);
-		}
-
-		return arg;
+		return value;
 	}
 
 	protected Object getDefaultValue(MethodParameter parameter) {
