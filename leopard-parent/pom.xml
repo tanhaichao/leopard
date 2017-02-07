@@ -16,7 +16,7 @@
 		<jdk.version>1.8</jdk.version>
 
 		<leopard.version>0.9.11-SNAPSHOT</leopard.version>
-		
+
 		<leopard-data.version>${leopard.version}</leopard-data.version>
 		<javahost.version>${leopard.version}</javahost.version>
 		<topnb.version>${leopard.version}</topnb.version>
@@ -369,6 +369,51 @@
 
 
 
+	<!-- 小牛云配置 start -->
+	<profiles>
+		<profile>
+			<id>xiaoniu</id>
+			<activation>
+				<file>
+					<exists>/Users/tanmr/xiaoniu</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>io.leopard</groupId>
+					<artifactId>webide-local</artifactId>
+					<version>0.1-SNAPSHOT</version>
+				</dependency>
+			</dependencies>
 
-
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>1.7</version>
+						<executions>
+							<execution>
+								<id>add-test-source</id>
+								<phase>generate-test-sources</phase>
+								<goals>
+									<goal>add-test-source</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<echo>add integration sources</echo>
+									</tasks>
+									<sources>
+										<source>src/mvcunit/java</source>
+										<source>src/apimock/java</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	<!-- 小牛云配置 end -->
 </project>
