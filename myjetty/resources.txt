@@ -1,0 +1,7 @@
+http://blog.csdn.net/fan_hai_ping/article/details/40835483	Jetty 9嵌入式开发
+http://czh.iteye.com/blog/739617	Jetty嵌入项目式开发(把jetty发布到你的应用中)
+
+
+http://blog.csdn.net/kobejayandy/article/details/20165937	Jetty之WebAppContext
+
+

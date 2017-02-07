@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard</groupId>
+	<artifactId>myjetty</artifactId>
+	<version>0.9.11-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>MyJetty</name>
+	<description>为移动运维(MobileOps)提供后台技术支持。支持在线部署、回滚、重启等常用操作。</description>
+
+
+	<parent>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
+	</parent>
+
+	<scm>
+		<url>https://github.com/tanhaichao/myjetty</url>
+		<connection>scm:svn:https://github.com/tanhaichao/myjetty/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/myjetty/trunk</developerConnection>
+	</scm>
+
+	<modules>
+		<module>myjetty-maven-plugin</module>
+		<module>myjetty-test</module>
+		<module>myjetty-server</module>
+		<module>myjetty-workbench</module>
+	</modules>
+</project>
