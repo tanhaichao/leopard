@@ -5,8 +5,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.springframework.util.StringUtils;
+
 import io.leopard.burrow.lang.inum.EnumUtil;
 import io.leopard.burrow.lang.inum.Onum;
+import io.leopard.burrow.util.StringUtil;
 
 public class OptionData {
 
@@ -21,6 +24,11 @@ public class OptionData {
 		catch (ClassNotFoundException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
+
+		if (StringUtils.isEmpty(id)) {
+			id = StringUtil.firstCharToLowerCase(clazz.getName());
+		}
+
 		Map<Object, Object> data = toData(clazz);
 		OptionInfo info = new OptionInfo();
 		info.setId(id);
