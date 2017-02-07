@@ -21,6 +21,8 @@
 	<bean class="io.leopard.web.captcha.SessCaptchaXParam" />
 
 	<bean class="io.leopard.timer.TimerBeanFactoryAware" />
+	
+	<bean class="io.leopard.web.mvc.option.OptionScannerConfigurer" />
 
 
 	<import resource="freemarker.xml" />
