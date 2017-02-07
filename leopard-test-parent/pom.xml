@@ -13,30 +13,6 @@
 		<version>0.9.11-SNAPSHOT</version>
 	</parent>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>javahost</artifactId>
-				<version>0.9.11-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-jdbc</artifactId>
-				<version>0.9.11-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-json</artifactId>
-				<version>0.9.11-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-util</artifactId>
-				<version>0.9.11-SNAPSHOT</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 	<modules>
 		<module>leopard-jetty</module>
 		<module>leopard-test</module>
