@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard</groupId>
+	<artifactId>nobug-parent</artifactId>
+	<version>0.9.11-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>NoBug</name>
+	<description>安全框架。支持XSS、CSRF、JSONP劫持等漏洞防范。</description>
+
+	<parent>
+		<groupId>io.leopard.depend</groupId>
+		<artifactId>depend</artifactId>
+		<version>0.9.6</version>
+	</parent>
+
+	<scm>
+		<url>https://github.com/tanhaichao/nobug</url>
+		<connection>scm:svn:https://github.com/tanhaichao/nobug/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/nobug/trunk</developerConnection>
+	</scm>
+
+
+	<modules>
+		<module>nobug-xss</module>
+		<module>nobug-csrf</module>
+	</modules>
+</project>

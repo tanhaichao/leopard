@@ -1,0 +1,3 @@
+http://jingyan.baidu.com/article/fcb5aff7f29864edaa4a7138.html	XSS攻击的防范
+
+
