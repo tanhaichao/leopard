@@ -37,6 +37,7 @@ public class OptionData {
 		for (Entry<Object, Onum<Object, Object>> entry : map.entrySet()) {
 			Object key = entry.getKey();
 			Object desc = entry.getValue().getDesc();
+			// System.err.println("put key:"+key+" desc:"+desc);
 			data.put(key, desc);
 		}
 		return data;

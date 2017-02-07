@@ -1,8 +1,8 @@
 package io.leopard.burrow.lang.inum;
 
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -104,7 +104,7 @@ public class EnumUtil {
 		if (map != null) {
 			return map;
 		}
-		map = new HashMap<Object, Enum<?>>();
+		map = new LinkedHashMap<Object, Enum<?>>();
 		EnumSet<E> set = EnumSet.allOf(clazz);
 		Iterator<E> iterator = set.iterator();
 		while (iterator.hasNext()) {

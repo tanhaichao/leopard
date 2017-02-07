@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
@@ -32,11 +33,11 @@ public class OptionScanner extends ClassPathBeanDefinitionScanner {
 		for (BeanDefinitionHolder holder : beanDefinitions) {
 			String id = holder.getBeanName();
 			String className = holder.getBeanDefinition().getBeanClassName();
-			System.err.println("holder:" + holder.getBeanName() + " className:" + className);
+//			System.err.println("holder:" + holder.getBeanName() + " className:" + className);
 			OptionData.load(id, className);
-			// GenericBeanDefinition definition = (GenericBeanDefinition) holder.getBeanDefinition();
-			// definition.getPropertyValues().add("innerClassName", definition.getBeanClassName());
-			// definition.setBeanClass(FactoryBeanTest.class);
+			GenericBeanDefinition definition = (GenericBeanDefinition) holder.getBeanDefinition();
+			definition.getPropertyValues().add("innerClassName", definition.getBeanClassName());
+			definition.setBeanClass(OptionFactoryBean.class);
 		}
 		return beanDefinitions;
 	}
