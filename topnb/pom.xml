@@ -11,22 +11,19 @@
 	<url>http://leopard.io/topnb/</url>
 	<inceptionYear>2015</inceptionYear>
 
+	<parent>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
+	</parent>
+
+
 	<modules>
 		<module>topnb-web</module>
 		<module>topnb-profiler</module>
 	</modules>
 
-	<parent>
-		<groupId>io.leopard.depend</groupId>
-		<artifactId>depend</artifactId>
-		<version>0.9.6</version>
-	</parent>
 
-	<scm>
-		<url>https://github.com/tanhaichao/topnb</url>
-		<connection>scm:svn:https://github.com/tanhaichao/topnb/trunk</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/topnb/trunk</developerConnection>
-	</scm>
 
 	<issueManagement>
 		<system>GitHub Issues</system>

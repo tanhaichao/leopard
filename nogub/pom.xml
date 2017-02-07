@@ -8,16 +8,10 @@
 	<description>安全框架。支持XSS、CSRF、JSONP劫持等漏洞防范。</description>
 
 	<parent>
-		<groupId>io.leopard.depend</groupId>
-		<artifactId>depend</artifactId>
-		<version>0.9.6</version>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
 	</parent>
-
-	<scm>
-		<url>https://github.com/tanhaichao/nobug</url>
-		<connection>scm:svn:https://github.com/tanhaichao/nobug/trunk</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/nobug/trunk</developerConnection>
-	</scm>
 
 
 	<modules>
