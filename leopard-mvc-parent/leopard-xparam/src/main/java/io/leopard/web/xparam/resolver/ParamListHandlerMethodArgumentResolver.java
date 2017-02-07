@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 import io.leopard.json.Json;
 import io.leopard.json.JsonException;
+import io.leopard.web.xparam.RequestBodyArgumentResolver;
 
 /**
  * List<?>参数解析.

@@ -20,7 +20,8 @@ public class UidXParam implements XParam {
 
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
-		String uid = request.getParameter("uid");
+		// String uid = request.getParameter("uid");
+		String uid = RequestBodyArgumentResolver.getParameter(request, "uid");
 		if (StringUtils.isNotEmpty(uid)) {
 			return NumberUtils.toLong(uid);
 		}

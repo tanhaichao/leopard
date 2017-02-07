@@ -1,4 +1,4 @@
-package io.leopard.web.xparam.resolver;
+package io.leopard.web.xparam;
 
 import java.util.Date;
 import java.util.Map;

@@ -4,10 +4,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ValueConstants;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver;
+
+import io.leopard.web.xparam.RequestBodyArgumentResolver;
 
 /**
  * 基本数据类型
@@ -15,14 +18,12 @@ import org.springframework.web.method.annotation.AbstractNamedValueMethodArgumen
  * @author ahai
  *
  */
+@Component // 之前为什么把这个注解去掉?
 public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
-
-	public PrimitiveMethodArgumentResolver() {
-
-	}
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
+		System.err.println("PrimitiveMethodArgumentResolver supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
 		RequestParam ann = parameter.getParameterAnnotation(RequestParam.class);
 		if (ann != null) {
 			return false;
@@ -51,7 +52,7 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest webRequest) throws Exception {
-		// System.err.println("PrimitiveMethodArgumentResolver resolveName name:" + name);
+		System.err.println("PrimitiveMethodArgumentResolver resolveName name:" + name);
 		if (UnderlineHandlerMethodArgumentResolver.isEnable()) {
 			name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
 		}
