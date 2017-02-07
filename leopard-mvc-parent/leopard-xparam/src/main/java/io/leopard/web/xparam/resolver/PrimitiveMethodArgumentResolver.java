@@ -23,7 +23,7 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		System.err.println("PrimitiveMethodArgumentResolver supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
+		// System.err.println("PrimitiveMethodArgumentResolver supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
 		RequestParam ann = parameter.getParameterAnnotation(RequestParam.class);
 		if (ann != null) {
 			return false;
