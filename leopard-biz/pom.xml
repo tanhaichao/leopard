@@ -8,25 +8,28 @@
 	<artifactId>leopard-biz</artifactId>
 	<name>Leopard-Biz</name>
 	<description>乱七八糟未成熟的业务组件</description>
-	
-	
-	<dependencies>
 
+
+	<dependencies>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-redis</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-memcache</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-cache</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-memdb</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
