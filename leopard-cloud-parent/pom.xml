@@ -17,7 +17,6 @@
 		<leopard.unified.version>${project.version}</leopard.unified.version>
 	</properties>
 
-
 	<modules>
 		<module>leopard-aliyun</module>
 	</modules>
