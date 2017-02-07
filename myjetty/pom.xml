@@ -14,12 +14,6 @@
 		<version>0.9.11-SNAPSHOT</version>
 	</parent>
 
-	<scm>
-		<url>https://github.com/tanhaichao/myjetty</url>
-		<connection>scm:svn:https://github.com/tanhaichao/myjetty/trunk</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/myjetty/trunk</developerConnection>
-	</scm>
-
 	<modules>
 		<module>myjetty-maven-plugin</module>
 		<module>myjetty-test</module>
