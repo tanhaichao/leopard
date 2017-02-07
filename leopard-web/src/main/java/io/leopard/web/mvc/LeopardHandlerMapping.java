@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +35,18 @@ import io.leopard.web.session.StoreRedisImpl;
 public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 
 	@Value("${mvc.restful}")
-	private boolean restful;
+	private String restful;
+
+	@PostConstruct
+	public void init() {
+		isRestful = !"false".equals(restful);
+	}
+
+	private static boolean isRestful = false;
+
+	public static boolean isRestful() {
+		return isRestful;
+	}
 
 	private RequestMappingInfoBuilder requestMappingInfoBuilder;
 
@@ -117,6 +130,9 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 	}
 
 	protected String createPattern(String methodName) {
+		if (isRestful) {
+			return methodName;
+		}
 		return methodName + ".do";
 	}
 }
