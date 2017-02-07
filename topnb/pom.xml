@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard.topnb</groupId>
+	<artifactId>topnb</artifactId>
+	<version>0.9.11-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>性能监控系统</name>
+	<description>性能监控系统，方法耗时、连接池信息、线程信息等。</description>
+
+	<url>http://leopard.io/topnb/</url>
+	<inceptionYear>2015</inceptionYear>
+
+	<modules>
+		<module>topnb-web</module>
+		<module>topnb-profiler</module>
+	</modules>
+
+	<parent>
+		<groupId>io.leopard.depend</groupId>
+		<artifactId>depend</artifactId>
+		<version>0.9.6</version>
+	</parent>
+
+	<scm>
+		<url>https://github.com/tanhaichao/topnb</url>
+		<connection>scm:svn:https://github.com/tanhaichao/topnb/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/topnb/trunk</developerConnection>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/tanhaichao/topnb/issues</url>
+	</issueManagement>
+
+	<properties>
+		<leopard.unified.version>${project.version}</leopard.unified.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-jetty-test</artifactId>
+				<version>${leopard.unified.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-jetty</artifactId>
+				<version>${leopard.unified.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-freemarker</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

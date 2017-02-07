@@ -1,0 +1,37 @@
+.content{padding: 40px 0px 0px 220px; margin: 0px;}
+    .menu{border-right: 1px solid #D5D5D5;}
+        .navigation li > a{cursor: pointer;}
+
+    .widgetButtons{display: block; margin: 0px auto; width: auto;}
+        .widgetButtons .bb{display: inline; width: auto; margin: 10px 10px 0px 0px;}
+            .widgetButtons .bb:first-child{margin: 0px; margin-right: 10px;}
+            
+    .sOrders td{border-bottom: 1px solid #e4e8ed;}            
+    
+    .users .item .info .controls{top: 18px;}
+    .modal-header{height: 35px;}
+    .modal-header h3{display: block; width: 300px; margin: 0px; padding: 10px; float: left;}
+    .modal-header .close{margin-top: 0px;}
+    
+    
+    .row-form input[type="text"], .row-form input[type="password"], .row-form textarea, .popup .search input[type="text"],
+    .dialog .block input[type="text"], .dialog .block input[type="password"], .dialog .block textarea{padding: 0px 5px; margin: 0px; width: 95%;}
+    
+    .popup .body, .popup .body-fluid, .popup .footer{border-left: 1px solid #D5D5D5; border-right: 1px solid #D5D5D5;}
+    .popup .footer{border-bottom: 1px solid #D5D5D5;}
+    
+    .breadLine .buttons li {position: relative; z-index: 1;}
+        .breadLine .buttons li .popup{z-index: 3;}
+        
+    ul.rows li{ line-height: 14px; }
+    
+    .listUsers .about{display: block; width: auto;}
+    
+    .headInfo .input-append input[type='text']{padding: 5px 5px 4px;}
+    
+    .btn{border-width: 1px;}
+    
+    .block.thumbs .thumbnail{float: left;}
+    
+    .errorPage .name{color: #CCC;}
+    

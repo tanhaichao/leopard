@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-fragment xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd"
+	version="3.0">
+	<name>topnb_webfragment</name>
+
+
+	<listener>
+		<listener-class>io.leopard.topnb.request.TopnbRequestServletRequestListener</listener-class>
+	</listener>
+	
+	<servlet>
+		<servlet-name>topnbMethodTimeServlet</servlet-name>
+		<servlet-class>io.leopard.topnb.methodtime.MethodTimeServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>topnbMethodTimeServlet</servlet-name>
+		<url-pattern>/topnb/index.leo</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>topnbRequestServlet</servlet-name>
+		<servlet-class>io.leopard.topnb.request.RequestServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>topnbRequestServlet</servlet-name>
+		<url-pattern>/topnb/request.leo</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>topnbThreadServlet</servlet-name>
+		<servlet-class>io.leopard.topnb.thread.ThreadServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>topnbThreadServlet</servlet-name>
+		<url-pattern>/topnb/thread.leo</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>topnbFileServlet</servlet-name>
+		<servlet-class>io.leopard.topnb.web.FileServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>topnbFileServlet</servlet-name>
+		<url-pattern>/topnb/file.leo</url-pattern>
+	</servlet-mapping>
+</web-fragment>
