@@ -13,36 +13,32 @@
 		<version>0.9.11-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<leopard.unified.version>${project.version}</leopard.unified.version>
-	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-json</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-httpnb</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-exception</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-util</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-timer</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

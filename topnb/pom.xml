@@ -39,19 +39,19 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty-test</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-freemarker</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

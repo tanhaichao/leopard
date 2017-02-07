@@ -18,15 +18,6 @@
 
 	<properties>
 		<spring.version>4.3.2.RELEASE</spring.version>
-
-		<leopard.unified.version>${project.version}</leopard.unified.version>
-		<leopard.version>${leopard.unified.version}</leopard.version>
-		<leopard-data.version>${leopard.unified.version}</leopard-data.version>
-		<topnb.version>${leopard.unified.version}</topnb.version>
-		<leopard-lang.version>${leopard.unified.version}</leopard-lang.version>
-		<leopard-mvc.version>${leopard.unified.version}</leopard-mvc.version>
-		<leopard-test.version>${leopard.unified.version}</leopard-test.version>
-		<leopard-security.version>${leopard.unified.version}</leopard-security.version>
 	</properties>
 
 	<dependencyManagement>
@@ -37,44 +28,49 @@
 				<version>2.3.23</version>
 			</dependency>
 			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>1.2.6</version>
+			</dependency>			
+			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-admin</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-freemarker</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-convert</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-session</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-lang</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-util</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-upload</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>javahost</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

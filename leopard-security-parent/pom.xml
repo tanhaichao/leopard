@@ -22,45 +22,45 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-mock</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-cache</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-kit</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jdbc</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-servlet</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-xparam</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-passport</artifactId>
-				<version>${leopard.unified.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 
 		</dependencies>
