@@ -16,7 +16,7 @@
 			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>

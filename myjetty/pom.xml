@@ -7,7 +7,6 @@
 	<name>MyJetty</name>
 	<description>为移动运维(MobileOps)提供后台技术支持。支持在线部署、回滚、重启等常用操作。</description>
 
-
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard</artifactId>
