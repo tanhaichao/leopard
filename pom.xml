@@ -191,6 +191,10 @@
 		<module>leopard-mvc-parent</module>
 		<module>leopard-security-parent</module>
 		<module>leopard-cloud-parent</module>
+		<module>leopard-message-parent</module>
+		
+		<module>nobug</module>
+		<module>topnb</module>
 	</modules>
 
 
