@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -30,6 +31,9 @@ import io.leopard.web.mvc.condition.ServerNameRequestCondition;
 import io.leopard.web.session.StoreRedisImpl;
 
 public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
+
+	@Value("${mvc.restful}")
+	private boolean restful;
 
 	private RequestMappingInfoBuilder requestMappingInfoBuilder;
 
