@@ -13,10 +13,6 @@
 		<version>0.9.11-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<leopard.unified.version>${project.version}</leopard.unified.version>
-	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

@@ -31,7 +31,13 @@
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
 				<version>1.2.6</version>
-			</dependency>			
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-admin</artifactId>
@@ -178,7 +184,7 @@
 		<module>leopard-monitor</module>
 		<module>leopard-web</module>
 		<module>leopard-freemarker</module>
-		
+
 		<module>javahost</module>
 		<module>leopard-lang-parent</module>
 		<module>leopard-test-parent</module>
@@ -187,7 +193,7 @@
 		<module>leopard-security-parent</module>
 		<module>leopard-cloud-parent</module>
 		<module>leopard-message-parent</module>
-		
+
 		<module>nobug</module>
 		<module>topnb</module>
 	</modules>

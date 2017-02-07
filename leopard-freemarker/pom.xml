@@ -12,9 +12,6 @@
 		<version>0.9.11-SNAPSHOT</version>
 	</parent>
 
-
-	
-	
 	<dependencies>
 
 		<dependency>

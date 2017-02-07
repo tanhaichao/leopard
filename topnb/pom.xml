@@ -17,22 +17,15 @@
 		<version>0.9.11-SNAPSHOT</version>
 	</parent>
 
-
 	<modules>
 		<module>topnb-web</module>
 		<module>topnb-profiler</module>
 	</modules>
 
-
-
 	<issueManagement>
 		<system>GitHub Issues</system>
 		<url>https://github.com/tanhaichao/topnb/issues</url>
 	</issueManagement>
-
-	<properties>
-		<leopard.unified.version>${project.version}</leopard.unified.version>
-	</properties>
 
 	<dependencyManagement>
 		<dependencies>

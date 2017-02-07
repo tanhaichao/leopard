@@ -13,22 +13,8 @@
 		<version>0.9.11-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<spring.version>4.3.2.RELEASE</spring.version>
-
-		<jdk.version>1.8</jdk.version>
-		<leopard.unified.version>${project.version}</leopard.unified.version>
-	</properties>
-
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.12</version>
-				<scope>test</scope>
-			</dependency>
-
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>javahost</artifactId>
