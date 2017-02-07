@@ -39,6 +39,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-lang</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
