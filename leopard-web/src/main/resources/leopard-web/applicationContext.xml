@@ -22,7 +22,7 @@
 
 	<bean class="io.leopard.timer.TimerBeanFactoryAware" />
 	
-	<bean class="io.leopard.web.mvc.option.OptionScannerConfigurer" />
+	<context:component-scan base-package="io.leopard.web.mvc.option" />
 
 
 	<import resource="freemarker.xml" />

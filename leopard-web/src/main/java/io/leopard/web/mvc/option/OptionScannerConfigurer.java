@@ -6,7 +6,9 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OptionScannerConfigurer implements BeanFactoryPostProcessor, ApplicationContextAware {
 
 	private ApplicationContext applicationContext;

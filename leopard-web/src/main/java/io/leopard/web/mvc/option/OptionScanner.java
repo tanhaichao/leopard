@@ -16,23 +16,29 @@ public class OptionScanner extends ClassPathBeanDefinitionScanner {
 		super(registry);
 	}
 
+	@Override
 	public void registerDefaultFilters() {
 		this.addIncludeFilter(new AnnotationTypeFilter(Option.class));
 	}
 
+	@Override
+	public boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
+		return super.isCandidateComponent(beanDefinition) && beanDefinition.getMetadata().hasAnnotation(Option.class.getName());
+	}
+
+	@Override
 	public Set<BeanDefinitionHolder> doScan(String... basePackages) {
 		Set<BeanDefinitionHolder> beanDefinitions = super.doScan(basePackages);
 		for (BeanDefinitionHolder holder : beanDefinitions) {
-			System.err.println("holder:" + holder.getBeanName());
+			String id = holder.getBeanName();
+			String className = holder.getBeanDefinition().getBeanClassName();
+			System.err.println("holder:" + holder.getBeanName() + " className:" + className);
+			OptionData.load(id, className);
 			// GenericBeanDefinition definition = (GenericBeanDefinition) holder.getBeanDefinition();
 			// definition.getPropertyValues().add("innerClassName", definition.getBeanClassName());
 			// definition.setBeanClass(FactoryBeanTest.class);
 		}
 		return beanDefinitions;
-	}
-
-	public boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
-		return super.isCandidateComponent(beanDefinition) && beanDefinition.getMetadata().hasAnnotation(Option.class.getName());
 	}
 
 }
