@@ -1,7 +1,8 @@
 package io.leopard.web.mvc.option;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -10,7 +11,11 @@ import io.leopard.burrow.lang.inum.Onum;
 
 public class OptionData {
 
-	private static Map<String, OptionInfo> data = new HashMap<>();
+	private static Map<String, OptionInfo> data = new LinkedHashMap<>();
+
+	public static List<OptionInfo> list() {
+		return new ArrayList<>(data.values());
+	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void load(String id, String className) {
