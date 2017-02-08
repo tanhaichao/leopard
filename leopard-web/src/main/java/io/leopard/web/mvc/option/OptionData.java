@@ -36,7 +36,8 @@ public class OptionData {
 			}
 		}
 
-		Map<Object, Object> data = toData(clazz);
+		List<Option> data = toData(clazz);
+
 		OptionInfo info = new OptionInfo();
 		info.setId(id);
 		info.setClassName(className);
@@ -46,23 +47,27 @@ public class OptionData {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static Map<Object, Object> toData(@SuppressWarnings("rawtypes") Class<? extends Enum> clazz) {
+	private static List<Option> toData(@SuppressWarnings("rawtypes") Class<? extends Enum> clazz) {
 		Map<Object, Onum<Object, Object>> map = EnumUtil.toMap(clazz);
-		Map<Object, Object> data = new LinkedHashMap<>();
+		List<Option> constantList = new ArrayList<Option>();
 		for (Entry<Object, Onum<Object, Object>> entry : map.entrySet()) {
 			Object key = entry.getKey();
-			Object desc = entry.getValue().getDesc();
+			String desc = (String) entry.getValue().getDesc();
 			// System.err.println("put key:"+key+" desc:"+desc);
-			data.put(key, desc);
+
+			Option option = new Option();
+			option.setKey(key);
+			option.setDesc(desc);
+			constantList.add(option);
 		}
-		return data;
+		return constantList;
 	}
 
 	public static void put(String id, OptionInfo info) {
 		data.put(id, info);
 	}
 
-	public static Map<Object, Object> getData(String id) {
+	public static List<Option> getData(String id) {
 		OptionInfo info = data.get(id);
 		if (info == null) {
 			return null;

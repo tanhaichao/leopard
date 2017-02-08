@@ -1,6 +1,6 @@
 package io.leopard.web.mvc.option;
 
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +12,8 @@ public class OptionController {
 
 	@RequestMapping("enum/{id}")
 	@ResponseBody
-	public Map<Object, Object> onum(@PathVariable String id) {
-		Map<Object, Object> data = OptionData.getData(id);
+	public List<Option> onum(@PathVariable String id) {
+		List<Option> data = OptionData.getData(id);
 		if (data == null) {
 			throw new NullPointerException("枚举[" + id + "]不存在.");
 		}
