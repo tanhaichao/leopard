@@ -1,7 +1,6 @@
 package io.leopard.web.mvc.option;
 
 import java.util.List;
-import java.util.Map;
 
 public class OptionInfo {
 

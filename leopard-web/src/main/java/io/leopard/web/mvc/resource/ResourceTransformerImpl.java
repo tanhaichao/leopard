@@ -1,11 +1,9 @@
 package io.leopard.web.mvc.resource;
 
 import java.io.IOException;
-import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.ServiceLoader;
 
 import javax.servlet.http.HttpServletRequest;
 

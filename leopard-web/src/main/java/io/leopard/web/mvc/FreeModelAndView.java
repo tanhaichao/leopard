@@ -89,7 +89,6 @@ public class FreeModelAndView extends ModelAndView {
 	// }
 	// }
 
-	@SuppressWarnings("rawtypes")
 	protected void list(Field field, Object attributeValue) throws Exception {
 		// String typeName = this.getTypeName(field);
 		// if (simpleClassNameSet.contains(typeName)) {
@@ -103,7 +102,7 @@ public class FreeModelAndView extends ModelAndView {
 		// for (Object element : list) {
 		// this.serialize(element);
 		// }
-		
+
 	}
 
 	protected String getTypeName(Field field) {

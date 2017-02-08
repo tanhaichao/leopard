@@ -18,7 +18,7 @@ public class OptionScannerConfigurer implements BeanFactoryPostProcessor, Applic
 	}
 
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		System.err.println("OptionScannerConfigurer postProcessBeanFactory");
+		// System.err.println("OptionScannerConfigurer postProcessBeanFactory");
 		OptionScanner scanner = new OptionScanner((BeanDefinitionRegistry) beanFactory);
 		scanner.setResourceLoader(this.applicationContext);
 		scanner.scan("com.starlink");
