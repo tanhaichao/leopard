@@ -48,11 +48,14 @@ public class OptionData {
 
 	@SuppressWarnings("unchecked")
 	private static List<Option> toData(@SuppressWarnings("rawtypes") Class<? extends Enum> clazz) {
-		Map<Object, Onum<Object, Object>> map = EnumUtil.toMap(clazz);
+		Map<Object, Enum<?>> map = EnumUtil.toMap(clazz);
 		List<Option> constantList = new ArrayList<Option>();
-		for (Entry<Object, Onum<Object, Object>> entry : map.entrySet()) {
+		for (Entry<Object, Enum<?>> entry : map.entrySet()) {
 			Object key = entry.getKey();
-			String desc = (String) entry.getValue().getDesc();
+
+			@SuppressWarnings("rawtypes")
+			Onum onum = (Onum) entry.getValue();
+			String desc = (String) onum.getDesc();
 			// System.err.println("put key:"+key+" desc:"+desc);
 
 			Option option = new Option();
