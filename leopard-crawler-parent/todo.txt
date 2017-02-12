@@ -7,3 +7,5 @@ http://www.tuicool.com/articles/q63Mfeq	crawler4j：轻量级多线程网络爬�
 http://blog.csdn.net/wyymaomi/article/details/3439016	一个简单的java网络爬虫(spider)
 http://www.cnblogs.com/skyme/p/4440831.html	基于java的分布式爬虫
 
+http://www.cnblogs.com/kofxxf/p/4562710.html		44款Java 网络爬虫开源软件
+http://www.oschina.net/project/lang/19?tag=64&sort=time	44款Java 网络爬虫开源软件
