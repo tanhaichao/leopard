@@ -21,6 +21,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import io.leopard.data.env.EnvUtil;
 import io.leopard.web.servlet.JsonDebugger;
@@ -53,6 +54,13 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 			this.formatWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
 			this.mapper = new ObjectMapper();
 		}
+		{
+			// Onum序列化
+			SimpleModule module = new SimpleModule();
+			module.addSerializer(new OnumJsonSerializer());
+			mapper.registerModule(module);
+		}
+
 	}
 
 	@Override
