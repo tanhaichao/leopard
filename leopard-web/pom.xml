@@ -113,7 +113,7 @@
 
 
 		<dependency>
-			<groupId>net.sf.pinyin4j</groupId>
+			<groupId>com.belerweb</groupId>
 			<artifactId>pinyin4j</artifactId>
 			<scope>provided</scope>
 		</dependency>
