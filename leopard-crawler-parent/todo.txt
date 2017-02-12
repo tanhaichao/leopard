@@ -2,3 +2,8 @@ http://git.oschina.net/l-weiwei/Spiderman2
 
 http://www.oschina.net/p/spiderman/	Spiderman - 又一个Java网络蜘蛛/爬虫
 
+http://www.tuicool.com/articles/q63Mfeq	crawler4j：轻量级多线程网络爬虫
+
+http://blog.csdn.net/wyymaomi/article/details/3439016	一个简单的java网络爬虫(spider)
+http://www.cnblogs.com/skyme/p/4440831.html	基于java的分布式爬虫
+
