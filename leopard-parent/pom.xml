@@ -372,8 +372,11 @@
 	<!-- 小牛云配置 start -->
 	<profiles>
 		<profile>
-			<id>xiaoniu</id>
+			<id>xiaoniu-windows</id>
 			<activation>
+				<os>
+					<family>windows</family>
+				</os>
 				<file>
 					<exists>/Users/tanmr/xiaoniu</exists>
 				</file>
@@ -389,6 +392,53 @@
 					<artifactId>autocode-all</artifactId>
 					<version>0.1-SNAPSHOT</version>
 					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>1.7</version>
+						<executions>
+							<execution>
+								<id>add-test-source</id>
+								<phase>generate-test-sources</phase>
+								<goals>
+									<goal>add-test-source</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<echo>add integration sources</echo>
+									</tasks>
+									<sources>
+										<source>src/mvcunit/java</source>
+										<source>src/apimock/java</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>xiaoniu-linux</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+				<file>
+					<exists>/Users/tanmr/xiaoniu</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>io.leopard</groupId>
+					<artifactId>webide-local</artifactId>
+					<version>0.1-SNAPSHOT</version>
 				</dependency>
 			</dependencies>
 
