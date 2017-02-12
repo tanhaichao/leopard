@@ -23,12 +23,12 @@ public class OnumJsonSerializer extends StdSerializer<Onum<?, ?>> {
 	}
 
 	@Override
-	public void serialize(Onum<?, ?> value, JsonGenerator generator, SerializerProvider provider) throws IOException {
+	public void serialize(Onum<?, ?> onum, JsonGenerator generator, SerializerProvider provider) throws IOException {
 		generator.writeStartObject();
 		generator.writeFieldName("key");
-		generator.writeNumber("abc");
+		generator.writeObject(onum.getKey());
 		generator.writeFieldName("desc");
-		generator.writeString("中文名称");
+		generator.writeObject(onum.getDesc());
 		generator.writeEndObject();
 	}
 
