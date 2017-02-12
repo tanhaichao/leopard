@@ -43,23 +43,25 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 	@PostConstruct
 	public void init() {
 		// voFiller.init();
+		// Onum序列化
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(new OnumJsonSerializer());
 
 		boolean enable = !"false".equals(underline);
 		// System.err.println("MappingJacksonResponseBodyAdvice underline:" + underline + " enable:" + enable);
 		if (enable) {
-			this.formatWriter = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES).writer().withDefaultPrettyPrinter();
+			ObjectMapper mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+			mapper.registerModule(module);
+			this.formatWriter = mapper.writer().withDefaultPrettyPrinter();
 			this.mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 		}
 		else {
-			this.formatWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.registerModule(module);
+			this.formatWriter = mapper.writer().withDefaultPrettyPrinter();
 			this.mapper = new ObjectMapper();
 		}
-		{
-			// Onum序列化
-			SimpleModule module = new SimpleModule();
-			module.addSerializer(new OnumJsonSerializer());
-			mapper.registerModule(module);
-		}
+		mapper.registerModule(module);
 
 	}
 
