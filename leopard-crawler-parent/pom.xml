@@ -9,4 +9,7 @@
   <packaging>pom</packaging>
   <name>Leopard Crawler</name>
   <description>爬虫</description>
+  <modules>
+  	<module>leopard-browser</module>
+  </modules>
 </project>
