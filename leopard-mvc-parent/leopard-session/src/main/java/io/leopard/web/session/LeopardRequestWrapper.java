@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author 阿海
  * 
  */
-public class LeopardRequestWrapper extends SessionRequestWrapper {
+public class LeopardRequestWrapper extends LeopardCachingRequestWrapper {
 	private RequestParameterListener requestParameterListener = new RequestParameterListenerImpl();
+
 	private RequestAttributeListener requestAttributeListener = new RequestAttributeListenerImpl();
 
 	public LeopardRequestWrapper(HttpServletRequest request, HttpServletResponse response) {
