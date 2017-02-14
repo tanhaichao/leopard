@@ -46,5 +46,4 @@ public interface Paging<E> {
 	 * @return
 	 */
 	Boolean isNextPage();
-
 }

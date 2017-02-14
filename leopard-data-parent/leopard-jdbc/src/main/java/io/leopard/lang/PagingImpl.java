@@ -8,8 +8,11 @@ public class PagingImpl<E> implements Paging<E> {
 	private List<E> list = new ArrayList<E>();
 
 	private Boolean nextPage;// 是否有下一页
+
 	private Integer totalCount;// 记录总数
+
 	private Integer pageCount;// 总页数
+
 	private Integer pageSize;// 一页显示的记录条数.
 
 	public PagingImpl() {
