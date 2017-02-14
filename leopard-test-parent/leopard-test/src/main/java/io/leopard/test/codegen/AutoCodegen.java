@@ -18,6 +18,12 @@ public class AutoCodegen {
 		method.invoke(null, jdbc, entity);
 	}
 
+	public static void generatePackage(Jdbc jdbc, Class<?> entity) throws Exception {
+		Class<?> codegenClazz = findCodegenClass();
+		Method method = codegenClazz.getMethod("generatePackage", Jdbc.class, Class.class);
+		method.invoke(null, jdbc, entity);
+	}
+
 	public static void setCheckUtilClazz(Class<?> clazz) throws Exception {
 		Class<?> codegenClazz = findCodegenClass();
 		Method method = codegenClazz.getMethod("setCheckUtilClazz", Class.class);
