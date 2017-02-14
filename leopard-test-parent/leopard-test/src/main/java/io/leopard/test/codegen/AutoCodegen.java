@@ -10,7 +10,7 @@ import io.leopard.jdbc.Jdbc;
  * @author 谭海潮
  *
  */
-public class Codegen {
+public class AutoCodegen {
 
 	public static void generate(Jdbc jdbc, Class<?> entity) throws Exception {
 		Class<?> codegenClazz = findCodegenClass();
