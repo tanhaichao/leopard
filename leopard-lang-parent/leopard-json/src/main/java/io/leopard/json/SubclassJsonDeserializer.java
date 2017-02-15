@@ -15,9 +15,9 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
- * 子类Json序列号
+ * 子类Json反序列化
  * 
- * @author Administrator
+ * @author 谭海潮
  *
  */
 public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
