@@ -261,6 +261,12 @@
 			</dependency>
 
 
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-aliyun</artifactId>
+				<version>${leopard.version}</version>
+			</dependency>
+
 
 			<dependency>
 				<groupId>io.leopard</groupId>
