@@ -1,5 +1,11 @@
 package io.leopard.web.mvc.option;
 
+/**
+ * 枚举信息模型(在Controller中使用)
+ * 
+ * @author 谭海潮
+ *
+ */
 public class Option {
 
 	private Object key;
