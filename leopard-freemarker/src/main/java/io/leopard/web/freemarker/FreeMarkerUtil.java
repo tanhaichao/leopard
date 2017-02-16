@@ -35,7 +35,7 @@ public class FreeMarkerUtil {
 	// </bean>
 	private static FreeMarkerConfigurer configurer;
 
-	protected static FreeMarkerConfigurer getFreeMarkerConfigurer(ApplicationContext applicationContext) {
+	protected static FreeMarkerConfigurer getFreeMarkerConfigurer(ApplicationContext applicationContext, String templateLoaderPath) {
 		Map<String, Object> freemarkerVariables = new HashMap<String, Object>();
 		freemarkerVariables.put("xml_escape", "fmXmlEscape");
 		freemarkerVariables.put("replaceParam", new ReplaceParamTemplateMethod());
@@ -47,7 +47,7 @@ public class FreeMarkerUtil {
 		freemarkerSettings.put("defaultEncoding", "UTF-8");
 
 		FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
-		configurer.setTemplateLoaderPath("/WEB-INF/ftl/");
+		configurer.setTemplateLoaderPath(templateLoaderPath);
 		configurer.setFreemarkerVariables(freemarkerVariables);
 		configurer.setFreemarkerSettings(freemarkerSettings);
 
@@ -76,11 +76,11 @@ public class FreeMarkerUtil {
 		return freemarkerVariables;
 	}
 
-	public static FreeMarkerConfig getFreeMarkerConfig(ApplicationContext applicationContext) {
+	public static FreeMarkerConfig getFreeMarkerConfig(ApplicationContext applicationContext, String templateLoaderPath) {
 		if (configurer != null) {
 			return configurer;
 		}
-		configurer = getFreeMarkerConfigurer(applicationContext);
+		configurer = getFreeMarkerConfigurer(applicationContext, templateLoaderPath);
 		return configurer;
 	}
 }
