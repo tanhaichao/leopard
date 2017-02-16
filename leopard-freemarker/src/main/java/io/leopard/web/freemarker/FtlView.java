@@ -43,7 +43,12 @@ public class FtlView extends FreeMarkerView {
 	@Override
 	protected FreeMarkerConfig autodetectConfiguration() throws BeansException {
 		System.out.println("autodetectConfiguration:");
-		return FreeMarkerUtil.getFreeMarkerConfig(super.getApplicationContext());
+		String templateLoaderPath = "";
+		return FreeMarkerUtil.getFreeMarkerConfig(super.getApplicationContext(), templateLoaderPath);
+	}
+
+	protected String getTemplateLoaderPath() {
+		return "/WEB-INF/freemarker/";
 	}
 
 	@Override
