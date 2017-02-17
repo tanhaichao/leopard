@@ -1,4 +1,4 @@
-package io.leopard.datatype.inum;
+package io.leopard.burrow.lang.inum;
 
 import java.util.EnumSet;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package io.leopard.datatype;
+package io.leopard.burrow.lang.datatype;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
