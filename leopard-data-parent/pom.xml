@@ -24,6 +24,7 @@
 		<module>leopard-dfs</module>
 		<module>leopard-kit</module>
 		<module>leopard-rpc</module>
+		<module>leopard-table</module>
 	</modules>
 
 </project>
