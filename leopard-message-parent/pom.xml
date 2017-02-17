@@ -14,5 +14,6 @@
 
 	<modules>
 		<module>leopard-email</module>
+		<module>leopard-sms</module>
 	</modules>
 </project>
