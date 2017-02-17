@@ -150,12 +150,12 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 				// throw new IllegalArgumentException("未知数据类型[" + elementClassName + "].");
 			}
 		}
-		else if (requiredType.isEnum() && requiredType.isAssignableFrom(Onum.class)) {
-			if (requiredType.isAssignableFrom(Snum.class)) {
+		else if (requiredType.isEnum()) {
+			if (Snum.class.isAssignableFrom(requiredType)) {
 				String key = rs.getString(index);
 				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
 			}
-			else if (requiredType.isAssignableFrom(Inum.class)) {
+			else if (Inum.class.isAssignableFrom(requiredType)) {
 				int key = rs.getInt(index);
 				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
 			}
