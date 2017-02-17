@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//aleopardSessionFilter 这个命名前面加个a，是为了排在最前面
 @WebFilter(filterName = "aleopardSessionFilter", urlPatterns = "/*")
 public class SessionFilter implements Filter {
 
