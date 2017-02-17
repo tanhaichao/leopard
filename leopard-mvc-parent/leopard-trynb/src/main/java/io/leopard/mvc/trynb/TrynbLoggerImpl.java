@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 
 public class TrynbLoggerImpl implements TrynbLogger {
-	protected Log logger = LogFactory.getLog(TrynbServiceImpl.class);
+	protected Log logger = LogFactory.getLog(TrynbLoggerImpl.class);
 
 	@Override
 	public void error(HttpServletRequest request, String uri, Exception exception) {
