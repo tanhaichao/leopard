@@ -152,6 +152,9 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 		else if (requiredType.isEnum()) {
 			if (Snum.class.isAssignableFrom(requiredType)) {
 				String key = rs.getString(index);
+				if (key == null) {
+					return null;
+				}
 				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
 			}
 			else if (Inum.class.isAssignableFrom(requiredType)) {
