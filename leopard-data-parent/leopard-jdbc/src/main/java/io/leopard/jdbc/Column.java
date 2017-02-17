@@ -16,6 +16,6 @@ public @interface Column {
 	 * 
 	 * @return
 	 */
-	String name();
+	String name() default "";
 
 }
