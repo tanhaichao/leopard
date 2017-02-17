@@ -34,13 +34,13 @@ public class JsonJacksonImpl implements IJson {
 		// JsonIgnore dd;
 		// mapperIgnoreUnknownField.configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true);
 		{
-		SimpleModule module = new SimpleModule();
-		module.addSerializer(new OnumJsonSerializer());
+			SimpleModule module = new SimpleModule();
+			module.addSerializer(new OnumJsonSerializer());
 
-		mapper.registerModule(module);
-		mapperIgnoreUnknownField.registerModule(module);
+			mapper.registerModule(module);
+			mapperIgnoreUnknownField.registerModule(module);
 		}
-		
+
 		mapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
 		writer = mapper.writer().withDefaultPrettyPrinter();
 		mapperIgnoreUnknownField.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
