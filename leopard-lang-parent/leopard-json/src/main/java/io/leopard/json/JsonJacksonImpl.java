@@ -62,7 +62,7 @@ public class JsonJacksonImpl implements IJson {
 
 		@Override
 		public void serialize(Onum<?, ?> onum, JsonGenerator generator, SerializerProvider provider) throws IOException {
-			generator.writeObject(onum.getDesc());
+			generator.writeObject(onum.getKey());
 		}
 
 	}
