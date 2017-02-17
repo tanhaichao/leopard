@@ -45,15 +45,29 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 			Object account = validator.validate(request, response);
 			// logger.info("validator:" + validator + " handler:" + handler + " account:" + account);
 			if (account == null) {
-				HandlerMethod method = (HandlerMethod) handler;
-				Nologin nologin = method.getMethodAnnotation(Nologin.class);
-				if (nologin == null) {
+				// HandlerMethod method = (HandlerMethod) handler;
+				// Nologin nologin = method.getMethodAnnotation(Nologin.class);
+				// if (nologin == null) {
+				boolean isNeedLogin = isNeedLogin(handler);
+				if (isNeedLogin) {
 					validator.showLoginBox(request, response);
 					return false;
 				}
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * 判断handler是否需要登录检查.
+	 * 
+	 * @param handler
+	 * @return
+	 */
+	public static boolean isNeedLogin(Object handler) {
+		HandlerMethod method = (HandlerMethod) handler;
+		Nologin nologin = method.getMethodAnnotation(Nologin.class);
+		return (nologin == null);
 	}
 
 }
