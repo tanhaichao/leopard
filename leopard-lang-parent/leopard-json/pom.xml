@@ -23,7 +23,11 @@
 			<artifactId>fastjson</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-datatype</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
