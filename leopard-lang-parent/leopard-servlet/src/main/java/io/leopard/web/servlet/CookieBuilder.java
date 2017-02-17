@@ -55,7 +55,7 @@ public class CookieBuilder {
 		return this;
 	}
 
-	protected static String parseTopLevelDomain(String serverName) {
+	public static String parseTopLevelDomain(String serverName) {
 		String regex = "[a-z0-9]+\\.[a-z]+$";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(serverName);
