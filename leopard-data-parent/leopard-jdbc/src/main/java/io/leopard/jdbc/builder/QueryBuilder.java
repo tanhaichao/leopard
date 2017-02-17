@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 
 import org.springframework.util.StringUtils;
 
+import io.leopard.burrow.lang.inum.Inum;
+import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.jdbc.StatementParameter;
 import io.leopard.lang.Paging;
@@ -18,14 +20,18 @@ public class QueryBuilder {
 	private String tableName;
 
 	private String rangeFieldName;
+
 	private TimeRange range;
 
 	private String orderFieldName;
+
 	// 按desc 还是asc
 	private String orderDirection;
+
 	private String groupbyFieldName;
 
 	private Integer limitStart;
+
 	private Integer limitSize;
 
 	private Map<String, Object> whereMap = new LinkedHashMap<String, Object>();
@@ -52,6 +58,20 @@ public class QueryBuilder {
 		return this;
 	}
 
+	public QueryBuilder addEnum(String fieldName, Inum inum) {
+		if (inum != null) {
+			this.addInt(fieldName, inum.getKey());
+		}
+		return this;
+	}
+
+	public QueryBuilder addEnum(String fieldName, Snum snum) {
+		if (snum != null) {
+			this.addString(fieldName, snum.getKey());
+		}
+		return this;
+	}
+
 	public QueryBuilder addString(String fieldName, String value) {
 		return this.addString(fieldName, value, false);
 	}
@@ -64,6 +84,13 @@ public class QueryBuilder {
 			else {
 				this.addWhere(fieldName, value);
 			}
+		}
+		return this;
+	}
+
+	public QueryBuilder addInt(String fieldName, int value) {
+		if (value > 0) {
+			this.addWhere(fieldName, value);
 		}
 		return this;
 	}
