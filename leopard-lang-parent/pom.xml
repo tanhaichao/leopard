@@ -28,6 +28,7 @@
 		<module>leopard-httpnb</module>
 		<module>leopard-exception</module>
 		<module>leopard-util</module>
+		<module>leopard-datatype</module>
 	</modules>
 
 </project>

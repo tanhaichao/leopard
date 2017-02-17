@@ -11,7 +11,9 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 public class JsonJacksonImpl implements IJson {
 	private static ObjectMapper mapper = new ObjectMapper(); // can reuse, share
+
 	private static ObjectMapper mapperIgnoreUnknownField = new ObjectMapper(); // 忽略不存在的字段.
+
 	private static ObjectWriter writer;
 
 	static {
@@ -24,6 +26,12 @@ public class JsonJacksonImpl implements IJson {
 		// mapper
 		// JsonIgnore dd;
 		// mapperIgnoreUnknownField.configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true);
+
+		{
+			SimpleModule module = new SimpleModule();
+			module.addSerializer(new OnumJsonSerializer());
+		}
+
 		mapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
 		writer = mapper.writer().withDefaultPrettyPrinter();
 		mapperIgnoreUnknownField.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
