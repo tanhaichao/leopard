@@ -8,8 +8,8 @@ import java.util.Map.Entry;
 
 import org.springframework.util.StringUtils;
 
-import io.leopard.datatype.inum.Inum;
-import io.leopard.datatype.inum.Snum;
+import io.leopard.burrow.lang.inum.Inum;
+import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.jdbc.StatementParameter;
 import io.leopard.lang.Paging;
