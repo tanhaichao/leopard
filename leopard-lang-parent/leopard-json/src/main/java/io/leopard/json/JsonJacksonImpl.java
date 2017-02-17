@@ -1,14 +1,20 @@
 package io.leopard.json;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+
+import io.leopard.datatype.inum.Onum;
 
 public class JsonJacksonImpl implements IJson {
 	private static ObjectMapper mapper = new ObjectMapper(); // can reuse, share
@@ -27,15 +33,38 @@ public class JsonJacksonImpl implements IJson {
 		// mapper
 		// JsonIgnore dd;
 		// mapperIgnoreUnknownField.configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true);
-
 		{
-			SimpleModule module = new SimpleModule();
-			module.addSerializer(new OnumJsonSerializer());
-		}
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(new OnumJsonSerializer());
 
+		mapper.registerModule(module);
+		mapperIgnoreUnknownField.registerModule(module);
+		}
+		
 		mapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
 		writer = mapper.writer().withDefaultPrettyPrinter();
 		mapperIgnoreUnknownField.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	}
+
+	/**
+	 * Onum Json序列化.
+	 * 
+	 * @author 谭海潮
+	 *
+	 */
+	private static class OnumJsonSerializer extends StdSerializer<Onum<?, ?>> {
+
+		private static final long serialVersionUID = 1L;
+
+		public OnumJsonSerializer() {
+			super(Onum.class, false);
+		}
+
+		@Override
+		public void serialize(Onum<?, ?> onum, JsonGenerator generator, SerializerProvider provider) throws IOException {
+			generator.writeObject(onum.getDesc());
+		}
+
 	}
 
 	/**
