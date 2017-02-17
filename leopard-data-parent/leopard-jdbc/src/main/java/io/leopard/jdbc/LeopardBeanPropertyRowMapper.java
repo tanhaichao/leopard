@@ -16,7 +16,6 @@ import org.springframework.util.Assert;
 
 import io.leopard.burrow.lang.inum.EnumUtil;
 import io.leopard.burrow.lang.inum.Inum;
-import io.leopard.burrow.lang.inum.Onum;
 import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.json.Json;
 import io.leopard.json.JsonException;

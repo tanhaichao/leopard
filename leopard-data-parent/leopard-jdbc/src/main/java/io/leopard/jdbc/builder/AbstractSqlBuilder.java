@@ -10,6 +10,7 @@ import io.leopard.jdbc.StatementParameter;
 
 public abstract class AbstractSqlBuilder implements SqlBuilder {
 	protected StatementParameter statementParameter = new StatementParameter();
+
 	protected List<String> fieldList = new ArrayList<String>();
 
 	/**
@@ -43,7 +44,22 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	}
 
 	/**
-	 * 设置List类型参数.
+	 * 设置Enum类型参数.
+	 * 
+	 * @param fieldName 参数名
+	 * @param value 参数值
+	 */
+	public void setEnum(String fieldName, Enum<?> value) {
+		if (value == null) {
+			// list默认允许传入null
+			return;
+		}
+		fieldList.add(fieldName);
+		statementParameter.setObject(value);
+	}
+
+	/**
+	 * 设置Object类型参数.
 	 * 
 	 * @param fieldName 参数名
 	 * @param value 参数值

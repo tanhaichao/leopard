@@ -451,6 +451,9 @@ public class JdbcMysqlImpl implements Jdbc {
 			else if (p instanceof List) {
 				param.setList((List) p);
 			}
+			else if (p instanceof Enum) {
+				param.setEnum((Enum) p);
+			}
 			// 自定义数据类型start
 			// else if (p instanceof OnlyDate) {
 			// param.setDate(((OnlyDate) p).toDate());

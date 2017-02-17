@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
+import io.leopard.burrow.lang.inum.Inum;
+import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.json.Json;
 
 /**
@@ -22,6 +24,7 @@ import io.leopard.json.Json;
 public class StatementParameter {
 
 	private final List<Object> list = new ArrayList<Object>();
+
 	private final List<Class<?>> type = new ArrayList<Class<?>>();
 
 	protected void checkNull(Object value) {
@@ -164,6 +167,17 @@ public class StatementParameter {
 		this.checkNull(obj);
 		this.list.add(obj);
 		this.type.add(Object.class);
+	}
+
+	/**
+	 * 设置Enum类型参数.
+	 * 
+	 * @param value
+	 */
+	public void setEnum(Enum<?> onum) {
+		this.checkNull(onum);
+		this.list.add(onum);
+		this.type.add(Enum.class);
 	}
 
 	/**
@@ -585,7 +599,21 @@ public class StatementParameter {
 		else if (type.equals(List.class)) {
 			pstmt.setString(i, Json.toJson(value));
 		}
+		else if (type.isEnum()) {
+			if (value instanceof Snum) {
+				String key = ((Snum) value).getKey();
+				pstmt.setString(i, key);
+			}
+			else if (value instanceof Inum) {
+				int key = ((Inum) value).getKey();
+				pstmt.setInt(i, key);
+			}
+			else {
+				throw new RuntimeException("未知枚举类型[" + type.getName() + "].");
+			}
+		}
 		else {
+			System.err.println("valuevalue:" + type.getName() + " enum:" + type.isEnum());
 			pstmt.setString(i, Json.toJson(value));
 			// throw new InvalidParamDataAccessException("未知参数类型[" + i + ":" + type.getName() + "].");
 		}
