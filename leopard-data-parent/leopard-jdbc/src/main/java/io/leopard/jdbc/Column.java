@@ -8,5 +8,14 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Column {
+
 	int lenght() default 0;
+
+	/**
+	 * 字段名称
+	 * 
+	 * @return
+	 */
+	String name();
+
 }

@@ -14,6 +14,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.util.Assert;
 
+import io.leopard.burrow.lang.inum.EnumUtil;
+import io.leopard.burrow.lang.inum.Inum;
+import io.leopard.burrow.lang.inum.Onum;
+import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.json.Json;
 import io.leopard.json.JsonException;
 
@@ -90,6 +94,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 		return bean;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected Object getColumnValue(ResultSet rs, int index, Field field) throws SQLException {
 		Class<?> requiredType = field.getType();
 		JdbcUtils.getResultSetValue(rs, index, requiredType);
@@ -143,6 +148,19 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 				// System.out.println("clazz:" + clazz.getName());
 				value = Json.toListObject(json, clazz, true);
 				// throw new IllegalArgumentException("未知数据类型[" + elementClassName + "].");
+			}
+		}
+		else if (requiredType.isEnum() && requiredType.isAssignableFrom(Onum.class)) {
+			if (requiredType.isAssignableFrom(Snum.class)) {
+				String key = rs.getString(index);
+				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+			}
+			else if (requiredType.isAssignableFrom(Inum.class)) {
+				int key = rs.getInt(index);
+				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+			}
+			else {
+				throw new RuntimeException("未知枚举类型[" + requiredType.getName() + "].");
 			}
 		}
 		else {
