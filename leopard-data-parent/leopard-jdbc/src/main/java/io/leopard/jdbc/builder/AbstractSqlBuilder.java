@@ -55,7 +55,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 			return;
 		}
 		fieldList.add(fieldName);
-		statementParameter.setObject(value);
+		statementParameter.setEnum(value);
 	}
 
 	/**

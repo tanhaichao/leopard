@@ -599,7 +599,7 @@ public class StatementParameter {
 		else if (type.equals(List.class)) {
 			pstmt.setString(i, Json.toJson(value));
 		}
-		else if (type.isEnum()) {
+		else if (type.equals(Enum.class)) {
 			if (value instanceof Snum) {
 				String key = ((Snum) value).getKey();
 				pstmt.setString(i, key);
@@ -613,7 +613,7 @@ public class StatementParameter {
 			}
 		}
 		else {
-			System.err.println("valuevalue:" + type.getName() + " enum:" + type.isEnum());
+			// System.err.println("valuevalue:" + type.getName() + " enum:" + type.isEnum());
 			pstmt.setString(i, Json.toJson(value));
 			// throw new InvalidParamDataAccessException("未知参数类型[" + i + ":" + type.getName() + "].");
 		}
