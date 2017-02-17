@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SessionFilter implements Filter {
 
 	public SessionFilter() {
-		System.err.println("new SessionFilter.");
+		// System.err.println("new SessionFilter.");
 	}
 
 	@Override
