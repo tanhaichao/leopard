@@ -1,7 +1,20 @@
 package io.leopard.json;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.introspect.Annotated;
+import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
+
+import io.leopard.burrow.lang.inum.EnumUtil;
+import io.leopard.burrow.lang.inum.Inum;
+import io.leopard.burrow.lang.inum.Onum;
+import io.leopard.burrow.lang.inum.Snum;
 
 /**
  * 禁用@JsonSerializer
@@ -12,6 +25,67 @@ import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntrospector {
 
 	private static final long serialVersionUID = 1L;
+
+	@Override
+	public Object findDeserializer(Annotated a) {
+		if (a instanceof AnnotatedClass) {
+			Class<?> clazz = ((AnnotatedClass) a).getAnnotated();
+			if (clazz.isEnum()) {
+				if (Onum.class.isAssignableFrom(clazz)) {
+					// System.err.println("OnumJsonSerializerIntrospector findDeserializer:" + clazz.getName() + " a:" + a);
+					return new OnumJsonDeserializer(clazz);
+				}
+			}
+		}
+		return super.findDeserializer(a);
+	}
+
+	/**
+	 * Onum Json反序列化
+	 * 
+	 * @author 谭海潮
+	 *
+	 */
+	private static class OnumJsonDeserializer extends JsonDeserializer<Onum<?, ?>> {
+		private Class<?> clazz;
+
+		public OnumJsonDeserializer(Class<?> clazz) {
+			this.clazz = clazz;
+		}
+
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		@Override
+		public Onum<?, ?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+			JsonToken currentToken = jp.getCurrentToken();
+			// JsonNode node = jp.getCodec().readTree(jp);
+			// System.err.println("jp.getText():" + jp.getText());
+
+			if (Inum.class.isAssignableFrom(clazz)) {
+				int key = jp.getIntValue();
+				return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
+			}
+			else if (Snum.class.isAssignableFrom(clazz)) {
+				String key = jp.getText();
+				return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
+			}
+
+			// node.getNodeType().
+			// if (currentToken == JsonToken.VALUE_STRING) {
+			// return new TextContainer(jp.getText().trim(), null);
+			// }
+			// else if (currentToken == JsonToken.START_OBJECT) {
+			// JsonToken jsonToken = jp.nextToken();
+			// if (jsonToken == JsonToken.FIELD_NAME) {
+			// String operation = jp.getText().trim();
+			// jp.nextToken();
+			// String text = jp.getText().trim();
+			// jp.nextToken();
+			// return new TextContainer(text, operation);
+			// }
+			// }
+			throw ctxt.mappingException(Onum.class, currentToken);
+		}
+	}
 
 	// @Override
 	// public Boolean isIgnorableType(AnnotatedClass ac) {

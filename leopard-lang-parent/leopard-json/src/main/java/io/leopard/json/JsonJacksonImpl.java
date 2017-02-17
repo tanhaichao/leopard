@@ -16,8 +16,6 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.introspect.Annotated;
-import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
@@ -49,63 +47,13 @@ public class JsonJacksonImpl implements IJson {
 			mapperIgnoreUnknownField.registerModule(module);
 		}
 
-		mapper.setAnnotationIntrospector(new OnumJsonSerializerIntrospector());
-		mapperIgnoreUnknownField.setAnnotationIntrospector(new OnumJsonSerializerIntrospector());
-
 		mapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
 
 		writer = mapper.writer().withDefaultPrettyPrinter();
 		mapperIgnoreUnknownField.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 
-	/**
-	 * 禁用@JsonSerializer
-	 * 
-	 * @author 谭海潮
-	 *
-	 */
-	private static class OnumJsonSerializerIntrospector extends JacksonAnnotationIntrospector {
-
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public Object findDeserializer(Annotated a) {
-			System.err.println("OnumJsonSerializerIntrospector findDeserializer:" + a);
-			return super.findDeserializer(a);
-		}
-	}
-
-	/**
-	 * Onum Json反序列化
-	 * 
-	 * @author 谭海潮
-	 *
-	 */
-	private static class OnumJsonDeserializer extends JsonDeserializer<Onum<?, ?>> {
-		@Override
-		public Onum<?, ?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-			JsonToken currentToken = jp.getCurrentToken();
-			// JsonNode node = jp.getCodec().readTree(jp);
-
-			System.err.println("jp.getText():" + jp.getText());
-
-			// node.getNodeType().
-			// if (currentToken == JsonToken.VALUE_STRING) {
-			// return new TextContainer(jp.getText().trim(), null);
-			// }
-			// else if (currentToken == JsonToken.START_OBJECT) {
-			// JsonToken jsonToken = jp.nextToken();
-			// if (jsonToken == JsonToken.FIELD_NAME) {
-			// String operation = jp.getText().trim();
-			// jp.nextToken();
-			// String text = jp.getText().trim();
-			// jp.nextToken();
-			// return new TextContainer(text, operation);
-			// }
-			// }
-			throw ctxt.mappingException(Onum.class, currentToken);
-		}
-	}
+	
 
 	/**
 	 * Onum Json序列化.
