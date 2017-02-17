@@ -22,7 +22,7 @@ public class SessUidXParam implements XParam {
 		// 分布式session还不够好，Long类型存进去再拿出来会变成Integer，这里做兼容
 		Number sessUid = (Number) request.getSession().getAttribute("sessUid");
 		// logger.info("getValue sessUid:" + sessUid);
-		if (sessUid == null) {
+		if (sessUid == null || sessUid.intValue() <= 0) {
 			Nologin nologin = parameter.getMethodAnnotation(Nologin.class);
 			if (nologin == null) {
 				String ip = XParamUtil.getProxyIp(request);
