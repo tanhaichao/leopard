@@ -273,6 +273,11 @@ public class QueryBuilder {
 		return buf.toString();
 	}
 
+	public <T> Paging<T> queryForPaging(Jdbc jdbc, Class<T> elementType, int start, int size) {
+		this.limit(start, size);
+		return this.queryForPaging(jdbc, elementType);
+	}
+
 	public <T> Paging<T> queryForPaging(Jdbc jdbc, Class<T> elementType) {
 		StatementParameter param = new StatementParameter();
 		StringBuilder sb = new StringBuilder();
