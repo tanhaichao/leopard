@@ -31,6 +31,6 @@ public class AutoCodegen {
 	}
 
 	protected static Class<?> findCodegenClass() throws ClassNotFoundException {
-		return Class.forName("io.leopard.codegen.AutoCodegen");
+		return Class.forName("io.bava.entity.codegen.AutoCodegen");
 	}
 }
