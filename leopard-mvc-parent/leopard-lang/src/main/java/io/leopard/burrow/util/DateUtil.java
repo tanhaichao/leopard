@@ -12,7 +12,9 @@ public class DateUtil {
 	public static final long HOUR = 60 * 60L * 1000L;
 
 	public static final int HOUR_SECOND = 60 * 60;
+
 	public static final int EIGHT_HOUR_SECOND = 60 * 60 * 8;// 8小时
+
 	public static final int DAY_SECOND = 60 * 60 * 24;
 
 	public static final long DAY_MILLI_SECOND = DAY_SECOND * 1000L;
@@ -213,6 +215,15 @@ public class DateUtil {
 	public static Date getTodayLastTime() {
 		Date today = getOnlyDate(new Date());
 		return new Date(today.getTime() + DateTime.DAY_MILLIS - 1000L);
+	}
+
+	/**
+	 * 获取当前最后的时间
+	 * 
+	 * @return
+	 */
+	public static Date getLastTime(Date dayFirstTime) {
+		return new Date(dayFirstTime.getTime() + DateTime.DAY_MILLIS - 1000L);
 	}
 
 	/**
