@@ -79,7 +79,7 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 
 		@Override
 		public String getContentType() {
-			return "text/plain; charset=UTF-8";
+			return "application/json; charset=UTF-8";
 		}
 
 		@Override
