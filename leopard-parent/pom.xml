@@ -399,7 +399,7 @@
 			</activation>
 			<dependencies>
 				<dependency>
-					<groupId>io.leopard</groupId>
+					<groupId>io.xiaoniu</groupId>
 					<artifactId>webide-local</artifactId>
 					<version>0.1-SNAPSHOT</version>
 				</dependency>
