@@ -95,6 +95,11 @@ public class QueryBuilder {
 		return this;
 	}
 
+	public QueryBuilder addBool(String fieldName, boolean value) {
+		this.addWhere(fieldName, value);
+		return this;
+	}
+
 	public QueryBuilder addLong(String fieldName, long value) {
 		if (value > 0) {
 			this.addWhere(fieldName, value);
