@@ -11,22 +11,20 @@ import io.leopard.lang.TimeRange;
  * @author 谭海潮
  *
  */
-public class MonthRange extends TimeRange {
+public class DayRange extends TimeRange {
 
-	public MonthRange() {
+	public DayRange() {
 		this(0);
 	}
 
-	public MonthRange(int monthNum) {
+	public DayRange(int dayNum) {
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.MONTH, monthNum);
-		cal.set(Calendar.DATE, 1);
+		cal.setTimeInMillis(System.currentTimeMillis());
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 		Date startTime = new Date(cal.getTimeInMillis());
-
 		Date endTime = null;
 		{
 			cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -36,10 +34,6 @@ public class MonthRange extends TimeRange {
 			cal.set(Calendar.MILLISECOND, 999);
 			endTime = new Date(cal.getTimeInMillis());
 		}
-
-		this.setStartTime(startTime);
-		this.setEndTime(endTime);
-
 		this.setStartTime(startTime);
 		this.setEndTime(endTime);
 	}
