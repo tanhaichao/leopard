@@ -54,8 +54,20 @@ public class BeanUtil {
 	}
 
 	public static <T> List<T> convertIncludeSub(List<?> list, Class<T> clazz) {
+		if (list == null) {
+			return null;
+		}
+		String json = Json.toJson(list);
+		List<T> list2 = Json.toListObject(json, clazz, true);
+
+		for (int i = 0; i < list.size(); i++) {
+			Object bean = list.get(i);
+			T result = list2.get(i);
+
+		}
+		return list2;
 		// TODO ahai 支持子类属性自动拷贝
-		return convert2(list, clazz);
+		// return convert2(list, clazz);
 	}
 
 	public static <T> List<T> convert2(List<?> list, Class<T> clazz) {
