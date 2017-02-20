@@ -14,6 +14,7 @@ public class TimeRange {
 	 * 开始时间
 	 */
 	private Date startTime;
+
 	/**
 	 * 结束时间
 	 */
