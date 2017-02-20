@@ -223,15 +223,16 @@
 		<module>leopard-data-parent</module>
 		<module>leopard-mvc-parent</module>
 		<module>leopard-security-parent</module>
-		<module>leopard-cloud-parent</module>
 		<module>leopard-message-parent</module>
+		<module>leopard-cloud-parent</module>
+		<module>leopard-thirdparty-parent</module>
 		<module>leopard-crawler-parent</module>
 
 		<module>nobug</module>
 		<module>topnb</module>
 		<module>myjetty</module>
 		<module>leopard-parent</module>
-		<module>leopard-thirdparty-parent</module>
+		<module>beanunit</module>
 	</modules>
 
 

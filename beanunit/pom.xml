@@ -1,0 +1,12 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard</artifactId>
+		<version>0.9.11-SNAPSHOT</version>
+	</parent>
+	<artifactId>beanunit</artifactId>
+	<packaging>pom</packaging>
+	<name>BeanUnit</name>
+	<description>Bean单元测试，支持测试方法加参数，并支持参数解析(类似Leopard MVC)、支持Test类注册为Spring Bean。</description>
+</project>
