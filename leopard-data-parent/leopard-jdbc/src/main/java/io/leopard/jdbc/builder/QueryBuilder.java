@@ -278,12 +278,30 @@ public class QueryBuilder {
 		return buf.toString();
 	}
 
-	public <T> Paging<T> queryForPaging(Jdbc jdbc, Class<T> elementType, int start, int size) {
-		this.limit(start, size);
-		return this.queryForPaging(jdbc, elementType);
+	public static class SQLInfo {
+		StatementParameter param;
+
+		private String sql;
+
+		public StatementParameter getParam() {
+			return param;
+		}
+
+		public void setParam(StatementParameter param) {
+			this.param = param;
+		}
+
+		public String getSql() {
+			return sql;
+		}
+
+		public void setSql(String sql) {
+			this.sql = sql;
+		}
+
 	}
 
-	public <T> Paging<T> queryForPaging(Jdbc jdbc, Class<T> elementType) {
+	protected SQLInfo toSqlInfo() {
 		StatementParameter param = new StatementParameter();
 		StringBuilder sb = new StringBuilder();
 
@@ -339,9 +357,31 @@ public class QueryBuilder {
 		param.setInt(limitSize);
 
 		String sql = sb.toString();
-		// System.err.println("sql:" + sql);
-		return jdbc.queryForPaging(sql, elementType, param);
-
+		SQLInfo sqlInfo = new SQLInfo();
+		sqlInfo.setParam(param);
+		sqlInfo.setSql(sql);
+		return sqlInfo;
 	}
 
+	public <T> Paging<T> queryForPaging(Jdbc jdbc, Class<T> elementType) {
+		SQLInfo sqlInfo = this.toSqlInfo();
+		// System.err.println("sql:" + sql);
+		return jdbc.queryForPaging(sqlInfo.getSql(), elementType, sqlInfo.getParam());
+	}
+
+	public <T> Paging<T> queryForPaging(Jdbc jdbc, Class<T> elementType, int start, int size) {
+		this.limit(start, size);
+		return this.queryForPaging(jdbc, elementType);
+	}
+
+	public <T> List<T> queryForList(Jdbc jdbc, Class<T> elementType) {
+		SQLInfo sqlInfo = this.toSqlInfo();
+		// System.err.println("sql:" + sql);
+		return jdbc.queryForList(sqlInfo.getSql(), elementType, sqlInfo.getParam());
+	}
+
+	public <T> List<T> queryForList(Jdbc jdbc, Class<T> elementType, int start, int size) {
+		this.limit(start, size);
+		return this.queryForList(jdbc, elementType);
+	}
 }
