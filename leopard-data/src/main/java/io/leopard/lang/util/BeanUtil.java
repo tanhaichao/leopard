@@ -53,6 +53,11 @@ public class BeanUtil {
 		// return Json.toObject(json, clazz, true);
 	}
 
+	public static <T> List<T> convertIncludeSub(List<?> list, Class<T> clazz) {
+		// TODO ahai 支持子类属性自动拷贝
+		return convert2(list, clazz);
+	}
+
 	public static <T> List<T> convert2(List<?> list, Class<T> clazz) {
 		if (list == null) {
 			return null;
