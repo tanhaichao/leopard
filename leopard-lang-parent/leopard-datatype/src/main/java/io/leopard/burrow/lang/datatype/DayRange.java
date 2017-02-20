@@ -18,8 +18,20 @@ public class DayRange extends TimeRange {
 	}
 
 	public DayRange(int dayNum) {
+		this(System.currentTimeMillis(), dayNum);
+	}
+
+	public DayRange(Date time) {
+		this(time, 0);
+	}
+
+	public DayRange(Date time, int dayNum) {
+		this(time.getTime(), dayNum);
+	}
+
+	public DayRange(long time, int dayNum) {
 		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(System.currentTimeMillis());
+		cal.setTimeInMillis(time);
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
