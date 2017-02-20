@@ -1,5 +1,6 @@
 package io.leopard.lang;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -42,6 +43,22 @@ public class TimeRange {
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+
+	private static final SimpleDateFormat GET_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+	public String toStartTime() {
+		if (startTime == null) {
+			return null;
+		}
+		return GET_TIME_FORMAT.format(this.startTime);
+	}
+
+	public String toEndTime() {
+		if (endTime == null) {
+			return null;
+		}
+		return GET_TIME_FORMAT.format(this.endTime);
 	}
 
 }
