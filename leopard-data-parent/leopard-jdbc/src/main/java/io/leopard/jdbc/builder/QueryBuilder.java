@@ -114,7 +114,8 @@ public class QueryBuilder {
 
 	public QueryBuilder addLike(String fieldName, String value) {
 		if (StringUtils.isEmpty(value)) {
-			throw new IllegalArgumentException("参数不能为空.");
+			// throw new IllegalArgumentException("参数不能为空.");
+			return this;
 		}
 		value = value.replace("%", "");
 		if (StringUtils.isEmpty(value)) {
