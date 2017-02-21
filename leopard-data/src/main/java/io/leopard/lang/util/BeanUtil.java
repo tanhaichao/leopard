@@ -11,6 +11,13 @@ import io.leopard.lang.PagingImpl;
 
 public class BeanUtil {
 
+	public static <T> T copyProperties(T dest, Object orig) {
+		
+		BeanUtils.copyProperties(dest, orig);
+
+		return dest;
+	}
+
 	public static <T> List<T> convert(List<?> list, Class<T> clazz) {
 		if (list == null) {
 			return null;
