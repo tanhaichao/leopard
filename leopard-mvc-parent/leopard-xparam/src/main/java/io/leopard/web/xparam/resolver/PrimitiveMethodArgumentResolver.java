@@ -3,6 +3,8 @@ package io.leopard.web.xparam.resolver;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,10 +22,11 @@ import io.leopard.web.xparam.RequestBodyArgumentResolver;
  */
 @Component // 之前为什么把这个注解去掉?
 public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		// System.err.println("PrimitiveMethodArgumentResolver supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
+		logger.info("supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
 		RequestParam ann = parameter.getParameterAnnotation(RequestParam.class);
 		if (ann != null) {
 			return false;
