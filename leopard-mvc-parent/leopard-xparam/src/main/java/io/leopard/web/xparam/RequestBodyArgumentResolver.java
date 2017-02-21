@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import io.leopard.json.Json;
 
@@ -16,6 +18,8 @@ import io.leopard.json.Json;
  *
  */
 public class RequestBodyArgumentResolver {
+
+	protected static Log logger = LogFactory.getLog(RequestBodyArgumentResolver.class);
 
 	public static String getParameter(HttpServletRequest request, String name) {
 		String value = request.getParameter(name);
@@ -30,7 +34,7 @@ public class RequestBodyArgumentResolver {
 		Map<String, Object> requestBody = (Map<String, Object>) request.getAttribute("requestBody");
 		if (requestBody == null) {
 			String requestBodyJson = request.getParameter("requestBody");
-			System.err.println("requestBodyJson:" + requestBodyJson);
+			logger.info("requestBodyJson:" + requestBodyJson);
 			if (StringUtils.isEmpty(requestBodyJson)) {
 				return null;
 			}
