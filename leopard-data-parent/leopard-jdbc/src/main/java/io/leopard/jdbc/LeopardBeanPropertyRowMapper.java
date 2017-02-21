@@ -133,6 +133,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 			// System.out.println("name:" + field.getName() + " json:" + json);
 			ParameterizedType type = (ParameterizedType) field.getGenericType();
 			String elementClassName = type.getActualTypeArguments()[0].getTypeName();
+
 			if (int.class.getName().equals(elementClassName) || Integer.class.getName().equals(elementClassName)) {
 				value = Json.toListObject(json, Integer.class);
 			}
@@ -143,10 +144,30 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 				value = Json.toListObject(json, String.class);
 			}
 			else {
-				Class<?> clazz = (Class<?>) type.getActualTypeArguments()[0];
-				// System.out.println("clazz:" + clazz.getName());
-				value = Json.toListObject(json, clazz, true);
-				// throw new IllegalArgumentException("未知数据类型[" + elementClassName + "].");
+				Class<?> elementType;
+				try {
+					elementType = Class.forName(elementClassName);
+				}
+				catch (ClassNotFoundException e) {
+					throw new RuntimeException(e.getMessage(), e);
+				}
+				if (elementType.isEnum()) {
+					if (Snum.class.isAssignableFrom(elementType)) {
+						return Json.toListObject(json, elementType);
+					}
+					else if (Inum.class.isAssignableFrom(elementType)) {
+						return Json.toListObject(json, elementType);
+					}
+					else {
+						throw new RuntimeException("未知枚举类型[" + requiredType.getName() + "].");
+					}
+				}
+				else {
+					Class<?> clazz = (Class<?>) type.getActualTypeArguments()[0];
+					// System.out.println("clazz:" + clazz.getName());
+					value = Json.toListObject(json, clazz, true);
+					// throw new IllegalArgumentException("未知数据类型[" + elementClassName + "].");
+				}
 			}
 		}
 		else if (requiredType.isEnum()) {
