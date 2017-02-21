@@ -45,7 +45,8 @@
 		<property name="conversionService" ref="conversionService" />
 	</bean>
 
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	<bean class="io.leopard.web.mvc.LeopardRequestMappingHandlerAdapter">
+
 		<property name="webBindingInitializer" ref="leopardWebBindingInitializer" />
 		<property name="messageConverters">
 			<list>
