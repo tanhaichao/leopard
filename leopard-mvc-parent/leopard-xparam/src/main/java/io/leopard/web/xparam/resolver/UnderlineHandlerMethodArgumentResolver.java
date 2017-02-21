@@ -44,7 +44,7 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-//		System.err.println("UnderlineHandlerMethodArgumentResolver supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
+		// System.err.println("UnderlineHandlerMethodArgumentResolver supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
 		String name = parameter.getParameterName();
 		if (StringUtils.isEmpty(name)) {
 			return false;
@@ -83,6 +83,9 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	 * 将驼峰式命名的字符串转换为下划线方式.
 	 */
 	public static String camelToUnderline(String param) {
+		if (!isEnable()) {
+			return param;
+		}
 		if (param == null || param.length() == 0) {
 			return param;
 		}

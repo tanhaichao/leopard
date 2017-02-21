@@ -53,9 +53,9 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest webRequest) throws Exception {
 		// System.err.println("PrimitiveMethodArgumentResolver resolveName name:" + name);
-		if (UnderlineHandlerMethodArgumentResolver.isEnable()) {
-			name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
-		}
+		// if (UnderlineHandlerMethodArgumentResolver.isEnable()) {
+		name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
+		// }
 		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 		Object value = RequestBodyArgumentResolver.getParameter(request, name);
 		if (value == null) {

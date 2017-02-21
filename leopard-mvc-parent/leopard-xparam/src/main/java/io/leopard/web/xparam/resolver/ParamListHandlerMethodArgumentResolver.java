@@ -110,11 +110,12 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		name = name.replaceFirst("List$", "");
 		name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
 		String[] values = req.getParameterValues(name);
+		logger.info("name:" + name + " values:" + values);
 
 		int hashCode = parameter.hashCode();
 
 		if (values == null) {
-			String value = RequestBodyArgumentResolver.getParameter(req, name);
+			String value = RequestBodyArgumentResolver.getParameterForRequestBody(req, name);
 			Class<?> clazz = clazzMap.get(hashCode);
 			return Json.toListObject(value, clazz);
 		}
@@ -124,7 +125,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			return toList(clazz, values);
 		}
 		if (values != null && values.length == 1) {
-			// logger.info("values:" + values[0]);
+			logger.info("values:" + values[0]);
 			if (StringUtils.isEmpty(values[0])) {
 				return null;
 			}
