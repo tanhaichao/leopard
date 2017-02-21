@@ -132,9 +132,34 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 		if (String.class.equals(clazz)) {
 			return this.parseListString(node);
 		}
-		else {
-			throw new IllegalArgumentException("未知泛型[" + clazz.getName() + "].");
+		else if (Integer.class.equals(clazz)) {
+			throw new IllegalArgumentException("未实现List<Integer>");
 		}
+		else if (Long.class.equals(clazz)) {
+			throw new IllegalArgumentException("未实现List<Long>");
+		}
+		else {
+			return this.parseListBean(node, clazz);
+			// throw new IllegalArgumentException("未知泛型[" + clazz.getName() + "].");
+		}
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected Object parseListBean(JsonNode node, Class<?> clazz) {
+		Iterator<JsonNode> elements = node.elements();
+		// System.err.println("parseListBean elements:" + elements);
+		List list = null;
+		if (elements != null) {
+			list = new ArrayList();
+			while (elements.hasNext()) {
+				JsonNode node3 = elements.next();
+				String text = node3.asText();
+				// System.err.println("bean text:" + text);
+				Object bean = Json.toObject(text, clazz);
+				list.add(bean);
+			}
+		}
+		return list;
 	}
 
 	protected Object parseListString(JsonNode node) {
