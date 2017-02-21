@@ -13,6 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 //import org.apache.commons.lang.StringUtils;
 import org.springframework.core.MethodParameter;
@@ -37,6 +39,8 @@ import io.leopard.web.xparam.RequestBodyArgumentResolver;
  */
 @Component
 public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
+
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private Set<String> simpleClassSet = new HashSet<String>();
 
@@ -110,7 +114,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		int hashCode = parameter.hashCode();
 
 		if (values == null) {
-			String value = RequestBodyArgumentResolver.getParameterForRequestBody(req, name);
+			String value = RequestBodyArgumentResolver.getParameter(req, name);
 			Class<?> clazz = clazzMap.get(hashCode);
 			return Json.toListObject(value, clazz);
 		}
@@ -120,6 +124,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			return toList(clazz, values);
 		}
 		if (values != null && values.length == 1) {
+			logger.info("values:" + values[0]);
 			if (StringUtils.isEmpty(values[0])) {
 				return null;
 			}
