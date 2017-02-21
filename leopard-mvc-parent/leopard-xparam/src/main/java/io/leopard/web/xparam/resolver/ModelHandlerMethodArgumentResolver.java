@@ -5,8 +5,8 @@ import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -14,11 +14,14 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import io.leopard.burrow.lang.inum.EnumUtil;
+import io.leopard.burrow.lang.inum.Inum;
+import io.leopard.burrow.lang.inum.Snum;
+import io.leopard.json.Json;
 import io.leopard.web.xparam.RequestBodyArgumentResolver;
 
 /**
@@ -32,23 +35,23 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	@Value("${xparam.underline}")
-	private String underline;
-
-	@PostConstruct
-	public void init() {
-		enable = !"false".equals(underline);
-	}
-
-	private static boolean enable = true;
-
-	public static boolean isEnable() {
-		return enable;
-	}
-
-	public static void setEnable(boolean enable) {
-		ModelHandlerMethodArgumentResolver.enable = enable;
-	}
+	// @Value("${xparam.underline}")
+	// private String underline;
+	//
+	// @PostConstruct
+	// public void init() {
+	// enable = !"false".equals(underline);
+	// }
+	//
+	// private static boolean enable = true;
+	//
+	// public static boolean isEnable() {
+	// return enable;
+	// }
+	//
+	// public static void setEnable(boolean enable) {
+	// ModelHandlerMethodArgumentResolver.enable = enable;
+	// }
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -64,7 +67,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		if (className.endsWith("AddressVO")) {
 			supports = true;
 		}
-		// logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports + " type:" + type.getName());
+		logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports + " type:" + type.getName());
 		return supports;
 	}
 
@@ -84,7 +87,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			}
 			else {
 				String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(fieldName);
-				// logger.info("resolveName name:" + fieldName + " underlineName:" + underlineName);
+				logger.info("resolveName name:" + fieldName + " underlineName:" + underlineName);
 				String value = RequestBodyArgumentResolver.getParameter(req, underlineName);
 				if (value == null) {
 					continue;
@@ -139,57 +142,83 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		if (String.class.equals(type)) {
 			return value;
 		}
-		if (boolean.class.equals(type)) {
+		else if (boolean.class.equals(type)) {
 			return "true".equals(value);
 		}
-		if (int.class.equals(type)) {
+		else if (int.class.equals(type)) {
 			return NumberUtils.toInt(value);
 		}
-		if (Integer.class.equals(type)) {
+		else if (Integer.class.equals(type)) {
 			if (StringUtils.isEmpty(value)) {
 				return null;
 			}
 			return NumberUtils.toInt(value);
 		}
-		if (long.class.equals(type)) {
+		else if (long.class.equals(type)) {
 			return NumberUtils.toLong(value);
 		}
-		if (Long.class.equals(type)) {
+		else if (Long.class.equals(type)) {
 			if (StringUtils.isEmpty(value)) {
 				return null;
 			}
 			return NumberUtils.toLong(value);
 		}
 
-		if (float.class.equals(type)) {
+		else if (float.class.equals(type)) {
 			return NumberUtils.toFloat(value);
 		}
-		if (Float.class.equals(type)) {
+		else if (Float.class.equals(type)) {
 			if (StringUtils.isEmpty(value)) {
 				return null;
 			}
 			return NumberUtils.toFloat(value);
 		}
-		if (double.class.equals(type)) {
+		else if (double.class.equals(type)) {
 			return NumberUtils.toDouble(value);
 		}
-		if (Double.class.equals(type)) {
+		else if (Double.class.equals(type)) {
 			if (StringUtils.isEmpty(value)) {
 				return null;
 			}
 			return NumberUtils.toDouble(value);
 		}
-		if (Date.class.equals(type)) {
+		else if (Date.class.equals(type)) {
 			long time = NumberUtils.toLong(value);
 			if (time <= 0) {
 				return null;
 			}
 			return new Date(time);
 		}
+		else if (type.isEnum()) {
+			// throw new RuntimeException("枚举类型未实现[" + type.getName() + " value:" + value + "].");
+			return toEnum(value, type);
+		}
 		else {
 			return ParamListHandlerMethodArgumentResolver.toObject(value, type);
 		}
 		// throw new IllegalArgumentException("未知数据类型[" + type.getName() + "].");
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected static Enum<?> toEnum(String value, Class<?> type) {
+		if (value == null) {
+			return null;
+		}
+		if (value.startsWith("{")) {// json
+			Map<String, Object> map = Json.toMap(value);
+			Object key = map.get("key");
+			return EnumUtil.toEnum(key, (Class<Enum>) type);
+		}
+		if (type.isAssignableFrom(Snum.class)) {
+			return EnumUtil.toEnum(value, (Class<Enum>) type);
+		}
+		else if (type.isAssignableFrom(Inum.class)) {
+			int key = Integer.parseInt(value);
+			return EnumUtil.toEnum(key, (Class<Enum>) type);
+		}
+		else {
+			throw new RuntimeException("未知枚举类型[" + type.getName() + "].");
+		}
 	}
 
 }
