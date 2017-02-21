@@ -115,7 +115,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		int hashCode = parameter.hashCode();
 
 		if (values == null) {
-			String value = RequestBodyArgumentResolver.getParameterForRequestBody(req, name);
+			String value = RequestBodyArgumentResolver.getParameter(req, name);
 			Class<?> clazz = clazzMap.get(hashCode);
 			return Json.toListObject(value, clazz);
 		}
