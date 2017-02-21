@@ -124,7 +124,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			return toList(clazz, values);
 		}
 		if (values != null && values.length == 1) {
-			logger.info("values:" + values[0]);
+			// logger.info("values:" + values[0]);
 			if (StringUtils.isEmpty(values[0])) {
 				return null;
 			}
