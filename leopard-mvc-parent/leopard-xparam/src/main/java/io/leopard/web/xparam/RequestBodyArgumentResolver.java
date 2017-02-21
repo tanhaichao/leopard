@@ -34,7 +34,7 @@ public class RequestBodyArgumentResolver {
 		Map<String, Object> requestBody = (Map<String, Object>) request.getAttribute("requestBody");
 		if (requestBody == null) {
 			String requestBodyJson = request.getParameter("requestBody");
-			logger.info("requestBodyJson:" + requestBodyJson);
+			logger.info("uri:" + request.getRequestURI() + " requestBodyJson:" + requestBodyJson);
 			if (StringUtils.isEmpty(requestBodyJson)) {
 				return null;
 			}
