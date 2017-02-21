@@ -390,9 +390,6 @@
 		<profile>
 			<id>xiaoniu-windows</id>
 			<activation>
-				<os>
-					<family>windows</family>
-				</os>
 				<file>
 					<exists>/Users/tanmr/xiaoniu</exists>
 				</file>
@@ -443,11 +440,8 @@
 		<profile>
 			<id>xiaoniu-linux</id>
 			<activation>
-				<os>
-					<family>unix</family>
-				</os>
 				<file>
-					<exists>/Users/tanmr/xiaoniu</exists>
+					<exists>/Users/tanmr/xiaoniu_server</exists>
 				</file>
 			</activation>
 			<dependencies>
