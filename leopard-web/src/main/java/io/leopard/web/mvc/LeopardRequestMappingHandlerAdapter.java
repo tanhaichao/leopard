@@ -19,4 +19,10 @@ public class LeopardRequestMappingHandlerAdapter extends RequestMappingHandlerAd
 		super.setCustomArgumentResolvers(argumentResolvers);
 	}
 
+	@Override
+	public void afterPropertiesSet() {
+		super.afterPropertiesSet();
+
+		logger.info("getArgumentResolvers():" + getArgumentResolvers());
+	}
 }
