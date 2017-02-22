@@ -22,6 +22,7 @@ import io.leopard.burrow.lang.inum.EnumUtil;
 import io.leopard.burrow.lang.inum.Inum;
 import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.json.Json;
+import io.leopard.lang.util.FieldUtil;
 
 /**
  * 下划线参数名称解析.
@@ -76,7 +77,8 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		Class<?> clazz = parameter.getParameterType();
 
 		Object bean = clazz.newInstance();
-		for (Field field : clazz.getDeclaredFields()) {
+
+		for (Field field : FieldUtil.listFields(clazz)) {
 			String fieldName = field.getName();
 			Class<?> type = field.getType();
 			Object obj;
@@ -92,6 +94,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			}
 			else {
 				String value = RequestBodyParser.getParameter(req, fieldName);
+				logger.info("fieldName:" + fieldName + " value:" + value);
 				if (value == null) {
 					continue;
 				}
@@ -214,10 +217,10 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			Object key = map.get("key");
 			return EnumUtil.toEnum(key, (Class<Enum>) type);
 		}
-		if (type.isAssignableFrom(Snum.class)) {
+		if (Snum.class.isAssignableFrom(type)) {
 			return EnumUtil.toEnum(value, (Class<Enum>) type);
 		}
-		else if (type.isAssignableFrom(Inum.class)) {
+		else if (Inum.class.isAssignableFrom(type)) {
 			int key = Integer.parseInt(value);
 			return EnumUtil.toEnum(key, (Class<Enum>) type);
 		}
