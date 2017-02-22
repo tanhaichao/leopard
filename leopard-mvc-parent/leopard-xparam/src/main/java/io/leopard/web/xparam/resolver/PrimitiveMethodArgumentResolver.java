@@ -1,5 +1,7 @@
 package io.leopard.web.xparam.resolver;
 
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,23 +26,32 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		logger.info("supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
 		RequestParam ann = parameter.getParameterAnnotation(RequestParam.class);
 		if (ann != null) {
 			return false;
 		}
+		logger.info("supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
 
 		Class<?> clazz = parameter.getParameterType();
-		if (clazz.equals(long.class)) {
+		if (clazz.equals(long.class) || clazz.equals(Long.class)) {
 			return true;
 		}
-		else if (clazz.equals(int.class)) {
+		else if (clazz.equals(int.class) || clazz.equals(Integer.class)) {
 			return true;
 		}
-		else if (clazz.equals(double.class)) {
+		else if (clazz.equals(double.class) || clazz.equals(Double.class)) {
 			return true;
 		}
-		else if (clazz.equals(float.class)) {
+		else if (clazz.equals(float.class) || clazz.equals(Float.class)) {
+			return true;
+		}
+		else if (clazz.equals(boolean.class) || clazz.equals(Boolean.class)) {
+			return true;
+		}
+		else if (clazz.equals(Date.class)) {
+			return true;
+		}
+		else if (clazz.equals(String.class)) {
 			return true;
 		}
 		return false;
@@ -61,6 +72,8 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 		if (value == null) {
 			value = this.getDefaultValue(parameter);
 		}
+		logger.info("resolveName name:" + name + " clazz:" + parameter.getParameterType());
+
 		return value;
 	}
 
@@ -77,6 +90,27 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 		}
 		else if (clazz.equals(float.class)) {
 			return 0f;
+		}
+		else if (clazz.equals(boolean.class)) {
+			return false;
+		}
+		else if (clazz.equals(String.class)) {
+			return null;
+		}
+		else if (clazz.equals(Boolean.class)) {
+			return null;
+		}
+		else if (clazz.equals(Integer.class)) {
+			return null;
+		}
+		else if (clazz.equals(Long.class)) {
+			return null;
+		}
+		else if (clazz.equals(Float.class)) {
+			return null;
+		}
+		else if (clazz.equals(Double.class)) {
+			return null;
 		}
 		throw new RuntimeException("未知类型[" + clazz.getName() + "].");
 	}
