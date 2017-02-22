@@ -38,10 +38,11 @@ public class UnderlineJson {
 		mapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
 		underlineMapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
 
-		underlineMapper = mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+		underlineMapper = underlineMapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 	}
 
 	private static ObjectMapper getObjectMapper() {
+		// System.err.println("UnderlineNameConfiger.isEnable():" + UnderlineNameConfiger.isEnable());
 		if (UnderlineNameConfiger.isEnable()) {
 			return underlineMapper;
 		}
