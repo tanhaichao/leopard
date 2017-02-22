@@ -94,7 +94,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			}
 			else {
 				String value = RequestBodyParser.getParameter(req, fieldName);
-				logger.info("fieldName:" + fieldName + " value:" + value);
+				// logger.info("fieldName:" + fieldName + " value:" + value);
 				if (value == null) {
 					continue;
 				}
