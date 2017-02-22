@@ -30,7 +30,7 @@ public class PathRegexHandlerMethodArgumentResolver implements HandlerMethodArgu
 		if (annot == null) {
 			return false;
 		}
-		System.err.println("annot.value():" + annot.value());
+		// System.err.println("annot.value():" + annot.value());
 		if (!StringUtils.hasText(annot.value())) {
 			return false;
 		}
