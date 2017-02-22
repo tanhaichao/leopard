@@ -43,6 +43,7 @@ public class JsonJacksonImpl implements IJson {
 		}
 
 		mapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
+		mapperIgnoreUnknownField.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
 
 		writer = mapper.writer().withDefaultPrettyPrinter();
 		mapperIgnoreUnknownField.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -54,7 +55,7 @@ public class JsonJacksonImpl implements IJson {
 	 * @author 谭海潮
 	 *
 	 */
-	private static class OnumJsonSerializer extends StdSerializer<Onum<?, ?>> {
+	public static class OnumJsonSerializer extends StdSerializer<Onum<?, ?>> {
 
 		private static final long serialVersionUID = 1L;
 

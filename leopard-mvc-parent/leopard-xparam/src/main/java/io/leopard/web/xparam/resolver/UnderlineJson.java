@@ -3,13 +3,14 @@ package io.leopard.web.xparam.resolver;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
+import io.leopard.json.DisablingJsonSerializerIntrospector;
 import io.leopard.json.JsonException;
+import io.leopard.json.JsonJacksonImpl.OnumJsonSerializer;
 
 public class UnderlineJson {
 
@@ -17,8 +18,20 @@ public class UnderlineJson {
 
 	private static ObjectMapper underlineMapper = new ObjectMapper();
 
-	@PostConstruct
-	public void init() {
+	static {
+
+		{
+			SimpleModule module = new SimpleModule();
+			module.addSerializer(new OnumJsonSerializer());
+			// module.addDeserializer(Onum.class, new OnumJsonDeserializer());
+
+			mapper.registerModule(module);
+			underlineMapper.registerModule(module);
+		}
+
+		mapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
+		underlineMapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
+
 		underlineMapper = mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 	}
 
