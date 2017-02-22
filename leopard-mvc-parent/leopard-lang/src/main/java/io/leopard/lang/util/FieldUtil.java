@@ -6,12 +6,15 @@ import java.util.List;
 
 import org.apache.commons.lang.reflect.FieldUtils;
 
-
 public class FieldUtil {
 
 	public static List<Field> listFields(Object bean) {
+		return listFields(bean.getClass());
+	}
+
+	public static List<Field> listFields(Class<?> clazz) {
 		List<Field> list = new ArrayList<Field>();
-		Class<?> currentClazz = bean.getClass();
+		Class<?> currentClazz = clazz;
 		while (true) {
 			Field[] fields = currentClazz.getDeclaredFields();
 			for (Field field : fields) {
