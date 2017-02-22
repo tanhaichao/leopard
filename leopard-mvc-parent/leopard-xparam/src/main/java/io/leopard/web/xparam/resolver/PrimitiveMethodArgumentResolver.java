@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ValueConstants;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver;
 
-import io.leopard.web.xparam.RequestBodyArgumentResolver;
-
 /**
  * 基本数据类型
  * 
@@ -57,10 +55,9 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest webRequest) throws Exception {
 		// System.err.println("PrimitiveMethodArgumentResolver resolveName name:" + name);
 		// if (UnderlineHandlerMethodArgumentResolver.isEnable()) {
-		name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
 		// }
 		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
-		Object value = RequestBodyArgumentResolver.getParameter(request, name);
+		Object value = RequestBodyParser.getParameter(request, name);
 		if (value == null) {
 			value = this.getDefaultValue(parameter);
 		}

@@ -42,8 +42,8 @@ public class TimeRangeHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		// startTimeName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(startTimeName);
 		// endTimeName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(endTimeName);
 		// }
-		String startTime = UnderlineHandlerMethodArgumentResolver.getParameter(req, "startTime");
-		String endTime = UnderlineHandlerMethodArgumentResolver.getParameter(req, "endTime");
+		String startTime = getParameter(req, "startTime");
+		String endTime = getParameter(req, "endTime");
 
 		TimeRange range = new TimeRange();
 		if (StringUtils.isNotEmpty(startTime)) {
@@ -55,10 +55,19 @@ public class TimeRangeHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		return range;
 	}
 
+	private static String getParameter(HttpServletRequest request, String name) {
+		String value = RequestBodyParser.getParameter(request, name);
+		if (UnderlineNameConfiger.isEnable() && value == null) {
+			value = RequestBodyParser.getParameter(request, UnderlineNameConfiger.camelToUnderline(name));
+		}
+		return value;
+	}
+
 	/**
 	 * 时间戳
 	 */
 	private static String Timestamp_regex = "1[0-9]{12}";
+
 	private static String DATE_regex = "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$";
 
 	protected static Date toDate(String datetime) {
@@ -70,7 +79,7 @@ public class TimeRangeHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			datetime += " 00:00:00";
 		}
 
-		if (SystemUtils.IS_OS_WINDOWS) {//TODO 测试代码
+		if (SystemUtils.IS_OS_WINDOWS) {// TODO 测试代码
 			try {
 				return DateUtil.toDate(datetime);
 			}

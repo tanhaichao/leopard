@@ -132,10 +132,10 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 			customArgumentResolvers.add(argumentResolver);
 		}
 
-		{
-			UnderlineHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(UnderlineHandlerMethodArgumentResolver.class);
-			customArgumentResolvers.add(argumentResolver);
-		}
+		// {
+		// UnderlineHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(UnderlineHandlerMethodArgumentResolver.class);
+		// customArgumentResolvers.add(argumentResolver);
+		// }
 		{
 			ModelHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(ModelHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);

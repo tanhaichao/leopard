@@ -2,10 +2,10 @@ package io.leopard.web.xparam.resolver;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +22,6 @@ import io.leopard.burrow.lang.inum.EnumUtil;
 import io.leopard.burrow.lang.inum.Inum;
 import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.json.Json;
-import io.leopard.web.xparam.RequestBodyArgumentResolver;
 
 /**
  * 下划线参数名称解析.
@@ -85,16 +84,19 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 				Class<?> subType = (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
 				obj = this.toList(fieldName, subType, req);
 			}
+			else if (Map.class.equals(type)) {
+				throw new NotImplementedException("Map类型未实现.");
+			}
+			else if (Set.class.equals(type)) {
+				throw new NotImplementedException("Set类型未实现.");
+			}
 			else {
-				String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(fieldName);
-				logger.info("resolveName name:" + fieldName + " underlineName:" + underlineName);
-				String value = RequestBodyArgumentResolver.getParameter(req, underlineName);
+				String value = RequestBodyParser.getParameter(req, fieldName);
 				if (value == null) {
 					continue;
 				}
 				obj = this.toObject(value, type);
 			}
-
 			field.setAccessible(true);
 			field.set(bean, obj);
 		}
@@ -103,39 +105,43 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 	}
 
 	protected Object toList(String fieldName, Class<?> subType, HttpServletRequest req) {
-		String underlineName = fieldName.replaceFirst("List$", "");
-		underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(underlineName);
-		String[] values = req.getParameterValues(underlineName);
-		logger.info("toList fieldName:" + fieldName + " underlineName:" + underlineName + " values:" + StringUtils.join(values, ",   "));
-		if (values == null) {
-			return null;
-		}
-		if (subType.equals(String.class)) {
-			List<String> list = new ArrayList<String>();
-			for (String value : values) {
-				list.add(value);
+		String json;
+		{
+			String[] values = ParamListHandlerMethodArgumentResolver.getParameterValues(req, fieldName);
+			logger.info("toList fieldName:" + fieldName + " values:" + StringUtils.join(values, ",   "));
+			if (values == null) {
+				return null;
 			}
-			return list;
+			json = values[0];
 		}
-		else if (subType.equals(Integer.class)) {
-			throw new NotImplementedException("List<Integer>未实现.");
-		}
-		else if (subType.equals(Long.class)) {
-			throw new NotImplementedException("List<Long>未实现.");
-		}
-		else if (subType.equals(Float.class)) {
-			throw new NotImplementedException("List<Float>未实现.");
-		}
-		else if (subType.equals(Double.class)) {
-			throw new NotImplementedException("List<Double>未实现.");
-		}
-		else if (subType.equals(Boolean.class)) {
-			throw new NotImplementedException("List<Boolean>未实现.");
-		}
-		else if (subType.equals(Date.class)) {
-			throw new NotImplementedException("List<Date>未实现.");
-		}
-		return ParamListHandlerMethodArgumentResolver.toList(subType, values);
+		return UnderlineJson.toListObject(json, subType);
+
+		// if (subType.equals(String.class)) {
+		// List<String> list = new ArrayList<String>();
+		// for (String value : values) {
+		// list.add(value);
+		// }
+		// return list;
+		// }
+		// else if (subType.equals(Integer.class)) {
+		// throw new NotImplementedException("List<Integer>未实现.");
+		// }
+		// else if (subType.equals(Long.class)) {
+		// throw new NotImplementedException("List<Long>未实现.");
+		// }
+		// else if (subType.equals(Float.class)) {
+		// throw new NotImplementedException("List<Float>未实现.");
+		// }
+		// else if (subType.equals(Double.class)) {
+		// throw new NotImplementedException("List<Double>未实现.");
+		// }
+		// else if (subType.equals(Boolean.class)) {
+		// throw new NotImplementedException("List<Boolean>未实现.");
+		// }
+		// else if (subType.equals(Date.class)) {
+		// throw new NotImplementedException("List<Date>未实现.");
+		// }
+		// return ParamListHandlerMethodArgumentResolver.toList(subType, values);
 	}
 
 	protected Object toObject(String value, Class<?> type) {
@@ -163,7 +169,6 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			}
 			return NumberUtils.toLong(value);
 		}
-
 		else if (float.class.equals(type)) {
 			return NumberUtils.toFloat(value);
 		}
@@ -194,7 +199,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			return toEnum(value, type);
 		}
 		else {
-			return ParamListHandlerMethodArgumentResolver.toObject(value, type);
+			return UnderlineJson.toObject(value, type);
 		}
 		// throw new IllegalArgumentException("未知数据类型[" + type.getName() + "].");
 	}

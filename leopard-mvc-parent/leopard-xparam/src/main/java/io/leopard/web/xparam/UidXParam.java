@@ -8,6 +8,7 @@ import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Service;
 
 import io.leopard.web.xparam.api.UserinfoResolverImpl;
+import io.leopard.web.xparam.resolver.RequestBodyParser;
 
 /**
  * 根据username解析uid.
@@ -21,7 +22,7 @@ public class UidXParam implements XParam {
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
 		// String uid = request.getParameter("uid");
-		String uid = RequestBodyArgumentResolver.getParameter(request, "uid");
+		String uid = RequestBodyParser.getParameter(request, "uid");
 		if (StringUtils.isNotEmpty(uid)) {
 			return NumberUtils.toLong(uid);
 		}

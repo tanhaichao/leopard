@@ -1,4 +1,4 @@
-package io.leopard.web.xparam;
+package io.leopard.web.xparam.resolver;
 
 import java.util.Date;
 import java.util.Map;
@@ -12,14 +12,23 @@ import org.apache.commons.logging.LogFactory;
 import io.leopard.json.Json;
 
 /**
- * RequestBody参数解析
+ * RequestBody参数解析器
  * 
  * @author 谭海潮
  *
  */
-public class RequestBodyArgumentResolver {
+public class RequestBodyParser {
 
-	protected static Log logger = LogFactory.getLog(RequestBodyArgumentResolver.class);
+	protected static Log logger = LogFactory.getLog(RequestBodyParser.class);
+
+	// TODO 未支持下划线
+	public static String[] getParameterValues(HttpServletRequest request, String name) {
+		String[] values = request.getParameterValues(name);
+		if (values == null) {
+			// value = getParameterForRequestBody(request, name);
+		}
+		return values;
+	}
 
 	public static String getParameter(HttpServletRequest request, String name) {
 		String value = request.getParameter(name);
@@ -29,7 +38,7 @@ public class RequestBodyArgumentResolver {
 		return value;
 	}
 
-	public static String getParameterForRequestBody(HttpServletRequest request, String name) {
+	private static String getParameterForRequestBody(HttpServletRequest request, String name) {
 		@SuppressWarnings("unchecked")
 		Map<String, Object> requestBody = (Map<String, Object>) request.getAttribute("requestBody");
 		if (requestBody == null) {
