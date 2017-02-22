@@ -62,7 +62,8 @@ public class UnderlineJson {
 		}
 	}
 
-	private static <E extends Enum<E>> List<E> toEnumList(String json, Class<E> clazz) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static <T> List<T> toEnumList(String json, Class<T> clazz) {
 		// logger.info("toListObject json:" + json);
 
 		JavaType javaType = getObjectMapper().getTypeFactory().constructParametrizedType(ArrayList.class, List.class, Map.class);
@@ -75,21 +76,20 @@ public class UnderlineJson {
 			logger.error("clazz:" + clazz.getName() + " json:" + json);
 			throw new JsonException(e.getMessage(), e);
 		}
-		List<E> list = new ArrayList<E>();
+		List<T> list = new ArrayList<T>();
 		for (Map<String, Object> map : mapList) {
 			Object key = map.get("key");
-			list.add(EnumUtil.toEnum(key, clazz));
+			list.add((T) EnumUtil.toEnum(key, (Class<Enum>) clazz));
 		}
 		return list;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static <T> List<T> toListObject(String json, Class<T> clazz) {
 		if (json == null || json.length() == 0) {
 			return null;
 		}
 		if (clazz.isEnum()) {
-			return toEnumList(json, (Class<Enum>) clazz);
+			return toEnumList(json, clazz);
 		}
 
 		JavaType javaType = getObjectMapper().getTypeFactory().constructParametrizedType(ArrayList.class, List.class, clazz);
