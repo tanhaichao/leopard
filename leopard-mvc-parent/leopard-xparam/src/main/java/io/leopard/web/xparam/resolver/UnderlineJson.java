@@ -64,18 +64,34 @@ public class UnderlineJson {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static <T> List<T> toEnumListByOnlyKey(String json, Class<T> clazz) {
+		JavaType javaType = getObjectMapper().getTypeFactory().constructParametrizedType(ArrayList.class, List.class, Object.class);
+		List<Object> keyList;
+		try {
+			keyList = getObjectMapper().readValue(json, javaType);
+		}
+		catch (Exception e) {
+			logger.error("clazz:" + clazz.getName() + " json:" + json);
+			throw new JsonException(e.getMessage(), e);
+		}
+		List<T> list = new ArrayList<T>();
+		for (Object key : keyList) {
+			list.add((T) EnumUtil.toEnum(key, (Class<Enum>) clazz));
+		}
+		return list;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static <T> List<T> toEnumList(String json, Class<T> clazz) {
-		// logger.info("toListObject json:" + json);
-
 		JavaType javaType = getObjectMapper().getTypeFactory().constructParametrizedType(ArrayList.class, List.class, Map.class);
-
 		List<Map<String, Object>> mapList;
 		try {
 			mapList = getObjectMapper().readValue(json, javaType);
 		}
 		catch (Exception e) {
 			logger.error("clazz:" + clazz.getName() + " json:" + json);
-			throw new JsonException(e.getMessage(), e);
+			// throw new JsonException(e.getMessage(), e);
+			return toEnumListByOnlyKey(json, clazz);
 		}
 		List<T> list = new ArrayList<T>();
 		for (Map<String, Object> map : mapList) {

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -82,10 +83,17 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			return null;
 		}
 		if (values.length == 1) {
-			if (values[0].startsWith("[") && values[0].endsWith("]")) {
+			if (StringUtils.isEmpty(values[0])) {
+				return null;
+			}
+			else if (values[0].startsWith("[") && values[0].endsWith("]")) {
 				Type[] args = ((ParameterizedType) parameter.getGenericParameterType()).getActualTypeArguments();
 				Class<?> clazz = (Class<?>) args[0];
 				return UnderlineJson.toListObject(values[0], clazz);
+			}
+			else {
+				logger.info("values[0]:" + values[0]);
+				return values[0].split(",");
 			}
 		}
 		return values;
