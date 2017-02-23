@@ -215,10 +215,24 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		if (value.startsWith("{")) {// json
 			Map<String, Object> map = Json.toMap(value);
 			Object key = map.get("key");
-			return EnumUtil.toEnum(key, (Class<Enum>) type);
+			if (key == null) {
+				return null;
+			}
+			value = key.toString();
 		}
+
 		if (Snum.class.isAssignableFrom(type)) {
-			return EnumUtil.toEnum(value, (Class<Enum>) type);
+			try {
+				return EnumUtil.toEnum(value, (Class<Enum>) type);
+			}
+			catch (IllegalArgumentException e) {
+				if ("".equals(value)) {
+					return null;
+				}
+				else {
+					throw e;
+				}
+			}
 		}
 		else if (Inum.class.isAssignableFrom(type)) {
 			int key = Integer.parseInt(value);
