@@ -5,6 +5,7 @@ import java.lang.reflect.ParameterizedType;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -152,15 +153,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 					throw new RuntimeException(e.getMessage(), e);
 				}
 				if (elementType.isEnum()) {
-					if (Snum.class.isAssignableFrom(elementType)) {
-						return Json.toListObject(json, elementType);
-					}
-					else if (Inum.class.isAssignableFrom(elementType)) {
-						return Json.toListObject(json, elementType);
-					}
-					else {
-						throw new RuntimeException("未知枚举类型[" + requiredType.getName() + "].");
-					}
+					return toEnumList(json, requiredType, elementType);
 				}
 				else {
 					Class<?> clazz = (Class<?>) type.getActualTypeArguments()[0];
@@ -198,6 +191,33 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 			// throw new SQLException("未知数据类型[" + requiredType.getName() + "].");
 		}
 		return value;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected static <T> List<T> toEnumList(String json, Class<?> requiredType, Class<T> elementType) {
+		if (Snum.class.isAssignableFrom(elementType)) {
+			List<String> keyList = Json.toListObject(json, String.class);
+			List<T> list = new ArrayList<T>();
+			for (String key : keyList) {
+				T onum = (T) EnumUtil.toEnum(key, (Class<Enum>) elementType);
+				list.add(onum);
+			}
+			return list;
+		}
+		else if (Inum.class.isAssignableFrom(elementType)) {
+			List<Integer> keyList = Json.toListObject(json, Integer.class);
+			// return Json.toListObject(json, elementType);
+			List<T> list = new ArrayList<T>();
+			for (Integer key : keyList) {
+				T onum = (T) EnumUtil.toEnum(key, (Class<Enum>) elementType);
+				list.add(onum);
+			}
+			return list;
+		}
+		else {
+			throw new RuntimeException("未知枚举类型[" + requiredType.getName() + "].");
+		}
+
 	}
 
 }
