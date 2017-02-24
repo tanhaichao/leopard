@@ -21,6 +21,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import io.leopard.burrow.lang.inum.EnumUtil;
 import io.leopard.burrow.lang.inum.Inum;
 import io.leopard.burrow.lang.inum.Snum;
+import io.leopard.core.exception.invalid.EnumConstantInvalidException;
 import io.leopard.json.Json;
 import io.leopard.lang.util.FieldUtil;
 
@@ -225,7 +226,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			try {
 				return EnumUtil.toEnum(value, (Class<Enum>) type);
 			}
-			catch (IllegalArgumentException e) {
+			catch (EnumConstantInvalidException e) {
 				if ("".equals(value)) {
 					return null;
 				}
@@ -239,7 +240,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			return EnumUtil.toEnum(key, (Class<Enum>) type);
 		}
 		else {
-			throw new RuntimeException("未知枚举类型[" + type.getName() + "].");
+			throw new EnumConstantInvalidException("未知枚举类型[" + type.getName() + "].");
 		}
 	}
 

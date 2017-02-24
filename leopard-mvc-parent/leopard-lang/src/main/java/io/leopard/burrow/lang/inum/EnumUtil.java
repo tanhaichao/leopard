@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import io.leopard.core.exception.invalid.EnumConstantInvalidException;
+
 /**
  * 枚举工具类
  * 
@@ -39,8 +41,8 @@ public class EnumUtil {
 	public static <E extends Enum<E>> E toEnum(Object key, Class<E> clazz) {
 		E inum = get(key, clazz);
 		if (inum == null) {
-			System.err.println("key:" + key.getClass().getName());
-			throw new IllegalArgumentException("枚举元素[" + key + "]不存在[" + clazz.getName() + "].");
+			// System.err.println("key:" + key.getClass().getName());
+			throw new EnumConstantInvalidException("枚举元素[" + key + "]不存在[" + clazz.getName() + "].");
 		}
 		return inum;
 	}

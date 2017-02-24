@@ -15,8 +15,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-
 /**
  * List<?>参数解析.
  * 

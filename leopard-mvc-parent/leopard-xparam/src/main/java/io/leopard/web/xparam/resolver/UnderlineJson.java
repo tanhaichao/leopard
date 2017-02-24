@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import io.leopard.burrow.lang.inum.EnumUtil;
+import io.leopard.core.exception.invalid.EnumConstantInvalidException;
 import io.leopard.json.DisablingJsonSerializerIntrospector;
 import io.leopard.json.JsonException;
 import io.leopard.json.JsonJacksonImpl.OnumJsonSerializer;
@@ -102,7 +103,7 @@ public class UnderlineJson {
 		for (Map<String, Object> map : mapList) {
 			Object key = map.get("key");
 			if (key == null) {
-				throw new NullPointerException("枚举的key不允许为null.");
+				throw new EnumConstantInvalidException("枚举的key不允许为null.");
 			}
 			list.add((T) EnumUtil.toEnum(key, (Class<Enum>) clazz));
 		}
