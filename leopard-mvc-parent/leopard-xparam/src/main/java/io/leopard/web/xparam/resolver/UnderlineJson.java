@@ -101,6 +101,9 @@ public class UnderlineJson {
 		List<T> list = new ArrayList<T>();
 		for (Map<String, Object> map : mapList) {
 			Object key = map.get("key");
+			if (key == null) {
+				throw new NullPointerException("枚举的key不允许为null.");
+			}
 			list.add((T) EnumUtil.toEnum(key, (Class<Enum>) clazz));
 		}
 		return list;

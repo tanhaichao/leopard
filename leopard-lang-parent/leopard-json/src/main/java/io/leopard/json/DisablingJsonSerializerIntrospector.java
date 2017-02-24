@@ -60,7 +60,6 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 			JsonToken currentToken = jp.getCurrentToken();
 
 			{
-				Object key;
 				// JsonNode node = jp.getCodec().readTree(jp);
 				if (currentToken.equals(JsonToken.START_OBJECT)) {
 					currentToken = jp.nextToken();
@@ -69,8 +68,23 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 						// throw new RuntimeException("枚举的key字段必须要放在最前面.");
 					}
 					jp.nextValue();
-					key = jp.getText();
+					String keyText = jp.getText();
 
+					if (keyText == null) {
+						return null;
+					}
+
+					Object key;
+					if (Inum.class.isAssignableFrom(clazz)) {
+						key = Integer.parseInt(keyText);
+					}
+					else if (Snum.class.isAssignableFrom(clazz)) {
+						key = keyText;
+
+					}
+					else {
+						throw ctxt.mappingException("未知枚举类型[" + clazz.getName() + "].");
+					}
 					// System.err.println("key:" + key + " name:" + jp.getCurrentName() + " value:" + jp.getCurrentValue() + " text:" + jp.getText());
 					this.nextToClose(jp, ctxt);
 					return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
@@ -88,7 +102,7 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 				String key = jp.getText();
 				return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
 			}
-			throw ctxt.mappingException("未知枚举类型["+clazz.getName()+"].");
+			throw ctxt.mappingException("未知枚举类型[" + clazz.getName() + "].");
 
 			// node.getNodeType().
 			// if (currentToken == JsonToken.VALUE_STRING) {
