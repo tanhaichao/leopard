@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.BindException;
 
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
+import org.eclipse.jetty.proxy.ProxyServlet;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerCollection;
+import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.FragmentConfiguration;
 import org.eclipse.jetty.webapp.MetaInfConfiguration;
@@ -34,6 +36,14 @@ public class WebServerJettyImpl extends AbstractWebServer {
 
 		Server server = new Server(port);
 		WebAppContext webContext = new WebAppContext(webApp, contextPath);
+
+		{
+			ServletHolder holder = new ServletHolder(new ProxyServlet.Transparent());
+			holder.setInitParameter("proxyTo", "http://localhost:3000/");
+			holder.setInitParameter("prefix", "/app2/");
+			webContext.addServlet(holder, "/app2/");
+		}
+
 		// webContext.setDefaultsDescriptor("leopard-jetty/webdefault.xml");
 
 		// 问题点：http://stackoverflow.com/questions/13222071/spring-3-1-webapplicationinitializer-embedded-jetty-8-annotationconfiguration

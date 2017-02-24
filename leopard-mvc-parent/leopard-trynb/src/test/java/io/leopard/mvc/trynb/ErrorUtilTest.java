@@ -70,4 +70,10 @@ public class ErrorUtilTest {
 		Assert.assertEquals("abc", ErrorUtil.fillterDebugInfo("a[a[b]][a]bc"));
 
 	}
+
+	@Test
+	public void parseDataIntegrityViolationException() {
+		String message = ErrorUtil.parseDataIntegrityViolationException(null);
+		System.out.println("message:" + message);
+	}
 }

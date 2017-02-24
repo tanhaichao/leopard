@@ -72,6 +72,24 @@ public class QueryBuilder {
 		return this;
 	}
 
+	public QueryBuilder addSnumList(String fieldName, List<?> snumList) {
+		if (snumList != null && !snumList.isEmpty()) {
+			List<String> keyList = new ArrayList<String>();
+			for (Object snum : snumList) {
+				keyList.add(((Snum) snum).getKey());
+			}
+			return this.addStringList(fieldName, keyList);
+		}
+		return this;
+	}
+
+	public QueryBuilder addStringList(String fieldName, List<String> valueList) {
+		if (valueList != null && !valueList.isEmpty()) {
+			return this.addWhere(fieldName, valueList);
+		}
+		return this;
+	}
+
 	public QueryBuilder addString(String fieldName, String value) {
 		return this.addString(fieldName, value, false);
 	}
