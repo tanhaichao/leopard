@@ -384,7 +384,7 @@ public class QueryBuilder {
 
 	public <T> Paging<T> queryForPaging(Jdbc jdbc, Class<T> elementType) {
 		SQLInfo sqlInfo = this.toSqlInfo();
-		// System.err.println("sql:" + sql);
+		// System.err.println("sql:" + sqlInfo.getSql());
 		return jdbc.queryForPaging(sqlInfo.getSql(), elementType, sqlInfo.getParam());
 	}
 
