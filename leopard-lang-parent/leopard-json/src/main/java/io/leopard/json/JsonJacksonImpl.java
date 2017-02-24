@@ -247,6 +247,9 @@ public class JsonJacksonImpl implements IJson {
 	}
 
 	public static Object toList(String json, TypeReference<?> valueTypeRef) {
+		if (json == null || json.length() == 0) {
+			return null;
+		}
 		try {
 			return mapper.readValue(json, valueTypeRef);
 		}
