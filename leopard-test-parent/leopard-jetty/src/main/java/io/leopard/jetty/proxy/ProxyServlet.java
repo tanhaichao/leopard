@@ -12,6 +12,8 @@ import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.client.api.Response;
 import org.eclipse.jetty.http.HttpStatus;
 import org.eclipse.jetty.http.HttpVersion;
+import org.eclipse.jetty.server.HttpConnection;
+import org.eclipse.jetty.server.HttpOutput;
 import org.eclipse.jetty.util.Callback;
 
 public class ProxyServlet extends org.eclipse.jetty.proxy.ProxyServlet.Transparent {
@@ -59,6 +61,18 @@ public class ProxyServlet extends org.eclipse.jetty.proxy.ProxyServlet.Transpare
 			// if (_log.isDebugEnabled())
 			_log.info("{} proxying content to downstream: {} bytes", getRequestId(request), length);
 			System.err.println("buffer:" + new String(buffer));
+			// response.setHeader("version", "1.1");
+			// org.eclipse.jetty.server.Request req = (org.eclipse.jetty.server.Request) request;
+			// req.getHttpVersion().
+
+			// org.eclipse.jetty.server.Response res = (org.eclipse.jetty.server.Response) response;
+			// // res.
+			// org.eclipse.jetty.server.HttpOutput output = (HttpOutput) response.getOutputStream();
+			//
+			// HttpConnection conn = (HttpConnection) output.getInterceptor();
+			// System.out.println("response.getOutputStream():" + response.getOutputStream().getClass().getName());
+			// // System.err.println("request:" + req.getHttpVersion());
+
 			response.getOutputStream().write(buffer, offset, length);
 			callback.succeeded();
 		}
