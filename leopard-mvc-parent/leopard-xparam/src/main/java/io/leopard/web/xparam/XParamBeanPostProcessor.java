@@ -8,39 +8,15 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.method.annotation.ErrorsMethodArgumentResolver;
-import org.springframework.web.method.annotation.ExpressionValueMethodArgumentResolver;
-import org.springframework.web.method.annotation.MapMethodProcessor;
-import org.springframework.web.method.annotation.ModelMethodProcessor;
-import org.springframework.web.method.annotation.RequestHeaderMapMethodArgumentResolver;
-import org.springframework.web.method.annotation.RequestHeaderMethodArgumentResolver;
-import org.springframework.web.method.annotation.RequestParamMapMethodArgumentResolver;
-import org.springframework.web.method.annotation.RequestParamMethodArgumentResolver;
-import org.springframework.web.method.annotation.SessionStatusMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor;
-import org.springframework.web.servlet.mvc.method.annotation.MatrixVariableMapMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.MatrixVariableMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.PathVariableMapMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.PathVariableMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.RedirectAttributesMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.RequestAttributeMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
-import org.springframework.web.servlet.mvc.method.annotation.RequestPartMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
-import org.springframework.web.servlet.mvc.method.annotation.ServletCookieValueMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.ServletModelAttributeMethodProcessor;
-import org.springframework.web.servlet.mvc.method.annotation.ServletRequestMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.ServletResponseMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.SessionAttributeMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.UriComponentsBuilderMethodArgumentResolver;
 
 import io.leopard.web.xparam.resolver.ModelHandlerMethodArgumentResolver;
+import io.leopard.web.xparam.resolver.OnumMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.ParamListHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.PathRegexHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.PrimitiveMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.TimeRangeHandlerMethodArgumentResolver;
-import io.leopard.web.xparam.resolver.UnderlineHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.XParamHandlerMethodArgumentResolver;
 
 /**
@@ -122,11 +98,14 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 		}
 
 		{
+			OnumMethodArgumentResolver argumentResolver = beanFactory.getBean(OnumMethodArgumentResolver.class);
+			customArgumentResolvers.add(argumentResolver);
+		}
+		{
 			// 要比UnderlineHandlerMethodArgumentResolver先添加到list
 			ParamListHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(ParamListHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);
 		}
-
 		{
 			TimeRangeHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(TimeRangeHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);

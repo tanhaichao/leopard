@@ -15,6 +15,8 @@ import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
 /**
  * List<?>参数解析.
  * 
@@ -87,9 +89,29 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 				return null;
 			}
 			else if (values[0].startsWith("[") && values[0].endsWith("]")) {
-				Type[] args = ((ParameterizedType) parameter.getGenericParameterType()).getActualTypeArguments();
-				Class<?> clazz = (Class<?>) args[0];
-				return UnderlineJson.toListObject(values[0], clazz);
+				Type arg = ((ParameterizedType) parameter.getGenericParameterType()).getActualTypeArguments()[0];
+				System.out.println("arg:" + arg.getClass().getName());
+
+				if (arg instanceof ParameterizedType) {
+					// ParameterizedType subType = (ParameterizedType) arg;
+					// Class<?> clazz = (Class<?>) subType.getRawType();
+					// Class<?> subClazz = (Class<?>) subType.getActualTypeArguments()[0];
+					// logger.info("clazz:" + clazz.getName() + " subClazz:" + subClazz.getName());
+					// TypeReference<?> typeReference = new TypeReference<?>() {
+					//
+					// };
+					return UnderlineJson.toListObject(values[0], parameter.getGenericParameterType());
+				}
+				else {
+					Class<?> clazz = (Class<?>) arg;
+					return UnderlineJson.toListObject(values[0], clazz);
+				}
+				// }
+				// else {
+				// Class<?> clazz = (Class<?>) args[0];
+				// Class<?> subClazz = (Class<?>) args[1];
+				// return UnderlineJson.toListSubParametrizedType(values[0], clazz, subClazz);
+				// }
 			}
 			else {
 				logger.info("values[0]:" + values[0]);

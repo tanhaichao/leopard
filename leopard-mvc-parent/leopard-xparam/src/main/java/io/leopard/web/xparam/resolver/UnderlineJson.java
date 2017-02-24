@@ -1,5 +1,6 @@
 package io.leopard.web.xparam.resolver;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,8 +43,6 @@ public class UnderlineJson {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		underlineMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		
-		
 		underlineMapper = underlineMapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 	}
 
@@ -105,6 +104,32 @@ public class UnderlineJson {
 			list.add((T) EnumUtil.toEnum(key, (Class<Enum>) clazz));
 		}
 		return list;
+	}
+
+	public static <T> List<T> toListObject(String json, Type type) {
+		if (json == null || json.length() == 0) {
+			return null;
+		}
+		// if (clazz.isEnum()) {
+		// return toEnumList(json, clazz);
+		// }
+
+		JavaType javaType;
+		try {
+			javaType = getObjectMapper().getTypeFactory().constructType(type);
+		}
+		catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		try {
+			return getObjectMapper().readValue(json, javaType);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			// logger.error("clazz:" + clazz.getName() + " json:" + json);
+			throw new JsonException(e.getMessage(), e);
+		}
 	}
 
 	public static <T> List<T> toListObject(String json, Class<T> clazz) {

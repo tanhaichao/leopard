@@ -7,14 +7,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.introspect.Annotated;
 import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 
 import io.leopard.burrow.lang.inum.EnumUtil;
-import io.leopard.burrow.lang.inum.Inum;
 import io.leopard.burrow.lang.inum.Onum;
-import io.leopard.burrow.lang.inum.Snum;
 
 /**
  * 禁用@JsonSerializer
@@ -57,24 +56,34 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 		@Override
 		public Onum<?, ?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			JsonToken currentToken = jp.getCurrentToken();
+
+			Object key;
 			// JsonNode node = jp.getCodec().readTree(jp);
 			if (currentToken.equals(JsonToken.START_OBJECT)) {
 				currentToken = jp.nextToken();
-				if ("key".equals(jp.getCurrentName())) {
-					throw new RuntimeException("枚举的key必须要放在最前面.");
+				if (!"key".equals(jp.getCurrentName())) {
+					throw ctxt.mappingException("枚举的key字段必须要放在最前面.");
+					// throw new RuntimeException("枚举的key字段必须要放在最前面.");
 				}
 				jp.nextValue();
-				System.err.println("currentToken name:" + jp.getCurrentName() + " token:" + currentToken.name());
+				key = jp.getText();
+
+//				System.err.println("key:" + key + " name:" + jp.getCurrentName() + " value:" + jp.getCurrentValue() + " text:" + jp.getText());
+				this.nextToClose(jp, ctxt);
+				// System.err.println("currentToken name:" + jp.getCurrentName() + " token:" + currentToken.name());
+			}
+			else {
+				key = jp.getCurrentValue();
 			}
 
-			if (Inum.class.isAssignableFrom(clazz)) {
-				int key = jp.getIntValue();
-				return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
-			}
-			else if (Snum.class.isAssignableFrom(clazz)) {
-				String key = jp.getText();
-				return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
-			}
+			// if (Inum.class.isAssignableFrom(clazz)) {
+			// int key = jp.getIntValue();
+			return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
+			// }
+			// else if (Snum.class.isAssignableFrom(clazz)) {
+			// String key = jp.getText();
+			// return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
+			// }
 
 			// node.getNodeType().
 			// if (currentToken == JsonToken.VALUE_STRING) {
@@ -90,7 +99,16 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 			// return new TextContainer(text, operation);
 			// }
 			// }
-			throw ctxt.mappingException(Onum.class, currentToken);
+
+		}
+
+		protected void nextToClose(JsonParser jp, DeserializationContext ctxt) throws JsonMappingException, IOException {
+			while (true) {
+				JsonToken token = jp.nextToken();// }
+				if (token == JsonToken.END_OBJECT) {
+					return;
+				}
+			}
 		}
 	}
 
