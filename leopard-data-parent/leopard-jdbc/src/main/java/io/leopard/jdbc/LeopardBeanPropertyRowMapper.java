@@ -189,7 +189,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 		else {
 			String json = rs.getString(index);
 			try {
-				value = Json.toObject(json, requiredType);
+				value = Json.toObject(json, requiredType, true);
 			}
 			catch (JsonException e) {
 				System.err.println("JsonException fieldName:" + field.getName() + " " + requiredType.getName() + " json:" + json);
