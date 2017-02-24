@@ -14,6 +14,9 @@ public class IndexServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("request:" + request.getClass().getName());
+		System.out.println("response:" + response.getClass().getName());
+
 		output(response, "Hello Leopard Proxy");
 	}
 
@@ -21,6 +24,8 @@ public class IndexServlet extends HttpServlet {
 		byte[] bytes = str.getBytes();
 		response.setContentType("text/html; charset=UTF-8");
 		response.setContentLength(bytes.length);
+
+		System.out.println("response:" + response.getClass().getName());
 
 		OutputStream out = response.getOutputStream();
 		out.write(bytes);
