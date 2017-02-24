@@ -58,7 +58,14 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 		public Onum<?, ?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			JsonToken currentToken = jp.getCurrentToken();
 			// JsonNode node = jp.getCodec().readTree(jp);
-			// System.err.println("jp.getText():" + jp.getText());
+			if (currentToken.equals(JsonToken.START_OBJECT)) {
+				currentToken = jp.nextToken();
+				if ("key".equals(jp.getCurrentName())) {
+					throw new RuntimeException("枚举的key必须要放在最前面.");
+				}
+				jp.nextValue();
+				System.err.println("currentToken name:" + jp.getCurrentName() + " token:" + currentToken.name());
+			}
 
 			if (Inum.class.isAssignableFrom(clazz)) {
 				int key = jp.getIntValue();
