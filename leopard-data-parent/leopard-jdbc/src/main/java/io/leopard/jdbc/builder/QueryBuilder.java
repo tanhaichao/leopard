@@ -19,7 +19,9 @@ public class QueryBuilder {
 
 	private String tableName;
 
-	private String rangeFieldName;
+	private String rangeStartFieldName;
+
+	private String rangeEndFieldName;
 
 	private TimeRange range;
 
@@ -45,10 +47,15 @@ public class QueryBuilder {
 	}
 
 	public QueryBuilder range(String fieldName, TimeRange range) {
+		return this.range(fieldName, fieldName, range);
+	}
+
+	public QueryBuilder range(String startFieldName, String endFieldName, TimeRange range) {
 		if (range == null) {
 			return this;
 		}
-		this.rangeFieldName = fieldName;
+		this.rangeStartFieldName = startFieldName;
+		this.rangeEndFieldName = endFieldName;
 		this.range = range;
 		return this;
 	}
@@ -168,7 +175,7 @@ public class QueryBuilder {
 		StringBuilder rangeSQL = new StringBuilder();
 		if (this.range != null) {
 			if (range.getStartTime() != null) {
-				rangeSQL.append(this.rangeFieldName + ">=?");
+				rangeSQL.append(this.rangeStartFieldName + ">=?");
 				param.setDate(range.getStartTime());
 			}
 
@@ -176,7 +183,7 @@ public class QueryBuilder {
 				if (rangeSQL.length() > 0) {
 					rangeSQL.append(" and ");
 				}
-				rangeSQL.append(this.rangeFieldName + "<=?");
+				rangeSQL.append(this.rangeEndFieldName + "<=?");
 				param.setDate(range.getEndTime());
 			}
 		}
