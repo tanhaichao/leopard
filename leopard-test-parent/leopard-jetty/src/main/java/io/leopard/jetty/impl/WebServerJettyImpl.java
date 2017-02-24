@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.BindException;
 
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
-import org.eclipse.jetty.proxy.ProxyServlet;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerCollection;
@@ -20,6 +19,8 @@ import io.leopard.jetty.LeopardClassLoader;
 import io.leopard.jetty.ResourcesManager;
 import io.leopard.jetty.ServerInitializer;
 import io.leopard.jetty.configuration.EmbedWebInfConfiguration;
+import io.leopard.jetty.proxy.IndexServlet;
+import io.leopard.jetty.proxy.ProxyServlet;
 
 public class WebServerJettyImpl extends AbstractWebServer {
 
@@ -37,11 +38,13 @@ public class WebServerJettyImpl extends AbstractWebServer {
 		Server server = new Server(port);
 		WebAppContext webContext = new WebAppContext(webApp, contextPath);
 
-		{
-			ServletHolder holder = new ServletHolder(new ProxyServlet.Transparent());
+		if (false) {
+			ServletHolder holder = new ServletHolder(new ProxyServlet());
 			holder.setInitParameter("proxyTo", "http://localhost:3000/");
-			holder.setInitParameter("prefix", "/app2/");
+			holder.setInitParameter("prefix", "/");
+
 			webContext.addServlet(holder, "/app2/");
+			webContext.addServlet(new ServletHolder(new IndexServlet()), "/proxy/");
 		}
 
 		// webContext.setDefaultsDescriptor("leopard-jetty/webdefault.xml");
