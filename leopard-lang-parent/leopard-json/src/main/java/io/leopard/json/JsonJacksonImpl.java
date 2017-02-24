@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -239,6 +240,15 @@ public class JsonJacksonImpl implements IJson {
 			else {
 				return mapper.readValue(json, clazz);
 			}
+		}
+		catch (Exception e) {
+			throw new JsonException(e.getMessage(), e);
+		}
+	}
+
+	public static Object toList(String json, TypeReference<?> valueTypeRef) {
+		try {
+			return mapper.readValue(json, valueTypeRef);
 		}
 		catch (Exception e) {
 			throw new JsonException(e.getMessage(), e);
