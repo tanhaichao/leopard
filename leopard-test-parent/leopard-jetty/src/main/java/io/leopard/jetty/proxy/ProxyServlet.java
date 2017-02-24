@@ -2,14 +2,17 @@ package io.leopard.jetty.proxy;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
-import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.client.api.Request;
+import org.eclipse.jetty.client.api.Response;
+import org.eclipse.jetty.http.HttpStatus;
 import org.eclipse.jetty.http.HttpVersion;
+import org.eclipse.jetty.util.Callback;
 
 public class ProxyServlet extends org.eclipse.jetty.proxy.ProxyServlet.Transparent {
 
@@ -51,4 +54,39 @@ public class ProxyServlet extends org.eclipse.jetty.proxy.ProxyServlet.Transpare
 		sendProxyRequest(request, response, proxyRequest);
 	}
 
+	protected void onResponseContent(HttpServletRequest request, HttpServletResponse response, Response proxyResponse, byte[] buffer, int offset, int length, Callback callback) {
+		try {
+			// if (_log.isDebugEnabled())
+			_log.info("{} proxying content to downstream: {} bytes", getRequestId(request), length);
+			System.err.println("buffer:" + new String(buffer));
+			response.getOutputStream().write(buffer, offset, length);
+			callback.succeeded();
+		}
+		catch (Throwable x) {
+			callback.failed(x);
+		}
+	}
+
+	protected void onProxyResponseFailure(HttpServletRequest clientRequest, HttpServletResponse proxyResponse, Response serverResponse, Throwable failure) {
+		// if (_log.isDebugEnabled())
+		_log.info(getRequestId(clientRequest) + " proxying failed", failure);
+
+		if (proxyResponse.isCommitted()) {
+			try {
+				// Use Jetty specific behavior to close connection.
+				proxyResponse.sendError(-1);
+				// AsyncContext asyncContext = clientRequest.getAsyncContext();
+				// asyncContext.complete();
+			}
+			catch (IOException x) {
+				if (_log.isDebugEnabled())
+					_log.debug(getRequestId(clientRequest) + " could not close the connection", failure);
+			}
+		}
+		else {
+			proxyResponse.resetBuffer();
+			int status = failure instanceof TimeoutException ? HttpStatus.GATEWAY_TIMEOUT_504 : HttpStatus.BAD_GATEWAY_502;
+			sendProxyResponseError(clientRequest, proxyResponse, status);
+		}
+	}
 }

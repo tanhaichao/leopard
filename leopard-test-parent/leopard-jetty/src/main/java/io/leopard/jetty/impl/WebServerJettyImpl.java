@@ -38,12 +38,12 @@ public class WebServerJettyImpl extends AbstractWebServer {
 		Server server = new Server(port);
 		WebAppContext webContext = new WebAppContext(webApp, contextPath);
 
-		if (false) {
+		if (true) {
 			ServletHolder holder = new ServletHolder(new ProxyServlet());
 			holder.setInitParameter("proxyTo", "http://localhost:3000/");
 			holder.setInitParameter("prefix", "/");
 
-			webContext.addServlet(holder, "/app2/");
+			webContext.addServlet(holder, "/app/");
 			webContext.addServlet(new ServletHolder(new IndexServlet()), "/proxy/");
 		}
 
