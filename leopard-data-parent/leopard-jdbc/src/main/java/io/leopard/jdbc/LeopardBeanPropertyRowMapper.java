@@ -195,6 +195,9 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected static <T> List<T> toEnumList(String json, Class<?> requiredType, Class<T> elementType) {
+		if (json == null) {
+			return null;
+		}
 		if (Snum.class.isAssignableFrom(elementType)) {
 			List<String> keyList = Json.toListObject(json, String.class);
 			List<T> list = new ArrayList<T>();
