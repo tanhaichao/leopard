@@ -68,19 +68,16 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 						// throw new RuntimeException("枚举的key字段必须要放在最前面.");
 					}
 					jp.nextValue();
-					String keyText = jp.getText();
-
-					if (keyText == null) {
-						return null;
-					}
 
 					Object key;
 					if (Inum.class.isAssignableFrom(clazz)) {
-						key = Integer.parseInt(keyText);
+						key = jp.getIntValue();
 					}
 					else if (Snum.class.isAssignableFrom(clazz)) {
-						key = keyText;
-
+						key = jp.getValueAsString();
+						if (key == null) {
+							return null;
+						}
 					}
 					else {
 						throw ctxt.mappingException("未知枚举类型[" + clazz.getName() + "].");
