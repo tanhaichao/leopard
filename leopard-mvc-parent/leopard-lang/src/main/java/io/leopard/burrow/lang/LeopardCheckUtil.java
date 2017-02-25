@@ -85,7 +85,18 @@ public class LeopardCheckUtil {
 	}
 
 	/**
-	 * 是否合法的YYUID..
+	 * 是否合法的UID.
+	 * 
+	 * @param username
+	 */
+	public static void isUid(long uid) {
+		if (!LeopardValidUtil.isValidUid(uid)) {
+			throw new UidInvalidException(uid);
+		}
+	}
+
+	/**
+	 * 是否合法的UID.
 	 * 
 	 * @param username
 	 */
