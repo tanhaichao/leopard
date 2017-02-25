@@ -120,8 +120,10 @@ public class QueryBuilder {
 		return this;
 	}
 
-	public QueryBuilder addBool(String fieldName, boolean value) {
-		this.addWhere(fieldName, value);
+	public QueryBuilder addBool(String fieldName, Boolean value) {
+		if (value != null) {
+			this.addWhere(fieldName, value);
+		}
 		return this;
 	}
 
