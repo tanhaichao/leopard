@@ -22,6 +22,7 @@ public class TrynbServiceImpl implements TrynbService {
 	private TrynbApi trynbApi = new TrynbApiImpl();
 
 	private final TrynbDao trynbDao = new TrynbDaoImpl();
+
 	private final TrynbLogger trynbLogger = new TrynbLoggerImpl();
 
 	private static Translater translater = TranslaterImpl.getInstance();
@@ -106,6 +107,7 @@ public class TrynbServiceImpl implements TrynbService {
 	}
 
 	protected String parseStatusCode(ExceptionConfig exceptionConfig, HttpServletRequest request, String uri, Exception exception) {
+		// System.err.println("exceptionConfig:" + exceptionConfig);
 		if (exceptionConfig == null) {
 			// logger.error("匹配[" + uri + "." + exception.getClass().getName() +
 			// "]不到exception配置");
@@ -114,6 +116,7 @@ public class TrynbServiceImpl implements TrynbService {
 			return exception.getClass().getSimpleName();
 		}
 		String logType = ExceptionConfig.getType(exceptionConfig.getLog());
+		// System.err.println("logType:" + logType);
 		if ("error".equals(logType)) {
 			// this.error(request, uri, exception);
 			trynbLogger.error(request, uri, exception);
@@ -130,6 +133,10 @@ public class TrynbServiceImpl implements TrynbService {
 			// logger.debug("uri:" + uri + " message:" + exception.getMessage());
 			trynbLogger.debug(request, uri, exception);
 		}
+		else {
+			throw new RuntimeException("未知日志类型[" + logType + "].");
+		}
+
 		if (StringUtils.isEmpty(exceptionConfig.getStatusCode())) {
 			return exception.getClass().getSimpleName();
 		}
