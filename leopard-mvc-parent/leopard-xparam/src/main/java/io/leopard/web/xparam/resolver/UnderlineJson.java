@@ -147,7 +147,7 @@ public class UnderlineJson {
 		if (clazz.isEnum()) {
 			return toEnumList(json, clazz);
 		}
-		System.err.println("clazz:" + clazz.getName() + " json:" + json);
+		// System.err.println("clazz:" + clazz.getName() + " json:" + json);
 		JavaType javaType = getObjectMapper().getTypeFactory().constructParametrizedType(ArrayList.class, List.class, clazz);
 		try {
 			return getObjectMapper().readValue(json, javaType);
