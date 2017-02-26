@@ -29,8 +29,12 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 
 	@Override
 	public Object findDeserializer(Annotated a) {
+		// System.err.println("Annotated:" + a.getClass().getName() + " " + a);
+
 		if (a instanceof AnnotatedClass) {
 			Class<?> clazz = ((AnnotatedClass) a).getAnnotated();
+			// System.err.println("clazz:" + clazz.getName() + " " + a.getName());
+
 			if (clazz.isEnum()) {
 				if (Onum.class.isAssignableFrom(clazz)) {
 					// System.err.println("OnumJsonSerializerIntrospector findDeserializer:" + clazz.getName() + " a:" + a);
@@ -38,7 +42,9 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 				}
 			}
 		}
-		return super.findDeserializer(a);
+
+		Object deserializer = super.findDeserializer(a);
+		return deserializer;
 	}
 
 	/**
@@ -58,8 +64,6 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 		@Override
 		public Onum<?, ?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			JsonToken currentToken = jp.getCurrentToken();
-
-			// System.err.println("currentToken:" + currentToken.name());
 			{
 				// JsonNode node = jp.getCodec().readTree(jp);
 				if (currentToken.equals(JsonToken.START_OBJECT)) {
@@ -76,17 +80,16 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 					}
 					else if (Snum.class.isAssignableFrom(clazz)) {
 						key = jp.getValueAsString();
-						if (key == null) {
-							return null;
-						}
 					}
 					else {
 						throw ctxt.mappingException("未知枚举类型[" + clazz.getName() + "].");
 					}
-					System.err.println("key:" + key + " name:" + jp.getCurrentName() + " value:" + jp.getCurrentValue() + " text:" + jp.getText());
+					// System.err.println("key:" + key + " name:" + jp.getCurrentName() + " value:" + jp.getCurrentValue() + " text:" + jp.getText());
 					this.nextToClose(jp, ctxt);
+					if (key == null) {
+						return null;
+					}
 					return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
-
 					// System.err.println("currentToken name:" + jp.getCurrentName() + " token:" + currentToken.name());
 				}
 			}
