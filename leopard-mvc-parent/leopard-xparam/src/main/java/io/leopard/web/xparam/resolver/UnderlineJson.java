@@ -80,9 +80,13 @@ public class UnderlineJson {
 			logger.error("clazz:" + clazz.getName() + " json:" + json);
 			throw new JsonException(e.getMessage(), e);
 		}
+
+		// System.err.println("keyList:" + keyList);
 		List<T> list = new ArrayList<T>();
 		for (Object key : keyList) {
-			list.add((T) EnumUtil.toEnum(key, (Class<Enum>) clazz));
+			T onum = (T) EnumUtil.toEnum(key, (Class<Enum>) clazz);
+			// System.err.println("key:" + key + " onum:" + onum);
+			list.add(onum);
 		}
 		return list;
 	}
@@ -95,7 +99,7 @@ public class UnderlineJson {
 			mapList = getObjectMapper().readValue(json, javaType);
 		}
 		catch (Exception e) {
-			logger.error("clazz:" + clazz.getName() + " json:" + json);
+			logger.warn("clazz:" + clazz.getName() + " json2:" + json);
 			// throw new JsonException(e.getMessage(), e);
 			return toEnumListByOnlyKey(json, clazz);
 		}
@@ -143,12 +147,13 @@ public class UnderlineJson {
 		if (clazz.isEnum()) {
 			return toEnumList(json, clazz);
 		}
-
+		System.err.println("clazz:" + clazz.getName() + " json:" + json);
 		JavaType javaType = getObjectMapper().getTypeFactory().constructParametrizedType(ArrayList.class, List.class, clazz);
 		try {
 			return getObjectMapper().readValue(json, javaType);
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			logger.error("clazz:" + clazz.getName() + " json:" + json);
 			throw new JsonException(e.getMessage(), e);
 		}

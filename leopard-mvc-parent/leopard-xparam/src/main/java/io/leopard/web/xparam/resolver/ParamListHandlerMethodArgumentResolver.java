@@ -88,20 +88,14 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			}
 			else if (values[0].startsWith("[") && values[0].endsWith("]")) {
 				Type arg = ((ParameterizedType) parameter.getGenericParameterType()).getActualTypeArguments()[0];
-				System.out.println("arg:" + arg.getClass().getName());
 
 				if (arg instanceof ParameterizedType) {
-					// ParameterizedType subType = (ParameterizedType) arg;
-					// Class<?> clazz = (Class<?>) subType.getRawType();
-					// Class<?> subClazz = (Class<?>) subType.getActualTypeArguments()[0];
-					// logger.info("clazz:" + clazz.getName() + " subClazz:" + subClazz.getName());
-					// TypeReference<?> typeReference = new TypeReference<?>() {
-					//
-					// };
+					// System.out.println("ParameterizedType:" + parameter.getGenericParameterType());
 					return UnderlineJson.toListObject(values[0], parameter.getGenericParameterType());
 				}
 				else {
 					Class<?> clazz = (Class<?>) arg;
+					// System.out.println("arg:" + arg.getClass().getName() + " clazz:" + clazz.getName());
 					return UnderlineJson.toListObject(values[0], clazz);
 				}
 				// }

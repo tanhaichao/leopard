@@ -26,7 +26,7 @@ public class UnderlineNameConfiger {
 		enable = !"false".equals(underline);
 	}
 
-	private static boolean enable = true;
+	private static boolean enable = false;
 
 	public static boolean isEnable() {
 		return enable;

@@ -97,6 +97,7 @@ public class RequestBodyParser {
 			return null;
 		}
 		Object value = requestBody.get(name);
+
 		if (value == null) {
 			return null;
 		}
@@ -121,6 +122,9 @@ public class RequestBodyParser {
 		else if (value instanceof Boolean) {
 			return value + "";
 		}
-		return Json.toJson(value);
+
+		String json = Json.toJson(value);
+		System.err.println("getParameterForRequestBody name:" + name + " json:" + json);
+		return json;
 	}
 }
