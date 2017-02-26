@@ -596,4 +596,26 @@ public class StringUtil {// NOPMD
 		}
 		return list;
 	}
+
+	/**
+	 * 将驼峰式命名的字符串转换为下划线方式.
+	 */
+	public static String camelToUnderline(String name) {
+		if (name == null || name.length() == 0) {
+			return name;
+		}
+		int len = name.length();
+		StringBuilder sb = new StringBuilder(len);
+		for (int i = 0; i < len; i++) {
+			char c = name.charAt(i);
+			if (Character.isUpperCase(c)) {
+				sb.append('_');
+				sb.append(Character.toLowerCase(c));
+			}
+			else {
+				sb.append(c);
+			}
+		}
+		return sb.toString();
+	}
 }
