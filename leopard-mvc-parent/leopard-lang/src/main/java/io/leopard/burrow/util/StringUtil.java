@@ -1,7 +1,5 @@
 package io.leopard.burrow.util;
 
-import io.leopard.burrow.lang.AssertUtil;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -14,6 +12,8 @@ import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
+
+import io.leopard.burrow.lang.AssertUtil;
 
 /**
  * 字符串转换工具类
@@ -606,7 +606,8 @@ public class StringUtil {// NOPMD
 		}
 		int len = name.length();
 		StringBuilder sb = new StringBuilder(len);
-		for (int i = 0; i < len; i++) {
+		sb.append(Character.toLowerCase(name.charAt(0)));
+		for (int i = 1; i < len; i++) {
 			char c = name.charAt(i);
 			if (Character.isUpperCase(c)) {
 				sb.append('_');
