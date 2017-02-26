@@ -6,8 +6,11 @@ import java.util.Map;
 public class ExceptionConfig {
 
 	private String type;
+
 	private String message;
+
 	private String statusCode;
+
 	private String log;// false、true、info、warn、error
 
 	public String getType() {
@@ -53,7 +56,11 @@ public class ExceptionConfig {
 	}
 
 	public static String getType(String log) {
-		return map.get(log);
+		String type = map.get(log);
+		if (type == null) {
+			type = "error";
+		}
+		return type;
 	}
 
 }
