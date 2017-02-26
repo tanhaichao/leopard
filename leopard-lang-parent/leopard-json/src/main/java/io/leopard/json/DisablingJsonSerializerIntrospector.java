@@ -59,6 +59,7 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 		public Onum<?, ?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			JsonToken currentToken = jp.getCurrentToken();
 
+			// System.err.println("currentToken:" + currentToken.name());
 			{
 				// JsonNode node = jp.getCodec().readTree(jp);
 				if (currentToken.equals(JsonToken.START_OBJECT)) {
@@ -82,7 +83,7 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 					else {
 						throw ctxt.mappingException("未知枚举类型[" + clazz.getName() + "].");
 					}
-					// System.err.println("key:" + key + " name:" + jp.getCurrentName() + " value:" + jp.getCurrentValue() + " text:" + jp.getText());
+					System.err.println("key:" + key + " name:" + jp.getCurrentName() + " value:" + jp.getCurrentValue() + " text:" + jp.getText());
 					this.nextToClose(jp, ctxt);
 					return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
 
@@ -122,7 +123,7 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 			while (true) {
 				JsonToken token = jp.nextToken();// }
 				if (token == JsonToken.END_OBJECT) {
-					return;
+					break;
 				}
 			}
 		}
