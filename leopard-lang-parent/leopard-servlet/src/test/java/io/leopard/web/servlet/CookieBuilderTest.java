@@ -10,6 +10,7 @@ public class CookieBuilderTest {
 		Assert.assertEquals("onloon.co", CookieBuilder.parseTopLevelDomain("shop.onloon.co"));
 		Assert.assertEquals("onloon.co", CookieBuilder.parseTopLevelDomain("shop.test.onloon.co"));
 		Assert.assertEquals("localhost", CookieBuilder.parseTopLevelDomain("localhost"));
+		Assert.assertEquals("e-starlink.com", CookieBuilder.parseTopLevelDomain("test.e-starlink.com"));
 	}
 
 }
