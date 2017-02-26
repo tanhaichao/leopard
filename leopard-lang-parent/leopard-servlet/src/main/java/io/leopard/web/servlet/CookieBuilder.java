@@ -10,9 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 public class CookieBuilder {
 
 	private String name;
+
 	private String value;
+
 	private String domain;
+
 	private int maxAge = -1;
+
 	private boolean httpOnly;
 
 	private HttpServletResponse response;
@@ -50,6 +54,9 @@ public class CookieBuilder {
 
 	public CookieBuilder setTopLevelDomain(HttpServletRequest request) {
 		String serverName = request.getServerName();
+		if ("localhost".equals(serverName)) {
+			return this;
+		}
 		String domain = parseTopLevelDomain(serverName);
 		this.domain = domain;
 		return this;
