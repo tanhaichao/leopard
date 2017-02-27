@@ -7,6 +7,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Service;
 
+import io.leopard.core.exception.other.NotLoginException;
+
 /**
  * 获取session中的uid.
  * 

@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 
+import io.leopard.core.exception.other.NotLoginException;
 import io.leopard.web.xparam.Nologin;
-import io.leopard.web.xparam.NotLoginException;
 import io.leopard.web.xparam.XParam;
 import io.leopard.web.xparam.XParamUtil;
 

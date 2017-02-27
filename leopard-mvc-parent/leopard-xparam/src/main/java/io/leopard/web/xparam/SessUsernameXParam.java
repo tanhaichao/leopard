@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Service;
 
+import io.leopard.core.exception.other.NotLoginException;
+
 /**
  * 获取存在session中的用户名.
  * 
