@@ -34,13 +34,14 @@ public class SessUidXParam implements XParam {
 				return 0;
 			}
 		}
-		if (sessUid instanceof Integer) {
-			return new Long((Integer) sessUid);
-		}
-		if (sessUid instanceof Long) {
-			return sessUid;
-		}
-		throw new UnsupportedOperationException("未知类型[" + sessUid.getClass().getName() + "].");
+		return sessUid.longValue();
+		// if (sessUid instanceof Integer) {
+		// return new Long((Integer) sessUid);
+		// }
+		// if (sessUid instanceof Long) {
+		// return sessUid;
+		// }
+		// throw new UnsupportedOperationException("未知类型[" + sessUid.getClass().getName() + "].");
 	}
 
 	public static long getSessUid(HttpServletRequest request) {
@@ -48,13 +49,7 @@ public class SessUidXParam implements XParam {
 		if (sessUid == null) {
 			return 0;
 		}
-		if (sessUid instanceof Integer) {
-			return new Long((Integer) sessUid);
-		}
-		else if (sessUid instanceof Long) {
-			return (long) sessUid;
-		}
-		throw new UnsupportedOperationException("未知类型[" + sessUid.getClass().getName() + "].");
+		return sessUid.longValue();
 	}
 
 	@Override
