@@ -17,7 +17,13 @@ import org.apache.commons.lang.StringUtils;
  */
 public class ListUtil {
 
-	
+	public static boolean contains(@SuppressWarnings("rawtypes") List list, Object element) {
+		if (list == null) {
+			return false;
+		}
+		return list.contains(element);
+	}
+
 	/**
 	 * 返回list的size,如果list等于null，返回0</br>
 	 * 
@@ -66,8 +72,7 @@ public class ListUtil {
 	/**
 	 * List的内容去重</br>
 	 * 
-	 * @param list
-	 *            需要去重的list
+	 * @param list 需要去重的list
 	 * @return 去重后的list
 	 */
 	public static List<String> uniq(List<String> list) {
@@ -86,8 +91,7 @@ public class ListUtil {
 	/**
 	 * 判断List是否为非空</br>
 	 * 
-	 * @param list
-	 *            List
+	 * @param list List
 	 * @return 若非空返回true
 	 */
 	public static boolean isNotEmpty(List<?> list) {
@@ -103,8 +107,7 @@ public class ListUtil {
 	/**
 	 * 判断List是否为空
 	 * 
-	 * @param list
-	 *            List
+	 * @param list List
 	 * @return 若空返回true
 	 */
 	public static boolean isEmpty(List<?> list) {
@@ -119,8 +122,7 @@ public class ListUtil {
 	/**
 	 * 把null或者不包含元素的List转成null
 	 * 
-	 * @param list
-	 *            List对象
+	 * @param list List对象
 	 * @return 转换后的List对象
 	 */
 	public static List<String> toStringResult(List<String> list) {
@@ -133,8 +135,7 @@ public class ListUtil {
 	/**
 	 * 把null转换成长度为0的数组
 	 * 
-	 * @param strs
-	 *            字符串数组
+	 * @param strs 字符串数组
 	 * @return 转换后的数组
 	 */
 	public static String[] defaultStrings(String[] strs) {
@@ -147,8 +148,7 @@ public class ListUtil {
 	/**
 	 * 把null转成包含0个元素的List
 	 * 
-	 * @param list
-	 *            List对象
+	 * @param list List对象
 	 * @return 转换后的List
 	 */
 	public static <T> List<T> defaultList(List<T> list) {
@@ -161,8 +161,7 @@ public class ListUtil {
 	/**
 	 * 去除List中的null元素
 	 * 
-	 * @param list
-	 *            List
+	 * @param list List
 	 * @return 去除null元素后的List
 	 */
 	public static <T> List<T> noNull(List<T> list) {
@@ -183,8 +182,7 @@ public class ListUtil {
 	/**
 	 * 将字符串集合转成字符串List
 	 * 
-	 * @param set
-	 *            字符串集合
+	 * @param set 字符串集合
 	 * @return 转换后的List
 	 */
 	public static List<String> toList(Set<String> set) {
@@ -212,8 +210,7 @@ public class ListUtil {
 	/**
 	 * 将List转成Set
 	 * 
-	 * @param list
-	 *            List
+	 * @param list List
 	 * @return Set
 	 */
 	public static <KEYTYPE> Set<KEYTYPE> toSet(List<KEYTYPE> list) {
@@ -230,8 +227,7 @@ public class ListUtil {
 	/**
 	 * 将整型List转成整形Set
 	 * 
-	 * @param list
-	 *            List
+	 * @param list List
 	 * @return Set
 	 */
 	public static Set<Integer> toIntSet(List<Integer> list) {
@@ -248,8 +244,7 @@ public class ListUtil {
 	/**
 	 * 将整数添加到一个新的List
 	 * 
-	 * @param num
-	 *            整数
+	 * @param num 整数
 	 * @return 新的List
 	 */
 	public static List<Integer> toIntList(int num) {
@@ -261,8 +256,7 @@ public class ListUtil {
 	/**
 	 * 将多个整数(用“,”隔开)添加到一个新的整型List
 	 * 
-	 * @param content
-	 *            包含多个整数的字符串
+	 * @param content 包含多个整数的字符串
 	 * @return 整型List
 	 */
 	public static List<Integer> toIntList(String content) {
@@ -281,8 +275,7 @@ public class ListUtil {
 	/**
 	 * 将文本内容(用“,”隔开)添加到一个新的字符串List
 	 * 
-	 * @param content
-	 *            文本
+	 * @param content 文本
 	 * @return 字符串List
 	 */
 	public static List<String> toList(String content) {
@@ -300,10 +293,8 @@ public class ListUtil {
 	/**
 	 * 将文本内容(用“,”隔开)添加到一个新的字符串List
 	 * 
-	 * @param content
-	 *            文本
-	 * @param trim
-	 *            忽略头尾空白
+	 * @param content 文本
+	 * @param trim 忽略头尾空白
 	 * @return 字符串List
 	 */
 	public static List<String> toList(String content, boolean trim) {
@@ -326,8 +317,7 @@ public class ListUtil {
 	/**
 	 * 字符串集合转成整型List
 	 * 
-	 * @param members
-	 *            集合
+	 * @param members 集合
 	 * @return 转换后的整型List
 	 */
 	public static List<Integer> toIntList(Set<String> members) {
@@ -347,10 +337,8 @@ public class ListUtil {
 	/**
 	 * 对整型集合中的元素添加前缀，保存到字符串数组并返回该数组
 	 * 
-	 * @param prefix
-	 *            前缀
-	 * @param idSet
-	 *            整型集合
+	 * @param prefix 前缀
+	 * @param idSet 整型集合
 	 * @return 转换后的字符串数组
 	 */
 	public static String[] getIntKeys(String prefix, Set<Integer> idSet) {
@@ -366,10 +354,8 @@ public class ListUtil {
 	/**
 	 * 对字符串集合中的元素添加前缀，保存到数组并返回该数组
 	 * 
-	 * @param prefix
-	 *            前缀
-	 * @param usernameSet
-	 *            字符串集合
+	 * @param prefix 前缀
+	 * @param usernameSet 字符串集合
 	 * @return 转换后的字符串数组
 	 */
 	public static String[] getKeys(String prefix, Set<String> usernameSet) {
@@ -385,8 +371,7 @@ public class ListUtil {
 	/**
 	 * 整型数组转成字符串数组
 	 * 
-	 * @param nums
-	 *            整型数组
+	 * @param nums 整型数组
 	 * @return 字符串数组
 	 */
 	public static String[] toStringArray(int[] nums) {
@@ -406,8 +391,7 @@ public class ListUtil {
 	/**
 	 * 整型List转成字符串数组
 	 * 
-	 * @param list
-	 *            整型List
+	 * @param list 整型List
 	 * @return 字符串数组
 	 */
 	public static String[] toStringArray(List<Integer> list) {
@@ -426,8 +410,7 @@ public class ListUtil {
 	/**
 	 * 字符串List转成字符串数组
 	 * 
-	 * @param list
-	 *            字符串List
+	 * @param list 字符串List
 	 * @return 字符串数组
 	 */
 	public static String[] toArray(List<String> list) {
@@ -446,8 +429,7 @@ public class ListUtil {
 	/**
 	 * 字符串List转成整型List，可包含null元素
 	 * 
-	 * @param members
-	 *            字符串List
+	 * @param members 字符串List
 	 * @return 整型List
 	 */
 	public static List<Integer> toIntList(List<String> members) {
@@ -472,8 +454,7 @@ public class ListUtil {
 	/**
 	 * 字符串List转成整型List，可包含null元素
 	 * 
-	 * @param members
-	 *            字符串List
+	 * @param members 字符串List
 	 * @return 整型List
 	 */
 	public static List<Long> toLongList(List<String> members) {
@@ -498,12 +479,9 @@ public class ListUtil {
 	/**
 	 * 生成包含指定前缀，从指定起始编号开始，大小为指定长度的字符串List
 	 * 
-	 * @param prefix
-	 *            前缀
-	 * @param start
-	 *            起始编号
-	 * @param size
-	 *            长度
+	 * @param prefix 前缀
+	 * @param start 起始编号
+	 * @param size 长度
 	 * @return 字符串List
 	 */
 	public static List<String> makeList(String prefix, int start, int size) {
@@ -518,8 +496,7 @@ public class ListUtil {
 	/**
 	 * 将文本(用“,”隔开)转换成长整型List
 	 * 
-	 * @param content
-	 *            文本
+	 * @param content 文本
 	 * @return 长整型List
 	 */
 	public static List<Long> makeLongList(String content) {
@@ -547,8 +524,7 @@ public class ListUtil {
 	/**
 	 * 将文本(用“,”隔开)转换成整型List
 	 * 
-	 * @param content
-	 *            文本
+	 * @param content 文本
 	 * @return 整型List
 	 */
 	public static List<Integer> makeIntList(String content) {
@@ -565,8 +541,7 @@ public class ListUtil {
 	/**
 	 * 将文本(用“,”隔开)转换成Double List
 	 * 
-	 * @param content
-	 *            文本
+	 * @param content 文本
 	 * @return 整型List
 	 */
 	public static List<Double> makeDoubleList(String content) {
@@ -591,8 +566,7 @@ public class ListUtil {
 	/**
 	 * 将文本(用“,”隔开)转换成字符串List
 	 * 
-	 * @param content
-	 *            文本
+	 * @param content 文本
 	 * @return 字符串List
 	 */
 	public static List<String> makeList(String content) {
@@ -608,8 +582,7 @@ public class ListUtil {
 	/**
 	 * 将整型List转换成字符串List
 	 * 
-	 * @param numList
-	 *            整型List
+	 * @param numList 整型List
 	 * @return 字符串List
 	 */
 	public static List<String> toStringList(List<Integer> numList) {
