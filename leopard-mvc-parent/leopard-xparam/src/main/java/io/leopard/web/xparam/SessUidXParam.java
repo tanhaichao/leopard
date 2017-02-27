@@ -22,8 +22,9 @@ public class SessUidXParam implements XParam {
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
 		// 分布式session还不够好，Long类型存进去再拿出来会变成Integer，这里做兼容
-		Long sessUid = (Long) request.getSession().getAttribute("sessUid");
-		if (sessUid == null || sessUid <= 0) {
+		Number sessUid = (Number) request.getSession().getAttribute("sessUid");
+		// logger.info("getValue sessUid:" + sessUid);
+		if (sessUid == null || sessUid.intValue() <= 0) {
 			Nologin nologin = parameter.getMethodAnnotation(Nologin.class);
 			if (nologin == null) {
 				String ip = XParamUtil.getProxyIp(request);
@@ -33,6 +34,9 @@ public class SessUidXParam implements XParam {
 				return 0;
 			}
 		}
+		if (sessUid instanceof Integer) {
+			return new Long((Integer) sessUid);
+		}
 		if (sessUid instanceof Long) {
 			return sessUid;
 		}
@@ -40,11 +44,17 @@ public class SessUidXParam implements XParam {
 	}
 
 	public static long getSessUid(HttpServletRequest request) {
-		Long sessUid = (Long) request.getSession().getAttribute("sessUid");
+		Number sessUid = (Number) request.getSession().getAttribute("sessUid");
 		if (sessUid == null) {
 			return 0;
 		}
-		return sessUid;
+		if (sessUid instanceof Integer) {
+			return (long) sessUid;
+		}
+		else if (sessUid instanceof Long) {
+			return (long) sessUid;
+		}
+		throw new UnsupportedOperationException("未知类型[" + sessUid.getClass().getName() + "].");
 	}
 
 	@Override
