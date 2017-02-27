@@ -49,7 +49,7 @@ public class SessUidXParam implements XParam {
 			return 0;
 		}
 		if (sessUid instanceof Integer) {
-			return (long) sessUid;
+			return new Long((Integer) sessUid);
 		}
 		else if (sessUid instanceof Long) {
 			return (long) sessUid;
