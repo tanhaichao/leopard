@@ -41,6 +41,13 @@ public class OnumMethodArgumentResolver extends AbstractNamedValueMethodArgument
 			return null;
 		}
 		Class<?> clazz = parameter.getParameterType();
+		if (value instanceof String) {
+			String str = (String) value;
+			if (str.startsWith("{") || str.startsWith("[")) {
+				return UnderlineJson.toEnumList(str, clazz);
+			}
+		}
+
 		if (Snum.class.isAssignableFrom(clazz)) {
 			String key = (String) value;
 			return EnumUtil.toEnum(key, (Class<Enum>) clazz);

@@ -92,7 +92,7 @@ public class UnderlineJson {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static <T> List<T> toEnumList(String json, Class<T> clazz) {
+	public static <T> List<T> toEnumList(String json, Class<T> clazz) {
 		JavaType javaType = getObjectMapper().getTypeFactory().constructParametrizedType(ArrayList.class, List.class, Map.class);
 		List<Map<String, Object>> mapList;
 		try {
