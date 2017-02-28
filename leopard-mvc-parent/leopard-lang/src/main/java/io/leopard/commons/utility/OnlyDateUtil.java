@@ -1,18 +1,17 @@
 package io.leopard.commons.utility;
 
+import java.util.Calendar;
+
 import io.leopard.burrow.lang.datatype.Month;
 import io.leopard.burrow.lang.datatype.OnlyDate;
 import io.leopard.burrow.util.DateTime;
-
-import java.util.Calendar;
 
 public class OnlyDateUtil {
 
 	/**
 	 * 获取月份的天数
 	 * 
-	 * @param monthNum
-	 *            0:表示当前月份 负数：表示前n个月份 整数：表示后n个月份
+	 * @param monthNum 0:表示当前月份 负数：表示前n个月份 整数：表示后n个月份
 	 * @return 天数
 	 */
 	public static int getDayCountOfMonth(final OnlyDate date) {
@@ -33,10 +32,8 @@ public class OnlyDateUtil {
 	/**
 	 * 获取两个日期之间相差的天数
 	 * 
-	 * @param date1
-	 *            开始日期
-	 * @param date2
-	 *            结束日期
+	 * @param date1 开始日期
+	 * @param date2 结束日期
 	 * @return 天数
 	 */
 	public static int getDayCount(final OnlyDate date1, OnlyDate date2) {
@@ -63,10 +60,8 @@ public class OnlyDateUtil {
 	/**
 	 * 根据给定的日期，返回指定monthNum个月后的月份的第一天，格式为yyyy-MM-dd
 	 * 
-	 * @param date
-	 *            日期
-	 * @param monthNum
-	 *            月数
+	 * @param date 日期
+	 * @param monthNum 月数
 	 * @return date指定monthNum个月后的月份第一天的日期字符串
 	 */
 	public static OnlyDate getFirstDayOfMonth(final OnlyDate date, final int monthNum) {
@@ -80,10 +75,8 @@ public class OnlyDateUtil {
 	/**
 	 * 根据给定的日期，返回指定monthNum个月后的月份的第一天，格式为yyyy-MM-dd
 	 * 
-	 * @param date
-	 *            日期
-	 * @param monthNum
-	 *            月数
+	 * @param date 日期
+	 * @param monthNum 月数
 	 * @return date指定monthNum个月后的月份第一天的日期字符串
 	 */
 	public static OnlyDate getFirstDayOfWeek(final OnlyDate date, final int weekNum) {
@@ -106,10 +99,8 @@ public class OnlyDateUtil {
 	/**
 	 * 根据给定的日期，返回指定monthNum个月后的月份的最后一天，格式为yyyy-MM-dd
 	 * 
-	 * @param date
-	 *            日期
-	 * @param monthNum
-	 *            月数
+	 * @param date 日期
+	 * @param monthNum 月数
 	 * @return date指定monthNum个月后的月份第一天的日期字符串
 	 */
 	public static OnlyDate getLastDayOfMonth(final OnlyDate date, final int monthNum) {
