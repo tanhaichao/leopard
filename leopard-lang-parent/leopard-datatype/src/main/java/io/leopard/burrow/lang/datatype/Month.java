@@ -1,6 +1,7 @@
 package io.leopard.burrow.lang.datatype;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 精确到月份的日期(如:2013-01)
@@ -48,6 +49,10 @@ public class Month implements Serializable {
 		else {
 			throw new IllegalArgumentException("非法参数[" + datetime + "].");
 		}
+	}
+
+	public Date toDate() {
+		return new Date(this.getTime());
 	}
 
 	@Override
