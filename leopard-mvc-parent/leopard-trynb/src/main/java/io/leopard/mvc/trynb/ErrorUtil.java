@@ -2,6 +2,8 @@ package io.leopard.mvc.trynb;
 
 import java.lang.reflect.GenericSignatureFormatError;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -30,6 +32,16 @@ public class ErrorUtil {
 	}
 
 	/**
+	 * 系统初始化时间
+	 */
+	private static Date startupTime = new Date();
+
+	private static void printStartupTime() {
+		String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(startupTime);
+		logger.info("系统启动时间:" + time);
+	}
+
+	/**
 	 * 获取异常信息.
 	 * 
 	 * @param e
@@ -47,7 +59,12 @@ public class ErrorUtil {
 			return message;
 		}
 		if (e instanceof GenericSignatureFormatError) {
+			printStartupTime();
 			return "更新程序后，还没有重启服务.";
+		}
+		if (e instanceof NoSuchMethodError) {
+			printStartupTime();
+			return "NoSuchMethodError:方法找不到.";
 		}
 		if (e instanceof SQLException) {
 			return "操作数据库出错，请稍后重试.";
