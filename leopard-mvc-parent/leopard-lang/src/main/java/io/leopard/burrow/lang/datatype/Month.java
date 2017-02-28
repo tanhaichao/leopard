@@ -53,7 +53,6 @@ public class Month implements Serializable {
 		}
 	}
 
-	
 	public Date toDate() {
 		return new Date(this.getTime());
 	}
