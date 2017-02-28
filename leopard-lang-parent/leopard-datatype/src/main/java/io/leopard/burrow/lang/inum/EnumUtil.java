@@ -18,13 +18,6 @@ public class EnumUtil {
 
 	// public static <E extends Enum<E>> EnumSet<E> of(E e) {
 
-	public static String getDefaultKey(Snum snum) {
-		if (snum == null) {
-			return "";
-		}
-		return snum.getKey();
-	}
-
 	public static <E extends Enum<E>> String getDesc(Object key, Class<E> clazz) {
 		// Onum<KEYTYPE, VALUETYPE> obj = EnumUtil.toEnum(key, clazz);
 		E e = EnumUtil.get(key, clazz);
