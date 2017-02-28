@@ -1,5 +1,7 @@
 package io.leopard.web.xparam.resolver;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
@@ -12,6 +14,8 @@ import io.leopard.burrow.lang.inum.EnumUtil;
 import io.leopard.burrow.lang.inum.Inum;
 import io.leopard.burrow.lang.inum.Onum;
 import io.leopard.burrow.lang.inum.Snum;
+import io.leopard.core.exception.invalid.EnumConstantInvalidException;
+import io.leopard.json.Json;
 
 /**
  * 枚举类型解析器
@@ -42,9 +46,14 @@ public class OnumMethodArgumentResolver extends AbstractNamedValueMethodArgument
 		}
 		Class<?> clazz = parameter.getParameterType();
 		if (value instanceof String) {
-			String str = (String) value;
-			if (str.startsWith("{") || str.startsWith("[")) {
-				return UnderlineJson.toEnumList(str, clazz);
+			String json = (String) value;
+			if (json.startsWith("{")) {
+				Map<String, Object> map = Json.toMap(json);
+				Object key = map.get("key");
+				if (key == null) {
+					throw new EnumConstantInvalidException("枚举的key不允许为null.");
+				}
+				return EnumUtil.toEnum(key, (Class<Enum>) clazz);
 			}
 		}
 
