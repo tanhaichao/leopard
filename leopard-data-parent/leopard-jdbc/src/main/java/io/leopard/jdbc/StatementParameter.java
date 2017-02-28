@@ -12,6 +12,7 @@ import java.util.List;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import io.leopard.burrow.lang.inum.Inum;
+import io.leopard.burrow.lang.inum.Onum;
 import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.json.Json;
 
@@ -405,6 +406,7 @@ public class StatementParameter {
 		return values;
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected Object getArg(int index) {
 		Object value = list.get(index);
 		if (value == null) {
@@ -455,6 +457,9 @@ public class StatementParameter {
 		}
 		else if (type.equals(byte[].class)) {
 			return value;
+		}
+		else if (type.equals(Enum.class)) {
+			return ((Onum) value).getKey();
 		}
 		else {
 			// throw new IllegalArgumentException("未知类型[" + type.getName() + "].");
