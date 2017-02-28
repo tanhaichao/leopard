@@ -26,7 +26,11 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 	public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 		JsonNode node = jp.getCodec().readTree(jp);
 		String fieldName = getTypeFieldName();
-		String type = node.get(fieldName).asText();
+		JsonNode fieldNode = node.get(fieldName);
+		if (fieldNode == null) {
+			throw new NullPointerException("节点[" + fieldName + "]不存在.");
+		}
+		String type = fieldNode.asText();
 
 		Class<T> clazz = findClass(type);
 		if (clazz == null) {
