@@ -153,7 +153,7 @@ public class UnderlineJson {
 			return getObjectMapper().readValue(json, javaType);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			logger.error("clazz:" + clazz.getName() + " json:" + json);
 			throw new JsonException(e.getMessage(), e);
 		}
