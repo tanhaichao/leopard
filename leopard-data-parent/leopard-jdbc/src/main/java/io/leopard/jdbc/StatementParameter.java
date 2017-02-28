@@ -12,7 +12,6 @@ import java.util.List;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import io.leopard.burrow.lang.inum.Inum;
-import io.leopard.burrow.lang.inum.Onum;
 import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.json.Json;
 
@@ -177,8 +176,16 @@ public class StatementParameter {
 	 */
 	public void setEnum(Enum<?> onum) {
 		this.checkNull(onum);
-		this.list.add(onum);
-		this.type.add(Enum.class);
+
+		if (onum instanceof Inum) {
+			this.setInt(((Inum) onum).getKey());
+		}
+		else if (onum instanceof Snum) {
+			this.setString(((Snum) onum).getKey());
+		}
+		else {
+			throw new RuntimeException("未知枚举类型[" + onum.getClass().getName() + "].");
+		}
 	}
 
 	/**
@@ -458,9 +465,6 @@ public class StatementParameter {
 		else if (type.equals(byte[].class)) {
 			return value;
 		}
-		else if (type.equals(Enum.class)) {
-			return ((Onum) value).getKey();
-		}
 		else {
 			// throw new IllegalArgumentException("未知类型[" + type.getName() + "].");
 			return value;
@@ -614,7 +618,7 @@ public class StatementParameter {
 				pstmt.setInt(i, key);
 			}
 			else {
-				throw new RuntimeException("未知枚举类型[" + type.getName() + "].");
+				throw new RuntimeException("未知枚举类型[" + type.getName() + " value:" + value + "].");
 			}
 		}
 		else {
