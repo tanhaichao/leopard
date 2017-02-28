@@ -274,6 +274,15 @@ public interface Jdbc {
 	/**
 	 * 根据sql查询数据，返回String的List.
 	 * 
+	 * @param sql 查询数据的sql
+	 * @param params 参数列表
+	 * @return 查询的数据
+	 */
+	List<String> queryForStrings(String sql, Object... params);
+
+	/**
+	 * 根据sql查询数据，返回String的List.
+	 * 
 	 * @param sql sql
 	 * @param param 参数列表
 	 * @param start 查询起点

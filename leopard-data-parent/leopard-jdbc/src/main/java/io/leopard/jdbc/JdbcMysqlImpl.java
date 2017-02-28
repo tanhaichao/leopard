@@ -197,6 +197,11 @@ public class JdbcMysqlImpl implements Jdbc {
 	}
 
 	@Override
+	public List<String> queryForStrings(String sql, Object... params) {
+		return this.queryForStrings(sql, toStatementParameter(sql, params));
+	}
+
+	@Override
 	public List<String> queryForStrings(String sql, StatementParameter param) {
 		List<String> list = jdbcTemplate.query(sql, param.getArgs(), new RowMapper<String>() {
 			@Override

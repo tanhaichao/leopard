@@ -138,6 +138,11 @@ public class JdbcWrapper implements Jdbc {
 	}
 
 	@Override
+	public List<String> queryForStrings(String sql, Object... params) {
+		return this.getJdbc().queryForStrings(sql, params);
+	}
+
+	@Override
 	public List<String> queryForStrings(String sql, StatementParameter param, int start, int size) {
 		return this.getJdbc().queryForStrings(sql, param, start, size);
 	}
