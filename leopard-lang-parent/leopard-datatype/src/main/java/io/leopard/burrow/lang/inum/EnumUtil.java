@@ -45,7 +45,7 @@ public class EnumUtil {
 		E inum = get(key, clazz);
 		if (inum == null) {
 			System.err.println("key:" + key.getClass().getName());
-			throw new IllegalArgumentException("枚举元素[" + key + "]不存在[" + clazz.getName() + "].");
+			throw new EnumConstantInvalidException("枚举元素[" + key + "]不存在[" + clazz.getName() + "].");
 		}
 		return inum;
 	}
