@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.util.Assert;
 
+import io.leopard.burrow.lang.inum.EnumConstantInvalidException;
 import io.leopard.burrow.lang.inum.EnumUtil;
 import io.leopard.burrow.lang.inum.Inum;
 import io.leopard.burrow.lang.inum.Snum;
@@ -169,7 +170,15 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 				if (key == null) {
 					return null;
 				}
-				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+				try {
+					return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+				}
+				catch (EnumConstantInvalidException e) {
+					if ("".equals(key)) {
+						return null;
+					}
+					throw e;
+				}
 			}
 			else if (Inum.class.isAssignableFrom(requiredType)) {
 				int key = rs.getInt(index);
