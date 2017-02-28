@@ -29,6 +29,11 @@ public class EnumUtil {
 		return (String) onum.getDesc();
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static Object toEnumObject(Object key, Class<?> clazz) {
+		return toEnum(key, (Class<Enum>) clazz);
+	}
+
 	/**
 	 * 根据ID转换为枚举(元素不存在会抛异常).
 	 * 
