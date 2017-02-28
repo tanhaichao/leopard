@@ -14,8 +14,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
+import io.leopard.burrow.lang.inum.EnumConstantInvalidException;
 import io.leopard.burrow.lang.inum.EnumUtil;
-import io.leopard.core.exception.invalid.EnumConstantInvalidException;
 import io.leopard.json.DisablingJsonSerializerIntrospector;
 import io.leopard.json.JsonException;
 import io.leopard.json.JsonJacksonImpl.OnumJsonSerializer;

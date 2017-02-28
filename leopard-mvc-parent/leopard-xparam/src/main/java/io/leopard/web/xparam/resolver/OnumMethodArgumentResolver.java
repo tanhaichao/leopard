@@ -10,11 +10,11 @@ import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import io.leopard.burrow.lang.inum.EnumConstantInvalidException;
 import io.leopard.burrow.lang.inum.EnumUtil;
 import io.leopard.burrow.lang.inum.Inum;
 import io.leopard.burrow.lang.inum.Onum;
 import io.leopard.burrow.lang.inum.Snum;
-import io.leopard.core.exception.invalid.EnumConstantInvalidException;
 import io.leopard.json.Json;
 
 /**
