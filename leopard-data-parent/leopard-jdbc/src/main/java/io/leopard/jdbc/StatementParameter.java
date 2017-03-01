@@ -413,7 +413,6 @@ public class StatementParameter {
 		return values;
 	}
 
-	@SuppressWarnings("rawtypes")
 	protected Object getArg(int index) {
 		Object value = list.get(index);
 		if (value == null) {
