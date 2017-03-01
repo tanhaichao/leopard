@@ -30,7 +30,7 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 		if (ann != null) {
 			return false;
 		}
-		logger.info("supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
+		// logger.info("supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
 
 		Class<?> clazz = parameter.getParameterType();
 		if (clazz.equals(long.class) || clazz.equals(Long.class)) {
@@ -72,7 +72,7 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 		if (value == null) {
 			value = this.getDefaultValue(parameter);
 		}
-		logger.info("resolveName name:" + name + " clazz:" + parameter.getParameterType());
+		// logger.info("resolveName name:" + name + " clazz:" + parameter.getParameterType());
 
 		return value;
 	}
