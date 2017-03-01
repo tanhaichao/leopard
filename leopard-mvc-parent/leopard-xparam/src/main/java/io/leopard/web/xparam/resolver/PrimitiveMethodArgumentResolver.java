@@ -112,6 +112,9 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 		else if (clazz.equals(Double.class)) {
 			return null;
 		}
+		else if (clazz.equals(Date.class)) {
+			return null;
+		}
 		throw new RuntimeException("未知类型[" + clazz.getName() + "].");
 	}
 
