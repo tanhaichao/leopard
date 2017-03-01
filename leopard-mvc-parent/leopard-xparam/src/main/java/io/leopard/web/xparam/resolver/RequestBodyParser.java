@@ -21,7 +21,7 @@ public class RequestBodyParser {
 
 	protected static Log logger = LogFactory.getLog(RequestBodyParser.class);
 
-	// TODO 未支持下划线
+	// FIXME 未支持下划线
 	public static String[] getParameterValues(HttpServletRequest request, String name) {
 		String[] values = request.getParameterValues(name);
 		if (values == null) {
