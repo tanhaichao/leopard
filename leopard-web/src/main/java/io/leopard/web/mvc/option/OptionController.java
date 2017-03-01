@@ -12,10 +12,10 @@ public class OptionController {
 
 	@RequestMapping("enum/{id}")
 	@ResponseBody
-	public List<Option> onum(@PathVariable String id) {
+	public List<Option> onum(@PathVariable String id) throws OptionNotFoundException {
 		List<Option> data = OptionData.getData(id);
 		if (data == null) {
-			throw new NullPointerException("枚举[" + id + "]不存在.");
+			throw new OptionNotFoundException("枚举[" + id + "]不存在.");
 		}
 		return data;
 	}
