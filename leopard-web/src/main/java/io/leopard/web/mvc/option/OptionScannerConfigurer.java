@@ -29,7 +29,7 @@ public class OptionScannerConfigurer implements BeanFactoryPostProcessor, Applic
 		// logger.info("postProcessBeanFactory");
 		LeopardPropertyPlaceholderConfigurer configurer = beanFactory.getBean(LeopardPropertyPlaceholderConfigurer.class);
 		String basePackage = configurer.getProperty("base.package");
-		System.err.println("basePackage:" + basePackage);
+		// logger.info("basePackage:" + basePackage);
 		if (StringUtils.isEmpty(basePackage)) {
 			throw new RuntimeException("app.properties没有配置base.package属性.");
 		}
