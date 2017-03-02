@@ -63,9 +63,10 @@ public class ConverterContext implements BeanFactoryAware {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected static Converter findConverter(String typeName, Object source) {
 		for (Converter converter : converterList) {
-			Class<?> api = converter.getClass().getInterfaces()[0];
+			// Class<?> api = converter.getClass().getInterfaces()[0];
 			ParameterizedType type2 = (ParameterizedType) converter.getClass().getGenericInterfaces()[0];
 			Type[] args = type2.getActualTypeArguments();
 			Class<?> clazz1 = (Class<?>) args[0];
@@ -81,6 +82,7 @@ public class ConverterContext implements BeanFactoryAware {
 		return null;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected static Object parse(String typeName, Object source) throws Exception {
 		Converter converter = findConverter(typeName, source);
 		if (converter == null) {

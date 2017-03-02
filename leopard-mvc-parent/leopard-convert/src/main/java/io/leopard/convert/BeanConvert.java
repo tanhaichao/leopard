@@ -3,9 +3,10 @@ package io.leopard.convert;
 public class BeanConvert<S, T> {
 
 	private S source;
+
 	private T target;
 
-	private Class<T> clazz;
+	// private Class<T> clazz;
 
 	// public BeanConvert(S source) {
 	// this(source, null);

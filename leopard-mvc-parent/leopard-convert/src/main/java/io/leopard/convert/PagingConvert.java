@@ -9,7 +9,7 @@ public class PagingConvert<S, T> {
 
 	private Paging<T> result;
 
-	private Class<T> clazz;
+	// private Class<T> clazz;
 
 	public PagingConvert(Paging<S> paging, Class<T> clazz) {
 		this.paging = paging;

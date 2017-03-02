@@ -9,10 +9,10 @@ public class ListConvert<S, T> {
 
 	private List<T> result;
 
-	private Class<T> clazz;
+	// private Class<T> clazz;
 
 	public ListConvert(List<S> list, Class<T> clazz) {
-		this.clazz = clazz;
+		// this.clazz = clazz;
 		this.list = list;
 		if (list == null) {
 		}
