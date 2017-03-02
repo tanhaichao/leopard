@@ -66,16 +66,16 @@ public class TimeRangeHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	/**
 	 * 时间戳
 	 */
-	private static String Timestamp_regex = "1[0-9]{12}";
+	private static String TIMESTAMP_REGEX = "1[0-9]{12}";
 
-	private static String DATE_regex = "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$";
+	private static String DATE_REGEX = "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$";
 
 	protected static Date toDate(String datetime) {
-		if (datetime.matches(Timestamp_regex)) {
+		if (datetime.matches(TIMESTAMP_REGEX)) {
 			long time = Long.parseLong(datetime);
 			return new Date(time);
 		}
-		if (datetime.matches(DATE_regex)) {
+		if (datetime.matches(DATE_REGEX)) {
 			datetime += " 00:00:00";
 		}
 
@@ -87,6 +87,8 @@ public class TimeRangeHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		// return null;
 		// }
 		// }
+		// TODO ahai startTime=1488297600 java.lang.StringIndexOutOfBoundsException: String index out of range: 13
+
 		return DateUtil.toDate(datetime);
 	}
 
