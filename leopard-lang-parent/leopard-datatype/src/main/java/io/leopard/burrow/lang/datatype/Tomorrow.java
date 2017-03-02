@@ -3,16 +3,16 @@ package io.leopard.burrow.lang.datatype;
 import java.util.Date;
 
 /**
- * 昨天
+ * 明天
  * 
  * @author 谭海潮
  *
  */
-public class Yesterday extends Date {
+public class Tomorrow extends Date {
 
 	private static final long serialVersionUID = 1L;
 
-	public Yesterday() {
+	public Tomorrow() {
 		throw new RuntimeException("not impl.");
 	}
 

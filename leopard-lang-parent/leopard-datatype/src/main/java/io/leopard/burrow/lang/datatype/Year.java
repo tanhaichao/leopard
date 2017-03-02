@@ -2,18 +2,11 @@ package io.leopard.burrow.lang.datatype;
 
 import java.util.Date;
 
-/**
- * 昨天
- * 
- * @author 谭海潮
- *
- */
-public class Yesterday extends Date {
+public class Year extends Date {
 
 	private static final long serialVersionUID = 1L;
 
-	public Yesterday() {
+	public Year() {
 		throw new RuntimeException("not impl.");
 	}
-
 }
