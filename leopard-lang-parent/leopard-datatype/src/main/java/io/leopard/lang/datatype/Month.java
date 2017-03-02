@@ -1,4 +1,4 @@
-package io.leopard.burrow.lang.datatype;
+package io.leopard.lang.datatype;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

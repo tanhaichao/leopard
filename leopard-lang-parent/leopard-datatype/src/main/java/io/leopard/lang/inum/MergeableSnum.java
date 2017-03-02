@@ -1,4 +1,4 @@
-package io.leopard.burrow.lang.inum;
+package io.leopard.lang.inum;
 
 /**
  * 多个枚举合并接口

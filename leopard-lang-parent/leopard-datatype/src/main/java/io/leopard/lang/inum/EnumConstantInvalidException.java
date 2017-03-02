@@ -1,4 +1,4 @@
-package io.leopard.burrow.lang.inum;
+package io.leopard.lang.inum;
 
 /**
  * 非法枚举元素.

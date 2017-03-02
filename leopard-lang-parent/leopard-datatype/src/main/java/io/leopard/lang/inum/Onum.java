@@ -1,4 +1,4 @@
-package io.leopard.burrow.lang.inum;
+package io.leopard.lang.inum;
 
 /**
  * 枚举接口(key类型自定义,value类型自定义)
