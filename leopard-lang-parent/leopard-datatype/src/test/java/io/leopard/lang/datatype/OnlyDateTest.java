@@ -1,4 +1,4 @@
-package io.leopard.burrow.lang.datatype;
+package io.leopard.lang.datatype;
 
 import org.junit.Test;
 
