@@ -24,7 +24,7 @@ public class PagingConvert<S, T> {
 					this.fill(source, target);
 				}
 				catch (Exception e) {
-					throw new RuntimeException(e.getMessage(), e);
+					throw new ConvertException(e.getMessage(), e);
 				}
 				FillerContext.fill(source, target);
 				result.add(target);
