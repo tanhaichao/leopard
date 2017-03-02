@@ -1,4 +1,4 @@
-package io.leopard.lang;
+package io.leopard.burrow.lang.datatype;
 
 /**
  * 经纬度.
@@ -17,6 +17,15 @@ public class Location {
 	 * 经度
 	 */
 	private Double lng;
+
+	public Location() {
+
+	}
+
+	public Location(Double lat, Double lng) {
+		this.lat = lat;
+		this.lng = lng;
+	}
 
 	public Double getLat() {
 		return lat;
