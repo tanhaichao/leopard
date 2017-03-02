@@ -1,6 +1,6 @@
 package io.leopard.burrow.lang.datatype;
 
-import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,11 +10,9 @@ import java.util.Date;
  * @author 阿海
  * 
  */
-public class OnlyDate implements Serializable {
+public class OnlyDate extends Date {
 
 	private static final long serialVersionUID = 1L;
-
-	private final long time;
 
 	public OnlyDate() {
 		this(System.currentTimeMillis());
@@ -26,15 +24,10 @@ public class OnlyDate implements Serializable {
 
 	public OnlyDate(String datetime) {
 		this(getMillis(datetime));
-		// new Exception("OnlyDate").printStackTrace();
 	}
 
 	public OnlyDate(long time) {
-		this.time = time;
-	}
-
-	public long getTime() {
-		return this.time;
+		super(time);
 	}
 
 	protected static long getMillis(String datetime) {
@@ -49,19 +42,17 @@ public class OnlyDate implements Serializable {
 		}
 	}
 
-	public Date toDate() {
-		return new Date(time);
-	}
-
 	public int getDay() {
 		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(time);
+		cal.setTimeInMillis(this.getTime());
 		return cal.get(Calendar.DATE);
 	}
 
+	private static final SimpleDateFormat GET_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
 	@Override
 	public String toString() {
-		return DateTime.getTime(time).substring(0, 10);
+		return GET_TIME_FORMAT.format(this);
 	}
 
 }

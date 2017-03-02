@@ -1,6 +1,6 @@
 package io.leopard.burrow.lang.datatype;
 
-import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -9,15 +9,12 @@ import java.util.Date;
  * @author 阿海
  * 
  */
-public class Month implements Serializable {
+public class Month extends Date {
 
 	private static final long serialVersionUID = 1L;
 
-	private final long time;
-
 	public Month() {
 		this(System.currentTimeMillis());
-		// new Exception("Month").printStackTrace();
 	}
 
 	public Month(java.util.Date date) {
@@ -29,11 +26,7 @@ public class Month implements Serializable {
 	}
 
 	public Month(long time) {
-		this.time = time;
-	}
-
-	public long getTime() {
-		return this.time;
+		super(time);
 	}
 
 	protected static long getMillis(String datetime) {
@@ -55,9 +48,11 @@ public class Month implements Serializable {
 		return new Date(this.getTime());
 	}
 
+	private static final SimpleDateFormat GET_TIME_FORMAT = new SimpleDateFormat("yyyy-MM");
+
 	@Override
 	public String toString() {
-		return DateTime.getTime(time).substring(0, 7);
+		return GET_TIME_FORMAT.format(this);
 	}
 
 }
