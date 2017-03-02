@@ -21,6 +21,7 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
+		// logger.info("setBeanFactory");
 		super.setBeanFactory(beanFactory);
 		PropertyDecoder propertyDecoder;
 		try {
@@ -47,6 +48,30 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 			value = resolvePlaceholderLei.resolvePlaceholder(placeholder, props);
 		}
 		return value;
+	}
+
+	// @Override
+	// public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+	// logger.info("postProcessBeanFactory");
+	// super.postProcessBeanFactory(beanFactory);
+	// }
+
+	private Properties props;
+
+	@Override
+	protected void convertProperties(Properties props) {
+		super.convertProperties(props);
+		this.props = props;
+	}
+
+	/**
+	 * 获取配置.
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public String getProperty(String name) {
+		return props.getProperty(name);
 	}
 
 }
