@@ -47,7 +47,7 @@ public class OptionScanner extends ClassPathBeanDefinitionScanner {
 				id = holder.getBeanName();
 			}
 			String className = holder.getBeanDefinition().getBeanClassName();
-			// System.err.println("holder:" + holder.getBeanName() + " className:" + className);
+			// logger.info("holder:" + holder.getBeanName() + " className:" + className);
 			OptionData.load(id, className);
 			definition.getPropertyValues().add("innerClassName", definition.getBeanClassName());
 			definition.setBeanClass(OptionFactoryBean.class);
