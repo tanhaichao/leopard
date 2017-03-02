@@ -21,7 +21,7 @@ public class OptionScannerConfigurer implements BeanFactoryPostProcessor, Applic
 		// System.err.println("OptionScannerConfigurer postProcessBeanFactory");
 		OptionScanner scanner = new OptionScanner((BeanDefinitionRegistry) beanFactory);
 		scanner.setResourceLoader(this.applicationContext);
-		scanner.scan("com.starlink");
+		scanner.scan("com.starlink");// TODO ahai 这里写死了
 	}
 
 }
