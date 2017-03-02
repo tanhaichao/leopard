@@ -31,7 +31,7 @@ public class SessUidXParam implements XParam {
 				throw new NotLoginException("您[" + ip + "]未登录.");
 			}
 			else {
-				return 0;
+				return 0L;
 			}
 		}
 		return sessUid.longValue();
@@ -47,7 +47,7 @@ public class SessUidXParam implements XParam {
 	public static long getSessUid(HttpServletRequest request) {
 		Number sessUid = (Number) request.getSession().getAttribute("sessUid");
 		if (sessUid == null) {
-			return 0;
+			return 0L;
 		}
 		return sessUid.longValue();
 	}
