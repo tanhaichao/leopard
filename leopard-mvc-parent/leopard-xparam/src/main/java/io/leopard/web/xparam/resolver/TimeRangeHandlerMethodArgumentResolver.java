@@ -15,7 +15,7 @@ import io.leopard.burrow.util.DateUtil;
 import io.leopard.lang.TimeRange;
 
 /**
- * 下划线参数名称解析.
+ * 时间范围对象参数解析器
  * 
  * @author 阿海
  *
