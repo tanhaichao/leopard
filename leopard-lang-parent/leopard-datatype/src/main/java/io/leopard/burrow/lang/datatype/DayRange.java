@@ -32,11 +32,16 @@ public class DayRange extends TimeRange {
 	public DayRange(long time, int dayNum) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(time);
+
+		cal.add(Calendar.DATE, dayNum);
+
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 		Date startTime = new Date(cal.getTimeInMillis());
+
+		// System.err.println("time:" + time + " startTime:" + startTime + " dayNum:" + dayNum);
 		Date endTime = null;
 		{
 			cal.set(Calendar.HOUR_OF_DAY, 23);
