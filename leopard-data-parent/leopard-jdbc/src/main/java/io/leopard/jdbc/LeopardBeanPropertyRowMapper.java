@@ -15,12 +15,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.util.Assert;
 
-import io.leopard.burrow.lang.inum.EnumConstantInvalidException;
-import io.leopard.burrow.lang.inum.EnumUtil;
-import io.leopard.burrow.lang.inum.Inum;
-import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.json.Json;
 import io.leopard.json.JsonException;
+import io.leopard.lang.inum.EnumConstantInvalidException;
+import io.leopard.lang.inum.EnumUtil;
+import io.leopard.lang.inum.Inum;
+import io.leopard.lang.inum.Snum;
 
 public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 

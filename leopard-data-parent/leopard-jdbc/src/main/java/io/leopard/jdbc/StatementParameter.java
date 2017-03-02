@@ -11,9 +11,9 @@ import java.util.List;
 
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
-import io.leopard.burrow.lang.inum.Inum;
-import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.json.Json;
+import io.leopard.lang.inum.Inum;
+import io.leopard.lang.inum.Snum;
 
 /**
  * SQL参数.

@@ -8,12 +8,12 @@ import java.util.Map.Entry;
 
 import org.springframework.util.StringUtils;
 
-import io.leopard.burrow.lang.inum.Inum;
-import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.jdbc.StatementParameter;
 import io.leopard.lang.Paging;
-import io.leopard.lang.TimeRange;
+import io.leopard.lang.datatype.TimeRange;
+import io.leopard.lang.inum.Inum;
+import io.leopard.lang.inum.Snum;
 
 public class QueryBuilder {
 

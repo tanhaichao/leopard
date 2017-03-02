@@ -12,10 +12,10 @@ import com.fasterxml.jackson.databind.introspect.Annotated;
 import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 
-import io.leopard.burrow.lang.inum.EnumUtil;
-import io.leopard.burrow.lang.inum.Inum;
-import io.leopard.burrow.lang.inum.Onum;
-import io.leopard.burrow.lang.inum.Snum;
+import io.leopard.lang.inum.EnumUtil;
+import io.leopard.lang.inum.Inum;
+import io.leopard.lang.inum.Onum;
+import io.leopard.lang.inum.Snum;
 
 /**
  * 禁用@JsonSerializer

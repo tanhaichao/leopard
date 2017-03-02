@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import io.leopard.burrow.util.DateUtil;
-import io.leopard.lang.TimeRange;
+import io.leopard.lang.datatype.TimeRange;
 
 /**
  * 时间范围对象参数解析器

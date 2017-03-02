@@ -10,12 +10,12 @@ import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import io.leopard.burrow.lang.inum.EnumConstantInvalidException;
-import io.leopard.burrow.lang.inum.EnumUtil;
-import io.leopard.burrow.lang.inum.Inum;
-import io.leopard.burrow.lang.inum.Onum;
-import io.leopard.burrow.lang.inum.Snum;
 import io.leopard.json.Json;
+import io.leopard.lang.inum.EnumConstantInvalidException;
+import io.leopard.lang.inum.EnumUtil;
+import io.leopard.lang.inum.Inum;
+import io.leopard.lang.inum.Onum;
+import io.leopard.lang.inum.Snum;
 
 /**
  * 枚举类型解析器

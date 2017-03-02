@@ -3,8 +3,8 @@ package io.leopard.web.editor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 
-import io.leopard.burrow.lang.inum.EnumUtil;
-import io.leopard.burrow.lang.inum.Inum;
+import io.leopard.lang.inum.EnumUtil;
+import io.leopard.lang.inum.Inum;
 
 /**
  * Converts from a String to a {@link java.lang.Enum} by calling {@link Enum#valueOf(Class, String)}.

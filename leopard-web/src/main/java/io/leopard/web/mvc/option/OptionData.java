@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import io.leopard.burrow.lang.inum.EnumUtil;
-import io.leopard.burrow.lang.inum.Onum;
+import io.leopard.lang.inum.EnumUtil;
+import io.leopard.lang.inum.Onum;
 
 public class OptionData {
 

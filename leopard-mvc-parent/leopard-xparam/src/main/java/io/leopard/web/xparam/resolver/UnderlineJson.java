@@ -14,11 +14,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import io.leopard.burrow.lang.inum.EnumConstantInvalidException;
-import io.leopard.burrow.lang.inum.EnumUtil;
 import io.leopard.json.DisablingJsonSerializerIntrospector;
 import io.leopard.json.JsonException;
 import io.leopard.json.JsonJacksonImpl.OnumJsonSerializer;
+import io.leopard.lang.inum.EnumConstantInvalidException;
+import io.leopard.lang.inum.EnumUtil;
 
 public class UnderlineJson {
 	protected static Log logger = LogFactory.getLog(UnderlineJson.class);

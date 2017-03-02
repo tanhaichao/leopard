@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
-import io.leopard.burrow.lang.inum.Onum;
+import io.leopard.lang.inum.Onum;
 
 public class JsonJacksonImpl implements IJson {
 	private static ObjectMapper mapper = new ObjectMapper(); // can reuse, share

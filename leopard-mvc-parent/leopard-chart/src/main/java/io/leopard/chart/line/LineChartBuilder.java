@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import io.leopard.burrow.util.DateUtil;
-import io.leopard.lang.TimeRange;
+import io.leopard.lang.datatype.TimeRange;
 
 public class LineChartBuilder {
 

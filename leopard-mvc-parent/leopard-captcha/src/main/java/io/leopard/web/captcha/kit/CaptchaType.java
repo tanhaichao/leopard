@@ -1,6 +1,6 @@
 package io.leopard.web.captcha.kit;
 
-import io.leopard.burrow.lang.inum.Snum;
+import io.leopard.lang.inum.Snum;
 
 /**
  * 验证码类型(手机、邮件)

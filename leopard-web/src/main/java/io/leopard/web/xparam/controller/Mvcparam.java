@@ -2,8 +2,8 @@ package io.leopard.web.xparam.controller;
 
 import java.util.Date;
 
-import io.leopard.burrow.lang.datatype.Month;
-import io.leopard.burrow.lang.datatype.OnlyDate;
+import io.leopard.lang.datatype.Month;
+import io.leopard.lang.datatype.OnlyDate;
 
 public class Mvcparam {
 
