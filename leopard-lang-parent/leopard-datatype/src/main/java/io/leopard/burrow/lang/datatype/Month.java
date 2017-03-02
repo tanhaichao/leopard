@@ -1,6 +1,7 @@
 package io.leopard.burrow.lang.datatype;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -26,7 +27,14 @@ public class Month extends Date {
 	}
 
 	public Month(long time) {
-		super(time);
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(time);
+		cal.set(Calendar.DATE, 1);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		this.setTime(cal.getTimeInMillis());
 	}
 
 	protected static long getMillis(String datetime) {
@@ -42,10 +50,6 @@ public class Month extends Date {
 		else {
 			throw new IllegalArgumentException("非法参数[" + datetime + "].");
 		}
-	}
-
-	public Date toDate() {
-		return new Date(this.getTime());
 	}
 
 	private static final SimpleDateFormat GET_TIME_FORMAT = new SimpleDateFormat("yyyy-MM");

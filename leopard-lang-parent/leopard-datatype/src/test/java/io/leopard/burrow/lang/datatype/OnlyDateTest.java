@@ -6,8 +6,8 @@ public class OnlyDateTest {
 
 	@Test
 	public void OnlyDate() {
-		OnlyDate date = new OnlyDate();
-		System.out.println("date:" + date);
+		OnlyDate day = new OnlyDate();
+		System.out.println("time:" + day.getTime() + " day:" + day);
 	}
 
 }
