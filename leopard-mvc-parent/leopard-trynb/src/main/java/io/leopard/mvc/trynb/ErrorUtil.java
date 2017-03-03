@@ -90,7 +90,10 @@ public class ErrorUtil {
 		MysqlDataTruncation e1 = (MysqlDataTruncation) e.getCause();
 		String message = e1.getMessage();
 		// String message = "Data truncation: Data too long for column 'spec' at row 1";
-		String regex = "Data truncation: Data too long for column '(.*?)' at row";
+		// [Data truncation: Out of range value for column 'weight' at row 1]
+
+//		String regex = "Data truncation: Data too long for column '(.*?)' at row";
+		String regex = " for column '(.*?)' at row";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(message);
 		if (m.find()) {
