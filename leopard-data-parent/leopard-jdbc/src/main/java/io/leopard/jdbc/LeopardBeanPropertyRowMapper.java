@@ -14,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import io.leopard.json.Json;
 import io.leopard.json.JsonException;
@@ -204,7 +205,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected static <T> List<T> toEnumList(String json, Class<?> requiredType, Class<T> elementType) {
-		if (json == null) {
+		if (StringUtils.isEmpty(json)) {
 			return null;
 		}
 		if (Snum.class.isAssignableFrom(elementType)) {
