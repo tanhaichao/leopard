@@ -92,13 +92,19 @@ public class ErrorUtil {
 		// String message = "Data truncation: Data too long for column 'spec' at row 1";
 		// [Data truncation: Out of range value for column 'weight' at row 1]
 
-//		String regex = "Data truncation: Data too long for column '(.*?)' at row";
+		// String regex = "Data truncation: Data too long for column '(.*?)' at row";
 		String regex = " for column '(.*?)' at row";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(message);
 		if (m.find()) {
 			String columnName = m.group(1);
-			return "字段" + columnName + "太长，请稍后重试.";
+
+			if (message.startsWith("Data truncation: Data too long for column")) {
+				return "字段" + columnName + "太长，请稍后重试.";
+			}
+			else if (message.startsWith("Out of range value for column")) {
+				return "数字类型字段" + columnName + "越界.";
+			}
 		}
 		throw new RuntimeException("解析mysql提示信息出错[" + message + "].");
 	}
