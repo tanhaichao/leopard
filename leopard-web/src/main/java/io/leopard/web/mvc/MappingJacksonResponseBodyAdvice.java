@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import io.leopard.data.env.EnvUtil;
+import io.leopard.mvc.trynb.ResultModifierImpl;
 import io.leopard.web.servlet.JsonDebugger;
 
 public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Object> {
@@ -94,6 +95,8 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 			// data = voFiller.fill(data);
 		}
 		map.put("data", data);
+
+		ResultModifierImpl.getInstance().modify(map);
 
 		String json = null;
 		if (isFormat) {
