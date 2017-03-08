@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import io.leopard.json.Json;
 import io.leopard.mvc.trynb.ErrorUtil;
+import io.leopard.mvc.trynb.ResultModifierImpl;
 import io.leopard.mvc.trynb.model.TrynbInfo;
 import io.leopard.mvc.trynb.resolver.TrynbResolver;
 import io.leopard.web.view.AbstractView;
@@ -32,6 +33,8 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 		// }
 
 		ErrorJsonView jsonView = new ErrorJsonView();
+		jsonView.setException(exception);
+		jsonView.setHandler(handler);
 
 		if (exception instanceof StatusCodeException) {
 			StatusCodeException e = (StatusCodeException) exception;
@@ -54,6 +57,18 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 	}
 
 	public class ErrorJsonView extends AbstractView {
+
+		private HandlerMethod handler;
+
+		private Exception exception;
+
+		public void setHandler(HandlerMethod handler) {
+			this.handler = handler;
+		}
+
+		public void setException(Exception exception) {
+			this.exception = exception;
+		}
 
 		private Map<String, Object> map = new LinkedHashMap<String, Object>();
 
@@ -84,6 +99,7 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 
 		@Override
 		public String getBody(HttpServletRequest request, HttpServletResponse response) {
+			ResultModifierImpl.getInstance().modify(request, handler, exception, map);
 			String json = Json.toFormatJson(map);
 			request.setAttribute("result.json", json);
 
