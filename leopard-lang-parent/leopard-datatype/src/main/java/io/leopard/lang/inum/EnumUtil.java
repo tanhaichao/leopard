@@ -74,7 +74,7 @@ public class EnumUtil {
 	 * @return
 	 */
 	public static <E extends Enum<E>> boolean contains(Object key, Class<E> clazz) {
-		key = toLowerCase(key);
+		// key = toLowerCase(key);
 		Map<Object, Enum<?>> map = cache.get(key);
 		if (map == null) {
 			map = toMap(key, clazz);
@@ -91,7 +91,7 @@ public class EnumUtil {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <E extends Enum<E>> E get(Object key, Class<E> clazz) {
-		key = toLowerCase(key);
+		// key = toLowerCase(key);
 		Map<Object, Enum<?>> map = cache.get(key);
 		if (map == null) {
 			map = toMap(key, clazz);
@@ -115,7 +115,7 @@ public class EnumUtil {
 		while (iterator.hasNext()) {
 			Onum<Object, Object> value = (Onum<Object, Object>) iterator.next();
 			Object id = value.getKey();
-			id = toLowerCase(id);
+			// id = toLowerCase(id);
 			map.put(id, (Enum<?>) value);
 		}
 		// cache.put(key, map);
