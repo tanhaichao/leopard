@@ -100,6 +100,7 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 
 			}
 			else if (Snum.class.isAssignableFrom(clazz)) {
+				// System.err.println("key:"+jp.getValueAsString());
 				String key = jp.getText();
 				return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
 			}
