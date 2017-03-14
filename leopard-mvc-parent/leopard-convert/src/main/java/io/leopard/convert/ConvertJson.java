@@ -1,19 +1,25 @@
 package io.leopard.convert;
 
-import io.leopard.json.DisablingJsonSerializerIntrospector;
-import io.leopard.json.JsonException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+
+import io.leopard.json.DisablingJsonSerializerIntrospector;
+import io.leopard.json.JsonException;
 
 public class ConvertJson {
 
 	private static ObjectMapper mapper = new ObjectMapper(); // 忽略不存在的字段.
 	static {
+
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(new OnumJsonSerializer());
+
+		mapper.registerModule(module);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		mapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
 	}
