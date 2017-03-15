@@ -333,7 +333,7 @@ public class QueryBuilder {
 		StatementParameter param = new StatementParameter();
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("select * from " + tableName);
+		sb.append("select * from `" + tableName + "`");
 		StringBuilder where = new StringBuilder();
 
 		{
