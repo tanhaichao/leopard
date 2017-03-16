@@ -120,11 +120,14 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 				value = this.parseList(field, node2);
 			}
 			else {
-				// System.err.println("textValue:" + textValue + " node2:" + node2.asText());
-				IllegalArgumentException e = new IllegalArgumentException("未知数据类型[" + type.getName() + " fieldName:" + fieldName + "].");
-				e.printStackTrace();
+				String json = node2.asText();
+				value = Json.toObject(json, type);
+
+				// System.err.println(" node2:" + node2.asText());
+				// IllegalArgumentException e = new IllegalArgumentException("未知数据类型[" + type.getName() + " fieldName:" + fieldName + "].");
+				// e.printStackTrace();
 				// throw e;
-				value = null;
+				// value = null;
 			}
 			field.set(bean, value);
 		}
