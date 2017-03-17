@@ -3,6 +3,7 @@ package io.leopard.web.xparam.resolver;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import io.leopard.json.Json;
 import io.leopard.lang.inum.EnumConstantInvalidException;
@@ -36,23 +38,17 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	// @Value("${xparam.underline}")
-	// private String underline;
-	//
-	// @PostConstruct
-	// public void init() {
-	// enable = !"false".equals(underline);
-	// }
-	//
-	// private static boolean enable = true;
-	//
-	// public static boolean isEnable() {
-	// return enable;
-	// }
-	//
-	// public static void setEnable(boolean enable) {
-	// ModelHandlerMethodArgumentResolver.enable = enable;
-	// }
+	private static Set<Class<?>> set = new HashSet<Class<?>>();
+	static {
+		set.add(MultipartFile.class);
+		set.add(String.class);
+		set.add(Date.class);
+		set.add(Integer.class);
+		set.add(Long.class);
+		set.add(Float.class);
+		set.add(Double.class);
+		set.add(List.class);
+	}
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -60,15 +56,23 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		if (type.isEnum()) {
 			return false;
 		}
-		String className = type.getName();
-		boolean supports = false;
-		if (className.endsWith("VO") || className.endsWith("Form")) {
-			supports = true;
+		if (type.isArray()) {
+			return false;
 		}
-		if (className.endsWith("AddressVO")) {
-			supports = true;
+		if (type.isPrimitive()) {
+			return false;
 		}
-		logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports + " type:" + type.getName());
+
+		// String className = type.getName();
+		// boolean supports = false;
+		// if (className.endsWith("VO") || className.endsWith("Form")) {
+		// supports = true;
+		// }
+		// if (className.endsWith("AddressVO")) {
+		// supports = true;
+		// }
+		logger.info("supportsParameter name:" + parameter.getParameterName() + " type:" + type.getName());
+		boolean supports = !set.contains(type);
 		return supports;
 	}
 
