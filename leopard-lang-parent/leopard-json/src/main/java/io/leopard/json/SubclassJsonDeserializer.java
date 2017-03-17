@@ -25,6 +25,7 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 	@Override
 	public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 		JsonNode node = jp.getCodec().readTree(jp);
+		// System.err.println("nodenode:" + node.toString());
 		String fieldName = getTypeFieldName();
 		JsonNode fieldNode = node.get(fieldName);
 		if (fieldNode == null) {
@@ -117,6 +118,7 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 				// }
 			}
 			else if (List.class.equals(type)) {
+				// System.err.println("node:" + node.asText());
 				value = this.parseList(field, node2);
 			}
 			else {
@@ -151,25 +153,32 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 		}
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	// @SuppressWarnings({ "rawtypes", "unchecked" })
 	protected Object parseListBean(JsonNode node, Class<?> clazz) {
-		Iterator<JsonNode> elements = node.elements();
-		// System.err.println("parseListBean elements:" + elements);
-		List list = null;
-		if (elements != null) {
-			list = new ArrayList();
-			while (elements.hasNext()) {
-				JsonNode node3 = elements.next();
-				String text = node3.asText();
-				// System.err.println("bean text:" + text);
-				Object bean = Json.toObject(text, clazz);
-				list.add(bean);
-			}
-		}
-		return list;
+		String json = node.toString();
+		return Json.toListObject(json, clazz);
+
+		// System.err.println("clazz:" + clazz.getName() + " node:" + node.toString());
+		//
+		// Iterator<JsonNode> elements = node.elements();
+		// // System.err.println("parseListBean elements:" + elements);
+		// List list = null;
+		// if (elements != null) {
+		// list = new ArrayList();
+		// while (elements.hasNext()) {
+		// JsonNode node3 = elements.next();
+		//
+		// String text = node3.asText();
+		// System.err.println("bean text:" + text + " node3.textValue():" + node3.toString());
+		// Object bean = Json.toObject(text, clazz);
+		// list.add(bean);
+		// }
+		// }
+		// return list;
 	}
 
 	protected Object parseListString(JsonNode node) {
+		// FIXME ahai 遇到WorkDelegate时?这里实现是否有问题?
 		Iterator<JsonNode> elements = node.elements();
 		List<String> list = null;
 		if (elements != null) {
