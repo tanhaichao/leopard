@@ -24,7 +24,7 @@ import io.leopard.web.xparam.Nologin;
  */
 @Component
 // TODO ahai 在site项目必须实现BeanPostProcessor接口才能成功配置拦截器.
-@Order(9)
+@Order(9) // 数字小优先
 public class PassportInterceptor extends RegisterHandlerInterceptor {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
