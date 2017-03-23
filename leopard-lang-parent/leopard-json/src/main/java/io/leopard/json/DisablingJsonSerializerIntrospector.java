@@ -2,6 +2,7 @@ package io.leopard.json;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
@@ -64,33 +65,11 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 		@Override
 		public Onum<?, ?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			JsonToken currentToken = jp.getCurrentToken();
+			System.err.println("getCurrentName:" + jp.getCurrentName());
 			{
 				// JsonNode node = jp.getCodec().readTree(jp);
 				if (currentToken.equals(JsonToken.START_OBJECT)) {
-					currentToken = jp.nextToken();
-					if (!"key".equals(jp.getCurrentName())) {
-						throw ctxt.mappingException("枚举的key字段必须要放在最前面.");
-						// throw new RuntimeException("枚举的key字段必须要放在最前面.");
-					}
-					jp.nextValue();
-
-					Object key;
-					if (Inum.class.isAssignableFrom(clazz)) {
-						key = jp.getIntValue();
-					}
-					else if (Snum.class.isAssignableFrom(clazz)) {
-						key = jp.getValueAsString();
-					}
-					else {
-						throw ctxt.mappingException("未知枚举类型[" + clazz.getName() + "].");
-					}
-					// System.err.println("key:" + key + " name:" + jp.getCurrentName() + " value:" + jp.getCurrentValue() + " text:" + jp.getText());
-					this.nextToClose(jp, ctxt);
-					if (key == null) {
-						return null;
-					}
-					return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
-					// System.err.println("currentToken name:" + jp.getCurrentName() + " token:" + currentToken.name());
+					return this.parseOnum(jp, ctxt);
 				}
 			}
 
@@ -121,6 +100,39 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 			// }
 			// }
 
+		}
+
+		protected Onum<?, ?> parseOnum(JsonParser jp, DeserializationContext ctxt) throws JsonParseException, IOException {
+			String fieldName = jp.getCurrentName();
+			JsonToken currentToken = jp.nextToken();
+			if (currentToken.equals(JsonToken.END_OBJECT)) {
+				return null;// 空对象直接返回null
+			}
+
+			if (!"key".equals(jp.getCurrentName())) {
+				// System.err.println("node:" + jp.getText());
+				throw ctxt.mappingException("枚举[" + fieldName + "]的key字段必须要放在最前面.");
+				// throw new RuntimeException("枚举的key字段必须要放在最前面.");
+			}
+			jp.nextValue();
+
+			Object key;
+			if (Inum.class.isAssignableFrom(clazz)) {
+				key = jp.getIntValue();
+			}
+			else if (Snum.class.isAssignableFrom(clazz)) {
+				key = jp.getValueAsString();
+			}
+			else {
+				throw ctxt.mappingException("未知枚举类型[" + clazz.getName() + "].");
+			}
+			// System.err.println("key:" + key + " name:" + jp.getCurrentName() + " value:" + jp.getCurrentValue() + " text:" + jp.getText());
+			this.nextToClose(jp, ctxt);
+			if (key == null) {
+				return null;
+			}
+			return (Onum<?, ?>) EnumUtil.toEnum(key, (Class<? extends Enum>) clazz);
+			// System.err.println("currentToken name:" + jp.getCurrentName() + " token:" + currentToken.name());
 		}
 
 		protected void nextToClose(JsonParser jp, DeserializationContext ctxt) throws JsonMappingException, IOException {
