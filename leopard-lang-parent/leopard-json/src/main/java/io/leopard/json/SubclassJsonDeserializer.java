@@ -122,7 +122,8 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 				value = this.parseList(field, node2);
 			}
 			else {
-				String json = node2.asText();
+				// String json = node2.asText();
+				String json = node2.toString();
 				value = Json.toObject(json, type);
 
 				// System.err.println(" node2:" + node2.asText());
@@ -138,19 +139,23 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 	protected Object parseList(Field field, JsonNode node) {
 		ParameterizedType p = (ParameterizedType) field.getGenericType();
 		Class<?> clazz = (Class<?>) p.getActualTypeArguments()[0];
-		if (String.class.equals(clazz)) {
-			return this.parseListString(node);
-		}
-		else if (Integer.class.equals(clazz)) {
-			throw new IllegalArgumentException("未实现List<Integer>");
-		}
-		else if (Long.class.equals(clazz)) {
-			throw new IllegalArgumentException("未实现List<Long>");
-		}
-		else {
-			return this.parseListBean(node, clazz);
-			// throw new IllegalArgumentException("未知泛型[" + clazz.getName() + "].");
-		}
+
+		String json = node.toString();
+		return Json.toListObject(json, clazz);
+
+		// if (String.class.equals(clazz)) {
+		// return this.parseListString(node);
+		// }
+		// else if (Integer.class.equals(clazz)) {
+		// throw new IllegalArgumentException("未实现List<Integer>");
+		// }
+		// else if (Long.class.equals(clazz)) {
+		// throw new IllegalArgumentException("未实现List<Long>");
+		// }
+		// else {
+		// return this.parseListBean(node, clazz);
+		// // throw new IllegalArgumentException("未知泛型[" + clazz.getName() + "].");
+		// }
 	}
 
 	// @SuppressWarnings({ "rawtypes", "unchecked" })

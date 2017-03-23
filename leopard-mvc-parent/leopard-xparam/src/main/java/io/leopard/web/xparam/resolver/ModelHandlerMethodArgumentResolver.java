@@ -152,7 +152,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		// return ParamListHandlerMethodArgumentResolver.toList(subType, values);
 	}
 
-	protected Object toObject(String value, Class<?> type) {
+	public static Object toObject(String value, Class<?> type) {
 		if (String.class.equals(type)) {
 			return value;
 		}
