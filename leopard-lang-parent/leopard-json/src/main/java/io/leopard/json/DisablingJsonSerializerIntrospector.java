@@ -65,7 +65,7 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 		@Override
 		public Onum<?, ?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			JsonToken currentToken = jp.getCurrentToken();
-			System.err.println("getCurrentName:" + jp.getCurrentName());
+			// System.err.println("getCurrentName:" + jp.getCurrentName());
 			{
 				// JsonNode node = jp.getCodec().readTree(jp);
 				if (currentToken.equals(JsonToken.START_OBJECT)) {
@@ -102,6 +102,7 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 
 		}
 
+		@SuppressWarnings("unchecked")
 		protected Onum<?, ?> parseOnum(JsonParser jp, DeserializationContext ctxt) throws JsonParseException, IOException {
 			String fieldName = jp.getCurrentName();
 			JsonToken currentToken = jp.nextToken();
