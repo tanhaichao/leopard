@@ -102,7 +102,7 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 
 		}
 
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		protected Onum<?, ?> parseOnum(JsonParser jp, DeserializationContext ctxt) throws JsonParseException, IOException {
 			String fieldName = jp.getCurrentName();
 			JsonToken currentToken = jp.nextToken();

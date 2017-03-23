@@ -71,7 +71,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		// if (className.endsWith("AddressVO")) {
 		// supports = true;
 		// }
-		logger.info("supportsParameter name:" + parameter.getParameterName() + " type:" + type.getName());
+		// logger.info("supportsParameter name:" + parameter.getParameterName() + " type:" + type.getName());
 		boolean supports = !set.contains(type);
 		return supports;
 	}
@@ -103,7 +103,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 				if (value == null) {
 					continue;
 				}
-				obj = this.toObject(value, type);
+				obj = toObject(value, type);
 			}
 			field.setAccessible(true);
 			field.set(bean, obj);
@@ -116,7 +116,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		String json;
 		{
 			String[] values = ParamListHandlerMethodArgumentResolver.getParameterValues(req, fieldName);
-			logger.info("toList fieldName:" + fieldName + " values:" + StringUtils.join(values, ",   "));
+			// logger.info("toList fieldName:" + fieldName + " values:" + StringUtils.join(values, ", "));
 			if (values == null) {
 				return null;
 			}
