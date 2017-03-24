@@ -6,14 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.mysql.jdbc.MysqlDataTruncation;
+
+import io.leopard.mvc.trynb.message.MessageParserImpl;
 
 public class ErrorUtil {
 	protected static final Log logger = LogFactory.getLog(ErrorUtil.class);
@@ -70,13 +70,15 @@ public class ErrorUtil {
 			return "操作数据库出错，请稍后重试.";
 		}
 		if (e instanceof DataIntegrityViolationException) {
-			try {
-				return parseDataIntegrityViolationException((DataIntegrityViolationException) e);
-			}
-			catch (Exception e1) {
-				e1.printStackTrace();
-				return "字段太长，请稍后重试.";
-			}
+			MysqlDataTruncation exception = (MysqlDataTruncation) e.getCause();
+			return MessageParserImpl.parse(exception);
+			// try {
+			// return parseDataIntegrityViolationException((DataIntegrityViolationException) e);
+			// }
+			// catch (Exception e1) {
+			// e1.printStackTrace();
+			// return "字段太长，请稍后重试.";
+			// }
 
 		}
 		message = e.getMessage();
@@ -86,28 +88,31 @@ public class ErrorUtil {
 		return fillterDebugInfo(message);
 	}
 
-	protected static String parseDataIntegrityViolationException(DataIntegrityViolationException e) {
-		MysqlDataTruncation e1 = (MysqlDataTruncation) e.getCause();
-		String message = e1.getMessage();
-		// String message = "Data truncation: Data too long for column 'spec' at row 1";
-		// [Data truncation: Out of range value for column 'weight' at row 1]
-
-		// String regex = "Data truncation: Data too long for column '(.*?)' at row";
-		String regex = " for column '(.*?)' at row";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(message);
-		if (m.find()) {
-			String columnName = m.group(1);
-
-			if (message.startsWith("Data truncation: Data too long for column")) {
-				return "字段" + columnName + "太长，请稍后重试.";
-			}
-			else if (message.startsWith("Out of range value for column")) {
-				return "数字类型字段" + columnName + "越界.";
-			}
-		}
-		throw new RuntimeException("解析mysql提示信息出错[" + message + "].");
-	}
+	// protected static String parseDataIntegrityViolationException(DataIntegrityViolationException e) {
+	// MysqlDataTruncation e1 = (MysqlDataTruncation) e.getCause();
+	// String message = e1.getMessage();
+	// // String message = "Data truncation: Data too long for column 'spec' at row 1";
+	// // [Data truncation: Out of range value for column 'weight' at row 1]
+	// // Field 'reason' doesn't have a default value
+	//
+	// // String regex = "Data truncation: Data too long for column '(.*?)' at row";
+	// String regex = " for column '(.*?)' at row";
+	// Pattern p = Pattern.compile(regex);
+	// Matcher m = p.matcher(message);
+	// if (m.find()) {
+	// String columnName = m.group(1);
+	//
+	// // Field 'reason' doesn't have a default value; nested exception is java.sql.SQLException: Field 'reason' doesn't have a default value
+	//
+	// if (message.startsWith("Data truncation: Data too long for column")) {
+	// return "字段" + columnName + "太长，请稍后重试.";
+	// }
+	// else if (message.startsWith("Out of range value for column")) {
+	// return "数字类型字段" + columnName + "越界.";
+	// }
+	// }
+	// throw new RuntimeException("解析mysql提示信息出错[" + message + "].");
+	// }
 
 	/**
 	 * 过滤debug信息.

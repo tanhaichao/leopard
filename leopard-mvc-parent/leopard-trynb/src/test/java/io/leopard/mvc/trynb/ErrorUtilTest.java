@@ -71,9 +71,9 @@ public class ErrorUtilTest {
 
 	}
 
-	@Test
-	public void parseDataIntegrityViolationException() {
-		String message = ErrorUtil.parseDataIntegrityViolationException(null);
-		System.out.println("message:" + message);
-	}
+	// @Test
+	// public void parseDataIntegrityViolationException() {
+	// String message = ErrorUtil.parseDataIntegrityViolationException(null);
+	// System.out.println("message:" + message);
+	// }
 }
