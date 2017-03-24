@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
+import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
@@ -23,6 +24,7 @@ public @interface FieldDetail {
 	/**
 	 * 序列化类名
 	 */
-	String value();
+	String className() default "";
 
+	Class<?> using() default JsonSerializer.None.class;
 }

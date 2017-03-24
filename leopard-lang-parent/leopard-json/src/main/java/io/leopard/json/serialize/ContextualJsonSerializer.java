@@ -21,8 +21,7 @@ public abstract class ContextualJsonSerializer<A extends Annotation> extends Jso
 	@Override
 	public JsonSerializer<?> createContextual(SerializerProvider serializerProvider, BeanProperty beanProperty) throws JsonMappingException {
 		if (beanProperty != null) {
-			System.err.println("beanProperty:" + beanProperty + " name:" + beanProperty.getName() + " type:" + beanProperty.getMember().getGenericType());
-
+			// System.err.println("beanProperty:" + beanProperty + " name:" + beanProperty.getName() + " type:" + beanProperty.getMember().getGenericType());
 			Class<A> clazz = annotation();
 			A anno = beanProperty.getAnnotation(clazz);
 			if (anno == null) {

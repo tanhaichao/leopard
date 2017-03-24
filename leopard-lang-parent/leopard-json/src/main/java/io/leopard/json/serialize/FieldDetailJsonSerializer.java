@@ -32,10 +32,16 @@ public class FieldDetailJsonSerializer extends ContextualJsonSerializer<FieldDet
 	public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
 		// gen.writeObject(value);
 		// String fieldName = gen.getOutputContext().getCurrentName();
-		String className = anno.value();
 		// System.err.println("FieldDetailJsonSerializer serialize: className:" + className);
 		try {
-			Class<?> clazz = Class.forName(className);
+			Class<?> clazz;
+			String className = anno.className();
+			if (className.length() <= 0) {
+				clazz = anno.using();
+			}
+			else {
+				clazz = Class.forName(className);
+			}
 			@SuppressWarnings("unchecked")
 			JsonSerializer<Object> serializer = (JsonSerializer<Object>) clazz.newInstance();
 			serializer.serialize(value, gen, serializers);
