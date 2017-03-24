@@ -66,7 +66,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 		String json = null;
 		try {
-			json = MvcJson.toJson(map, isFormat);
+			json = MvcOutputJson.toJson(map, isFormat);
 		}
 		catch (JsonProcessingException e) {
 			e.printStackTrace();

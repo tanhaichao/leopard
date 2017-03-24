@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import io.leopard.web.xparam.resolver.UnderlineNameConfiger;
 
-public class MvcJson {
+public class MvcOutputJson {
 
 	private static ObjectWriter formatWriter;
 
