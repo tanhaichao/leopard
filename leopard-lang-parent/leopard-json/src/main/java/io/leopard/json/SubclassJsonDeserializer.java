@@ -90,16 +90,23 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 				}
 			}
 			else if (type.equals(int.class)) {
-				value = node2.intValue();
+				// String text = node2.asText();
+				value = Integer.parseInt(node2.asText());// node2.intValue();
+
+				// System.err.println("node2:" + text + " value:" + value);
+
 			}
 			else if (type.equals(long.class)) {
-				value = node2.longValue();
+				// value = node2.longValue();
+				value = Long.parseLong(node2.asText());
 			}
 			else if (type.equals(float.class)) {
-				value = node2.floatValue();
+				// value = node2.floatValue();
+				value = Float.parseFloat(node2.asText());
 			}
 			else if (type.equals(double.class)) {
-				value = node2.doubleValue();
+				// value = node2.doubleValue();
+				value = Double.parseDouble(node2.asText());
 			}
 			else if (type.equals(Date.class)) {
 
@@ -108,7 +115,9 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 				// value = null;
 				// }
 				// else {
-				long time = node2.longValue();
+				long time = Long.parseLong(node2.asText());// node2.intValue();
+
+				// long time = node2.longValue();
 				if (time == 0) {
 					value = null;
 				}
