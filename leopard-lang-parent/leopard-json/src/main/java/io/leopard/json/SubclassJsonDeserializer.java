@@ -63,9 +63,15 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 		return bean;
 	}
 
+	/**
+	 * 兼容加了双引号的数字
+	 * 
+	 * @param node2
+	 * @return
+	 */
 	protected String getNumberText(JsonNode node2) {
 		String text = node2.asText();
-		if (text == null || text.length() == 0) {
+		if (text == null || text.length() == 0 || "null".equals(text)) {
 			return "0";
 		}
 		return text;
