@@ -5,7 +5,6 @@ import java.lang.reflect.ParameterizedType;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -131,8 +130,6 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 		}
 		else if (java.sql.Timestamp.class.equals(requiredType) || java.util.Date.class.equals(requiredType)) {
 			value = rs.getTimestamp(index);
-			Timestamp timestamp = (Timestamp) value;
-			System.err.println("timestamp:" + timestamp.getTime());
 		}
 		else if (List.class.equals(requiredType)) {
 			String json = rs.getString(index);
