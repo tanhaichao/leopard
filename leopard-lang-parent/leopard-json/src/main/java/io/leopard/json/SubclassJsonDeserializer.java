@@ -63,22 +63,31 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 		return bean;
 	}
 
+	protected String getNumberText(JsonNode node2) {
+		String text = node2.asText();
+		if (text == null || text.length() == 0) {
+			return "0";
+		}
+		return text;
+	}
+
 	protected void deserialize(JsonNode node, Class<?> clazz, T bean) throws IllegalArgumentException, IllegalAccessException {
 		for (Field field : clazz.getDeclaredFields()) {
 			field.setAccessible(true);
 			Class<?> type = field.getType();
 			String fieldName = field.getName();
 			JsonNode node2 = node.get(fieldName);
-			Object value;
 			if (node2 == null) {
-				value = null;
 				continue;
 			}
+
+			Object value;
 			if (type.equals(String.class)) {
 				value = node2.textValue();
 			}
 			else if (type.equals(boolean.class)) {
-				value = node2.booleanValue();
+				String text = node2.asText();
+				value = Boolean.parseBoolean(text);
 			}
 			else if (type.equals(Boolean.class)) {
 				String text = node2.asText();
@@ -86,60 +95,43 @@ public abstract class SubclassJsonDeserializer<T> extends JsonDeserializer<T> {
 					value = null;
 				}
 				else {
-					value = node2.booleanValue();
+					value = Boolean.parseBoolean(text);
 				}
 			}
 			else if (type.equals(int.class)) {
 				// String text = node2.asText();
-				value = Integer.parseInt(node2.asText());// node2.intValue();
+				value = Integer.parseInt(getNumberText(node2));// node2.intValue();
 
 				// System.err.println("node2:" + text + " value:" + value);
 
 			}
 			else if (type.equals(long.class)) {
 				// value = node2.longValue();
-				value = Long.parseLong(node2.asText());
+				value = Long.parseLong(getNumberText(node2));
 			}
 			else if (type.equals(float.class)) {
 				// value = node2.floatValue();
-				value = Float.parseFloat(node2.asText());
+				value = Float.parseFloat(getNumberText(node2));
 			}
 			else if (type.equals(double.class)) {
 				// value = node2.doubleValue();
-				value = Double.parseDouble(node2.asText());
+				value = Double.parseDouble(getNumberText(node2));
 			}
 			else if (type.equals(Date.class)) {
-
-				// String text = node2.asText();
-				// if (text == null) {
-				// value = null;
-				// }
-				// else {
-				long time = Long.parseLong(node2.asText());// node2.intValue();
-
-				// long time = node2.longValue();
+				long time = Long.parseLong(getNumberText(node2));
 				if (time == 0) {
 					value = null;
 				}
 				else {
 					value = new Date(time);
 				}
-				// }
 			}
 			else if (List.class.equals(type)) {
-				// System.err.println("node:" + node.asText());
 				value = this.parseList(field, node2);
 			}
 			else {
-				// String json = node2.asText();
 				String json = node2.toString();
 				value = Json.toObject(json, type);
-
-				// System.err.println(" node2:" + node2.asText());
-				// IllegalArgumentException e = new IllegalArgumentException("未知数据类型[" + type.getName() + " fieldName:" + fieldName + "].");
-				// e.printStackTrace();
-				// throw e;
-				// value = null;
 			}
 			field.set(bean, value);
 		}
