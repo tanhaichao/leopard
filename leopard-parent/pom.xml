@@ -400,14 +400,12 @@
 					<artifactId>webide-local</artifactId>
 					<version>0.1-SNAPSHOT</version>
 				</dependency>
-				<!-- 
 				<dependency>
 					<groupId>io.leopard</groupId>
 					<artifactId>autocode-all</artifactId>
 					<version>0.1-SNAPSHOT</version>
 					<scope>provided</scope>
 				</dependency>
-				 -->
 			</dependencies>
 
 			<build>
