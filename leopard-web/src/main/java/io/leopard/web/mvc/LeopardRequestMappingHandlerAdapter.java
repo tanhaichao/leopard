@@ -7,7 +7,12 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod;
 
+import io.leopard.web.mvc.method.InvocableHandlerMethodCreator;
+import io.leopard.web.mvc.method.InvocableHandlerMethodCreatorImpl;
+
 public class LeopardRequestMappingHandlerAdapter extends RequestMappingHandlerAdapter {
+
+	private InvocableHandlerMethodCreator invocableHandlerMethodCreator = new InvocableHandlerMethodCreatorImpl();
 
 	@Override
 	public void setArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
@@ -23,7 +28,7 @@ public class LeopardRequestMappingHandlerAdapter extends RequestMappingHandlerAd
 
 	@Override
 	protected ServletInvocableHandlerMethod createInvocableHandlerMethod(HandlerMethod handlerMethod) {
-		return new LeopardServletInvocableHandlerMethod(handlerMethod);
+		return invocableHandlerMethodCreator.createInvocableHandlerMethod(handlerMethod);
 	}
 
 	@Override
