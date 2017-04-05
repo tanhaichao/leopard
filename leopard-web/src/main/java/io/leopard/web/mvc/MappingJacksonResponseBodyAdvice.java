@@ -20,6 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.leopard.data.env.EnvUtil;
 import io.leopard.mvc.trynb.ResultModifierImpl;
+import io.leopard.web.mvc.json.MvcOutputJson;
 import io.leopard.web.servlet.JsonDebugger;
 
 public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Object> {

@@ -1,6 +1,10 @@
-package io.leopard.web.mvc;
+package io.leopard.web.mvc.json;
+
+import java.util.Iterator;
+import java.util.ServiceLoader;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -15,10 +19,18 @@ public class MvcOutputJson {
 	private static ObjectMapper mapper; // can reuse, share
 
 	static {
+		Iterator<ModuleSerializer> iterator = ServiceLoader.load(ModuleSerializer.class).iterator();
 		// voFiller.init();
 		// Onum序列化
 		SimpleModule module = new SimpleModule();
 		module.addSerializer(new OnumJsonSerializer());
+		while (iterator.hasNext()) {
+			ModuleSerializer moduleSerializer = iterator.next();
+			JsonSerializer<?> serializer = moduleSerializer.get();
+			if (serializer != null) {
+				module.addSerializer(serializer);
+			}
+		}
 
 		boolean enable = UnderlineNameConfiger.isEnable();
 		// System.err.println("MappingJacksonResponseBodyAdvice underline:" + underline + " enable:" + enable);
@@ -34,7 +46,6 @@ public class MvcOutputJson {
 			formatWriter = mapper.writer().withDefaultPrettyPrinter();
 			mapper = new ObjectMapper();
 		}
-		mapper.registerModule(module);
 	}
 
 	public static String toJson(Object data, boolean format) throws JsonProcessingException {

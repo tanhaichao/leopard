@@ -1,4 +1,4 @@
-package io.leopard.web.mvc;
+package io.leopard.web.mvc.json;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
