@@ -22,8 +22,9 @@ public class ResultModifierImpl implements ResultModifier {
 
 	public ResultModifierImpl() {
 		Iterator<ResultModifier> iterator = ServiceLoader.load(ResultModifier.class).iterator();
-		if (iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			list.add(iterator.next());
+			// System.err.println("ResultModifierImpl load:" + list.get(list.size() - 1).getClass().getName());
 		}
 	}
 
