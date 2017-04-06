@@ -9,13 +9,17 @@ public class LeopardTransactionManager extends DataSourceTransactionManager {
 
 	@Override
 	protected void doCommit(DefaultTransactionStatus status) {
-		logger.info("doCommit:" + status);
+		// logger.info("doCommit:" + status);
+		// if (true) {
+		// this.doRollback(status);
+		// return;
+		// }
 		super.doCommit(status);
 	}
 
 	@Override
 	protected void doRollback(DefaultTransactionStatus status) {
-		logger.info("doRollback:" + status);
+		// logger.info("doRollback:" + status);
 		super.doRollback(status);
 	}
 
