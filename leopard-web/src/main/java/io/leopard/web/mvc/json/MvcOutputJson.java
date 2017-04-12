@@ -38,13 +38,13 @@ public class MvcOutputJson {
 			mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 			mapper.registerModule(module);
 			formatWriter = mapper.writer().withDefaultPrettyPrinter();
-			mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+			// mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 		}
 		else {
 			mapper = new ObjectMapper();
 			mapper.registerModule(module);
 			formatWriter = mapper.writer().withDefaultPrettyPrinter();
-			mapper = new ObjectMapper();
+			// mapper = new ObjectMapper();
 		}
 	}
 
