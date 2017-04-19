@@ -11,7 +11,7 @@ public class RequestMappingUtil {
 	 * @param method
 	 * @return
 	 */
-	public static String getUrl(HandlerMethod method) {
+	public static String getMethodUrl(HandlerMethod method) {
 		String methodValue = getMethodValue(method);
 		Class<?> beanType = method.getBeanType();
 		RequestMapping anno = beanType.getAnnotation(RequestMapping.class);
