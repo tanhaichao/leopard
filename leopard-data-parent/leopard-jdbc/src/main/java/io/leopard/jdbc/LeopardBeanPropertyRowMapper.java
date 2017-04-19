@@ -207,6 +207,9 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 				throw new RuntimeException("未知枚举类型[" + requiredType.getName() + "].");
 			}
 		}
+		else if (Object.class.equals(requiredType)) {
+			throw new RuntimeException("实体类的字段类型不能使用Object.");
+		}
 		else {
 			String json = rs.getString(index);
 			try {
