@@ -15,7 +15,7 @@ public class RequestMappingUtil {
 		String methodValue = getMethodValue(method);
 		Class<?> beanType = method.getBeanType();
 		RequestMapping anno = beanType.getAnnotation(RequestMapping.class);
-		if (anno == null) {
+		if (anno == null || anno.value().length == 0) {
 			return methodValue;
 		}
 		else {
@@ -27,7 +27,7 @@ public class RequestMappingUtil {
 
 	protected static String getMethodValue(HandlerMethod method) {
 		RequestMapping anno = method.getMethodAnnotation(RequestMapping.class);
-		if (anno == null) {
+		if (anno == null || anno.value().length == 0) {
 			return "/" + method.getMethod().getName();
 		}
 		else {
