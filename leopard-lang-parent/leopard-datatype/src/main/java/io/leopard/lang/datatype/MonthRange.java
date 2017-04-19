@@ -24,7 +24,16 @@ public class MonthRange extends TimeRange {
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 		Date startTime = new Date(cal.getTimeInMillis());
+		this.init(startTime);
+	}
 
+	public MonthRange(Date startTime) {
+		this.init(startTime);
+	}
+
+	protected void init(Date startTime) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(startTime.getTime());
 		Date endTime = null;
 		{
 			cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
