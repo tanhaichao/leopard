@@ -5,7 +5,9 @@ import java.lang.reflect.ParameterizedType;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,6 +133,21 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 		else if (java.sql.Timestamp.class.equals(requiredType) || java.util.Date.class.equals(requiredType)) {
 			value = rs.getTimestamp(index);
 		}
+		else if (java.util.Date.class.isAssignableFrom(requiredType)) {
+			Timestamp timestamp = rs.getTimestamp(index);
+			Date date;
+			try {
+				date = (Date) requiredType.newInstance();
+			}
+			catch (InstantiationException e) {
+				throw new RuntimeException(requiredType.getName() + "没有默认构造方法.", e);
+			}
+			catch (IllegalAccessException e) {
+				throw new RuntimeException(requiredType.getName() + "默认构造方法实例化失败.", e);
+			}
+			date.setTime(timestamp.getTime());
+			value = date;
+		}
 		else if (List.class.equals(requiredType)) {
 			String json = rs.getString(index);
 			// System.out.println("name:" + field.getName() + " json:" + json);
@@ -161,7 +178,8 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 					Class<?> clazz = (Class<?>) type.getActualTypeArguments()[0];
 					// System.out.println("clazz:" + clazz.getName());
 					value = Json.toListObject(json, clazz, true);
-					// throw new IllegalArgumentException("未知数据类型[" + elementClassName + "].");
+					// throw new IllegalArgumentException("未知数据类型[" +
+					// elementClassName + "].");
 				}
 			}
 		}
@@ -198,7 +216,8 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 				System.err.println("JsonException fieldName:" + field.getName() + " " + requiredType.getName() + " json:" + json);
 				throw e;
 			}
-			// throw new SQLException("未知数据类型[" + requiredType.getName() + "].");
+			// throw new SQLException("未知数据类型[" + requiredType.getName() +
+			// "].");
 		}
 		return value;
 	}
