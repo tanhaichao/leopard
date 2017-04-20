@@ -6,6 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
@@ -22,9 +24,12 @@ import io.leopard.data.schema.RegisterComponentUtil;
  * 
  */
 public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
+		logger.info("parse:");
+
 		String hash = element.getAttribute("hash");
 		if ("none".equals(hash) || StringUtils.isEmpty(hash)) {
 			return createDefaultRedisImpl(element, parserContext);
