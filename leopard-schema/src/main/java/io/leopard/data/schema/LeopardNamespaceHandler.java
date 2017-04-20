@@ -1,11 +1,14 @@
 package io.leopard.data.schema;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
 import io.leopard.data.env.AppInitializerImpl;
 
 public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	public LeopardNamespaceHandler() {
 		new AppInitializerImpl().init();
@@ -52,7 +55,7 @@ public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
 			parser = getBeanDefinitionParser(elementName, className);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 			return;
 		}
 		// try {
