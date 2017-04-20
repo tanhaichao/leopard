@@ -31,6 +31,8 @@ public class CaptchaBeanDefinitionParser implements BeanDefinitionParser {
 			tableName = "captcha";
 		}
 
+		logger.info("CaptchaBeanDefinitionParser id:" + beanId);
+
 		Class<?> clazz;
 		try {
 			clazz = Class.forName("io.leopard.web.captcha.kit.CaptchaServiceImpl");
