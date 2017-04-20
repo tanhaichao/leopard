@@ -21,6 +21,10 @@ public class CaptchaBeanDefinitionParser implements BeanDefinitionParser {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
+	public CaptchaBeanDefinitionParser() {
+		logger.info("init");
+	}
+
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		final String beanId = element.getAttribute("id");
