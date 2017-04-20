@@ -50,6 +50,7 @@ public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
 	}
 
 	protected void registerParser(String elementName, String className) {
+		logger.info("registerParser elementName:" + elementName + " className:" + className);
 		BeanDefinitionParser parser;
 		try {
 			parser = getBeanDefinitionParser(elementName, className);
