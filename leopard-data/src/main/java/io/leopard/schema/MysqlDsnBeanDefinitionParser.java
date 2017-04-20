@@ -1,6 +1,8 @@
 package io.leopard.schema;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
@@ -16,6 +18,8 @@ import io.leopard.data.schema.RegisterComponentUtil;
  * 
  */
 public class MysqlDsnBeanDefinitionParser implements BeanDefinitionParser {
+	protected Log logger = LogFactory.getLog(this.getClass());
+
 	// recall.jdbc.driverClassName=
 	// recall.jdbc.url=
 	// recall.jdbc.username=
@@ -23,6 +27,7 @@ public class MysqlDsnBeanDefinitionParser implements BeanDefinitionParser {
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		final String jdbcId = element.getAttribute("id");
+		logger.info("parse jdbcId:" + jdbcId);
 		String dataSourceId = element.getAttribute("dataSourceId");
 		BeanDefinition beanDefinition = createJdbc(jdbcId, dataSourceId, element, parserContext);
 		this.createNosql(jdbcId, parserContext);

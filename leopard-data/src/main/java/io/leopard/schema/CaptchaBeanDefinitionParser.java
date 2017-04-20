@@ -22,7 +22,7 @@ public class CaptchaBeanDefinitionParser implements BeanDefinitionParser {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	public CaptchaBeanDefinitionParser() {
-		logger.info("init");
+		logger.info("new");
 	}
 
 	@Override
