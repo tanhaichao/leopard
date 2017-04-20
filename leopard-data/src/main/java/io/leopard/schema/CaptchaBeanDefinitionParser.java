@@ -1,6 +1,8 @@
 package io.leopard.schema;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
@@ -17,6 +19,8 @@ import io.leopard.data.schema.RegisterComponentUtil;
  */
 public class CaptchaBeanDefinitionParser implements BeanDefinitionParser {
 
+	protected Log logger = LogFactory.getLog(this.getClass());
+
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		final String beanId = element.getAttribute("id");
@@ -32,6 +36,7 @@ public class CaptchaBeanDefinitionParser implements BeanDefinitionParser {
 			clazz = Class.forName("io.leopard.web.captcha.kit.CaptchaServiceImpl");
 		}
 		catch (ClassNotFoundException e) {
+			logger.error(e.getMessage(), e);
 			// e.printStackTrace();
 			return null;
 		}
