@@ -27,7 +27,7 @@ public class MysqlDsnBeanDefinitionParser implements BeanDefinitionParser {
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		final String jdbcId = element.getAttribute("id");
-		logger.info("parse jdbcId:" + jdbcId);
+		// logger.info("parse jdbcId:" + jdbcId);
 		String dataSourceId = element.getAttribute("dataSourceId");
 		BeanDefinition beanDefinition = createJdbc(jdbcId, dataSourceId, element, parserContext);
 		this.createNosql(jdbcId, parserContext);

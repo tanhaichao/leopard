@@ -28,14 +28,13 @@ public class CaptchaBeanDefinitionParser implements BeanDefinitionParser {
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		final String beanId = element.getAttribute("id");
-		logger.info("parse beanId:" + beanId);
+		// logger.info("parse beanId:" + beanId);
 		String jdbcId = element.getAttribute("jdbc-ref");
 		String redisId = element.getAttribute("redis-ref");
 		String tableName = element.getAttribute("table");
 		if (StringUtils.isEmpty(tableName)) {
 			tableName = "captcha";
 		}
-
 
 		Class<?> clazz;
 		try {
