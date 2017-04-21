@@ -26,7 +26,7 @@ public class MysqlDsnDataSource extends JdbcDataSource {
 
 	@Override
 	public void init() {
-		JdbcUrlInfo jdbcUrlInfo = this.parseUrl(url);
+		JdbcUrlInfo jdbcUrlInfo = parseUrl(url);
 		// String jdbcUrl = ProxyDataSource.getJdbcUrl(jdbcUrlInfo.getHost(),
 		// jdbcUrlInfo.getPort(), jdbcUrlInfo.getDatabase());
 
@@ -37,7 +37,7 @@ public class MysqlDsnDataSource extends JdbcDataSource {
 		super.init();
 	}
 
-	protected JdbcUrlInfo parseUrl(String url) {
+	public static JdbcUrlInfo parseUrl(String url) {
 		String regex = "jdbc:mysql://(.*?):([0-9]+)/([a-z0-9A-Z_]+)";
 
 		Pattern p = Pattern.compile(regex);
