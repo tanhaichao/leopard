@@ -54,7 +54,7 @@ public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
 		BeanDefinitionParser parser;
 		try {
 			parser = getBeanDefinitionParser(elementName, className);
-			logger.info("registerParser elementName:" + elementName + " parser:" + parser);
+//			logger.info("registerParser elementName:" + elementName + " parser:" + parser);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
