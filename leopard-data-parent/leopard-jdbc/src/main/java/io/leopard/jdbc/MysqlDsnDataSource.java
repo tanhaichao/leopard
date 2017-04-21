@@ -20,7 +20,7 @@ public class MysqlDsnDataSource extends JdbcDataSource {
 		if (StringUtils.isEmpty(url)) {
 			throw new IllegalArgumentException("参数url不能为空.");
 		}
-		logger.info("jdbcUrl:" + url);
+		// logger.info("jdbcUrl:" + url);
 		this.url = url;
 	}
 
