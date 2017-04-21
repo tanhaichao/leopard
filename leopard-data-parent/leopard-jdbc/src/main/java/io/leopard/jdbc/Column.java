@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Column {
 
-	int lenght() default 0;
+	int length() default 0;
 
 	/**
 	 * 字段名称
