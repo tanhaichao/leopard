@@ -16,6 +16,7 @@ public class Month extends Date {
 
 	public Month() {
 		this(System.currentTimeMillis());
+		new Exception().printStackTrace();
 	}
 
 	public Month(java.util.Date date) {
