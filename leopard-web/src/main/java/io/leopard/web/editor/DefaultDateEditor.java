@@ -6,6 +6,7 @@ import java.util.Date;
 import io.leopard.burrow.util.DateTime;
 import io.leopard.burrow.util.DateUtil;
 
+@Deprecated
 public class DefaultDateEditor extends PropertyEditorSupport {
 
 	@Override

@@ -1,11 +1,9 @@
 package io.leopard.web.editor;
 
-import java.util.Date;
-
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
 import org.springframework.web.context.request.WebRequest;
-
+@Deprecated
 public class LeopardWebBindingInitializer extends ConfigurableWebBindingInitializer {
 
 	// private static boolean convert = true;

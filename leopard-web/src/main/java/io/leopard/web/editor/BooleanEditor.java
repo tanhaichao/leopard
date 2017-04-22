@@ -2,6 +2,7 @@ package io.leopard.web.editor;
 
 import org.springframework.beans.propertyeditors.CustomBooleanEditor;
 
+@Deprecated
 public class BooleanEditor extends CustomBooleanEditor {
 
 	public BooleanEditor() {

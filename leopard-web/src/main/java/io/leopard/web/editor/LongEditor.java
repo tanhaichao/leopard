@@ -1,7 +1,7 @@
 package io.leopard.web.editor;
 
 import java.beans.PropertyEditorSupport;
-
+@Deprecated
 public class LongEditor extends PropertyEditorSupport {
 
 	public Object getValue() {
