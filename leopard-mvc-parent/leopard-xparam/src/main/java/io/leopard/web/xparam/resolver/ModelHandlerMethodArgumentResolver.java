@@ -21,6 +21,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.leopard.json.Json;
+import io.leopard.lang.datatype.Month;
+import io.leopard.lang.datatype.OnlyDate;
 import io.leopard.lang.inum.EnumConstantInvalidException;
 import io.leopard.lang.inum.EnumUtil;
 import io.leopard.lang.inum.Inum;
@@ -48,6 +50,8 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		set.add(Float.class);
 		set.add(Double.class);
 		set.add(List.class);
+		set.add(Month.class);
+		set.add(OnlyDate.class);
 	}
 
 	@Override
@@ -62,16 +66,6 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		if (type.isPrimitive()) {
 			return false;
 		}
-
-		// String className = type.getName();
-		// boolean supports = false;
-		// if (className.endsWith("VO") || className.endsWith("Form")) {
-		// supports = true;
-		// }
-		// if (className.endsWith("AddressVO")) {
-		// supports = true;
-		// }
-		// logger.info("supportsParameter name:" + parameter.getParameterName() + " type:" + type.getName());
 		boolean supports = !set.contains(type);
 		return supports;
 	}
