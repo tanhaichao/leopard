@@ -28,8 +28,7 @@ public class RedisDsnBeanDefinitionParser implements BeanDefinitionParser {
 
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
-		logger.info("parse:");
-
+		// logger.info("parse:");
 		String hash = element.getAttribute("hash");
 		if ("none".equals(hash) || StringUtils.isEmpty(hash)) {
 			return createDefaultRedisImpl(element, parserContext);
