@@ -1,7 +1,5 @@
 package io.leopard.web.editor;
 
-import java.util.Date;
-
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
 import org.springframework.web.context.request.WebRequest;
@@ -20,7 +18,7 @@ public class LeopardWebBindingInitializer extends ConfigurableWebBindingInitiali
 
 		// new CustomBooleanEditor(true)//
 
-		binder.registerCustomEditor(Date.class, new DefaultDateEditor());
+		// binder.registerCustomEditor(Date.class, new DefaultDateEditor());
 		// binder.registerCustomEditor(boolean.class, new BooleanEditor());
 		// binder.registerCustomEditor(int.class, new IntegerEditor());
 		// binder.registerCustomEditor(long.class, new LongEditor());
