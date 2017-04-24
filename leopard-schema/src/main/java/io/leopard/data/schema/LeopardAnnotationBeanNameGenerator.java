@@ -7,6 +7,12 @@ import org.springframework.context.annotation.AnnotationBeanNameGenerator;
 
 public class LeopardAnnotationBeanNameGenerator extends AnnotationBeanNameGenerator implements BeanNameGenerator {
 
+	private static boolean qualifiedBeanName = false;
+
+	public static void setQualifiedBeanName(boolean qualifiedBeanName) {
+		LeopardAnnotationBeanNameGenerator.qualifiedBeanName = qualifiedBeanName;
+	}
+
 	@Override
 	protected String buildDefaultBeanName(BeanDefinition definition) {
 		String beanName = null;
@@ -19,7 +25,12 @@ public class LeopardAnnotationBeanNameGenerator extends AnnotationBeanNameGenera
 		}
 
 		if (beanName == null) {
-			beanName = super.buildDefaultBeanName(definition);
+			if (qualifiedBeanName) {
+				beanName = definition.getBeanClassName();
+			}
+			else {
+				beanName = super.buildDefaultBeanName(definition);
+			}
 		}
 
 		beanName = this.replaceBeanName(beanName);

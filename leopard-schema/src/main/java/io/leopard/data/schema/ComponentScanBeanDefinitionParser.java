@@ -26,6 +26,10 @@ public class ComponentScanBeanDefinitionParser extends org.springframework.conte
 		// BeanDefinitionParserUtil.printParserContext(ComponentScanBeanDefinitionParser.class, parserContext);
 		this.parserContext = parserContext;
 
+		boolean qualifiedBeanName = "true".equals(element.getAttribute("qualified-name"));
+
+		LeopardAnnotationBeanNameGenerator.setQualifiedBeanName(qualifiedBeanName);
+
 		element.setAttribute("name-generator", LeopardAnnotationBeanNameGenerator.class.getName());
 
 		// ahai 排除定时器?
@@ -42,7 +46,7 @@ public class ComponentScanBeanDefinitionParser extends org.springframework.conte
 		super.registerComponents(readerContext, beanDefinitions, element);
 		for (BeanDefinitionHolder beanDefHolder : beanDefinitions) {
 			String beanName = beanDefHolder.getBeanName();
-			// ahai 未规范实现
+			// TODO ahai 未规范实现
 			if (beanName.endsWith("Timer")) {
 				timerList.add(beanName);
 			}
