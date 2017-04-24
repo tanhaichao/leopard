@@ -26,7 +26,7 @@ public interface XParam {
 	 * @param response
 	 * @return
 	 */
-	Object getValue(HttpServletRequest request, MethodParameter parameter);
+	Object getValue(HttpServletRequest request, MethodParameter parameter) throws Exception;
 
 	// /**
 	// * 当存在多个相同key的实现时，被覆盖的实现类通过此方法传递给新的实现类
