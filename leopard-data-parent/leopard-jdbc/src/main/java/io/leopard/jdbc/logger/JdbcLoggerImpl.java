@@ -15,7 +15,16 @@ public class JdbcLoggerImpl implements JdbcLogger {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	public static void setStyle(JdbcLoggerStyle style) {
+	public static void setEnable(boolean enable) {
+		if (enable) {
+			setEnable(JdbcLoggerStyle.ARGUMENT_PARSE);
+		}
+		else {
+			setEnable(null);
+		}
+	}
+
+	public static void setEnable(JdbcLoggerStyle style) {
 		if (style == JdbcLoggerStyle.ARGUMENT_PARSE) {
 			instance.jdbcLogger = new ArgumentParseJdbcLogger();
 		}
@@ -23,7 +32,7 @@ public class JdbcLoggerImpl implements JdbcLogger {
 			instance.jdbcLogger = new NoArgumentParseJdbcLogger();
 		}
 		else {
-			instance.jdbcLogger = new ArgumentParseJdbcLogger();
+			instance.jdbcLogger = null;
 		}
 	}
 

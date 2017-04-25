@@ -11,13 +11,12 @@ public enum JdbcLoggerStyle {
 	 * 不做参数解析
 	 */
 	NO_ARGUMENT_PARSE,
-
 	/**
-	 * 参数解析
+	 * (短)参数解析
 	 */
 	ARGUMENT_PARSE,
 	/**
-	 * 短参数值解析
+	 * 完整参数值解析
 	 */
-	SHORT_ARGUMENT_PARSE;
+	FULL_ARGUMENT_PARSE;
 }

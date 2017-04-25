@@ -9,13 +9,7 @@ import org.apache.commons.logging.LogFactory;
  * @author 谭海潮
  *
  */
-public class ArgumentParseJdbcLogger implements JdbcLogger {
+public class ArgumentParseJdbcLogger extends FullArgumentParseJdbcLogger {
 
-	protected Log logger = LogFactory.getLog(this.getClass());
-
-	@Override
-	public void update(int updatedCount, String sql, Object[] args) {
-		logger.info("update updatedCount:" + updatedCount + " sql:" + sql);
-	}
 
 }
