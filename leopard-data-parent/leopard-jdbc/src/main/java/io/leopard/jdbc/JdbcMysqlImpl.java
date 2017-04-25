@@ -25,6 +25,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import io.leopard.jdbc.builder.InsertBuilder;
 import io.leopard.jdbc.builder.ReplaceBuilder;
 import io.leopard.jdbc.builder.SqlBuilder;
+import io.leopard.jdbc.logger.JdbcLogger;
+import io.leopard.jdbc.logger.JdbcLoggerImpl;
 import io.leopard.lang.Paging;
 import io.leopard.lang.PagingImpl;
 
@@ -35,6 +37,8 @@ import io.leopard.lang.PagingImpl;
  * 
  */
 public class JdbcMysqlImpl implements Jdbc {
+
+	protected JdbcLogger jdbcLogger = new JdbcLoggerImpl();
 
 	protected JdbcTemplate jdbcTemplate;
 
@@ -484,7 +488,9 @@ public class JdbcMysqlImpl implements Jdbc {
 
 	@Override
 	public int update(String sql, StatementParameter param) {
-		return this.getJdbcTemplate().update(sql, param.getParameters());
+		int updatedCount = this.getJdbcTemplate().update(sql, param.getParameters());
+		jdbcLogger.update(updatedCount, sql, param.getArgs());
+		return updatedCount;
 	}
 
 	@Override
