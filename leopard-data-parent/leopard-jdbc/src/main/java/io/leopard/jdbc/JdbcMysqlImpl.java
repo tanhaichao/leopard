@@ -38,7 +38,7 @@ import io.leopard.lang.PagingImpl;
  */
 public class JdbcMysqlImpl implements Jdbc {
 
-	protected JdbcLogger jdbcLogger = new JdbcLoggerImpl();
+	protected JdbcLogger jdbcLogger = JdbcLoggerImpl.getInstance();
 
 	protected JdbcTemplate jdbcTemplate;
 
