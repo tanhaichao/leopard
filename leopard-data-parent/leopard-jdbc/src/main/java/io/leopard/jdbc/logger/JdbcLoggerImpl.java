@@ -42,6 +42,9 @@ public class JdbcLoggerImpl implements JdbcLogger {
 
 	@Override
 	public void update(int updatedCount, String sql, Object[] args) {
+		if (jdbcLogger == null) {
+			return;
+		}
 		jdbcLogger.update(updatedCount, sql, args);
 	}
 
