@@ -48,7 +48,7 @@ public class DecimalUtil {
 		nf.setMaximumFractionDigits(5);
 		String s = nf.format(num);
 		int index = s.indexOf(".");
-		if (index == 0) {
+		if (index <= 0) {
 			return 0;
 		}
 		int count = s.length() - index - 1;
