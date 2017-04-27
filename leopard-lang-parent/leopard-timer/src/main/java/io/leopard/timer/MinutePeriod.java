@@ -24,7 +24,7 @@ public class MinutePeriod implements Period {
 		return minute;
 	}
 
-	protected int getSeconds() {
+	public int getSeconds() {
 		return getMinute() * 60;
 	}
 
