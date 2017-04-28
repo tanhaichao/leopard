@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import io.leopard.jdbc.builder.InsertBuilder;
 import io.leopard.jdbc.builder.ReplaceBuilder;
 import io.leopard.jdbc.builder.SqlBuilder;
+import io.leopard.lang.Page;
 import io.leopard.lang.Paging;
 
 public class JdbcWrapper implements Jdbc {
@@ -335,6 +336,26 @@ public class JdbcWrapper implements Jdbc {
 	@Override
 	public Double queryForDouble(String sql, Object... params) {
 		return this.getJdbc().queryForDouble(sql, params);
+	}
+
+	@Override
+	public <T> Page<T> queryForPage(String sql, Class<T> elementType) {
+		return this.getJdbc().queryForPage(sql, elementType);
+	}
+
+	@Override
+	public <T> Page<T> queryForPage(String sql, Class<T> elementType, Object... params) {
+		return this.getJdbc().queryForPage(sql, elementType, params);
+	}
+
+	@Override
+	public <T> Page<T> queryForPage(String sql, Class<T> elementType, StatementParameter param) {
+		return this.getJdbc().queryForPage(sql, elementType, param);
+	}
+
+	@Override
+	public <T> Page<T> queryForPage(String sql, Class<T> elementType, StatementParameter param, int start, int size) {
+		return this.getJdbc().queryForPage(sql, elementType, param, start, size);
 	}
 
 }

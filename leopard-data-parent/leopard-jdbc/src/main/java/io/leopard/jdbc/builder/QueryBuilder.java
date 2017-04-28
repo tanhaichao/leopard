@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 
 import io.leopard.jdbc.Jdbc;
 import io.leopard.jdbc.StatementParameter;
+import io.leopard.lang.Page;
 import io.leopard.lang.Paging;
 import io.leopard.lang.datatype.TimeRange;
 import io.leopard.lang.inum.Inum;
@@ -400,6 +401,17 @@ public class QueryBuilder {
 	public <T> Paging<T> queryForPaging(Jdbc jdbc, Class<T> elementType, int start, int size) {
 		this.limit(start, size);
 		return this.queryForPaging(jdbc, elementType);
+	}
+
+	public <T> Page<T> queryForPage(Jdbc jdbc, Class<T> elementType) {
+		SQLInfo sqlInfo = this.toSqlInfo();
+		// System.err.println("sql:" + sqlInfo.getSql());
+		return jdbc.queryForPage(sqlInfo.getSql(), elementType, sqlInfo.getParam());
+	}
+
+	public <T> Page<T> queryForPage(Jdbc jdbc, Class<T> elementType, int start, int size) {
+		this.limit(start, size);
+		return this.queryForPage(jdbc, elementType);
 	}
 
 	public <T> List<T> queryForList(Jdbc jdbc, Class<T> elementType) {

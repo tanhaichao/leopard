@@ -1,10 +1,5 @@
 package io.leopard.jdbc;
 
-import io.leopard.jdbc.builder.InsertBuilder;
-import io.leopard.jdbc.builder.ReplaceBuilder;
-import io.leopard.jdbc.builder.SqlBuilder;
-import io.leopard.lang.Paging;
-
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +8,12 @@ import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import io.leopard.jdbc.builder.InsertBuilder;
+import io.leopard.jdbc.builder.ReplaceBuilder;
+import io.leopard.jdbc.builder.SqlBuilder;
+import io.leopard.lang.Page;
+import io.leopard.lang.Paging;
 
 /**
  * Jdbc接口(MySQL操作).
@@ -554,12 +555,18 @@ public interface Jdbc {
 
 	<T> Paging<T> queryForPaging(String sql, Class<T> elementType);
 
-	// <T> Paging<T> queryForPaging(String sql, Class<T> elementType, int start, int size);
-
 	<T> Paging<T> queryForPaging(String sql, Class<T> elementType, Object... params);
 
 	<T> Paging<T> queryForPaging(String sql, Class<T> elementType, StatementParameter param);
 
 	<T> Paging<T> queryForPaging(String sql, Class<T> elementType, StatementParameter param, int start, int size);
+
+	<T> Page<T> queryForPage(String sql, Class<T> elementType);
+
+	<T> Page<T> queryForPage(String sql, Class<T> elementType, Object... params);
+
+	<T> Page<T> queryForPage(String sql, Class<T> elementType, StatementParameter param);
+
+	<T> Page<T> queryForPage(String sql, Class<T> elementType, StatementParameter param, int start, int size);
 
 }

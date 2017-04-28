@@ -27,6 +27,8 @@ import io.leopard.jdbc.builder.ReplaceBuilder;
 import io.leopard.jdbc.builder.SqlBuilder;
 import io.leopard.jdbc.logger.JdbcLogger;
 import io.leopard.jdbc.logger.JdbcLoggerImpl;
+import io.leopard.lang.Page;
+import io.leopard.lang.PageImpl;
 import io.leopard.lang.Paging;
 import io.leopard.lang.PagingImpl;
 
@@ -695,4 +697,66 @@ public class JdbcMysqlImpl implements Jdbc {
 		return paging;
 	}
 
+	@Override
+	public <T> Page<T> queryForPage(String sql, Class<T> elementType) {
+		List<T> list = this.queryForList(sql, elementType);
+		String countSql = SqlUtil.toCountSql(sql);
+		int totalCount = this.queryForInt(countSql);
+
+		PageImpl<T> page = new PageImpl<T>();
+		page.setTotalCount(totalCount);
+		page.setList(list);
+		return page;
+	}
+
+	@Override
+	public <T> Page<T> queryForPage(String sql, Class<T> elementType, Object... params) {
+		StatementParameter param = toStatementParameter(sql, params);
+		List<T> list = this.queryForList(sql, elementType, param);
+		CountSqlParser parser = new CountSqlParser(sql, param);
+
+		// System.err.println("countSQL:" + countSqlParser.getCountSql());
+		int totalCount = this.queryForInt(parser.getCountSql(), parser.getCountParam());
+
+		PageImpl<T> page = new PageImpl<T>();
+		page.setTotalCount(totalCount);
+		page.setList(list);
+
+		if (parser.getSize() != null) {
+			page.setPageSize(parser.getSize());
+		}
+		return page;
+	}
+
+	@Override
+	public <T> Page<T> queryForPage(String sql, Class<T> elementType, StatementParameter param) {
+		List<T> list = this.queryForList(sql, elementType, param);
+		CountSqlParser parser = new GroupCountSqlParser(sql, param);
+		String countSql = parser.getCountSql();
+		// System.err.println("countSql:" + countSql);
+		int totalCount = this.queryForInt(countSql, parser.getCountParam());
+		// System.err.println("countSql:" + countSql + " totalCount:" + totalCount);
+
+		PageImpl<T> page = new PageImpl<T>();
+		page.setTotalCount(totalCount);
+		page.setList(list);
+		if (parser.getSize() != null) {
+			page.setPageSize(parser.getSize());
+		}
+		return page;
+	}
+
+	@Override
+	public <T> Page<T> queryForPage(String sql, Class<T> elementType, StatementParameter param, int start, int size) {
+		PageableRowMapperResultSetExtractor<T> extractor = new PageableRowMapperResultSetExtractor<T>(new LeopardBeanPropertyRowMapper<T>(elementType), start, size);
+		List<T> list = this.getJdbcTemplate().query(sql, param.getArgs(), extractor);
+		int totalCount = extractor.getCount();
+		PageImpl<T> page = new PageImpl<T>();
+		page.setTotalCount(totalCount);
+		page.setList(list);
+
+		page.setPageSize(size);
+
+		return page;
+	}
 }
