@@ -30,18 +30,18 @@ public class PageImpl<E> implements Page<E> {
 		this.pageSize = pageSize;
 	}
 
-	public PageImpl(Paging<?> paging) {
-		if (paging.isNextPage() != null) {
-			this.setNextPage(paging.isNextPage());
+	public PageImpl(Page<?> page) {
+		if (page.isNextPage() != null) {
+			this.setNextPage(page.isNextPage());
 		}
-		if (paging.getTotalCount() != null) {
-			this.setTotalCount(paging.getTotalCount());
+		if (page.getTotalCount() != null) {
+			this.setTotalCount(page.getTotalCount());
 		}
-		if (paging.getPageCount() != null) {
-			this.setPageCount(paging.getPageCount());
+		if (page.getPageCount() != null) {
+			this.setPageCount(page.getPageCount());
 		}
-		if (paging.getPageSize() != null) {
-			this.setPageSize(paging.getPageSize());
+		if (page.getPageSize() != null) {
+			this.setPageSize(page.getPageSize());
 		}
 	}
 
