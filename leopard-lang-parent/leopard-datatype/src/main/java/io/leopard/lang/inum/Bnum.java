@@ -6,6 +6,6 @@ package io.leopard.lang.inum;
  * @author 谭海潮
  * 
  */
-public interface Bnum extends Onum<Integer, String> {
+public interface Bnum extends Onum<Byte, String> {
 
 }
