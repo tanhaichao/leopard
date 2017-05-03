@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import io.leopard.json.Json;
+import io.leopard.lang.Page;
+import io.leopard.lang.PageImpl;
 import io.leopard.lang.Paging;
 import io.leopard.lang.PagingImpl;
 
@@ -33,6 +35,17 @@ public class BeanUtil {
 		}
 		Paging<T> result = new PagingImpl<T>(paging);
 		for (Object obj : paging.getList()) {
+			result.add(convert(obj, clazz));
+		}
+		return result;
+	}
+
+	public static <T> Page<T> convert(Page<?> page, Class<T> clazz) {
+		if (page == null) {
+			return null;
+		}
+		Page<T> result = new PageImpl<T>(page);
+		for (Object obj : page.getList()) {
 			result.add(convert(obj, clazz));
 		}
 		return result;
