@@ -99,7 +99,7 @@ public class UnderlineJson {
 			mapList = getObjectMapper().readValue(json, javaType);
 		}
 		catch (Exception e) {
-			logger.warn("clazz:" + clazz.getName() + " json2:" + json);
+			// logger.warn("clazz:" + clazz.getName() + " json2:" + json);
 			// throw new JsonException(e.getMessage(), e);
 			return toEnumListByOnlyKey(json, clazz);
 		}
