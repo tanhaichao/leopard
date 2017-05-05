@@ -70,8 +70,13 @@ public class ErrorUtil {
 			return "操作数据库出错，请稍后重试.";
 		}
 		if (e instanceof DataIntegrityViolationException) {
-			MysqlDataTruncation exception = (MysqlDataTruncation) e.getCause();
-			return MessageParserImpl.parse(exception);
+			Exception exception = (Exception) e.getCause();
+			if (exception instanceof MysqlDataTruncation) {
+				return MessageParserImpl.parse((MysqlDataTruncation) exception);
+			}
+			else {
+				return "操作数据库出错，请稍后重试.";
+			}
 			// try {
 			// return parseDataIntegrityViolationException((DataIntegrityViolationException) e);
 			// }
