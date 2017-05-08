@@ -44,10 +44,8 @@ public abstract class AbstractTemplateMethod implements TemplateMethodModelEx, T
 			}
 			i++;
 		}
-		HttpServletRequest request = RequestHolder.getRequest();
-
 		try {
-			return this.exec(request, args);
+			return this.execute(args);
 		}
 		catch (TemplateModelException e) {
 			throw e;
@@ -57,6 +55,19 @@ public abstract class AbstractTemplateMethod implements TemplateMethodModelEx, T
 		}
 	}
 
-	public abstract Object exec(HttpServletRequest request, Object... args) throws TemplateModelException, TemplateException, IOException;
+	public Object execute(Object... args) throws TemplateModelException, TemplateException, IOException {
+		HttpServletRequest request = RequestHolder.getRequest();
+		try {
+			return this.execute(request, args);
+		}
+		catch (TemplateModelException e) {
+			throw e;
+		}
+		catch (Exception e) {
+			throw new TemplateModelException(e);
+		}
+	}
+
+	public abstract Object execute(HttpServletRequest request, Object... args) throws TemplateModelException, TemplateException, IOException;
 
 }

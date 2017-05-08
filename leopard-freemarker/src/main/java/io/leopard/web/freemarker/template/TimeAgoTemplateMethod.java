@@ -17,7 +17,7 @@ import freemarker.template.TemplateModelException;
 public class TimeAgoTemplateMethod extends AbstractTemplateMethod {
 
 	@Override
-	public Object exec(HttpServletRequest request, Object... args) throws TemplateModelException {
+	public Object execute(HttpServletRequest request, Object... args) throws TemplateModelException {
 		Date datetime = (Date) args[0];
 		long time = datetime.getTime() / 1000;
 		long current = System.currentTimeMillis() / 1000;

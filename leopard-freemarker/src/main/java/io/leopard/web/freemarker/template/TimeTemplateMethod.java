@@ -17,7 +17,7 @@ import io.leopard.web.freemarker.template.AbstractTemplateMethod;
 public class TimeTemplateMethod extends AbstractTemplateMethod {
 
 	@Override
-	public Object exec(HttpServletRequest request, Object... args) throws TemplateModelException {
+	public Object execute(HttpServletRequest request, Object... args) throws TemplateModelException {
 		double time = (Double) args[0];
 		if (time <= 0) {
 			return "-";
