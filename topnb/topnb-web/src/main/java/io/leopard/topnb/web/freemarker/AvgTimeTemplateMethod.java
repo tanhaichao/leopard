@@ -17,7 +17,7 @@ import io.leopard.web.freemarker.template.AbstractTemplateMethod;
 public class AvgTimeTemplateMethod extends AbstractTemplateMethod {
 
 	@Override
-	public Object exec(HttpServletRequest request, Object... args) throws TemplateModelException {
+	public Object execute(HttpServletRequest request, Object... args) throws TemplateModelException {
 		long count = (Long) args[0];
 		double time = (Double) args[1];
 
