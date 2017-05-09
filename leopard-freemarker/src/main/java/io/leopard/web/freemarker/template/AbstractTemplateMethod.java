@@ -53,8 +53,11 @@ public abstract class AbstractTemplateMethod implements TemplateMethodModelEx, T
 		catch (TemplateModelException e) {
 			throw e;
 		}
+		catch (RuntimeException e) {
+			throw e;
+		}
 		catch (Exception e) {
-			throw new TemplateModelException(e);
+			throw new TemplateModelException(e.getMessage(), e);
 		}
 	}
 
@@ -64,6 +67,9 @@ public abstract class AbstractTemplateMethod implements TemplateMethodModelEx, T
 			return this.execute(request, args);
 		}
 		catch (TemplateModelException e) {
+			throw e;
+		}
+		catch (RuntimeException e) {
 			throw e;
 		}
 		catch (Exception e) {
