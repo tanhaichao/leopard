@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.web.context.WebApplicationContext;
 
-import io.leopard.web.mvc.resource.ResourcesDispatcherServlet;
+import io.leopard.htdocs.ResourcesDispatcherServlet;
 
 public class OptionsDispatcherServlet extends ResourcesDispatcherServlet {
 
