@@ -54,4 +54,10 @@ public class NullInsertBuilder extends InsertBuilder {
 		}
 	}
 
+	@Override
+	public void setEnum(String fieldName, Enum<?> value) {
+		if (value != null) {
+			super.setEnum(fieldName, value);
+		}
+	}
 }

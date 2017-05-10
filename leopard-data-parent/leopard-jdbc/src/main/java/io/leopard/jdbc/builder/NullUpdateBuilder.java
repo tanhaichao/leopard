@@ -49,4 +49,11 @@ public class NullUpdateBuilder extends UpdateBuilder {
 			super.setString(fieldName, value);
 		}
 	}
+
+	@Override
+	public void setEnum(String fieldName, Enum<?> value) {
+		if (value != null) {
+			super.setEnum(fieldName, value);
+		}
+	}
 }
