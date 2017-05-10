@@ -73,6 +73,7 @@
 		<module>leopard-lang</module>
 		<module>leopard-chart</module>
 		<module>leopard-upload</module>
+		<module>leopard-htdocs</module>
 	</modules>
 
 </project>
