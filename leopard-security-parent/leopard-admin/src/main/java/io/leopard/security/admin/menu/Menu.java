@@ -1,5 +1,10 @@
 package io.leopard.security.admin.menu;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * 菜单
  * 
@@ -23,12 +28,21 @@ public class Menu {
 	// },
 
 	private String text;
+
 	private Boolean heading;
+
 	private String translate;
+
 	private String sref;
+
 	private String icon;
+
 	private String alert;
+
 	private String label;
+
+	@JsonProperty("submenu")
+	private List<Submenu> submenuList;
 
 	public String getText() {
 		return text;
@@ -84,6 +98,25 @@ public class Menu {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public List<Submenu> getSubmenuList() {
+		return submenuList;
+	}
+
+	public void setSubmenuList(List<Submenu> submenuList) {
+		this.submenuList = submenuList;
+	}
+
+	public Submenu addSubmenu(String text, String sref) {
+		if (this.submenuList == null) {
+			this.submenuList = new ArrayList<Submenu>();
+		}
+		Submenu submenu = new Submenu();
+		submenu.setText(text);
+		submenu.setSref(sref);
+		submenuList.add(submenu);
+		return submenu;
 	}
 
 }

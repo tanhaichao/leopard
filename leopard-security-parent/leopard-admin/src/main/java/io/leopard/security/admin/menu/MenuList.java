@@ -19,12 +19,13 @@ public class MenuList extends ArrayList<Menu> {
 		this.add(menu);
 	}
 
-	public void addMenu(String text, String sref) {
+	public Menu addMenu(String text, String sref) {
 		Menu menu = new Menu();
 		menu.setText(text);
 		menu.setSref(sref);
 		menu.setIcon("icon-graduation");
 		this.add(menu);
+		return menu;
 	}
 
 	public String toJson() {
