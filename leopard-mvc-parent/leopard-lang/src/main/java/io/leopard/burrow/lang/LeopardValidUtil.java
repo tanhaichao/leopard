@@ -51,53 +51,6 @@ public class LeopardValidUtil {
 		return true;
 	}
 
-	/**
-	 * 验证imid是否合法 .
-	 * 
-	 * @param imid
-	 * @return 合法 false 非法true
-	 */
-	public static boolean isValidImid(long imid) {
-		if (imid <= 0) {
-			return false;
-		}
-		return true;
-	}
-
-	private static Pattern GAMEID_PATTERN = Pattern.compile("^[a-zA-Z0-9_]+$");
-
-	/**
-	 * 验证gameid是否合法 .
-	 * 
-	 * @param gameId
-	 * @return
-	 */
-	public static boolean isValidGameId(String gameId) {
-		// return StringUtils.isNotEmpty(gameId);
-		if (gameId == null || gameId.length() == 0) {
-			return false;
-		}
-		Matcher m = GAMEID_PATTERN.matcher(gameId);
-		return m.find();
-	}
-
-	private static Pattern SERVERID_PATTERN = Pattern.compile("^[a-zA-Z0-9]+$");
-
-	/**
-	 * 验证serverid是否合法 .
-	 * 
-	 * @param serverId
-	 * @return
-	 */
-	public static boolean isValidServerId(String serverId) {
-		// return StringUtils.isNotEmpty(serverId);
-		if (serverId == null || serverId.length() == 0) {
-			return false;
-		}
-		Matcher m = SERVERID_PATTERN.matcher(serverId);
-		return m.find();
-	}
-
 	private static Pattern IP_PATTERN = Pattern.compile("^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$");
 
 	/**
