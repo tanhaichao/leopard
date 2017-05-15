@@ -25,27 +25,6 @@ public class LeopardValidUtilTest {
 	}
 
 	@Test
-	public void isValidImid() {
-		Assert.assertTrue(LeopardValidUtil.isValidImid(1));
-		Assert.assertFalse(LeopardValidUtil.isValidImid(0));
-	}
-
-	@Test
-	public void isValidGameId() {
-		Assert.assertTrue(LeopardValidUtil.isValidGameId("Ddt"));
-		Assert.assertTrue(LeopardValidUtil.isValidGameId("ddt"));
-		Assert.assertTrue(LeopardValidUtil.isValidGameId("dd_t"));
-		Assert.assertFalse(LeopardValidUtil.isValidGameId(""));
-	}
-
-	@Test
-	public void isValidServerId() {
-		Assert.assertTrue(LeopardValidUtil.isValidServerId("S1"));
-		Assert.assertTrue(LeopardValidUtil.isValidServerId("s1"));
-		Assert.assertFalse(LeopardValidUtil.isValidServerId(""));
-	}
-
-	@Test
 	public void isValidIp() {
 		Assert.assertTrue(LeopardValidUtil.isValidIp("127.0.0.1"));
 		Assert.assertFalse(LeopardValidUtil.isValidIp(""));
