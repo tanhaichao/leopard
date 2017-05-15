@@ -16,13 +16,13 @@ public class LeopardRequestMappingHandlerAdapter extends RequestMappingHandlerAd
 
 	@Override
 	public void setArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		logger.info("setArgumentResolvers:" + argumentResolvers);
+		// logger.info("setArgumentResolvers:" + argumentResolvers);
 		super.setArgumentResolvers(argumentResolvers);
 	}
 
 	@Override
 	public void setCustomArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		logger.info("setCustomArgumentResolvers:" + argumentResolvers);
+		// logger.info("setCustomArgumentResolvers:" + argumentResolvers);
 		super.setCustomArgumentResolvers(argumentResolvers);
 	}
 
@@ -34,7 +34,6 @@ public class LeopardRequestMappingHandlerAdapter extends RequestMappingHandlerAd
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
-
-		logger.info("getArgumentResolvers():" + getArgumentResolvers());
+		// logger.info("getArgumentResolvers():" + getArgumentResolvers());
 	}
 }
