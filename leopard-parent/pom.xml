@@ -291,12 +291,6 @@
 
 			<dependency>
 				<groupId>io.leopard</groupId>
-				<artifactId>myjetty-maven-plugin</artifactId>
-				<version>${leopard.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>io.leopard</groupId>
 				<artifactId>htdocs</artifactId>
 				<version>0.2-SNAPSHOT</version>
 			</dependency>
@@ -320,6 +314,11 @@
 		<finalName>${project.artifactId}</finalName>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>io.leopard</groupId>
+					<artifactId>myjetty-maven-plugin</artifactId>
+					<version>${leopard.version}</version>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
