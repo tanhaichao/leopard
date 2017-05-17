@@ -6,8 +6,8 @@ import java.util.ServiceLoader;
 public class ServerInitializerImpl implements ServerInitializer {
 
 	public ServerInitializerImpl() {
-		System.out.println("new ServerInitializerImpl()	");
 		Iterator<ServerInitializer> iterator = ServiceLoader.load(ServerInitializer.class).iterator();
+		System.out.println("new ServerInitializerImpl()	");
 		while (iterator.hasNext()) {
 			ServerInitializer initializer = iterator.next();
 			initializer.run();
