@@ -10,6 +10,7 @@ public class ServerInitializerImpl implements ServerInitializer {
 		System.out.println("new ServerInitializerImpl()	");
 		while (iterator.hasNext()) {
 			ServerInitializer initializer = iterator.next();
+			System.out.println("initializer:" + initializer.getClass().getName());
 			initializer.run();
 		}
 	}
