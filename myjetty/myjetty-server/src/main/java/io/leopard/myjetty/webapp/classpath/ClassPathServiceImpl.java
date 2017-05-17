@@ -9,8 +9,6 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 public class ClassPathServiceImpl implements ClassPathService {
 
-	// private ClassPathServiceDataSourceImpl classPathServiceDataSourceImpl = new ClassPathServiceDataSourceImpl();
-
 	private List<ClassPathService> list = new ArrayList<ClassPathService>();
 
 	public ClassPathServiceImpl() {
@@ -21,9 +19,6 @@ public class ClassPathServiceImpl implements ClassPathService {
 			list.add(iterator.next());
 		}
 	}
-	// private ClassPathServiceYtestImpl classPathServiceYtestImpl = new ClassPathServiceYtestImpl();
-	// private ClassPathServiceLeopardImpl classPathServiceLeopardImpl = new ClassPathServiceLeopardImpl();
-	// private ClassPathServiceProjectImpl classPathServiceProjectImpl = new ClassPathServiceProjectImpl();
 
 	@Override
 	public void preConfigure(WebAppContext context, List<String> hostList, String war) {
