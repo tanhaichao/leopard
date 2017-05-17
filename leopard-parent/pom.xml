@@ -291,6 +291,12 @@
 
 			<dependency>
 				<groupId>io.leopard</groupId>
+				<artifactId>myjetty-maven-plugin</artifactId>
+				<version>0.9.11-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.leopard</groupId>
 				<artifactId>htdocs</artifactId>
 				<version>0.2-SNAPSHOT</version>
 			</dependency>
@@ -405,14 +411,7 @@
 					<artifactId>webide-local</artifactId>
 					<version>0.1-SNAPSHOT</version>
 				</dependency>
-				<!-- 
-				<dependency>
-					<groupId>io.leopard</groupId>
-					<artifactId>autocode-all</artifactId>
-					<version>0.1-SNAPSHOT</version>
-					<scope>provided</scope>
-				</dependency>
-				 -->
+				<!-- <dependency> <groupId>io.leopard</groupId> <artifactId>autocode-all</artifactId> <version>0.1-SNAPSHOT</version> <scope>provided</scope> </dependency> -->
 			</dependencies>
 
 			<build>
