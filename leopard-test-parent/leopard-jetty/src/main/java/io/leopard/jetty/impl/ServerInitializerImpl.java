@@ -1,19 +1,8 @@
 package io.leopard.jetty.impl;
 
-import java.util.Iterator;
-import java.util.ServiceLoader;
-
 import io.leopard.jetty.ServerInitializer;
 
 public class ServerInitializerImpl implements ServerInitializer {
-
-	public ServerInitializerImpl() {
-		Iterator<ServerInitializer> iterator = ServiceLoader.load(ServerInitializer.class).iterator();
-		while (iterator.hasNext()) {
-			ServerInitializer initializer = iterator.next();
-			initializer.run();
-		}
-	}
 
 	@Override
 	public void run() {

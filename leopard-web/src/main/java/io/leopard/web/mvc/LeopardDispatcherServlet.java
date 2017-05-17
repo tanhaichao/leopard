@@ -11,12 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
+import io.leopard.web.servlet.ServerInitializerImpl;
+
 public class LeopardDispatcherServlet extends OptionsDispatcherServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	public LeopardDispatcherServlet() {
 		// System.err.println("classLoader:" + this.getClass().getClassLoader());
+		new ServerInitializerImpl().run();
 	}
 
 	protected void noHandlerFound(HttpServletRequest request, HttpServletResponse response) throws Exception {

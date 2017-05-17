@@ -57,7 +57,6 @@ public class MyJettyServer implements WebServer {
 		org.eclipse.jetty.util.log.Log.setLog(null);
 		this.server = new Server();
 		this.webappService = WebappServiceImpl.getInstance();
-		new ServerInitializerImpl().run();
 	}
 
 	public Server start(int port) throws Exception {
