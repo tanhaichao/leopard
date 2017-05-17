@@ -292,7 +292,7 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>myjetty-maven-plugin</artifactId>
-				<version>0.9.11-SNAPSHOT</version>
+				<version>${leopard.version}</version>
 			</dependency>
 
 			<dependency>
