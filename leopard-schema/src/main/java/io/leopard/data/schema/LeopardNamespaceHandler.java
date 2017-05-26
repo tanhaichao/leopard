@@ -32,7 +32,7 @@ public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
 		registerParser("memcache", "io.leopard.schema.MemcacheBeanDefinitionParser");
 		registerParser("mysql-dsn", "io.leopard.schema.MysqlDsnBeanDefinitionParser");
 		registerParser("redis-dsn", "io.leopard.schema.RedisDsnBeanDefinitionParser");
-		registerParser("elasticsearch-dsn", "io.leopard.schema.ElasticSearchDsnBeanDefinitionParser");
+		registerParser("search-dsn", "io.leopard.schema.SearcherDsnBeanDefinitionParser");
 		registerParser("mongo-dsn", "io.leopard.schema.MongoDsnBeanDefinitionParser");
 		registerParser("dfs-dsn", "io.leopard.schema.DfsDsnBeanDefinitionParser");
 		registerParser("queue-dsn", "io.leopard.schema.QueueDsnBeanDefinitionParser");
@@ -55,7 +55,7 @@ public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
 		BeanDefinitionParser parser;
 		try {
 			parser = getBeanDefinitionParser(elementName, className);
-//			logger.info("registerParser elementName:" + elementName + " parser:" + parser);
+			// logger.info("registerParser elementName:" + elementName + " parser:" + parser);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
