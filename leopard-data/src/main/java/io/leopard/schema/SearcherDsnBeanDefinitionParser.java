@@ -22,6 +22,13 @@ public class SearcherDsnBeanDefinitionParser implements BeanDefinitionParser {
 
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
+		try {
+			Class.forName("io.leopard.elasticsearch.SearcherImpl");
+		}
+		catch (ClassNotFoundException e) {
+			return null;
+		}
+
 		// logger.info("parse:");
 		String id = element.getAttribute("id");
 		String name = element.getAttribute("name");
