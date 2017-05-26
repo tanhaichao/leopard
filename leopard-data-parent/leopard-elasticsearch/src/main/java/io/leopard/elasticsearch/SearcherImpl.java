@@ -32,12 +32,7 @@ public class SearcherImpl implements Searcher {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 		Settings settings = Settings.builder().build();
-		try {
-			this.client = new PreBuiltTransportClient(settings);
-		}
-		finally {
-			client.close();
-		}
+		this.client = new PreBuiltTransportClient(settings);
 		InetSocketTransportAddress transportAddress = new InetSocketTransportAddress(inetAddress, port);
 		client.addTransportAddress(transportAddress);
 	}
