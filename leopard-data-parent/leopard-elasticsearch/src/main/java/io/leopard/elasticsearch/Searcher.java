@@ -1,5 +1,7 @@
 package io.leopard.elasticsearch;
 
+import org.elasticsearch.client.transport.TransportClient;
+
 /**
  * 搜索器
  * 
@@ -7,5 +9,9 @@ package io.leopard.elasticsearch;
  *
  */
 public interface Searcher {
+
+	boolean createIndex(String index);
+
+	TransportClient getClient();
 
 }
