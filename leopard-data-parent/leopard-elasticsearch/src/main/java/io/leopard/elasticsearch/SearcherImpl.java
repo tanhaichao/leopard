@@ -32,6 +32,30 @@ public class SearcherImpl implements Searcher {
 		this.port = port;
 	}
 
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	public String getServer() {
+		return server;
+	}
+
+	public void setServer(String server) {
+		this.server = server;
+	}
+
 	public void init() {
 
 		if (server != null && server.length() > 0) {
