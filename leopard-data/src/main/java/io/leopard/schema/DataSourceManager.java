@@ -2,6 +2,7 @@ package io.leopard.schema;
 
 import io.leopard.data.nosql.NosqlMysqlImpl;
 import io.leopard.data4j.memdb.MemdbRsyncImpl;
+import io.leopard.elasticsearch.SearcherImpl;
 import io.leopard.jdbc.JdbcDataSource;
 import io.leopard.jdbc.JdbcMysqlImpl;
 import io.leopard.jdbc.MysqlDsnDataSource;
@@ -58,6 +59,10 @@ public class DataSourceManager {
 
 	public static Class<?> getRedisImpl() {
 		return findClass(RedisImpl.class);
+	}
+
+	public static Class<?> getSearcherImpl() {
+		return findClass(SearcherImpl.class);
 	}
 
 	public static Class<?> getRedisHashImpl() {

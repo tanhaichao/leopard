@@ -164,7 +164,7 @@
 	</xsd:element>
 	
 	
-	<xsd:element name="elasticsearch-dsn">
+	<xsd:element name="search-dsn">
 		<xsd:annotation>
 			<xsd:documentation>ElasticSearch</xsd:documentation>
 		</xsd:annotation>

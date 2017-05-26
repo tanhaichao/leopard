@@ -81,11 +81,18 @@
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-mongo</artifactId>
 			<version>0.9.11-SNAPSHOT</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-memcache</artifactId>
 			<version>0.9.11-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-elasticsearch</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>

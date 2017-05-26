@@ -3,6 +3,8 @@ package io.leopard.elasticsearch;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -11,12 +13,19 @@ import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 public class SearcherImpl implements Searcher {
+	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private String host;
+	protected String host;
 
-	private int port;
+	protected int port;
 
-	private TransportClient client;
+	protected String server;
+
+	protected TransportClient client;
+
+	public SearcherImpl() {
+
+	}
 
 	public SearcherImpl(String host, int port) {
 		this.host = host;
@@ -24,6 +33,19 @@ public class SearcherImpl implements Searcher {
 	}
 
 	public void init() {
+
+		if (server != null && server.length() > 0) {
+			String[] serverInfo = server.split(":");
+			this.host = serverInfo[0].trim();
+			try {
+				this.port = Integer.parseInt(serverInfo[1].trim());
+			}
+			catch (NumberFormatException e) {
+				logger.error("elasticsearch server:" + server);
+				throw e;
+			}
+		}
+
 		InetAddress inetAddress;
 		try {
 			inetAddress = InetAddress.getByName(host);

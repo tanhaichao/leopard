@@ -32,6 +32,7 @@ public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
 		registerParser("memcache", "io.leopard.schema.MemcacheBeanDefinitionParser");
 		registerParser("mysql-dsn", "io.leopard.schema.MysqlDsnBeanDefinitionParser");
 		registerParser("redis-dsn", "io.leopard.schema.RedisDsnBeanDefinitionParser");
+		registerParser("elasticsearch-dsn", "io.leopard.schema.ElasticSearchDsnBeanDefinitionParser");
 		registerParser("mongo-dsn", "io.leopard.schema.MongoDsnBeanDefinitionParser");
 		registerParser("dfs-dsn", "io.leopard.schema.DfsDsnBeanDefinitionParser");
 		registerParser("queue-dsn", "io.leopard.schema.QueueDsnBeanDefinitionParser");
