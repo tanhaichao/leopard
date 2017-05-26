@@ -286,7 +286,11 @@
 				<artifactId>leopard-convert</artifactId>
 				<version>${leopard.version}</version>
 			</dependency>
-	
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-elasticsearch</artifactId>
+				<version>${leopard.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>io.leopard</groupId>
