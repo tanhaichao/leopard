@@ -11,7 +11,7 @@
 
 	<properties>
 		<!-- <jetty.version>8.1.10.v20130312</jetty.version> <jetty.jsp.version>8.1.10.v20130312</jetty.jsp.version> -->
-		<jetty.version>9.3.9.v20160517</jetty.version>
+		<jetty.version>9.4.6.v20170531</jetty.version>
 		<jetty.jsp.version>9.3.0.M1</jetty.jsp.version>
 	</properties>
 
