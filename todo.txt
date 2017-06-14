@@ -1,8 +1,6 @@
 待开发的功能:
 	1、URL扩展名规范.
 	2、字段名称(下划线、驼峰)配置
-	3、AutoUnit-web：对标准接口在线自动测试。目前是根据Leopard2E生成测试代码，AutoUnit-web可以做到连测试代码都不用生成.
-	4、apidoc-todo:每个接口还有哪些TODO?
 	5、webserver管理，Jetty扩展.
 	6、启动性能优化
 	
