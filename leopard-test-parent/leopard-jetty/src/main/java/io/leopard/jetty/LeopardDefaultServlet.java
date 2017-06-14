@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 import javax.servlet.UnavailableException;
 
-import org.eclipse.jetty.server.ResourceCache;
+import org.eclipse.jetty.server.CachedContentFactory;
 import org.eclipse.jetty.servlet.DefaultServlet;
 
 /**
@@ -31,8 +31,8 @@ public class LeopardDefaultServlet extends DefaultServlet {
 	protected void initUseFileMappedBuffer() throws Exception {
 		Field field = DefaultServlet.class.getDeclaredField("_cache");
 		field.setAccessible(true);
-		ResourceCache cache = (ResourceCache) field.get(this);
-		Field bufferField = ResourceCache.class.getDeclaredField("_useFileMappedBuffer");
+		CachedContentFactory cache = (CachedContentFactory) field.get(this);
+		Field bufferField = CachedContentFactory.class.getDeclaredField("_useFileMappedBuffer");
 		bufferField.setAccessible(true);
 		bufferField.set(cache, false);
 		// _useFileMappedBuffer
