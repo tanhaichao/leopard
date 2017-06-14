@@ -1,7 +1,3 @@
-
-
-
-
 leopard-lang
 	leopard-json:简化Json使用，可以在Jackson、FastJson切换.
 	httpnb
@@ -11,7 +7,6 @@ leopard-lang
 	
 JavaHost:JVM DNS
 
-AutoUnit:“全”自动化单元测试框架
 
 leopard-data:数据源操作
 	leopard-jdbc、leopard-redis、leopard-memcache、leopard-cache、leopard-memdb
@@ -41,6 +36,3 @@ nobug：安全框架
 topnb:监控框架
 	topnb-profiler、topnb-web
 
-apidoc:接口文档生成系统
-	apidoc-web、apidoc-maven-plugin
-	
