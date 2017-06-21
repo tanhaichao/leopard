@@ -23,7 +23,9 @@ public class CaptchaServiceImpl implements CaptchaService {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	protected Jdbc jdbc;
+
 	protected Redis redis;
+
 	private String tableName;
 
 	public void setJdbc(Jdbc jdbc) {
@@ -183,7 +185,12 @@ public class CaptchaServiceImpl implements CaptchaService {
 			seccode = bean.getCaptcha();
 			this.captchaDao.updateLmodify(bean.getCaptchaId(), new Date());
 		}
-		content = content.replace("{seccode}", seccode);
+		if (StringUtils.isEmpty(content)) {
+			content = seccode;
+		}
+		else {
+			content = content.replace("{seccode}", seccode);
+		}
 		CaptchaDebugger.debug(seccode, content);
 		return seccode;
 	}
