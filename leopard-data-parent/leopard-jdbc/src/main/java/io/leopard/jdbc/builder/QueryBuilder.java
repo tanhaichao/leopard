@@ -157,6 +157,13 @@ public class QueryBuilder {
 		return this.order(fieldName, "desc");
 	}
 
+	public QueryBuilder order(Snum snum) {
+		if (snum == null) {
+			return this;
+		}
+		return this.order(snum.getKey(), "desc");
+	}
+
 	public QueryBuilder order(String fieldName, String orderDirection) {
 		this.orderFieldName = fieldName;
 		this.orderDirection = orderDirection;
