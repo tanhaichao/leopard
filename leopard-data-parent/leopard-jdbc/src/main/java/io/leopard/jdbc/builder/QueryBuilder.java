@@ -80,6 +80,7 @@ public class QueryBuilder {
 		return this;
 	}
 
+	// TODO
 	public QueryBuilder addSnumList(String fieldName, List<?> snumList) {
 		if (snumList != null && !snumList.isEmpty()) {
 			List<String> keyList = new ArrayList<String>();
