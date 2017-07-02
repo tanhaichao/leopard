@@ -309,6 +309,16 @@ public class RequestUtil {
 		return username;
 	}
 
+	/**
+	 * 是否AJAX请求
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public static boolean isAjaxRequest(HttpServletRequest request) {
+		String requestedWith = request.getHeader("X-Requested-With");
+		return "XMLHttpRequest".equals(requestedWith);
+	}
 	// public static void test() {
 	// logger.info("test");
 	// }
