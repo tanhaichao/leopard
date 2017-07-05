@@ -10,7 +10,11 @@
 	<description>通过main方法嵌入式运行Jetty，整个Eclipse工作区的工程代码修改后不需要打包即可生效。</description>
 
 	<properties>
+	<!-- 
+	这个版本websocket有问题 20170706
 		<jetty.version>9.4.6.v20170531</jetty.version>
+		 -->
+		<jetty.version>9.4.5.v20170502</jetty.version>
 		<jetty.jsp.version>9.3.0.M1</jetty.jsp.version>
 		<!-- <jetty.version>8.1.10.v20130312</jetty.version> <jetty.jsp.version>8.1.10.v20130312</jetty.jsp.version> -->
 	</properties>
