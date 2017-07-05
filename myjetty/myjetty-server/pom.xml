@@ -10,8 +10,11 @@
 	<description>MyJetty核心模块。在线部署、回滚、重启、Web操作界面、移动运维后台接口等。</description>
 
 	<properties>
-		<!-- <jetty.version>8.1.10.v20130312</jetty.version> <jetty.jsp.version>8.1.10.v20130312</jetty.jsp.version> -->
+<!-- 
+	这个版本websocket有问题 20170706
 		<jetty.version>9.4.6.v20170531</jetty.version>
+		 -->
+		<jetty.version>9.4.5.v20170502</jetty.version>
 		<jetty.jsp.version>9.3.0.M1</jetty.jsp.version>
 	</properties>
 
