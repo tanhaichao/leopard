@@ -1,8 +1,8 @@
 package io.leopard.myjetty.webapp.classpath;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
@@ -15,9 +15,9 @@ public abstract class AbstractClassPathService implements ClassPathService {
 
 	private void addResource(WebAppContext context, Resource jar) {
 		@SuppressWarnings("unchecked")
-		List<Resource> list = (List<Resource>) context.getAttribute(METAINF_RESOURCES);
+		Set<Resource> list = (Set<Resource>) context.getAttribute(METAINF_RESOURCES);
 		if (list == null) {
-			list = new ArrayList<Resource>();
+			list = new LinkedHashSet<Resource>();
 			context.setAttribute(METAINF_RESOURCES, list);
 		}
 		if (!list.contains(jar)) {
