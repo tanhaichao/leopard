@@ -15,7 +15,7 @@ import org.eclipse.jetty.webapp.WebInfConfiguration;
  * 解决jetty自带的WebInfConfiguration只扫描WEB-INF/lib的问题，maven编译后的目录为target，不符合其规则
  */
 public class EmbedWebInfConfiguration extends WebInfConfiguration {
-	protected static final Logger LOG = Log.getLogger(EmbedWebInfConfiguration.class);
+	protected Logger logger = Log.getLogger(EmbedWebInfConfiguration.class);
 
 	@Override
 	protected List<Resource> findJars(WebAppContext context) throws Exception {
@@ -27,7 +27,7 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 		if (aLoader instanceof URLClassLoader) {
 			URL[] _urls = ((URLClassLoader) aLoader).getURLs();
 			for (URL _url : _urls) {
-				// System.err.println("_url:"+_url);
+				// System.err.println("EmbedWebInfConfiguration url:" + _url);
 				list.add(Resource.newResource(_url));
 			}
 		}
