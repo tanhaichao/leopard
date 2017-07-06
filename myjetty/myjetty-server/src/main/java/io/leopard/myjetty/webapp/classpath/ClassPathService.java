@@ -6,5 +6,5 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 public interface ClassPathService {
 
-	void preConfigure(WebAppContext context, List<String> hostList, String war);
+	void preConfigure(WebAppContext context, List<String> hostList, String war) throws Exception;
 }

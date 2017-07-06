@@ -21,7 +21,7 @@ public class ClassPathServiceImpl implements ClassPathService {
 	}
 
 	@Override
-	public void preConfigure(WebAppContext context, List<String> hostList, String war) {
+	public void preConfigure(WebAppContext context, List<String> hostList, String war) throws Exception {
 		for (ClassPathService service : list) {
 			service.preConfigure(context, hostList, war);
 		}
