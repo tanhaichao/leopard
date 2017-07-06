@@ -1,20 +1,24 @@
 package io.leopard.myjetty.webapp;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebInfConfiguration;
 
+import io.leopard.myjetty.ResourceLoaderImpl;
 import io.leopard.myjetty.webapp.classpath.ClassPathService;
 import io.leopard.myjetty.webapp.classpath.ClassPathServiceImpl;
 
 public class EmbedWebInfConfiguration extends WebInfConfiguration {
 
 	private List<String> hostList;
+
 	private String war;
 
 	public EmbedWebInfConfiguration(List<String> hostList, String war) {
@@ -41,6 +45,20 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 		catch (Exception e) {
 
 		}
+	}
+
+	@Override
+	protected List<Resource> findJars(WebAppContext context) throws Exception {
+		List<Resource> list = super.findJars(context);
+		if (list == null) {
+			list = new ArrayList<Resource>();
+		}
+		List<Resource> extendResourceList = new ResourceLoaderImpl().findJars(context);
+		// System.err.println("extendResourceList:" + extendResourceList);
+		if (extendResourceList != null) {
+			list.addAll(extendResourceList);
+		}
+		return list;
 	}
 
 	// @Override
