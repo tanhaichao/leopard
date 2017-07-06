@@ -29,27 +29,18 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 		if (aLoader instanceof URLClassLoader) {
 			URL[] _urls = ((URLClassLoader) aLoader).getURLs();
 			for (URL _url : _urls) {
-				// System.err.println("EmbedWebInfConfiguration url:" + _url);
+				// System.err.println("EmbedWebInfConfiguration url:" + _url.getPath());
 				list.add(Resource.newResource(_url));
 			}
 		}
-		List<Resource> extendResourceList = new ResourceLoaderImpl().findJars(context);
-		// System.err.println("extendResourceList:" + extendResourceList);
-		if (extendResourceList != null) {
-			list.addAll(extendResourceList);
+		if (true) {
+			List<Resource> extendResourceList = new ResourceLoaderImpl().findJars(context);
+			// System.err.println("extendResourceList:" + extendResourceList);
+			if (extendResourceList != null) {
+				list.addAll(extendResourceList);
+			}
 		}
 		return list;
 	}
 
-	// protected void changeClassLoader(WebAppContext webContext, String jarFile) throws IOException {
-	// // System.err.println("start test");
-	// // System.err.println("webinf:" + webContext.getBaseResource());
-	// ClassLoader classLoader = webContext.getClassLoader();
-	//
-	// URL[] urls = new URL[1];
-	// urls[0] = new File(jarFile).toURI().toURL();
-	// // urls[0] = new File("/work/news/leopard/leopard-web/src/main/resources/").toURI().toURL();
-	// URLClassLoader urlClassLoader = new URLClassLoader(urls, classLoader);
-	// webContext.setClassLoader(urlClassLoader);
-	// }
 }
