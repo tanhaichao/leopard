@@ -25,6 +25,12 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 		if (list == null) {
 			list = new ArrayList<Resource>();
 		}
+		List<Resource> extendResourceList = new ResourceLoaderImpl().findJars(context);
+		// System.err.println("list:" + list);
+		// System.err.println("extendResourceList:" + extendResourceList);
+		if (extendResourceList != null) {
+			list.addAll(extendResourceList);
+		}
 		ClassLoader aLoader = getClass().getClassLoader();
 		if (aLoader instanceof URLClassLoader) {
 			URL[] _urls = ((URLClassLoader) aLoader).getURLs();
@@ -32,10 +38,6 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 				// System.err.println("EmbedWebInfConfiguration url:" + _url);
 				list.add(Resource.newResource(_url));
 			}
-		}
-		List<Resource> extendResourceList = new ResourceLoaderImpl().findJars(context);
-		if (extendResourceList != null) {
-			list.addAll(extendResourceList);
 		}
 		return list;
 	}
