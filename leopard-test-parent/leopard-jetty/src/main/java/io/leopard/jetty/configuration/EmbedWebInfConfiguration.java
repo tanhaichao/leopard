@@ -13,10 +13,6 @@ import org.eclipse.jetty.webapp.WebInfConfiguration;
 
 /**
  * 解决jetty自带的WebInfConfiguration只扫描WEB-INF/lib的问题，maven编译后的目录为target，不符合其规则
- * 
- * @author dw_lixuan
- * @version version1
- * @since 2013-02-18
  */
 public class EmbedWebInfConfiguration extends WebInfConfiguration {
 	protected static final Logger LOG = Log.getLogger(EmbedWebInfConfiguration.class);
