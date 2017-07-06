@@ -33,19 +33,14 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 				list.add(Resource.newResource(_url));
 			}
 		}
-		return list;
-	}
-
-	@Override
-	protected List<Resource> findClassDirs(WebAppContext context) throws Exception {
-		List<Resource> list = super.findClassDirs(context);
 		List<Resource> extendResourceList = new ResourceLoaderImpl().findJars(context);
-		System.err.println("extendResourceList:" + extendResourceList);
+		// System.err.println("extendResourceList:" + extendResourceList);
 		if (extendResourceList != null) {
 			list.addAll(extendResourceList);
 		}
 		return list;
 	}
+
 	// protected void changeClassLoader(WebAppContext webContext, String jarFile) throws IOException {
 	// // System.err.println("start test");
 	// // System.err.println("webinf:" + webContext.getBaseResource());
