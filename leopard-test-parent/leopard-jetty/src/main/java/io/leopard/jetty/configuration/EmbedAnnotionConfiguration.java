@@ -15,10 +15,6 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
  * 解决jetty自带的AnnotationConfiguration只扫描WEB-INF/classes的问题，maven编译后的目录为target， 不符合其规则
- * 
- * @author dw_lixuan
- * @version version1
- * @since 2013-02-18
  */
 public class EmbedAnnotionConfiguration extends AnnotationConfiguration {
 	protected static final Logger LOG = Log.getLogger(EmbedAnnotionConfiguration.class);
