@@ -38,10 +38,10 @@ public class CorsConfig {
 		sb.append("://");
 
 		sb.append(host);
-		if ((port == -1 || port == 80) && "http".equals(scheme)) {
+		if ((port == -1 || port == 80) && "http".equalsIgnoreCase(scheme)) {
 			//
 		}
-		else if ((port == -1 || port == 443) && "https".equals(scheme)) {
+		else if ((port == -1 || port == 443) && "https".equalsIgnoreCase(scheme)) {
 			//
 		}
 		else {
