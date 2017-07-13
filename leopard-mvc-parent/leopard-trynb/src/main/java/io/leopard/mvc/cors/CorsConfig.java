@@ -101,8 +101,7 @@ public class CorsConfig {
 		String host = url.getHost();
 
 		boolean matched = match(host, originRegexList);
-		System.err.println("host:" + host + " matched:" + matched + " originRegexList:" + originRegexList);
-
+		// System.err.println("host:" + host + " matched:" + matched + " originRegexList:" + originRegexList);
 		if (!matched) {
 			return null;
 		}
