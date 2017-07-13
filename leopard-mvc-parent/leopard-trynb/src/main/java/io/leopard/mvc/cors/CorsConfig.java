@@ -11,6 +11,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 
+/**
+ * 跨域配置
+ * 
+ * @author 谭海潮
+ *
+ */
 public class CorsConfig {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
