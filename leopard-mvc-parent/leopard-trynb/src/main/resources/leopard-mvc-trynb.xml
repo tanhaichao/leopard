@@ -5,6 +5,7 @@
 	
 	<!-- 异常处理 -->
 	<bean class="io.leopard.mvc.trynb.TrynbHandlerExceptionResolver" />
+	<bean class="io.leopard.mvc.cors.CorsConfig" />
 	<context:component-scan base-package="io.leopard.mvc.trynb.controller" />
 
 </beans>
