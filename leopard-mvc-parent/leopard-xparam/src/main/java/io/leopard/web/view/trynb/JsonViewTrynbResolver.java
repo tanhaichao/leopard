@@ -8,11 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import io.leopard.json.Json;
+import io.leopard.mvc.cors.CorsService;
 import io.leopard.mvc.trynb.ErrorUtil;
 import io.leopard.mvc.trynb.ResultModifierImpl;
 import io.leopard.mvc.trynb.model.TrynbInfo;
@@ -21,6 +23,9 @@ import io.leopard.web.view.AbstractView;
 import io.leopard.web.view.StatusCodeException;
 
 public class JsonViewTrynbResolver implements TrynbResolver {
+
+	@Autowired
+	private CorsService corsService;
 
 	@Override
 	public ModelAndView resolveView(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler, Exception exception, TrynbInfo trynbInfo) {
@@ -32,9 +37,11 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 		}
 		// }
 
-		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,X_Requested_With,Content-Type");
-		response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-		response.addHeader("Access-Control-Allow-Origin", "*");
+		if (corsService.isEnable()) {
+			response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,X_Requested_With,Content-Type");
+			response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+			response.addHeader("Access-Control-Allow-Origin", "*");
+		}
 
 		ErrorJsonView jsonView = new ErrorJsonView();
 		jsonView.setException(exception);
