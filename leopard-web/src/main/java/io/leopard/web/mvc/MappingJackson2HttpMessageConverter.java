@@ -70,7 +70,7 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 
 		outputMessage.getHeaders().setAccessControlAllowOrigin("*");// FIXME 暂时的写法
 
-		// TODO 之前为什么要注释?
+		// TODO 之前为什么要注释? 20170713
 		outputMessage.getHeaders().setAccessControlAllowMethods(ALLOWED_METHODS);
 		outputMessage.getHeaders().setAccessControlAllowHeaders(ALLOWED_HEADERS);
 
