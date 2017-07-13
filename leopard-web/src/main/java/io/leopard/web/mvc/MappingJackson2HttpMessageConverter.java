@@ -61,29 +61,16 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 	@Override
 	public void write(Object body, MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
 		outputMessage.getHeaders().setContentType(jsonType);
-
-		// header('content-type:application:json;charset=utf8');
-		// header('Access-Control-Allow-Origin:*');
-		// header('Access-Control-Allow-Methods:POST');
-		// header('Access-Control-Allow-Headers:x-requested-with,content-type');
-
-		// logger.info("setAccessControlAllowOrigin:*");
-
-		// response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,X_Requested_With,Content-Type");
-		// response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-		// response.addHeader("Access-Control-Allow-Origin", "*");
-
+		
+		
 		// outputMessage.getHeaders().setAccessControlAllowOrigin("*");// FIXME 暂时的写法
-		// TODO 之前为什么要注释? 20170713
-		// outputMessage.getHeaders().setAccessControlAllowMethods(ALLOWED_METHODS);
-		// outputMessage.getHeaders().setAccessControlAllowHeaders(ALLOWED_HEADERS);
 
 		if (CorsConfig.isEnable()) {
 			HttpServletRequest request = RequestUtil.getCurrentRequest();
 			String allowOrigin = CorsConfig.getAccessControlAllowOrigin(request);
 			outputMessage.getHeaders().set("Access-Control-Allow-Origin", allowOrigin);
 			outputMessage.getHeaders().set("Access-Control-Allow-Credentials", "true");
-			outputMessage.getHeaders().set("Access-Control-Allow-Methods", "POST");
+			outputMessage.getHeaders().set("Access-Control-Allow-Methods", "GET, POST");
 			outputMessage.getHeaders().set("Access-Control-Allow-Headers", "x_requested_with,content-type");
 		}
 
