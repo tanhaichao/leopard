@@ -3,14 +3,31 @@ package io.leopard.mvc.cors;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 
 public class CorsConfig {
+	protected Log logger = LogFactory.getLog(this.getClass());
+
+	@Value("${mvc.cors}")
+	private String enable;
+
+	private static boolean ENABLE;
+
+	@PostConstruct
+	public void init() {
+		// logger.info("init:" + enable);
+		ENABLE = "true".equals(enable);
+	}
 
 	public static boolean isEnable() {
-		return true;
+		// System.err.println("cors:" + ENABLE);
+		return ENABLE;
 	}
 
 	public static String getAccessControlAllowOrigin(HttpServletRequest request) {
