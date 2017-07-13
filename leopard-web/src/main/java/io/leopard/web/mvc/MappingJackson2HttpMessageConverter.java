@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpOutputMessage;
@@ -15,7 +14,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-import io.leopard.mvc.cors.CorsService;
+import io.leopard.mvc.cors.CorsConfig;
 
 public class MappingJackson2HttpMessageConverter implements HttpMessageConverter<Object> {
 
@@ -23,9 +22,6 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 
 	// TODO ahai 这里使用application/json是否会有安全性问题?
 	private static final MediaType jsonType = MediaType.valueOf("application/json;charset=UTF-8");
-
-	@Autowired
-	private CorsService corsService;
 
 	@Override
 	public boolean canRead(Class<?> clazz, MediaType mediaType) {
@@ -79,7 +75,7 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 		// outputMessage.getHeaders().setAccessControlAllowMethods(ALLOWED_METHODS);
 		// outputMessage.getHeaders().setAccessControlAllowHeaders(ALLOWED_HEADERS);
 
-		if (corsService.isEnable()) {
+		if (CorsConfig.isEnable()) {
 			// outputMessage.getHeaders().set("Access-Control-Allow-Headers", "X-Requested-With,X_Requested_With,Content-Type");
 			// outputMessage.getHeaders().set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
 			outputMessage.getHeaders().set("Access-Control-Allow-Origin", "*");
