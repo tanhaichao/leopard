@@ -79,9 +79,9 @@ public class SessionRequestWrapper extends HttpServletRequestWrapper {
 		}
 
 		Cookie cookie = new Cookie(name, value);
-//		cookie.setHttpOnly(true);
+		// cookie.setHttpOnly(true);
 		cookie.setPath("/");
-		if (true) {// TODO 20170713
+		if (false) {// TODO 20170713
 			String domain = this.getDomain();
 			cookie.setDomain(domain);
 		}
