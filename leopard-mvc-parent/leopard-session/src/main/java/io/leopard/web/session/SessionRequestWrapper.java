@@ -1,8 +1,5 @@
 package io.leopard.web.session;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -14,9 +11,7 @@ public class SessionRequestWrapper extends HttpServletRequestWrapper {
 	public static final String SESSIONID_COOKIE_NAME = "SESSIONID";
 
 	private final String sid;
-
 	private HttpSession session;
-
 	private static int expiry = 86400;// 1天
 
 	public static void setExpiry(int expiry) {
@@ -79,34 +74,10 @@ public class SessionRequestWrapper extends HttpServletRequestWrapper {
 		}
 
 		Cookie cookie = new Cookie(name, value);
-		// cookie.setHttpOnly(true);
+		cookie.setHttpOnly(true);
 		cookie.setPath("/");
-		if (false) {// TODO 20170713
-			String domain = this.getDomain();
-			cookie.setDomain(domain);
-		}
 		// response.addHeader("P3P", "CP=\"CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"");
 		response.addCookie(cookie);
-	}
-
-	private String getDomain() {
-		String serverName = this.getServerName();
-		if ("localhost".equals(serverName)) {
-			return serverName;
-		}
-		return parseTopLevelDomain(serverName);
-
-	}
-
-	public static String parseTopLevelDomain(String serverName) {
-		String regex = "[a-z0-9\\-_]+\\.[a-z]+$";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(serverName);
-		if (m.find()) {
-			return m.group();
-		}
-		// 来到这的，有localhost
-		return serverName;
 	}
 
 	@Override
