@@ -76,9 +76,9 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 		// outputMessage.getHeaders().setAccessControlAllowHeaders(ALLOWED_HEADERS);
 
 		if (CorsConfig.isEnable()) {
-			// outputMessage.getHeaders().set("Access-Control-Allow-Headers", "X-Requested-With,X_Requested_With,Content-Type");
-			// outputMessage.getHeaders().set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
 			outputMessage.getHeaders().set("Access-Control-Allow-Origin", "*");
+			outputMessage.getHeaders().set("Access-Control-Allow-Methods", "POST");
+			outputMessage.getHeaders().set("Access-Control-Allow-Headers", "x_requested_with,content-type");
 		}
 
 		// System.err.println("ok");

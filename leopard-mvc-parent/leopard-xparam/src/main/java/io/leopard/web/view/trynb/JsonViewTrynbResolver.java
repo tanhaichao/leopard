@@ -37,6 +37,8 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 			// response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,X_Requested_With,Content-Type");
 			// response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
 			response.addHeader("Access-Control-Allow-Origin", "*");
+			response.addHeader("Access-Control-Allow-Methods", "POST");
+			response.addHeader("Access-Control-Allow-Headers", "x_requested_with,content-type");
 		}
 
 		ErrorJsonView jsonView = new ErrorJsonView();
