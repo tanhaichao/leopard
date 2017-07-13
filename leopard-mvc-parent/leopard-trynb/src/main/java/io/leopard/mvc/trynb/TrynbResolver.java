@@ -1,4 +1,4 @@
-package io.leopard.mvc.trynb.resolver;
+package io.leopard.mvc.trynb;
 
 import io.leopard.mvc.trynb.model.TrynbInfo;
 

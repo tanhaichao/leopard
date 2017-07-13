@@ -2,12 +2,15 @@ package io.leopard.mvc.cors;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 
@@ -21,38 +24,89 @@ public class CorsConfig {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Value("${mvc.cors}")
-	private String enable;
+	private String cors;
 
-	private static boolean ENABLE;
+	@Autowired
+	private AllowOriginResolver allowOriginResolver;
+
+	private List<String> allowOriginList;
+
+	private boolean enable;
 
 	@PostConstruct
 	public void init() {
+		List<String> allowOriginList = allowOriginResolver.resolve(cors);
+		if (allowOriginList == null) {
+			allowOriginList = new ArrayList<>();
+		}
+		this.allowOriginList = toRegexList(allowOriginList);
 		// logger.info("init:" + enable);
-		ENABLE = "true".equals(enable);
+		enable = !allowOriginList.isEmpty();
 	}
 
-	public static boolean isEnable() {
+	public boolean isEnable() {
 		// System.err.println("cors:" + ENABLE);
-		return ENABLE;
+		return enable;
 	}
 
-	public static String getAccessControlAllowOrigin(HttpServletRequest request) {
+	public String getAccessControlAllowOrigin(HttpServletRequest request) {
 		String referer = request.getHeader("referer");
 		if (StringUtils.isEmpty(referer)) {
-			return "*";
+			return null;
 		}
-
-		try {
-			return getHostAndPort(referer);
-		}
-		catch (MalformedURLException e) {
-			return "*";
-		}
+		return getHostAndPort(referer, allowOriginList);
 	}
 
-	private static String getHostAndPort(String referer) throws MalformedURLException {
-		URL url = new URL(referer);
+	/**
+	 * 转换成正则表达式
+	 * 
+	 * @param allowOriginList
+	 * @return
+	 */
+	protected static List<String> toRegexList(List<String> allowOriginList) {
+		List<String> regexList = new ArrayList<>();
+		for (String origin : allowOriginList) {
+			if ("*".equals(origin)) {
+				regexList.add("^[a-zA-Z0-9_\\-\\.]+$");
+			}
+			else if (origin.startsWith("*.")) {
+				regexList.add("^[a-zA-Z0-9_\\-\\.]+" + origin.substring(2) + "$");
+			}
+			else {
+				regexList.add("^" + origin + "$");
+			}
+		}
+		return regexList;
+	}
+
+	protected static boolean match(String host, List<String> originRegexList) {
+		for (String regex : originRegexList) {
+			// System.err.println("host:" + host + " regex:" + regex + " match:" + host.matches(regex));
+			if (host.matches(regex)) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	protected static String getHostAndPort(String referer, List<String> originRegexList) {
+		URL url;
+		try {
+			url = new URL(referer);
+		}
+		catch (MalformedURLException e) {
+			return null;
+		}
 		String host = url.getHost();
+
+		boolean matched = match(host, originRegexList);
+		System.err.println("host:" + host + " matched:" + matched + " originRegexList:" + originRegexList);
+
+		if (!matched) {
+			return null;
+		}
+
 		int port = url.getPort();
 		String scheme = url.getProtocol();
 		StringBuilder sb = new StringBuilder(48);

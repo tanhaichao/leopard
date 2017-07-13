@@ -6,10 +6,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpInputMessage;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -45,33 +46,24 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 		return null;
 	}
 
-	private static List<String> ALLOWED_HEADERS = new ArrayList<String>();
-
-	private static List<HttpMethod> ALLOWED_METHODS = new ArrayList<HttpMethod>();
-	static {
-		// "X-Requested-With,X_Requested_With,Content-Type"
-		ALLOWED_HEADERS.add("X-Requested-With");
-		ALLOWED_HEADERS.add("Content-Type");
-
-		// TODO ahai 这里是否结合Controller定义输出?
-		ALLOWED_METHODS.add(HttpMethod.GET);
-		ALLOWED_METHODS.add(HttpMethod.POST);
-	}
+	@Autowired
+	private CorsConfig corsConfig;
 
 	@Override
 	public void write(Object body, MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
 		outputMessage.getHeaders().setContentType(jsonType);
-		
-		
+
 		// outputMessage.getHeaders().setAccessControlAllowOrigin("*");// FIXME 暂时的写法
 
-		if (CorsConfig.isEnable()) {
+		if (corsConfig.isEnable()) {
 			HttpServletRequest request = RequestUtil.getCurrentRequest();
-			String allowOrigin = CorsConfig.getAccessControlAllowOrigin(request);
-			outputMessage.getHeaders().set("Access-Control-Allow-Origin", allowOrigin);
-			outputMessage.getHeaders().set("Access-Control-Allow-Credentials", "true");
-			outputMessage.getHeaders().set("Access-Control-Allow-Methods", "GET, POST");
-			outputMessage.getHeaders().set("Access-Control-Allow-Headers", "x_requested_with,content-type");
+			String allowOrigin = corsConfig.getAccessControlAllowOrigin(request);
+			if (StringUtils.isNotEmpty(allowOrigin)) {
+				outputMessage.getHeaders().set("Access-Control-Allow-Origin", allowOrigin);
+				outputMessage.getHeaders().set("Access-Control-Allow-Credentials", "true");
+				// outputMessage.getHeaders().set("Access-Control-Allow-Methods", "GET, POST");
+				// outputMessage.getHeaders().set("Access-Control-Allow-Headers", "x_requested_with,content-type");
+			}
 		}
 
 		// System.err.println("ok");

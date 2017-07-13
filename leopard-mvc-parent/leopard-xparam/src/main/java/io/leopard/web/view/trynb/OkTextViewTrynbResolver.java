@@ -1,7 +1,7 @@
 package io.leopard.web.view.trynb;
 
+import io.leopard.mvc.trynb.TrynbResolver;
 import io.leopard.mvc.trynb.model.TrynbInfo;
-import io.leopard.mvc.trynb.resolver.TrynbResolver;
 import io.leopard.web.view.OkTextView;
 import io.leopard.web.view.OutSideException;
 
@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+@Order(2)
+@Component
 public class OkTextViewTrynbResolver implements TrynbResolver {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
