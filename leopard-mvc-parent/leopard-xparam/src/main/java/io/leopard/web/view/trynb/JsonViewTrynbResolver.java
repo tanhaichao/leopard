@@ -38,8 +38,8 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 		// }
 
 		if (corsService.isEnable()) {
-			response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,X_Requested_With,Content-Type");
-			response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+			// response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,X_Requested_With,Content-Type");
+			// response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 		}
 
