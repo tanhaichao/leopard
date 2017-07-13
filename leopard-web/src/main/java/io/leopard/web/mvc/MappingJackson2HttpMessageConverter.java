@@ -40,15 +40,17 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 		return null;
 	}
 
-	private static List<String> allowedHeaders = new ArrayList<String>();
-	private static List<HttpMethod> allowedMethods = new ArrayList<HttpMethod>();
+	private static List<String> ALLOWED_HEADERS = new ArrayList<String>();
+
+	private static List<HttpMethod> ALLOWED_METHODS = new ArrayList<HttpMethod>();
 	static {
-		allowedHeaders.add("x-requested-with");
-		allowedHeaders.add("content-type");
+		// "X-Requested-With,X_Requested_With,Content-Type"
+		ALLOWED_HEADERS.add("X-Requested-With");
+		ALLOWED_HEADERS.add("Content-Type");
 
 		// TODO ahai 这里是否结合Controller定义输出?
-		allowedMethods.add(HttpMethod.GET);
-		allowedMethods.add(HttpMethod.POST);
+		ALLOWED_METHODS.add(HttpMethod.GET);
+		ALLOWED_METHODS.add(HttpMethod.POST);
 	}
 
 	@Override
@@ -61,9 +63,16 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 		// header('Access-Control-Allow-Headers:x-requested-with,content-type');
 
 		// logger.info("setAccessControlAllowOrigin:*");
+
+		// response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,X_Requested_With,Content-Type");
+		// response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+		// response.addHeader("Access-Control-Allow-Origin", "*");
+
 		outputMessage.getHeaders().setAccessControlAllowOrigin("*");// FIXME 暂时的写法
-		// outputMessage.getHeaders().setAccessControlAllowMethods(allowedMethods);
-		// outputMessage.getHeaders().setAccessControlAllowHeaders(allowedHeaders);
+
+		// TODO 之前为什么要注释?
+		outputMessage.getHeaders().setAccessControlAllowMethods(ALLOWED_METHODS);
+		outputMessage.getHeaders().setAccessControlAllowHeaders(ALLOWED_HEADERS);
 
 		outputMessage.getBody().write(((String) body).getBytes());
 	}
