@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpInputMessage;
@@ -15,6 +17,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
 import io.leopard.mvc.cors.CorsConfig;
+import io.leopard.web.servlet.RequestUtil;
 
 public class MappingJackson2HttpMessageConverter implements HttpMessageConverter<Object> {
 
@@ -76,7 +79,10 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 		// outputMessage.getHeaders().setAccessControlAllowHeaders(ALLOWED_HEADERS);
 
 		if (CorsConfig.isEnable()) {
-			outputMessage.getHeaders().set("Access-Control-Allow-Origin", "*");
+			HttpServletRequest request = RequestUtil.getCurrentRequest();
+			String allowOrigin = CorsConfig.getAccessControlAllowOrigin(request);
+			outputMessage.getHeaders().set("Access-Control-Allow-Origin", allowOrigin);
+			outputMessage.getHeaders().set("Access-Control-Allow-Credentials", "true");
 			outputMessage.getHeaders().set("Access-Control-Allow-Methods", "POST");
 			outputMessage.getHeaders().set("Access-Control-Allow-Headers", "x_requested_with,content-type");
 		}

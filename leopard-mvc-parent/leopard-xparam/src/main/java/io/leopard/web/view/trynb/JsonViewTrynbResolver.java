@@ -36,7 +36,9 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 		if (CorsConfig.isEnable()) {
 			// response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,X_Requested_With,Content-Type");
 			// response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-			response.addHeader("Access-Control-Allow-Origin", "*");
+			String allowOrigin = CorsConfig.getAccessControlAllowOrigin(request);
+			response.addHeader("Access-Control-Allow-Origin", allowOrigin);
+			response.addHeader("Access-Control-Allow-Credentials", "true");
 			response.addHeader("Access-Control-Allow-Methods", "POST");
 			response.addHeader("Access-Control-Allow-Headers", "x_requested_with,content-type");
 		}
