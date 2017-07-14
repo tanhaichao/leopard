@@ -45,7 +45,7 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 		return bean;
 	}
 
-	private SysconfigDao sysconfigDao = new SysconfigDaoJdbcImpl();
+	private SysconfigDao sysconfigDao = new SysconfigDaoImpl();
 
 	protected Object resolveValue(Value anno, Field field) {
 		String value = anno.value();
