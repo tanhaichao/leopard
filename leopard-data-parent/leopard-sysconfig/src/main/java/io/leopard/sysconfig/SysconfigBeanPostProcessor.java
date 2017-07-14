@@ -134,10 +134,10 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 
 	@Override
 	public void subscribe(String message, boolean isMySelf) {
-		logger.info("subscribe message:" + message + " isMySelf:" + isMySelf);
 		if (isMySelf) {
 			return;
 		}
+		logger.info("subscribe message:" + message + " isMySelf:" + isMySelf);
 		this.update();
 	}
 
