@@ -15,9 +15,11 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.util.StringUtils;
 
+import io.leopard.data4j.pubsub.IPubSub;
+import io.leopard.data4j.pubsub.Publisher;
 import io.leopard.jdbc.Jdbc;
 
-public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware, SysconfigResolver {
+public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware, SysconfigResolver, IPubSub {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	protected ConfigurableListableBeanFactory beanFactory;
@@ -105,7 +107,17 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
+		Publisher.publish(this, "update");
 		return true;
+	}
+
+	@Override
+	public void subscribe(String message, boolean isMySelf) {
+		logger.info("subscribe message:" + message + " isMySelf:" + isMySelf);
+		if (isMySelf) {
+			return;
+		}
+		this.update();
 	}
 
 }
