@@ -66,7 +66,7 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 			sysconfigDao = new SysconfigDaoJdbcImpl(jdbc);
 		}
 
-		logger.info("jdbc:" + jdbc);
+		// logger.info("jdbc:" + jdbc);
 		// ${aws.oss.endpoint}
 		String key = value.replace("${", "").replace("}", "");
 		return sysconfigDao.resolve(key, field.getType());
