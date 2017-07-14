@@ -20,7 +20,7 @@ public class TrynbHandlerExceptionResolver implements HandlerExceptionResolver {
 
 	private TrynbService errorPageService = new TrynbServiceImpl();
 
-	@Autowired
+	@Autowired(required = false)
 	private List<TrynbResolver> trynbResolverList;
 
 	// @PostConstruct
