@@ -14,7 +14,5 @@ public interface SysconfigResolver {
 
 	SysconfigVO get();
 
-	boolean save(SysconfigVO sysconfigVO);
-
 	boolean publish();
 }

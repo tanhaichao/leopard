@@ -104,8 +104,6 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 	@Override
 	public boolean update() {
 		this.sysconfigDao.loadData();
-		SysconfigVO sysconfigVO = new SysconfigVO();
-		List<FieldVO> fieldVOList = new ArrayList<FieldVO>();
 		for (FieldInfo fieldInfo : fieldList) {
 			Field field = fieldInfo.getField();
 			Value annotation = field.getAnnotation(Value.class);
@@ -120,15 +118,8 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 			catch (IllegalAccessException e) {
 				throw new RuntimeException(e.getMessage(), e);
 			}
-			String sysconfigId = annotation.value().replace("${", "").replace("}", "");
-			FieldVO fieldVO = new FieldVO();
-			fieldVO.setSysconfigId(sysconfigId);
-			fieldVO.setValue(value);
-			fieldVOList.add(fieldVO);
 		}
-		sysconfigVO.setFieldList(fieldVOList);
-		sysconfigVO.setLmodify(new Date());
-		this.save(sysconfigVO);
+		lmodify = new Date();
 		return true;
 	}
 
@@ -141,17 +132,31 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 		this.update();
 	}
 
-	private SysconfigVO sysconfigVO;
+	private Date lmodify;
 
 	@Override
 	public SysconfigVO get() {
+		SysconfigVO sysconfigVO = new SysconfigVO();
+		List<FieldVO> fieldVOList = new ArrayList<FieldVO>();
+		sysconfigVO.setFieldList(fieldVOList);
+		for (FieldInfo fieldInfo : fieldList) {
+			Field field = fieldInfo.getField();
+			Value annotation = field.getAnnotation(Value.class);
+			Object value;
+			try {
+				value = field.get(fieldInfo.getBean());
+			}
+			catch (IllegalAccessException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+			String sysconfigId = annotation.value().replace("${", "").replace("}", "");
+			FieldVO fieldVO = new FieldVO();
+			fieldVO.setSysconfigId(sysconfigId);
+			fieldVO.setValue(value);
+			fieldVOList.add(fieldVO);
+		}
+		sysconfigVO.setLmodify(lmodify);
 		return sysconfigVO;
-	}
-
-	@Override
-	public boolean save(SysconfigVO sysconfigVO) {
-		this.sysconfigVO = sysconfigVO;
-		return true;
 	}
 
 }
