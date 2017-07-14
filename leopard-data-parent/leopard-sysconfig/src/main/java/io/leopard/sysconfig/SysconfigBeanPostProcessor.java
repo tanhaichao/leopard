@@ -88,10 +88,13 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 
 	@Override
 	public boolean update() {
+		this.sysconfigDao.loadData();
+
 		for (FieldInfo fieldInfo : fieldList) {
 			Field field = fieldInfo.getField();
 			Value annotation = field.getAnnotation(Value.class);
 			Object value = resolveValue(annotation, field);
+
 			if (value == null) {
 				throw new NullPointerException("参数值怎么会为空?");
 			}

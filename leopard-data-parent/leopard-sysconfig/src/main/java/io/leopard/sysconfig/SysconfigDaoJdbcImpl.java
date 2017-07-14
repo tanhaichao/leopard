@@ -24,16 +24,18 @@ public class SysconfigDaoJdbcImpl implements SysconfigDao {
 
 	public SysconfigDaoJdbcImpl(Jdbc jdbc) {
 		this.jdbc = jdbc;
-		this.data = loadData();
+		loadData();
 	}
 
-	protected Map<String, String> loadData() {
+	@Override
+	public Map<String, String> loadData() {
 		String sql = "select * from " + tableName;
 		List<Sysconfig> list = jdbc.queryForList(sql, Sysconfig.class);
 		Map<String, String> data = new ConcurrentHashMap<>();
 		for (Sysconfig sysconfig : list) {
 			data.put(sysconfig.getSysparamId(), sysconfig.getValue());
 		}
+		this.data = data;
 		return data;
 	}
 
