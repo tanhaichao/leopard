@@ -95,6 +95,13 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 	}
 
 	@Override
+	public boolean publish() {
+		boolean success = this.update();
+		Publisher.publish(this, "update");
+		return success;
+	}
+
+	@Override
 	public boolean update() {
 		this.sysconfigDao.loadData();
 		SysconfigVO sysconfigVO = new SysconfigVO();
@@ -122,7 +129,6 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 		sysconfigVO.setFieldList(fieldVOList);
 		sysconfigVO.setLmodify(new Date());
 		this.save(sysconfigVO);
-		Publisher.publish(this, "update");
 		return true;
 	}
 
