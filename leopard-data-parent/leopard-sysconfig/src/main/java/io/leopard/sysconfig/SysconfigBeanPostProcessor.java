@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 import io.leopard.data4j.pubsub.IPubSub;
 import io.leopard.data4j.pubsub.Publisher;
 import io.leopard.jdbc.Jdbc;
+import io.leopard.redis.Redis;
 
 public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware, SysconfigResolver, IPubSub {
 	protected Log logger = LogFactory.getLog(this.getClass());
@@ -30,6 +31,8 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		this.beanFactory = (ConfigurableListableBeanFactory) beanFactory;
 		jdbc = beanFactory.getBean(Jdbc.class);
+		Redis redis = (Redis) beanFactory.getBean("sessionRedis");
+		Publisher.listen(this, redis);
 	}
 
 	private List<FieldInfo> fieldList = new ArrayList<FieldInfo>();
