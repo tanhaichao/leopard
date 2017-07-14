@@ -2,6 +2,7 @@ package io.leopard.sysconfig;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -19,6 +20,8 @@ import io.leopard.data4j.pubsub.IPubSub;
 import io.leopard.data4j.pubsub.Publisher;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.redis.Redis;
+import io.leopard.sysconfig.viewer.FieldVO;
+import io.leopard.sysconfig.viewer.SysconfigVO;
 
 public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware, SysconfigResolver, IPubSub {
 	protected Log logger = LogFactory.getLog(this.getClass());
@@ -94,7 +97,8 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 	@Override
 	public boolean update() {
 		this.sysconfigDao.loadData();
-
+		SysconfigVO sysconfigVO = new SysconfigVO();
+		List<FieldVO> fieldVOList = new ArrayList<FieldVO>();
 		for (FieldInfo fieldInfo : fieldList) {
 			Field field = fieldInfo.getField();
 			Value annotation = field.getAnnotation(Value.class);
@@ -109,7 +113,15 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 			catch (IllegalAccessException e) {
 				throw new RuntimeException(e.getMessage(), e);
 			}
+			String sysconfigId = annotation.value().replace("${", "").replace("}", "");
+			FieldVO fieldVO = new FieldVO();
+			fieldVO.setSysconfigId(sysconfigId);
+			fieldVO.setValue(value);
+			fieldVOList.add(fieldVO);
 		}
+		sysconfigVO.setFieldList(fieldVOList);
+		sysconfigVO.setLmodify(new Date());
+		this.save(sysconfigVO);
 		Publisher.publish(this, "update");
 		return true;
 	}
@@ -121,6 +133,19 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 			return;
 		}
 		this.update();
+	}
+
+	private SysconfigVO sysconfigVO;
+
+	@Override
+	public SysconfigVO get() {
+		return sysconfigVO;
+	}
+
+	@Override
+	public boolean save(SysconfigVO sysconfigVO) {
+		this.sysconfigVO = sysconfigVO;
+		return true;
 	}
 
 }

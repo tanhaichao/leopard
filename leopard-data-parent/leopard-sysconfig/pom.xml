@@ -35,5 +35,15 @@
 			<artifactId>leopard-memdb</artifactId>
 			<version>0.9.11-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>

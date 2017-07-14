@@ -1,5 +1,7 @@
 package io.leopard.sysconfig;
 
+import io.leopard.sysconfig.viewer.SysconfigVO;
+
 /**
  * 系统配置解析器
  * 
@@ -9,4 +11,8 @@ package io.leopard.sysconfig;
 public interface SysconfigResolver {
 
 	boolean update();
+
+	SysconfigVO get();
+
+	boolean save(SysconfigVO sysconfigVO);
 }
