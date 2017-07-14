@@ -41,7 +41,7 @@ public class SysconfigDaoJdbcImpl implements SysconfigDao {
 
 	@Override
 	public Object resolve(String key, Class<?> type) {
-		logger.info("resolve:" + key + " type:" + type.getName());
+		// logger.info("resolve:" + key + " type:" + type.getName());
 		String value = data.get(key);
 		if (value == null) {
 			return null;
