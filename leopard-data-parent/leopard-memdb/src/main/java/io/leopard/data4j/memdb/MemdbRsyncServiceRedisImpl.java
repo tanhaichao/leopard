@@ -41,13 +41,25 @@ public class MemdbRsyncServiceRedisImpl implements MemdbRsyncService {
 			public void run() {
 				// Exception in thread "Thread-11" java.lang.ClassCastException: [B cannot be cast to java.util.List
 				try {
-					redis.subscribe(queueListener, channel);
+					subscribe();
 				}
-				catch (Exception e) {
+				catch (InterruptedException e) {
 					logger.error(e.getMessage(), e);
 				}
 			};
 		}.start();
+	}
+
+	protected void subscribe() throws InterruptedException {
+		while (true) {
+			try {
+				redis.subscribe(queueListener, channel);
+			}
+			catch (ClassCastException e) {
+				logger.error(e.getMessage(), e);
+				Thread.sleep(5000);
+			}
+		}
 	}
 
 	@Override
