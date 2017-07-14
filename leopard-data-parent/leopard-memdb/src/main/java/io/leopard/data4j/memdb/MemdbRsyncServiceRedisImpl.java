@@ -1,8 +1,12 @@
 package io.leopard.data4j.memdb;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import io.leopard.redis.Redis;
 
 public class MemdbRsyncServiceRedisImpl implements MemdbRsyncService {
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private final Redis redis;
 
@@ -35,7 +39,13 @@ public class MemdbRsyncServiceRedisImpl implements MemdbRsyncService {
 		new Thread() {
 			@Override
 			public void run() {
-				redis.subscribe(queueListener, channel);
+				// Exception in thread "Thread-11" java.lang.ClassCastException: [B cannot be cast to java.util.List
+				try {
+					redis.subscribe(queueListener, channel);
+				}
+				catch (Exception e) {
+					logger.error(e.getMessage(), e);
+				}
 			};
 		}.start();
 	}
