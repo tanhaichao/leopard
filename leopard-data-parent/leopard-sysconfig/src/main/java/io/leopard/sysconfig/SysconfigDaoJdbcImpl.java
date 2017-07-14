@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import io.leopard.jdbc.Jdbc;
+import io.leopard.json.Json;
 
 public class SysconfigDaoJdbcImpl implements SysconfigDao {
 
@@ -20,7 +21,7 @@ public class SysconfigDaoJdbcImpl implements SysconfigDao {
 	 */
 	private String tableName = "sysparam";
 
-	private Map<String, String> data;
+	private Map<String, String> data = new ConcurrentHashMap<>();
 
 	public SysconfigDaoJdbcImpl(Jdbc jdbc) {
 		this.jdbc = jdbc;
@@ -31,11 +32,11 @@ public class SysconfigDaoJdbcImpl implements SysconfigDao {
 	public Map<String, String> loadData() {
 		String sql = "select * from " + tableName;
 		List<Sysconfig> list = jdbc.queryForList(sql, Sysconfig.class);
-		Map<String, String> data = new ConcurrentHashMap<>();
+		Json.printList(list, "list");
+		data.clear();
 		for (Sysconfig sysconfig : list) {
 			data.put(sysconfig.getSysparamId(), sysconfig.getValue());
 		}
-		this.data = data;
 		return data;
 	}
 

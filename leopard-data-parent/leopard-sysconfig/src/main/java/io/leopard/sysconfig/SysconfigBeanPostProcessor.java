@@ -108,7 +108,9 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 			Field field = fieldInfo.getField();
 			Value annotation = field.getAnnotation(Value.class);
 			Object value = resolveValue(annotation, field);
+			String sysconfigId = annotation.value().replace("${", "").replace("}", "");
 
+			logger.info("update sysconfigId:" + sysconfigId + " value:" + value);
 			if (value == null) {
 				throw new NullPointerException("参数值怎么会为空?");
 			}
