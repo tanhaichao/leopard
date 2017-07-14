@@ -1,6 +1,8 @@
 package io.leopard.sysconfig;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +17,7 @@ import org.springframework.util.StringUtils;
 
 import io.leopard.jdbc.Jdbc;
 
-public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware {
+public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware, SysconfigResolver {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	protected ConfigurableListableBeanFactory beanFactory;
@@ -27,6 +29,8 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 		this.beanFactory = (ConfigurableListableBeanFactory) beanFactory;
 		jdbc = beanFactory.getBean(Jdbc.class);
 	}
+
+	private List<FieldInfo> fieldList = new ArrayList<FieldInfo>();
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -43,8 +47,13 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 			if (value == null) {
 				continue;
 			}
+
 			try {
 				field.set(bean, value);
+				FieldInfo fieldInfo = new FieldInfo();
+				fieldInfo.setBean(bean);
+				fieldInfo.setField(field);
+				fieldList.add(fieldInfo);
 			}
 			catch (IllegalAccessException e) {
 				throw new BeanInstantiationException(clazz, e.getMessage(), e);
@@ -75,6 +84,25 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		return bean;
+	}
+
+	@Override
+	public boolean update() {
+		for (FieldInfo fieldInfo : fieldList) {
+			Field field = fieldInfo.getField();
+			Value annotation = field.getAnnotation(Value.class);
+			Object value = resolveValue(annotation, field);
+			if (value == null) {
+				throw new NullPointerException("参数值怎么会为空?");
+			}
+			try {
+				field.set(fieldInfo.getBean(), value);
+			}
+			catch (IllegalAccessException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+		}
+		return true;
 	}
 
 }
