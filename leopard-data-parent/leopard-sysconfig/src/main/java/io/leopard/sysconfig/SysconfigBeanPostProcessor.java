@@ -15,7 +15,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.Primary;
 
-public class AutoResourceBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware {
+public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware {
 	protected ConfigurableListableBeanFactory beanFactory;
 
 	@Override
