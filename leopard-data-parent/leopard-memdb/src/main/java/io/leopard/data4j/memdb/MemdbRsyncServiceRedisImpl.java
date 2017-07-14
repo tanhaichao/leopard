@@ -58,7 +58,7 @@ public class MemdbRsyncServiceRedisImpl implements MemdbRsyncService {
 			catch (ClassCastException e) {
 				// TODO 为什么会报错?
 				logger.error(e.getMessage(), e);
-				Thread.sleep(5000);
+				Thread.sleep(1000);
 			}
 		}
 	}
