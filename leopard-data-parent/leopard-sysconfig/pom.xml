@@ -20,5 +20,10 @@
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-jdbc</artifactId>
+			<version>0.9.11-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
