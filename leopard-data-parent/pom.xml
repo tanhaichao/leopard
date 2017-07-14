@@ -26,6 +26,7 @@
 		<module>leopard-rpc</module>
 		<module>leopard-table</module>
 		<module>leopard-elasticsearch</module>
+		<module>leopard-sysconfig</module>
 	</modules>
 
 </project>
