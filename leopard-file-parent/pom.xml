@@ -8,4 +8,7 @@
   <artifactId>leopard-file-parent</artifactId>
   <packaging>pom</packaging>
   <description>文件操作</description>
+  <modules>
+  	<module>leopard-excel</module>
+  </modules>
 </project>
