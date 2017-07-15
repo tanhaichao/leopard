@@ -238,6 +238,7 @@
 		<module>myjetty</module>
 		<module>leopard-parent</module>
 		<module>beanunit</module>
+		<module>leopard-file-parent</module>
 	</modules>
 
 
