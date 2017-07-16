@@ -296,11 +296,15 @@
 				<artifactId>leopard-elasticsearch</artifactId>
 				<version>${leopard.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>javahost</artifactId>
 				<version>${javahost.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-excel</artifactId>
+				<version>${leopard.version}</version>
 			</dependency>
 
 			<dependency>
