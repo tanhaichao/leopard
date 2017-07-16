@@ -78,7 +78,7 @@ public class ExcelView extends ModelAndView {
 
 	public void addColumnName(String... columnNames) throws WriteException {
 		int columnCount = this.sheet.getColumns();
-		System.err.println("columnCount:" + columnCount);
+		// System.err.println("columnCount:" + columnCount);
 		for (int i = 0; i < columnNames.length; i++) {
 			// 通过函数WritableFont（）设置字体样式
 			// 第一个参数表示所选字体
