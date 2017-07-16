@@ -46,6 +46,16 @@ public class Row {
 		return this.addCell(str);
 	}
 
+	public Row addCell(int num) throws WriteException {
+		String str = Integer.toString(num);
+		return this.addCell(str);
+	}
+
+	public Row addCell(long num) throws WriteException {
+		String str = Long.toString(num);
+		return this.addCell(str);
+	}
+
 	public Row addFormatCell(double number) throws WriteException {
 		String str;
 		if (number > 0) {
