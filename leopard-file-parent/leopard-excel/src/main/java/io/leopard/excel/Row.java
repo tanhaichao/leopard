@@ -3,6 +3,9 @@ package io.leopard.excel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.leopard.lang.inum.Bnum;
+import io.leopard.lang.inum.Inum;
+import io.leopard.lang.inum.Snum;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WriteException;
@@ -26,6 +29,21 @@ public class Row {
 	public Row addCell(String str) throws WriteException {
 		sheet.addCell(new Label(currentCell++, rowNumber, str));
 		return this;
+	}
+
+	public Row addCell(Bnum bnum) throws WriteException {
+		String str = bnum.getDesc();
+		return this.addCell(str);
+	}
+
+	public Row addCell(Inum inum) throws WriteException {
+		String str = inum.getDesc();
+		return this.addCell(str);
+	}
+
+	public Row addCell(Snum snum) throws WriteException {
+		String str = snum.getDesc();
+		return this.addCell(str);
 	}
 
 	public Row addFormatCell(double number) throws WriteException {
