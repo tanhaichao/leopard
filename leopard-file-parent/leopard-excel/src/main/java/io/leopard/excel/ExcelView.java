@@ -49,6 +49,7 @@ public class ExcelView extends ModelAndView {
 			response.addHeader("Content-Disposition", "attachment;filename=" + filedisplay);
 			// System.out.println("filedisplay:" + filedisplay);
 			workbook.write();
+			workbook.close();
 
 			InputStream input = new ByteArrayInputStream(output.toByteArray());
 			java.io.OutputStream out = response.getOutputStream();
@@ -59,7 +60,7 @@ public class ExcelView extends ModelAndView {
 			}
 			input.close();
 			out.flush();
-			workbook.close();
+			output.close();
 		}
 	};
 
