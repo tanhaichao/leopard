@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 
@@ -45,7 +46,11 @@ public class ExcelView extends ModelAndView {
 		@Override
 		protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 			response.setContentType("application/force-download");
-			String filedisplay = URLEncoder.encode(getFileName(), "UTF-8");
+			String fileName = getFileName();
+			if (StringUtils.isEmpty(fileName)) {
+				fileName = Long.toString(System.currentTimeMillis());
+			}
+			String filedisplay = URLEncoder.encode(fileName + ".xls", "UTF-8");
 			response.addHeader("Content-Disposition", "attachment;filename=" + filedisplay);
 			// System.out.println("filedisplay:" + filedisplay);
 			workbook.write();
