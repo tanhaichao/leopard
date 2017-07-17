@@ -34,4 +34,16 @@ public class HuanxinJson {
 			throw new JsonException(e.getMessage(), e);
 		}
 	}
+
+	public static <T> T toObject(String json, Class<T> clazz) {
+		if (json == null || json.length() == 0) {
+			return null;
+		}
+		try {
+			return mapper.readValue(json, clazz);
+		}
+		catch (Exception e) {
+			throw new JsonException(e.getMessage(), e);
+		}
+	}
 }

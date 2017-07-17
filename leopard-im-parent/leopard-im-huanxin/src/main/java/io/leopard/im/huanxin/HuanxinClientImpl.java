@@ -3,9 +3,9 @@ package io.leopard.im.huanxin;
 import org.springframework.beans.factory.annotation.Value;
 
 import io.leopard.httpnb.Httpnb;
+import io.leopard.im.huanxin.model.AccessTokenResponseObject;
 import io.leopard.im.huanxin.model.TokenRequestObject;
 import io.leopard.im.huanxin.model.UserResponseObject;
-import io.leopard.json.Json;
 
 public class HuanxinClientImpl implements HuanxinClient {
 
@@ -52,7 +52,8 @@ public class HuanxinClientImpl implements HuanxinClient {
 		tokenRO.setClientSecret(clientSecret);
 		String requestBody = HuanxinJson.toJson(tokenRO);
 		String json = Httpnb.execute(url, new HttpHeaderRequestBodyImpl("POST", requestBody));
-		return json;
+		AccessTokenResponseObject object = HuanxinJson.toObject(json, AccessTokenResponseObject.class);
+		return object.getAccessToken();
 	}
 
 	protected String loadToken() {
