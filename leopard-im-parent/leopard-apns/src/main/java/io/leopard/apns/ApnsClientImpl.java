@@ -15,7 +15,7 @@ import com.notnoop.apns.ApnsService;
 import io.leopard.core.exception.IORuntimeException;
 import io.leopard.data.env.EnvUtil;
 
-public class ApnsClientHttpImpl implements ApnsClient {
+public class ApnsClientImpl implements ApnsClient {
 	// https://github.com/notnoop/java-apns
 
 	private ApnsService apnsService;
