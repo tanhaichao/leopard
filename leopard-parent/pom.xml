@@ -308,7 +308,7 @@
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
-				<artifactId>leopard-im-parent</artifactId>
+				<artifactId>leopard-im-huanxin</artifactId>
 				<version>${leopard.version}</version>
 			</dependency>
 			<dependency>
