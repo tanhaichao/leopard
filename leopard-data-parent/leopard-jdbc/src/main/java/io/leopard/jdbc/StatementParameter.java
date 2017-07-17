@@ -12,7 +12,9 @@ import java.util.List;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import io.leopard.json.Json;
+import io.leopard.lang.inum.Bnum;
 import io.leopard.lang.inum.Inum;
+import io.leopard.lang.inum.Onum;
 import io.leopard.lang.inum.Snum;
 
 /**
@@ -169,19 +171,42 @@ public class StatementParameter {
 		this.type.add(Object.class);
 	}
 
+	// /**
+	// * 设置Enum类型参数.
+	// *
+	// * @param value
+	// */
+	// public void setEnum(Enum<?> onum) {
+	// this.checkNull(onum);
+	// if (onum instanceof Inum) {
+	// this.setInt(((Inum) onum).getKey());
+	// }
+	// else if (onum instanceof Snum) {
+	// this.setString(((Snum) onum).getKey());
+	// }
+	// else if (onum instanceof Bnum) {
+	// this.setByte(((Bnum) onum).getKey());
+	// }
+	// else {
+	// throw new RuntimeException("未知枚举类型[" + onum.getClass().getName() + "].");
+	// }
+	// }
+
 	/**
-	 * 设置Enum类型参数.
+	 * 设置Onum类型参数.
 	 * 
 	 * @param value
 	 */
-	public void setEnum(Enum<?> onum) {
+	public void setEnum(Onum<?, ?> onum) {
 		this.checkNull(onum);
-
 		if (onum instanceof Inum) {
 			this.setInt(((Inum) onum).getKey());
 		}
 		else if (onum instanceof Snum) {
 			this.setString(((Snum) onum).getKey());
+		}
+		else if (onum instanceof Bnum) {
+			this.setByte(((Bnum) onum).getKey());
 		}
 		else {
 			throw new RuntimeException("未知枚举类型[" + onum.getClass().getName() + "].");
@@ -219,6 +244,17 @@ public class StatementParameter {
 		this.checkNull(value);
 		list.add(value);
 		type.add(Short.class);
+	}
+
+	/**
+	 * 设置Byte类型参数.
+	 * 
+	 * @param value
+	 */
+	public void setByte(Byte value) {
+		this.checkNull(value);
+		list.add(value);
+		type.add(Byte.class);
 	}
 
 	public void setBytes(byte[] value) {

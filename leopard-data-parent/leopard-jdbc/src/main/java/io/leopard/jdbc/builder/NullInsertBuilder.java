@@ -2,6 +2,8 @@ package io.leopard.jdbc.builder;
 
 import java.util.Date;
 
+import io.leopard.lang.inum.Onum;
+
 public class NullInsertBuilder extends InsertBuilder {
 
 	public NullInsertBuilder(String tableName) {
@@ -55,7 +57,7 @@ public class NullInsertBuilder extends InsertBuilder {
 	}
 
 	@Override
-	public void setEnum(String fieldName, Enum<?> value) {
+	public void setEnum(String fieldName, Onum<?, ?> value) {
 		if (value != null) {
 			super.setEnum(fieldName, value);
 		}

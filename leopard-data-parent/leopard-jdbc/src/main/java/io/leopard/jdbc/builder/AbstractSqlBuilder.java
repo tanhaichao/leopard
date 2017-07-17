@@ -7,6 +7,7 @@ import java.util.List;
 
 //import io.leopard.burrow.lang.datatype.OnlyDate;
 import io.leopard.jdbc.StatementParameter;
+import io.leopard.lang.inum.Onum;
 
 public abstract class AbstractSqlBuilder implements SqlBuilder {
 	protected StatementParameter statementParameter = new StatementParameter();
@@ -43,13 +44,28 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 		statementParameter.setList(value);
 	}
 
+//	/**
+//	 * 设置Enum类型参数.
+//	 * 
+//	 * @param fieldName 参数名
+//	 * @param value 参数值
+//	 */
+//	public void setEnum(String fieldName, Enum<?> value) {
+//		if (value == null) {
+//			// list默认允许传入null
+//			return;
+//		}
+//		fieldList.add(fieldName);
+//		statementParameter.setEnum(value);
+//	}
+
 	/**
-	 * 设置Enum类型参数.
+	 * 设置Onum类型参数.
 	 * 
 	 * @param fieldName 参数名
 	 * @param value 参数值
 	 */
-	public void setEnum(String fieldName, Enum<?> value) {
+	public void setEnum(String fieldName, Onum<?, ?> value) {
 		if (value == null) {
 			// list默认允许传入null
 			return;

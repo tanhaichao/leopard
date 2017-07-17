@@ -31,6 +31,7 @@ import io.leopard.lang.Page;
 import io.leopard.lang.PageImpl;
 import io.leopard.lang.Paging;
 import io.leopard.lang.PagingImpl;
+import io.leopard.lang.inum.Onum;
 
 /**
  * Jdbc接口MySQL实现.
@@ -458,12 +459,11 @@ public class JdbcMysqlImpl implements Jdbc {
 			else if (p instanceof Date) {
 				param.setDate((Date) p);
 			}
-
 			else if (p instanceof List) {
 				param.setList((List) p);
 			}
-			else if (p instanceof Enum) {
-				param.setEnum((Enum) p);
+			else if (p instanceof Onum) {
+				param.setEnum((Onum) p);
 			}
 			// 自定义数据类型start
 			// else if (p instanceof OnlyDate) {
