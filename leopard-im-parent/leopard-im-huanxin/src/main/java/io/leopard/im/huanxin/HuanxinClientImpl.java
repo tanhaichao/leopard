@@ -9,11 +9,8 @@ import io.leopard.im.huanxin.model.UserResponseObject;
 
 public class HuanxinClientImpl implements HuanxinClient {
 
-	@Value("${huanxin.orgName}")
-	private String orgName;
-
-	@Value("${huanxin.appName}")
-	private String appName;
+	@Value("${huanxin.appKey}")
+	private String appKey;
 
 	@Value("${huanxin.clientId}")
 	private String clientId;
@@ -23,24 +20,8 @@ public class HuanxinClientImpl implements HuanxinClient {
 
 	private String token;
 
-	public String getOrgName() {
-		return orgName;
-	}
-
-	public void setOrgName(String orgName) {
-		this.orgName = orgName;
-	}
-
-	public String getAppName() {
-		return appName;
-	}
-
-	public void setAppName(String appName) {
-		this.appName = appName;
-	}
-
 	protected String getUrl(String path) {
-		String url = "https://a1.easemob.com/" + orgName + "/" + appName + path;
+		String url = "https://a1.easemob.com/" + appKey.replace("#", "/") + path;
 		return url;
 	}
 
