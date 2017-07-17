@@ -306,7 +306,11 @@
 				<artifactId>leopard-excel</artifactId>
 				<version>${leopard.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-im-parent</artifactId>
+				<version>${leopard.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>htdocs</artifactId>
