@@ -2,10 +2,11 @@ package io.leopard.im.huanxin;
 
 import io.leopard.httpnb.Httpnb;
 import io.leopard.im.huanxin.model.TokenRequestObject;
+import io.leopard.im.huanxin.model.UserResponseObject;
 import io.leopard.json.Json;
 
 public class HuanxinClientImpl implements HuanxinClient {
-	
+
 	private String orgName;
 
 	private String appName;
@@ -32,14 +33,19 @@ public class HuanxinClientImpl implements HuanxinClient {
 		this.appName = appName;
 	}
 
+	protected String getUrl(String path) {
+		String url = "https://a1.easemob.com/" + orgName + "/" + appName + path;
+		return url;
+	}
+
 	@Override
 	public String getToken() {
-		String url = "https://a1.easemob.com/" + orgName + "/" + appName + "/token";
+		String url = this.getUrl("/token");
 		TokenRequestObject tokenRO = new TokenRequestObject();
 		tokenRO.setClientId(clientId);
 		tokenRO.setClientSecret(clientSecret);
 		String requestBody = Json.toJson(tokenRO);
-		String json = Httpnb.execute(url, new HttpHeaderRequestBodyImpl(requestBody));
+		String json = Httpnb.execute(url, new HttpHeaderRequestBodyImpl("POST", requestBody));
 		return json;
 	}
 
@@ -51,14 +57,26 @@ public class HuanxinClientImpl implements HuanxinClient {
 		return this.token;
 	}
 
-	protected String requestByToken(String url, Object requestObject) {
+	protected String requestByToken(String method, String url, Object requestObject) {
 		if (token == null) {
 			this.loadToken();
 		}
-		String requestBody = Json.toJson(requestObject);
+		String requestBody = null;
+		if (requestObject != null) {
+			requestBody = Json.toJson(requestObject);
+		}
+
 		String authorization = "Bearer " + this.token;
-		String json = Httpnb.execute(url, new HttpHeaderRequestBodyImpl(requestBody, authorization));
+		String json = Httpnb.execute(url, new HttpHeaderRequestBodyImpl(method, requestBody, authorization));
 		return json;
+	}
+
+	@Override
+	public UserResponseObject getUser(String username) {
+		String url = this.getUrl("/users/" + username);
+		String json = this.requestByToken("GET", url, null);
+		System.err.println("json:" + json);
+		return null;
 	}
 
 }

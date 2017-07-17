@@ -10,11 +10,12 @@ public class HttpHeaderRequestBodyImpl extends AbstractHttpHeader {
 
 	private String requestBody;
 
-	public HttpHeaderRequestBodyImpl(String requestBody) {
-		this(requestBody, null);
+	public HttpHeaderRequestBodyImpl(String method, String requestBody) {
+		this(method, requestBody, null);
 	}
 
-	public HttpHeaderRequestBodyImpl(String requestBody, String authorization) {
+	public HttpHeaderRequestBodyImpl(String method, String requestBody, String authorization) {
+		this.method = method;
 		this.requestBody = requestBody;
 		this.authorization = authorization;
 	}
