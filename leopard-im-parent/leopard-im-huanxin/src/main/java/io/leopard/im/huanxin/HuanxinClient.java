@@ -12,5 +12,8 @@ public interface HuanxinClient {
 
 	String getToken();
 
+	UserResponseObject addUser(String username, String password, String nickname);
+
 	UserResponseObject getUser(String username);
+
 }

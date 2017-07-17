@@ -1,11 +1,16 @@
 package io.leopard.im.huanxin;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 
 import io.leopard.httpnb.Httpnb;
 import io.leopard.im.huanxin.model.AccessTokenResponseObject;
+import io.leopard.im.huanxin.model.AddUserRequestObject;
 import io.leopard.im.huanxin.model.TokenRequestObject;
 import io.leopard.im.huanxin.model.UserResponseObject;
+import io.leopard.json.Json;
 
 public class HuanxinClientImpl implements HuanxinClient {
 
@@ -60,11 +65,37 @@ public class HuanxinClientImpl implements HuanxinClient {
 	}
 
 	@Override
+	public UserResponseObject addUser(String username, String password, String nickname) {
+		String url = this.getUrl("/users");
+		AddUserRequestObject userinfo = new AddUserRequestObject();
+		userinfo.setUsername(username);
+		userinfo.setPassword(password);
+		userinfo.setNickname(nickname);
+		String json = this.requestByToken("POST", url, userinfo);
+		return this.toUser(json);
+	}
+
+	@Override
 	public UserResponseObject getUser(String username) {
 		String url = this.getUrl("/users/" + username);
 		String json = this.requestByToken("GET", url, null);
-		System.err.println("json:" + json);
-		return null;
+		return this.toUser(json);
+	}
+
+	protected UserResponseObject toUser(String json) {
+		// System.err.println("json:" + json);
+		Map<String, Object> map = Json.toMap(json);
+		String error = (String) map.get("error");
+		if (error != null) {
+			String message = (String) map.get("error_description");
+			throw new RuntimeException(message);
+		}
+		@SuppressWarnings("rawtypes")
+		List entities = (List) map.get("entities");
+		if (entities.size() <= 0) {
+			return null;
+		}
+		return HuanxinJson.toObject(HuanxinJson.toJson(entities.get(0)), UserResponseObject.class);
 	}
 
 }
