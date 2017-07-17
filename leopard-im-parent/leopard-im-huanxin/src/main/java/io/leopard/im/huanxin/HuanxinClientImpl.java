@@ -1,5 +1,7 @@
 package io.leopard.im.huanxin;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import io.leopard.httpnb.Httpnb;
 import io.leopard.im.huanxin.model.TokenRequestObject;
 import io.leopard.im.huanxin.model.UserResponseObject;
@@ -7,12 +9,16 @@ import io.leopard.json.Json;
 
 public class HuanxinClientImpl implements HuanxinClient {
 
+	@Value("${huanxin.orgName}")
 	private String orgName;
 
+	@Value("${huanxin.appName}")
 	private String appName;
 
+	@Value("${huanxin.clientId}")
 	private String clientId;
 
+	@Value("${huanxin.clientSecret}")
 	private String clientSecret;
 
 	private String token;
