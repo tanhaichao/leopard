@@ -97,11 +97,17 @@ public class DynamicEnum<KEYTYPE> implements Onum<KEYTYPE, String> {
 
 	public static List<EnumConstant> allOf(String enumKey) {
 		Map<Object, EnumConstant> constantMap = ENUM_MAP.get(enumKey);
+		if (constantMap == null) {
+			return null;
+		}
 		return new ArrayList<>(constantMap.values());
 	}
 
 	public static EnumConstant getConstant(String enumKey, Object constantKey) {
 		Map<Object, EnumConstant> constantMap = ENUM_MAP.get(enumKey);
+		if (constantMap == null) {
+			return null;
+		}
 		return constantMap.get(constantKey);
 	}
 
