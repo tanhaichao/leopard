@@ -50,7 +50,7 @@ public class HuanxinClientImpl implements HuanxinClient {
 		TokenRequestObject tokenRO = new TokenRequestObject();
 		tokenRO.setClientId(clientId);
 		tokenRO.setClientSecret(clientSecret);
-		String requestBody = Json.toJson(tokenRO);
+		String requestBody = HuanxinJson.toJson(tokenRO);
 		String json = Httpnb.execute(url, new HttpHeaderRequestBodyImpl("POST", requestBody));
 		return json;
 	}
@@ -69,7 +69,7 @@ public class HuanxinClientImpl implements HuanxinClient {
 		}
 		String requestBody = null;
 		if (requestObject != null) {
-			requestBody = Json.toJson(requestObject);
+			requestBody = HuanxinJson.toJson(requestObject);
 		}
 
 		String authorization = "Bearer " + this.token;
