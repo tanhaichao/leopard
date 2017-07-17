@@ -13,9 +13,14 @@ import javax.net.ssl.SSLSession;
 public class AbstractHttpHeader implements HttpHeader {
 
 	private long timeout = -1;
+
 	private String cookie;
+
 	protected String method = "GET";
+
 	private String userAgent = null;
+
+	protected String authorization;
 
 	protected List<Param> paramList = new ArrayList<Param>();
 
@@ -81,6 +86,14 @@ public class AbstractHttpHeader implements HttpHeader {
 	@Override
 	public void addParam(Param param) {
 		this.paramList.add(param);
+	}
+
+	public String getAuthorization() {
+		return authorization;
+	}
+
+	public void setAuthorization(String authorization) {
+		this.authorization = authorization;
 	}
 
 	@Override
