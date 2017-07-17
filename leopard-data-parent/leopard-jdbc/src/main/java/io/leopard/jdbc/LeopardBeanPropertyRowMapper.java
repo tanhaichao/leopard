@@ -20,10 +20,13 @@ import org.springframework.util.StringUtils;
 
 import io.leopard.json.Json;
 import io.leopard.json.JsonException;
+import io.leopard.lang.inum.Bnum;
 import io.leopard.lang.inum.EnumConstantInvalidException;
 import io.leopard.lang.inum.EnumUtil;
 import io.leopard.lang.inum.Inum;
 import io.leopard.lang.inum.Snum;
+import io.leopard.lang.inum.daynamic.DynamicEnum;
+import io.leopard.lang.inum.daynamic.DynamicEnumUtil;
 
 public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 
@@ -203,10 +206,43 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 				int key = rs.getInt(index);
 				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
 			}
+			else if (Bnum.class.isAssignableFrom(requiredType)) {
+				byte key = rs.getByte(index);
+				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+			}
 			else {
 				throw new RuntimeException("未知枚举类型[" + requiredType.getName() + "].");
 			}
 		}
+		else if (DynamicEnum.class.isAssignableFrom(requiredType)) {
+			if (Snum.class.isAssignableFrom(requiredType)) {
+				String key = rs.getString(index);
+				if (key == null) {
+					return null;
+				}
+				try {
+					return DynamicEnumUtil.toEnum(key, (Class<? extends DynamicEnum>) requiredType);
+				}
+				catch (EnumConstantInvalidException e) {
+					if ("".equals(key)) {
+						return null;
+					}
+					throw e;
+				}
+			}
+			else if (Inum.class.isAssignableFrom(requiredType)) {
+				int key = rs.getInt(index);
+				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+			}
+			else if (Bnum.class.isAssignableFrom(requiredType)) {
+				byte key = rs.getByte(index);
+				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+			}
+			else {
+				throw new RuntimeException("未知枚举类型[" + requiredType.getName() + "].");
+			}
+		}
+
 		else if (Object.class.equals(requiredType)) {
 			throw new RuntimeException("实体类的字段类型不能使用Object.");
 		}
