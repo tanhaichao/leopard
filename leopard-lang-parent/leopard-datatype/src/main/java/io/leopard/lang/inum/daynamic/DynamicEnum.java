@@ -100,6 +100,11 @@ public class DynamicEnum<KEYTYPE> implements Onum<KEYTYPE, String> {
 		return new ArrayList<>(constantMap.values());
 	}
 
+	public static EnumConstant getConstant(String enumKey, Object constantKey) {
+		Map<Object, EnumConstant> constantMap = ENUM_MAP.get(enumKey);
+		return constantMap.get(constantKey);
+	}
+
 	public static EnumConstant putEnumConstant(Class<?> clazz, Object key, String desc) {
 		Map<Object, EnumConstant> constantMap = ENUM_MAP.get(clazz.getName());
 		if (constantMap == null) {
