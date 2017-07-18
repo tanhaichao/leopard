@@ -126,9 +126,11 @@ public class DynamicEnum<KEYTYPE> implements Onum<KEYTYPE, String> {
 
 	public static void setEnumConstantList(String enumKey, List<EnumConstant> constantList) {
 		Map<Object, EnumConstant> constantMap = Collections.synchronizedMap(new LinkedHashMap<>());
-		for (EnumConstant constant : constantList) {
-			Object key = constant.getKey();
-			constantMap.put(key, constant);
+		if (constantList != null) {
+			for (EnumConstant constant : constantList) {
+				Object key = constant.getKey();
+				constantMap.put(key, constant);
+			}
 		}
 		ENUM_MAP.put(enumKey, constantMap);
 	}
