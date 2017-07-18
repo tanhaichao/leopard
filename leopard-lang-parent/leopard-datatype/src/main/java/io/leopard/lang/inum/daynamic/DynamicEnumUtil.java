@@ -9,9 +9,19 @@ import io.leopard.lang.inum.EnumConstantInvalidException;
 
 public class DynamicEnumUtil {
 
+	protected static Constructor<?> findConstructor(Class<?> clazz) {
+		Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+		for (Constructor<?> constructor : constructors) {
+			if (constructor.getParameterTypes().length == 1) {
+				return constructor;
+			}
+		}
+		throw new RuntimeException("获取不到动态枚举默认构造函数.");
+	}
+
 	@SuppressWarnings("unchecked")
 	public static <E extends DynamicEnum<?>> List<E> values(Class<E> clazz) {
-		Constructor<?> constructor = clazz.getDeclaredConstructors()[0];
+		Constructor<?> constructor = findConstructor(clazz);
 		// System.err.println("constructor:" + constructor.toGenericString());
 		List<EnumConstant> list = DynamicEnum.allOf(clazz.getName());
 		List<E> result = new ArrayList<>();
@@ -52,7 +62,7 @@ public class DynamicEnumUtil {
 		if (constant == null) {
 			throw new EnumConstantInvalidException("枚举元素[" + key + "]不存在[" + clazz.getName() + "].");
 		}
-		Constructor<?> constructor = clazz.getDeclaredConstructors()[0];
+		Constructor<?> constructor = findConstructor(clazz);
 
 		E instance;
 		try {

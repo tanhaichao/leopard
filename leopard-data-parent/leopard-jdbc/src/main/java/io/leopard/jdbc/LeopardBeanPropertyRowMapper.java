@@ -224,6 +224,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 					return DynamicEnumUtil.toEnum(key, (Class<? extends DynamicEnum>) requiredType);
 				}
 				catch (EnumConstantInvalidException e) {
+					e.printStackTrace();
 					if ("".equals(key)) {
 						return null;
 					}

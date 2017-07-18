@@ -1,6 +1,5 @@
 package io.leopard.sysconfig.dynamicenum;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +8,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -21,6 +19,7 @@ import io.leopard.data.env.LeopardPropertyPlaceholderConfigurer;
 import io.leopard.data4j.pubsub.IPubSub;
 import io.leopard.data4j.pubsub.Publisher;
 import io.leopard.jdbc.Jdbc;
+import io.leopard.json.Json;
 import io.leopard.lang.inum.daynamic.DynamicEnum;
 import io.leopard.lang.inum.daynamic.EnumConstant;
 import io.leopard.redis.Redis;
@@ -85,6 +84,8 @@ public class DynamicEnumScannerConfigurer implements BeanFactoryPostProcessor, A
 				throw new RuntimeException(e.getMessage(), e);
 			}
 			List<EnumConstant> constantList = dynamicEnumDao.resolve(enumId, type);
+			System.out.println("className:" + className);
+			Json.printList(constantList, "constantList");
 			DynamicEnum.setEnumConstantList(className, constantList);
 		}
 		lmodify = new Date();
