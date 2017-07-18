@@ -24,7 +24,7 @@ public class ServerInitializerImpl implements ServerInitializer {
 		catch (ClassNotFoundException e) {
 			// e.printStackTrace();
 		}
-		System.setProperty("spring.profiles.active", "dev");
+		System.setProperty("spring.profiles.active", "dev,jetty");
 
 	}
 
