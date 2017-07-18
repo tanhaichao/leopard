@@ -35,6 +35,10 @@ public class CorsConfig {
 
 	@PostConstruct
 	public void init() {
+		// logger.info("cors:" + cors);
+		if ("${mvc.cors}".equals(cors)) {// TODO
+			cors = null;
+		}
 		List<String> allowOriginList = allowOriginResolver.resolve(cors);
 		if (allowOriginList == null) {
 			allowOriginList = new ArrayList<>();
