@@ -8,7 +8,7 @@ import org.springframework.core.type.filter.AssignableTypeFilter;
 import io.leopard.burrow.util.StringUtil;
 import io.leopard.lang.inum.daynamic.DynamicEnum;
 
-public class DynamicEnumScanner extends ClassPathBeanDefinitionScanner {
+public abstract class DynamicEnumScanner extends ClassPathBeanDefinitionScanner {
 
 	public DynamicEnumScanner(BeanDefinitionRegistry registry) {
 		super(registry);
@@ -23,10 +23,12 @@ public class DynamicEnumScanner extends ClassPathBeanDefinitionScanner {
 	public boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
 		String beanClassName = beanDefinition.getBeanClassName();
 		String simpleName = beanClassName.substring(beanClassName.lastIndexOf(".") + 1);
-		String beanId = StringUtil.firstCharToLowerCase(simpleName);
-
-		System.err.println("beanDefinition..." + beanDefinition.getBeanClassName() + " beanId:" + beanId);
+		String enumId = StringUtil.firstCharToLowerCase(simpleName);
+		registerEnum(enumId, beanClassName);
+		System.err.println("beanDefinition..." + beanDefinition.getBeanClassName() + " enumId:" + enumId);
 		return false;// 不注册Spring Bean
 	}
+
+	protected abstract void registerEnum(String enumId, String beanClassName);
 
 }
