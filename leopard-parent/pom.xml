@@ -14,18 +14,6 @@
 
 	<properties>
 		<jdk.version>1.8</jdk.version>
-
-		<leopard.version>0.9.11-SNAPSHOT</leopard.version>
-
-		<leopard-data.version>${leopard.version}</leopard-data.version>
-		<javahost.version>${leopard.version}</javahost.version>
-		<topnb.version>${leopard.version}</topnb.version>
-		<leopard-lang.version>${leopard.version}</leopard-lang.version>
-		<leopard-mvc.version>${leopard.version}</leopard-mvc.version>
-		<leopard-test.version>${leopard.version}</leopard-test.version>
-		<leopard-security.version>${leopard.version}</leopard-security.version>
-		<leopard-freemarker.version>${leopard.version}</leopard-freemarker.version>
-		<leopard-netty.version>${leopard.version}</leopard-netty.version>
 	</properties>
 
 
@@ -37,279 +25,274 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-json</artifactId>
-				<version>${leopard-lang.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-datatype</artifactId>
-				<version>${leopard-lang.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-exception</artifactId>
-				<version>${leopard-lang.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-httpnb</artifactId>
-				<version>${leopard-lang.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-timer</artifactId>
-				<version>${leopard-lang.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-command</artifactId>
-				<version>${leopard-lang.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-servlet</artifactId>
-				<version>${leopard-lang.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-util</artifactId>
-				<version>${leopard-lang.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<!-- leopard-test -->
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-mock</artifactId>
-				<version>${leopard-test.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-mocknb</artifactId>
-				<version>${leopard-test.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-treedata</artifactId>
-				<version>${leopard-test.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty</artifactId>
-				<version>${leopard-test.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty-test</artifactId>
-				<version>${leopard-test.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-test</artifactId>
-				<version>${leopard-test.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<!-- leopard-data -->
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jdbc</artifactId>
-				<version>${leopard-data.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-table</artifactId>
-				<version>${leopard-data.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-sysconfig</artifactId>
-				<version>${leopard-data.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-queue</artifactId>
-				<version>${leopard-data.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-dfs</artifactId>
-				<version>${leopard-data.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-redis</artifactId>
-				<version>${leopard-data.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-mongo</artifactId>
-				<version>${leopard-data.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-memcache</artifactId>
-				<version>${leopard-data.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-cache</artifactId>
-				<version>${leopard-data.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-memdb</artifactId>
-				<version>${leopard-data.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.leopard.topnb</groupId>
 				<artifactId>topnb-profiler</artifactId>
-				<version>${topnb.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard.topnb</groupId>
 				<artifactId>topnb-web</artifactId>
-				<version>${topnb.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<!-- leopard-mvc -->
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-xparam</artifactId>
-				<version>${leopard-mvc.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-upload</artifactId>
-				<version>${leopard-mvc.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-passport</artifactId>
-				<version>${leopard-mvc.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-trynb</artifactId>
-				<version>${leopard-mvc.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-captcha</artifactId>
-				<version>${leopard-mvc.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-frequency</artifactId>
-				<version>${leopard-mvc.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-chart</artifactId>
-				<version>${leopard-mvc.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-proxy</artifactId>
-				<version>${leopard-mvc.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 
 			<!-- leopard-freemarker -->
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-freemarker</artifactId>
-				<version>${leopard-freemarker.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<!-- leopard-security -->
 
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-admin</artifactId>
-				<version>${leopard-security.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-allow</artifactId>
-				<version>${leopard-security.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 
 
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-data</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-biz</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-kit</artifactId>
-				<version>${leopard-data.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-netty</artifactId>
-				<version>${leopard-netty.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-lang</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-monitor</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-htdocs</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-web</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 
 
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-aliyun</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-convert</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-elasticsearch</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>javahost</artifactId>
-				<version>${javahost.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-excel</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-im-huanxin</artifactId>
-				<version>${leopard.version}</version>
+				<version>0.9.11-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
@@ -339,7 +322,7 @@
 				<plugin>
 					<groupId>io.leopard</groupId>
 					<artifactId>myjetty-maven-plugin</artifactId>
-					<version>${leopard.version}</version>
+					<version>0.9.11-SNAPSHOT</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -441,7 +424,7 @@
 						<plugin>
 							<groupId>io.leopard</groupId>
 							<artifactId>myjetty-maven-plugin</artifactId>
-							<version>${leopard.version}</version>
+							<version>0.9.11-SNAPSHOT</version>
 							<dependencies>
 								<dependency>
 									<groupId>io.xiaoniu</groupId>
@@ -501,7 +484,7 @@
 						<plugin>
 							<groupId>io.leopard</groupId>
 							<artifactId>myjetty-maven-plugin</artifactId>
-							<version>${leopard.version}</version>
+							<version>0.9.11-SNAPSHOT</version>
 							<dependencies>
 								<dependency>
 									<groupId>io.xiaoniu</groupId>
