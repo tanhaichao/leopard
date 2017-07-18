@@ -232,11 +232,13 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 			}
 			else if (Inum.class.isAssignableFrom(requiredType)) {
 				int key = rs.getInt(index);
-				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+				// return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+				return DynamicEnumUtil.toEnum(key, (Class<? extends DynamicEnum>) requiredType);
 			}
 			else if (Bnum.class.isAssignableFrom(requiredType)) {
 				byte key = rs.getByte(index);
-				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+				// return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+				return DynamicEnumUtil.toEnum(key, (Class<? extends DynamicEnum>) requiredType);
 			}
 			else {
 				throw new RuntimeException("未知枚举类型[" + requiredType.getName() + "].");
