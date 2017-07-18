@@ -31,6 +31,8 @@ import io.leopard.lang.Page;
 import io.leopard.lang.PageImpl;
 import io.leopard.lang.Paging;
 import io.leopard.lang.PagingImpl;
+import io.leopard.lang.datatype.Month;
+import io.leopard.lang.datatype.OnlyDate;
 import io.leopard.lang.inum.Onum;
 
 /**
@@ -466,12 +468,12 @@ public class JdbcMysqlImpl implements Jdbc {
 				param.setEnum((Onum) p);
 			}
 			// 自定义数据类型start
-			// else if (p instanceof OnlyDate) {
-			// param.setDate(((OnlyDate) p).toDate());
-			// }
-			// else if (p instanceof Month) {
-			// param.setString(((Month) p).toString());
-			// }
+			else if (p instanceof OnlyDate) {
+				param.setDate(((OnlyDate) p));
+			}
+			else if (p instanceof Month) {
+				param.setString(((Month) p).toString());
+			}
 			else {
 				param.setObject(p);
 				// throw new IllegalArgumentException("未知数据类型[" + p.getClass().getName() + "].");
