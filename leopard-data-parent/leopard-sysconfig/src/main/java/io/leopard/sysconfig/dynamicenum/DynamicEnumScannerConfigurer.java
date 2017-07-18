@@ -1,5 +1,6 @@
 package io.leopard.sysconfig.dynamicenum;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -16,21 +18,31 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import io.leopard.data.env.LeopardPropertyPlaceholderConfigurer;
+import io.leopard.data4j.pubsub.IPubSub;
+import io.leopard.data4j.pubsub.Publisher;
+import io.leopard.jdbc.Jdbc;
 import io.leopard.lang.inum.daynamic.DynamicEnum;
 import io.leopard.lang.inum.daynamic.EnumConstant;
+import io.leopard.redis.Redis;
 import io.leopard.sysconfig.viewer.DynamicEnumDataVO;
 import io.leopard.sysconfig.viewer.DynamicEnumVO;
 
 @Component
-public class DynamicEnumScannerConfigurer implements BeanFactoryPostProcessor, ApplicationContextAware, DynamicEnumResolver {
+public class DynamicEnumScannerConfigurer implements BeanFactoryPostProcessor, ApplicationContextAware, DynamicEnumResolver, IPubSub {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private ApplicationContext applicationContext;
 
+	private Jdbc jdbc;
+
+	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		// logger.info("setApplicationContext");
 		this.applicationContext = applicationContext;
+		jdbc = applicationContext.getBean(Jdbc.class);
+		Redis redis = (Redis) applicationContext.getBean("sessionRedis");
+		Publisher.listen(this, redis);
 	}
 
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
@@ -56,8 +68,40 @@ public class DynamicEnumScannerConfigurer implements BeanFactoryPostProcessor, A
 		scanner.scan(basePackage);
 	}
 
+	private DynamicEnumDao dynamicEnumDao;
+
+	protected Object resolveValue(Value anno, Field field) {
+		String value = anno.value();
+		if (StringUtils.isEmpty(value)) {
+			return null;
+		}
+
+		if (dynamicEnumDao == null) {
+			dynamicEnumDao = new DynamicEnumDaoJdbcImpl(jdbc);
+		}
+
+		// logger.info("jdbc:" + jdbc);
+		// ${aws.oss.endpoint}
+		String key = value.replace("${", "").replace("}", "");
+		return dynamicEnumDao.resolve(key, field.getType());
+	}
+
 	@Override
 	public boolean update() {
+		this.dynamicEnumDao.loadData();
+		for (DynamicEnumInfo enumInfo : enumList) {
+			String enumId = enumInfo.getEnumId();
+			String className = enumInfo.getBeanClassName();
+			Class<?> type;
+			try {
+				type = Class.forName(className);
+			}
+			catch (ClassNotFoundException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+			List<EnumConstant> constantList = dynamicEnumDao.resolve(enumId, type);
+			DynamicEnum.setEnumConstantList(className, constantList);
+		}
 		lmodify = new Date();
 		return true;
 	}
@@ -85,9 +129,19 @@ public class DynamicEnumScannerConfigurer implements BeanFactoryPostProcessor, A
 	}
 
 	@Override
+	public void subscribe(String message, boolean isMySelf) {
+		if (isMySelf) {
+			return;
+		}
+		logger.info("subscribe message:" + message + " isMySelf:" + isMySelf);
+		this.update();
+	}
+
+	@Override
 	public boolean publish() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean success = this.update();
+		Publisher.publish(this, "update");
+		return success;
 	}
 
 }
