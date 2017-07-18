@@ -195,6 +195,12 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			}
 			return new Month(value);
 		}
+		else if (OnlyDate.class.equals(type)) {
+			if (StringUtils.isEmpty(value)) {
+				return null;
+			}
+			return new OnlyDate(value);
+		}
 		else if (Date.class.equals(type)) {
 			long time = NumberUtils.toLong(value);
 			if (time <= 0) {
