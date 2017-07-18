@@ -84,8 +84,8 @@ public class DynamicEnumScannerConfigurer implements BeanFactoryPostProcessor, A
 				throw new RuntimeException(e.getMessage(), e);
 			}
 			List<EnumConstant> constantList = dynamicEnumDao.resolve(enumId, type);
-			System.out.println("className:" + className);
-			Json.printList(constantList, "constantList");
+			// System.out.println("className:" + className);
+			// Json.printList(constantList, "constantList");
 			DynamicEnum.setEnumConstantList(className, constantList);
 		}
 		lmodify = new Date();
