@@ -23,10 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 import io.leopard.json.Json;
 import io.leopard.lang.datatype.Month;
 import io.leopard.lang.datatype.OnlyDate;
+import io.leopard.lang.inum.Bnum;
 import io.leopard.lang.inum.EnumConstantInvalidException;
 import io.leopard.lang.inum.EnumUtil;
 import io.leopard.lang.inum.Inum;
 import io.leopard.lang.inum.Snum;
+import io.leopard.lang.inum.daynamic.DynamicEnum;
+import io.leopard.lang.inum.daynamic.DynamicEnumUtil;
 import io.leopard.lang.util.FieldUtil;
 
 /**
@@ -208,6 +211,9 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			}
 			return new Date(time);
 		}
+		else if (DynamicEnum.class.isAssignableFrom(type)) {
+			return toDynamicEnum(value, type);
+		}
 		else if (type.isEnum()) {
 			// throw new RuntimeException("枚举类型未实现[" + type.getName() + " value:" + value + "].");
 			return toEnum(value, type);
@@ -249,9 +255,52 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			int key = Integer.parseInt(value);
 			return EnumUtil.toEnum(key, (Class<Enum>) type);
 		}
+		else if (Bnum.class.isAssignableFrom(type)) {
+			byte key = Byte.parseByte(value);
+			return EnumUtil.toEnum(key, (Class<Enum>) type);
+		}
 		else {
 			throw new EnumConstantInvalidException("未知枚举类型[" + type.getName() + "].");
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected static DynamicEnum<?> toDynamicEnum(String value, Class<?> type) {
+		if (value == null) {
+			return null;
+		}
+		if (value.startsWith("{")) {// json
+			Map<String, Object> map = Json.toMap(value);
+			Object key = map.get("key");
+			if (key == null) {
+				return null;
+			}
+			value = key.toString();
+		}
+
+		if (Snum.class.isAssignableFrom(type)) {
+			try {
+				return DynamicEnumUtil.toEnum(value, (Class<? extends DynamicEnum>) type);
+			}
+			catch (EnumConstantInvalidException e) {
+				if ("".equals(value)) {
+					return null;
+				}
+				else {
+					throw e;
+				}
+			}
+		}
+		else if (Inum.class.isAssignableFrom(type)) {
+			int key = Integer.parseInt(value);
+			return DynamicEnumUtil.toEnum(key, (Class<? extends DynamicEnum>) type);
+		}
+		else if (Bnum.class.isAssignableFrom(type)) {
+			byte key = Byte.parseByte(value);
+			return DynamicEnumUtil.toEnum(key, (Class<? extends DynamicEnum>) type);
+		}
+		else {
+			throw new EnumConstantInvalidException("未知枚举类型[" + type.getName() + "].");
+		}
+	}
 }
