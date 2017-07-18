@@ -48,7 +48,7 @@ public class DynamicEnumDaoJdbcImpl implements DynamicEnumDao {
 
 	@Override
 	public List<EnumConstant> resolve(String enumId, Class<?> type) {
-		logger.info("resolve enumId:" + enumId + " type:" + type.getName());
+		// logger.info("resolve enumId:" + enumId + " type:" + type.getName());
 		DynamicEnumRecord record = data.get(enumId);
 		if (record == null) {
 			return null;
