@@ -424,7 +424,7 @@
 						<plugin>
 							<groupId>io.leopard</groupId>
 							<artifactId>myjetty-maven-plugin</artifactId>
-							<version>0.9.11-SNAPSHOT</version>
+							<version>0.9.12-SNAPSHOT</version>
 							<dependencies>
 								<dependency>
 									<groupId>io.xiaoniu</groupId>
@@ -484,7 +484,7 @@
 						<plugin>
 							<groupId>io.leopard</groupId>
 							<artifactId>myjetty-maven-plugin</artifactId>
-							<version>0.9.11-SNAPSHOT</version>
+							<version>0.9.12-SNAPSHOT</version>
 							<dependencies>
 								<dependency>
 									<groupId>io.xiaoniu</groupId>
