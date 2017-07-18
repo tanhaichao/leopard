@@ -1,5 +1,6 @@
 package io.leopard.sysconfig.dynamicenum;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -7,8 +8,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import io.leopard.burrow.util.ListUtil;
 import io.leopard.jdbc.Jdbc;
-import io.leopard.json.Json;
+import io.leopard.lang.inum.Bnum;
+import io.leopard.lang.inum.Inum;
+import io.leopard.lang.inum.Snum;
 import io.leopard.lang.inum.daynamic.EnumConstant;
 
 public class DynamicEnumDaoJdbcImpl implements DynamicEnumDao {
@@ -33,6 +37,8 @@ public class DynamicEnumDaoJdbcImpl implements DynamicEnumDao {
 	public void loadData() {
 		String sql = "select * from " + tableName;
 		List<DynamicEnumRecord> list = jdbc.queryForList(sql, DynamicEnumRecord.class);
+		logger.info("loadData list:" + list);
+
 		data.clear();
 		for (DynamicEnumRecord record : list) {
 			String enumId = record.getEnumId();
@@ -42,15 +48,36 @@ public class DynamicEnumDaoJdbcImpl implements DynamicEnumDao {
 
 	@Override
 	public List<EnumConstant> resolve(String enumId, Class<?> type) {
-		// logger.info("resolve:" + key + " type:" + type.getName());
+		logger.info("resolve enumId:" + enumId + " type:" + type.getName());
 		DynamicEnumRecord record = data.get(enumId);
 		if (record == null) {
 			return null;
 		}
-		String json = record.getData();
-		List<Map> list = Json.toListObject(json, Map.class);
-		System.err.println("list:" + list);
-		return null;
+		List<String> keyList = record.getConstantList();
+		if (ListUtil.isEmpty(keyList)) {
+			return null;
+		}
+		List<EnumConstant> constantList = new ArrayList<EnumConstant>();
+		for (String _key : keyList) {
+			Object key;
+			if (Snum.class.isAssignableFrom(type)) {
+				key = _key;
+			}
+			else if (Inum.class.isAssignableFrom(type)) {
+				key = Integer.parseInt(_key);
+			}
+			else if (Bnum.class.isAssignableFrom(type)) {
+				key = Byte.parseByte(_key);
+			}
+			else {
+				throw new IllegalArgumentException("未知key类型[" + type.getName() + "].");
+			}
+			EnumConstant constant = new EnumConstant();
+			constant.setKey(key);
+			constant.setDesc(_key);// TODO
+			constantList.add(constant);
+		}
+		return constantList;
 		//
 		// if (type.equals(String.class)) {
 		// return value;

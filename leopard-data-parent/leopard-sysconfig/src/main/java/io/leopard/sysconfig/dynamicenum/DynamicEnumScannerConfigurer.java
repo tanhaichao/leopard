@@ -45,6 +45,7 @@ public class DynamicEnumScannerConfigurer implements BeanFactoryPostProcessor, A
 		Publisher.listen(this, redis);
 	}
 
+	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		// logger.info("postProcessBeanFactory");
 		LeopardPropertyPlaceholderConfigurer configurer = beanFactory.getBean(LeopardPropertyPlaceholderConfigurer.class);
@@ -66,29 +67,13 @@ public class DynamicEnumScannerConfigurer implements BeanFactoryPostProcessor, A
 		};
 		scanner.setResourceLoader(this.applicationContext);
 		scanner.scan(basePackage);
-	}
 
-	private DynamicEnumDao dynamicEnumDao;
-
-	protected Object resolveValue(Value anno, Field field) {
-		String value = anno.value();
-		if (StringUtils.isEmpty(value)) {
-			return null;
-		}
-
-		if (dynamicEnumDao == null) {
-			dynamicEnumDao = new DynamicEnumDaoJdbcImpl(jdbc);
-		}
-
-		// logger.info("jdbc:" + jdbc);
-		// ${aws.oss.endpoint}
-		String key = value.replace("${", "").replace("}", "");
-		return dynamicEnumDao.resolve(key, field.getType());
+		this.update();
 	}
 
 	@Override
 	public boolean update() {
-		this.dynamicEnumDao.loadData();
+		DynamicEnumDao dynamicEnumDao = new DynamicEnumDaoJdbcImpl(jdbc);
 		for (DynamicEnumInfo enumInfo : enumList) {
 			String enumId = enumInfo.getEnumId();
 			String className = enumInfo.getBeanClassName();

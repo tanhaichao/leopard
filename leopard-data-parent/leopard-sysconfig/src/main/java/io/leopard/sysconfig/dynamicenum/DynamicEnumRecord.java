@@ -1,13 +1,12 @@
 package io.leopard.sysconfig.dynamicenum;
 
+import java.util.List;
+
 public class DynamicEnumRecord {
 
 	private String enumId;
 
-	/**
-	 * json
-	 */
-	private String data;
+	private List<String> constantList;
 
 	public String getEnumId() {
 		return enumId;
@@ -17,12 +16,12 @@ public class DynamicEnumRecord {
 		this.enumId = enumId;
 	}
 
-	public String getData() {
-		return data;
+	public List<String> getConstantList() {
+		return constantList;
 	}
 
-	public void setData(String data) {
-		this.data = data;
+	public void setConstantList(List<String> constantList) {
+		this.constantList = constantList;
 	}
 
 }
