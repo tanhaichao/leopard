@@ -3,7 +3,7 @@
   <parent>
     <groupId>io.leopard</groupId>
     <artifactId>leopard-thirdparty-parent</artifactId>
-    <version>0.9.11-SNAPSHOT</version>
+    <version>0.9.11</version>
   </parent>
   <artifactId>leopard-thirdparty-im</artifactId>
   <description>第三方IM接口</description>

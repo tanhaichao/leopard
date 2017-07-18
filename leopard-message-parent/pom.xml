@@ -2,14 +2,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.leopard</groupId>
 	<artifactId>leopard-message-parent</artifactId>
-	<version>0.9.7-SNAPSHOT</version>
+	<version>0.9.11</version>
 	<packaging>pom</packaging>
 	<name>信息渠道</name>
 
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard</artifactId>
-		<version>0.9.11-SNAPSHOT</version>
+		<version>0.9.11</version>
 	</parent>
 
 	<modules>

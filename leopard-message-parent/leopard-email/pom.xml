@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-message-parent</artifactId>
-		<version>0.9.7-SNAPSHOT</version>
+		<version>0.9.11</version>
 	</parent>
 	<artifactId>leopard-email</artifactId>
 	<name>Leopard-Email</name>

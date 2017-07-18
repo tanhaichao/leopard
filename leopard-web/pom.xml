@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>leopard</artifactId>
 		<groupId>io.leopard</groupId>
-		<version>0.9.11-SNAPSHOT</version>
+		<version>0.9.11</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>leopard-web</artifactId>
@@ -14,96 +14,96 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-data</artifactId>
-			<version>0.9.11-SNAPSHOT</version><!--$NO-MVN-MAN-VER$ -->
+			<version>0.9.11</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-util</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-schema</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-freemarker</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-trynb</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-passport</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-xparam</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-convert</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-proxy</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-htdocs</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-admin</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-allow</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-captcha</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-command</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-frequency</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-session</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-test</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jetty</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -139,20 +139,20 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-mock</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-monitor</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-upload</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 	</dependencies>
 

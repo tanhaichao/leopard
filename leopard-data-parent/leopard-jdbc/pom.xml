@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-data-parent</artifactId>
-		<version>0.9.11-SNAPSHOT</version>
+		<version>0.9.11</version>
 	</parent>
 	<artifactId>leopard-jdbc</artifactId>
 	<name>Leopard-Jdbc</name>
@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-json</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>

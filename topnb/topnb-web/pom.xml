@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard.topnb</groupId>
 		<artifactId>topnb</artifactId>
-		<version>0.9.11-SNAPSHOT</version>
+		<version>0.9.11</version>
 	</parent>
 	<artifactId>topnb-web</artifactId>
 	<name>Web操作界面</name>

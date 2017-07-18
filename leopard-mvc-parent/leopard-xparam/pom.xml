@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-mvc-parent</artifactId>
-		<version>0.9.11-SNAPSHOT</version>
+		<version>0.9.11</version>
 	</parent>
 	<artifactId>leopard-xparam</artifactId>
 	<name>XParame</name>
@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-trynb</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -42,7 +42,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-lang</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 
 

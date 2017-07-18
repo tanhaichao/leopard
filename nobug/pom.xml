@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.leopard</groupId>
 	<artifactId>nobug-parent</artifactId>
-	<version>0.9.11-SNAPSHOT</version>
+	<version>0.9.11</version>
 	<packaging>pom</packaging>
 	<name>NoBug</name>
 	<description>安全框架。支持XSS、CSRF、JSONP劫持等漏洞防范。</description>
@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard</artifactId>
-		<version>0.9.11-SNAPSHOT</version>
+		<version>0.9.11</version>
 	</parent>
 
 

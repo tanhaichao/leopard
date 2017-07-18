@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-data-parent</artifactId>
-		<version>0.9.11-SNAPSHOT</version>
+		<version>0.9.11</version>
 	</parent>
 	<artifactId>leopard-sysconfig</artifactId>
 	<description>系统配置</description>
@@ -27,17 +27,17 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jdbc</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-redis</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-memdb</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

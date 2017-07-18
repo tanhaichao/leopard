@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard</artifactId>
-		<version>0.9.11-SNAPSHOT</version>
+		<version>0.9.11</version>
 	</parent>
 
 	<artifactId>leopard-data</artifactId>
@@ -24,86 +24,86 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-schema</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-biz</artifactId>
-			<version>0.9.11-SNAPSHOT</version><!--$NO-MVN-MAN-VER$ -->
+			<version>0.9.11</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-lang</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-httpnb</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-json</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jdbc</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-memdb</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-kit</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-queue</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-dfs</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-redis</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-mongo</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-memcache</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-elasticsearch</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-cache</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-log</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -126,7 +126,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-mock</artifactId>
-			<version>0.9.11-SNAPSHOT</version>
+			<version>0.9.11</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
