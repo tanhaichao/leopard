@@ -2,14 +2,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.leopard</groupId>
 	<artifactId>leopard-freemarker</artifactId>
-	<version>0.9.11</version>
+	<version>0.9.12-SNAPSHOT</version>
 	<name>Leopard-Freemarker</name>
 	<description>规范、简化Freemarker，自带常用自定义Freemarker指令、方法。</description>
 
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard</artifactId>
-		<version>0.9.11</version>
+		<version>0.9.12-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-json</artifactId>
-			<version>0.9.11</version>
+			<version>0.9.12-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 

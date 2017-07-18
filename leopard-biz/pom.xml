@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard</artifactId>
-		<version>0.9.11</version>
+		<version>0.9.12-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-biz</artifactId>
 	<name>Leopard-Biz</name>
@@ -14,22 +14,22 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-redis</artifactId>
-			<version>0.9.11</version>
+			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-memcache</artifactId>
-			<version>0.9.11</version>
+			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-cache</artifactId>
-			<version>0.9.11</version>
+			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-memdb</artifactId>
-			<version>0.9.11</version>
+			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

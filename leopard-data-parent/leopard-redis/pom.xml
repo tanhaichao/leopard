@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-data-parent</artifactId>
-		<version>0.9.11</version>
+		<version>0.9.12-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-redis</artifactId>
 	<name>Leopard-Redis</name>

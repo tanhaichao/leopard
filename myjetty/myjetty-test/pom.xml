@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>myjetty</artifactId>
-		<version>0.9.11</version>
+		<version>0.9.12-SNAPSHOT</version>
 	</parent>
 	<artifactId>myjetty-test</artifactId>
 	<packaging>jar</packaging>
@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>myjetty-maven-plugin</artifactId>
-			<version>0.9.11</version>
+			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -22,7 +22,7 @@
 			<plugin>
 				<groupId>io.leopard</groupId>
 				<artifactId>myjetty-maven-plugin</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 			</plugin>
 		</plugins>
 	</build>

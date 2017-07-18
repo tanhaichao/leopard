@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-mvc-parent</artifactId>
-		<version>0.9.11</version>
+		<version>0.9.12-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-chart</artifactId>
 	<description>报表</description>
@@ -15,7 +15,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-lang</artifactId>
-			<version>0.9.11</version>
+			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

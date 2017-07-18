@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.leopard.topnb</groupId>
 	<artifactId>topnb</artifactId>
-	<version>0.9.11</version>
+	<version>0.9.12-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>性能监控系统</name>
@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard</artifactId>
-		<version>0.9.11</version>
+		<version>0.9.12-SNAPSHOT</version>
 	</parent>
 
 	<modules>
@@ -32,19 +32,19 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty-test</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-freemarker</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

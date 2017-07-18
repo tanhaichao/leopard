@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.leopard</groupId>
 	<artifactId>leopard-mvc-parent</artifactId>
-	<version>0.9.11</version>
+	<version>0.9.12-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Leopard MVC框架</name>
 	<description>请求特殊参数、通行证验证、异常处理、验证码、访问频率限制、分布式session、服务器代理等</description>
@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard</artifactId>
-		<version>0.9.11</version>
+		<version>0.9.12-SNAPSHOT</version>
 	</parent>
 
 	<dependencyManagement>
@@ -18,45 +18,45 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-mock</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-test</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty-test</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jdbc</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-json</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-exception</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-servlet</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-redis</artifactId>
-				<version>0.9.11</version>
+				<version>0.9.12-SNAPSHOT</version>
 			</dependency>
 
 		</dependencies>
