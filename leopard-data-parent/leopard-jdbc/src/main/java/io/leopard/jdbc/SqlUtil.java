@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import io.leopard.lang.datatype.Month;
+import io.leopard.lang.datatype.OnlyDate;
+
 public class SqlUtil {
 
 	/**
@@ -41,12 +44,12 @@ public class SqlUtil {
 			String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format((Date) obj);
 			value = "'" + time + "'";
 		}
-		// else if (type.equals(OnlyDate.class)) {
-		// value = "'" + ((OnlyDate) obj).toString() + "'";
-		// }
-		// else if (type.equals(Month.class)) {
-		// value = "'" + ((Month) obj).toString() + "'";
-		// }
+		else if (type.equals(OnlyDate.class)) {
+			value = "'" + ((OnlyDate) obj).toString() + "'";
+		}
+		else if (type.equals(Month.class)) {
+			value = "'" + ((Month) obj).toString() + "'";
+		}
 		else if (type.equals(Integer.class)) {
 			value = Integer.toString(((Integer) obj));
 		}

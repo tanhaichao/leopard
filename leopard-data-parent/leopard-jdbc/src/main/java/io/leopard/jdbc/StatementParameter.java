@@ -12,6 +12,8 @@ import java.util.List;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import io.leopard.json.Json;
+import io.leopard.lang.datatype.Month;
+import io.leopard.lang.datatype.OnlyDate;
 import io.leopard.lang.inum.Bnum;
 import io.leopard.lang.inum.Inum;
 import io.leopard.lang.inum.Onum;
@@ -47,29 +49,27 @@ public class StatementParameter {
 		type.add(Date.class);
 	}
 
-	// /**
-	// * 设置OnlyDate类型参数.
-	// *
-	// * @param value
-	// */
-	// public void setOnlyDate(OnlyDate value) {
-	// this.checkNull(value);
-	// // long time = ((OnlyDate) value).getTime();
-	// // list.add(new java.sql.Date(time));
-	// list.add(value);
-	// type.add(OnlyDate.class);
-	// }
+	/**
+	 * 设置OnlyDate类型参数.
+	 *
+	 * @param value
+	 */
+	public void setOnlyDate(OnlyDate value) {
+		this.checkNull(value);
+		list.add(value);
+		type.add(OnlyDate.class);
+	}
 
-	// /**
-	// * 设置OnlyDate类型参数.
-	// *
-	// * @param value
-	// */
-	// public void setMonth(Month value) {
-	// this.checkNull(value);
-	// list.add(value);
-	// type.add(Month.class);
-	// }
+	/**
+	 * 设置Month类型参数.
+	 *
+	 * @param value
+	 */
+	public void setMonth(Month value) {
+		this.checkNull(value);
+		list.add(value);
+		type.add(Month.class);
+	}
 
 	/**
 	 * 设置Timestamp类型参数.
@@ -112,27 +112,27 @@ public class StatementParameter {
 				this.setBool((Boolean) value);
 			}
 		}
-		// else if (type.equals(Month.class)) {
-		// if (value instanceof String) {
-		// String month = (String) value;
-		// this.setMonth(new Month(month));
-		// }
-		// else {
-		// this.setMonth((Month) value);
-		// }
-		// }
+		else if (type.equals(Month.class)) {
+			if (value instanceof String) {
+				String month = (String) value;
+				this.setMonth(new Month(month));
+			}
+			else {
+				this.setMonth((Month) value);
+			}
+		}
 		else if (type.equals(Date.class)) {
 			this.setDate((Date) value);
 		}
-		// else if (type.equals(OnlyDate.class)) {
-		// if (value instanceof java.sql.Date) {
-		// java.sql.Date date = (java.sql.Date) value;
-		// this.setOnlyDate(new OnlyDate(date.getTime()));
-		// }
-		// else {
-		// this.setOnlyDate((OnlyDate) value);
-		// }
-		// }
+		else if (type.equals(OnlyDate.class)) {
+			if (value instanceof java.sql.Date) {
+				java.sql.Date date = (java.sql.Date) value;
+				this.setOnlyDate(new OnlyDate(date.getTime()));
+			}
+			else {
+				this.setOnlyDate((OnlyDate) value);
+			}
+		}
 		else {
 			throw new IllegalArgumentException("未知类型[" + type + "].");
 		}
@@ -400,17 +400,16 @@ public class StatementParameter {
 		return (Boolean) value;
 	}
 
-	// /**
-	// * 返回索引对应的month类型参数值.
-	// *
-	// * @param index
-	// * 索引
-	// * @return 参数值
-	// */
-	// public Month getMonth(int index) {
-	// Object value = this.getObject(index);
-	// return (Month) value;
-	// }
+	/**
+	 * 返回索引对应的month类型参数值.
+	 *
+	 * @param index 索引
+	 * @return 参数值
+	 */
+	public Month getMonth(int index) {
+		Object value = this.getObject(index);
+		return (Month) value;
+	}
 
 	/**
 	 * 返回索引对应的参数.
@@ -462,7 +461,6 @@ public class StatementParameter {
 			Boolean flag = (Boolean) value;
 			return (int) (flag ? 1 : 0);
 		}
-
 		else if (type.equals(Integer.class)) {
 			return value;
 		}
@@ -478,15 +476,13 @@ public class StatementParameter {
 		else if (type.equals(Double.class)) {
 			return value;
 		}
-		// else if (type.equals(Month.class)) {
-		// return ((Month) value).toString();
-		// // return (Month) value;
-		// }
-
-		// else if (type.equals(OnlyDate.class)) {
-		// long time = ((OnlyDate) value).getTime();
-		// return new java.sql.Date(time);
-		// }
+		else if (type.equals(Month.class)) {
+			return ((Month) value).toString();
+		}
+		else if (type.equals(OnlyDate.class)) {
+			long time = ((OnlyDate) value).getTime();
+			return new java.sql.Date(time);
+		}
 		else if (type.equals(Date.class)) {
 			Date date = (Date) value;
 			return new Timestamp(date.getTime());
@@ -550,12 +546,12 @@ public class StatementParameter {
 		else if (type.equals(Timestamp.class)) {
 			return Types.TIMESTAMP;
 		}
-		// else if (type.equals(OnlyDate.class)) {
-		// return Types.DATE;
-		// }
-		// else if (type.equals(Month.class)) {
-		// return Types.VARCHAR;
-		// }
+		else if (type.equals(OnlyDate.class)) {
+			return Types.DATE;
+		}
+		else if (type.equals(Month.class)) {
+			return Types.VARCHAR;
+		}
 		else {
 			throw new IllegalArgumentException("未知类型[" + type.getName() + "].");
 		}
