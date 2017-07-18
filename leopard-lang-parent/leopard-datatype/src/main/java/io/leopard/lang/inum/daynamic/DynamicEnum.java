@@ -124,6 +124,23 @@ public class DynamicEnum<KEYTYPE> implements Onum<KEYTYPE, String> {
 		return constant;
 	}
 
+	public static void setEnumConstantList(String enumKey, List<EnumConstant> constantList) {
+		Map<Object, EnumConstant> constantMap = Collections.synchronizedMap(new LinkedHashMap<>());
+		for (EnumConstant constant : constantList) {
+			Object key = constant.getKey();
+			constantMap.put(key, constant);
+		}
+		ENUM_MAP.put(enumKey, constantMap);
+	}
+
+	public void setKey(KEYTYPE key) {
+		this.key = key;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
 	@Override
 	public String toString() {
 		return "key:" + this.key + " desc:" + this.desc + " parameters:" + this.constant.getParameterMap();
