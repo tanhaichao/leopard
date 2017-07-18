@@ -29,11 +29,11 @@ public class DynamicEnumScannerConfigurer implements BeanFactoryPostProcessor, A
 		// logger.info("postProcessBeanFactory");
 		LeopardPropertyPlaceholderConfigurer configurer = beanFactory.getBean(LeopardPropertyPlaceholderConfigurer.class);
 		String basePackage = configurer.getProperty("base.package");
-		// logger.info("basePackage:" + basePackage);
+		logger.info("basePackage:" + basePackage);
 		if (StringUtils.isEmpty(basePackage)) {
 			throw new RuntimeException("app.properties没有配置base.package属性.");
 		}
-		// System.err.println("OptionScannerConfigurer postProcessBeanFactory");
+		System.err.println("DynamicEnumScannerConfigurer postProcessBeanFactory");
 		DynamicEnumScanner scanner = new DynamicEnumScanner((BeanDefinitionRegistry) beanFactory);
 		scanner.setResourceLoader(this.applicationContext);
 		scanner.scan(basePackage);
