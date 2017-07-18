@@ -1,4 +1,4 @@
-package io.leopard.sysconfig;
+package io.leopard.sysconfig.dynamicenum;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;

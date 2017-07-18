@@ -1,4 +1,4 @@
-package io.leopard.sysconfig;
+package io.leopard.sysconfig.dynamicenum;
 
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
