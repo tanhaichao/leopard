@@ -60,6 +60,7 @@ public class MyJettyServer implements WebServer {
 	}
 
 	public Server start(int port) throws Exception {
+		System.setProperty("spring.profiles.active", "jetty");
 
 		List<ServerConnector> connectorList = this.listPort(port);
 		Connector[] connectors = new Connector[connectorList.size()];
