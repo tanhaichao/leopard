@@ -52,7 +52,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 			throw new CaptchaInvalidException("图片验证码不能为空.");// , "Sorry,the code you entered is incorrect!"
 		}
 		if (StringUtils.isEmpty(sessCaptcha)) {
-			throw new CaptchaInvalidException("图片验证码未生成，验证码使用.");// , "Sorry,the code you entered is incorrect!"
+			throw new CaptchaInvalidException("请重新生成验证码.");// , "Sorry,the code you entered is incorrect!"
 		}
 		if (!captcha.equals(sessCaptcha)) {
 			logger.warn("错误验证码 sessCaptcha:" + sessCaptcha + " captcha:" + captcha);
