@@ -16,7 +16,7 @@ public class ResourceLoaderImpl implements IResourceLoader {
 		Iterator<IResourceLoader> iterator = ServiceLoader.load(IResourceLoader.class).iterator();
 		while (iterator.hasNext()) {
 			IResourceLoader loader = iterator.next();
-			System.err.println("loader:" + loader.getClass().getName());
+			// System.err.println("loader:" + loader.getClass().getName());
 			List<Resource> list = loader.findJars(context);
 			if (list != null) {
 				result.addAll(list);
