@@ -166,4 +166,9 @@ public class DisablingJsonSerializerIntrospector extends JacksonAnnotationIntros
 		// }
 		// return serializer;
 	}
+
+	
+	public Object findJsonSerializer(Annotated am) {
+		return super.findSerializer(am);
+	}
 }
