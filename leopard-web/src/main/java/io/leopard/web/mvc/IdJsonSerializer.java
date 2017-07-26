@@ -15,12 +15,14 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  *
  * @param <T>
  */
-public abstract class BaseJsonSerializer<T, V> extends AbstractJsonSerializer<Object> {
+public abstract class IdJsonSerializer<T, V> extends AbstractJsonSerializer<Object> {
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
 		// System.err.println("BaseJsonSerializer value:" + value);
+		String fieldName = gen.getOutputContext().getCurrentName();
+
 		gen.writeObject(value);
 		Object data;
 		if (value instanceof List) {
@@ -34,8 +36,20 @@ public abstract class BaseJsonSerializer<T, V> extends AbstractJsonSerializer<Ob
 		else {
 			data = this.get((T) value);
 		}
-		gen.writeFieldName("carList");
+
+		String newFieldName = this.getFieldName(fieldName);
+		gen.writeFieldName(newFieldName);
 		gen.writeObject(data);
+	}
+
+	protected String getFieldName(String fieldName) {
+		if ("uid".equals(fieldName)) {
+			return "user";
+		}
+		if ("uidList".equals(fieldName)) {
+			return "userList";
+		}
+		return fieldName.replace("Id", "");
 	}
 
 	public abstract V get(T value);
