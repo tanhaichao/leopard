@@ -70,7 +70,11 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 			json = MvcOutputJson.toJson(map, isFormat);
 		}
 		catch (JsonProcessingException e) {
-			e.printStackTrace();
+			Throwable t = e.getCause();
+			if (t != null && t instanceof RuntimeException) {
+				throw (RuntimeException) t;
+			}
+			throw new RuntimeException("Json序列化出错[" + e.getMessage() + "]", e);
 		}
 
 		request.setAttribute("result.json", json);
