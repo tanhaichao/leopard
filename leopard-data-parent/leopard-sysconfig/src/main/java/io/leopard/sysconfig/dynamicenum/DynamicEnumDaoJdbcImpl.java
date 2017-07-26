@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.jdbc.BadSqlGrammarException;
 
 import io.leopard.burrow.util.ListUtil;
 import io.leopard.jdbc.Jdbc;
@@ -36,7 +37,13 @@ public class DynamicEnumDaoJdbcImpl implements DynamicEnumDao {
 	@Override
 	public void loadData() {
 		String sql = "select * from " + tableName;
-		List<DynamicEnumRecord> list = jdbc.queryForList(sql, DynamicEnumRecord.class);
+		List<DynamicEnumRecord> list;
+		try {
+			list = jdbc.queryForList(sql, DynamicEnumRecord.class);
+		}
+		catch (BadSqlGrammarException e) {
+			return;
+		}
 		logger.info("loadData list:" + list);
 
 		data.clear();
