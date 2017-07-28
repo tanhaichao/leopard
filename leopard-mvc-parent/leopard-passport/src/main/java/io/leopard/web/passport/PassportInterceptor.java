@@ -40,6 +40,7 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		// logger.info("preHandle:" + request.getRequestURI());
 		List<PassportValidator> list = finder.find(request, handler);
 		for (PassportValidator validator : list) {
 			Object account = validator.validate(request, response);
