@@ -25,7 +25,7 @@ import io.leopard.web.xparam.api.UserinfoResolverImpl;
 /**
  * 页面特殊参数.
  * 
- * @author 谭海潮
+ * @author 阿海
  *
  */
 @Component
