@@ -31,7 +31,7 @@ import io.leopard.web.xparam.api.UserinfoResolverImpl;
 @Component
 public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements BeanFactoryAware {
 	// TODO ahai 这里有必要使用线程安全的Map吗？
-	private static final Map<String, List<XParam>> data = new HashMap<String, List<XParam>>();
+	private static final Map<String, List<XParam>> DATA = new HashMap<String, List<XParam>>();
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
@@ -51,14 +51,14 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 		Map<String, XParam> map = factory.getBeansOfType(XParam.class);
 		for (Entry<String, XParam> entry : map.entrySet()) {
 			XParam xparam = entry.getValue();
-			List<XParam> xparamList = data.get(xparam.getKey());
+			List<XParam> xparamList = DATA.get(xparam.getKey());
 			if (xparamList == null) {
 				xparamList = new ArrayList<XParam>();
-				data.put(xparam.getKey(), xparamList);
+				DATA.put(xparam.getKey(), xparamList);
 			}
 			xparamList.add(xparam);
 		}
-		for (Entry<String, List<XParam>> entry : data.entrySet()) {
+		for (Entry<String, List<XParam>> entry : DATA.entrySet()) {
 			List<XParam> xparamList = entry.getValue();
 			if (xparamList.size() > 1) {
 				AnnotationAwareOrderComparator.sort(xparamList);
@@ -71,7 +71,7 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 		// System.err.println("XParamHandlerMethodArgumentResolver supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
 
 		String name = parameter.getParameterName();
-		boolean isSpecialName = data.containsKey(name);
+		boolean isSpecialName = DATA.containsKey(name);
 		// logger.info("supportsParameter name:" + name + " isSpecialName:" + isSpecialName);
 		return isSpecialName;
 	}
@@ -79,7 +79,7 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		// System.err.println("resolveName name:" + name);
-		List<XParam> xparamList = data.get(name);
+		List<XParam> xparamList = DATA.get(name);
 		if (xparamList == null) {
 			throw new IllegalArgumentException("未知参数名称[" + name + "].");
 		}
