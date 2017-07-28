@@ -3,9 +3,12 @@ package io.leopard.web.xparam;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -18,6 +21,7 @@ import io.leopard.web.xparam.resolver.PathRegexHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.PrimitiveMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.TimeRangeHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.XParamHandlerMethodArgumentResolver;
+import io.leopard.web.xparam.resolver.XParamResolver;
 
 /**
  * 注册HandlerMethodArgumentResolver
@@ -28,6 +32,15 @@ import io.leopard.web.xparam.resolver.XParamHandlerMethodArgumentResolver;
 @Component
 public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware {
 	protected BeanFactory beanFactory;
+
+	protected Log logger = LogFactory.getLog(this.getClass());
+
+	public XParamBeanPostProcessor() {
+		logger.info("XParamBeanPostProcessor new...");
+	}
+
+	@Autowired
+	private List<XParamResolver> xparamResolverList;
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
@@ -48,6 +61,8 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 	 * @param adapter
 	 */
 	protected void registerHandlerMethodArgumentResolver(RequestMappingHandlerAdapter adapter) {
+		logger.info("registerHandlerMethodArgumentResolver...");
+
 		List<HandlerMethodArgumentResolver> customArgumentResolvers = adapter.getCustomArgumentResolvers();
 		// new Exception("registerHandlerMethodArgumentResolver customArgumentResolvers:" + customArgumentResolvers).printStackTrace();
 		if (customArgumentResolvers == null) {
@@ -84,9 +99,16 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 			adapter.setCustomArgumentResolvers(customArgumentResolvers);
 			// adapter.setArgumentResolvers(customArgumentResolvers);
 		}
-		this.registerHandlerMethodArgumentResolver(customArgumentResolvers);
+
+		if (xparamResolverList != null) {
+			customArgumentResolvers.addAll(xparamResolverList);
+		}
+		// customArgumentResolvers.add(new PrimitiveMethodArgumentResolver());
+
+		// this.registerHandlerMethodArgumentResolver(customArgumentResolvers);
 	}
 
+	@Deprecated
 	protected void registerHandlerMethodArgumentResolver(List<HandlerMethodArgumentResolver> customArgumentResolvers) {
 
 		{

@@ -16,6 +16,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,7 +40,8 @@ import io.leopard.lang.util.FieldUtil;
  *
  */
 @Component
-public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
+@Order(6)
+public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements XParamResolver {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 

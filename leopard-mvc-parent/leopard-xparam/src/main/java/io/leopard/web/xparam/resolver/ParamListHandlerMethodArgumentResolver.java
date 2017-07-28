@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 //import org.apache.commons.lang.StringUtils;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -22,7 +23,8 @@ import org.springframework.web.context.request.NativeWebRequest;
  *
  */
 @Component
-public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
+@Order(4)
+public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements XParamResolver {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -24,7 +25,8 @@ import io.leopard.lang.inum.Snum;
  *
  */
 @Component
-public class OnumMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
+@Order(3)
+public class OnumMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements XParamResolver {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Override

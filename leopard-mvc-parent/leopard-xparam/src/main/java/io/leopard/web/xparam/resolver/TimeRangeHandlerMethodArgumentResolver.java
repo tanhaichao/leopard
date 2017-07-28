@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -21,7 +22,8 @@ import io.leopard.lang.datatype.TimeRange;
  *
  */
 @Component
-public class TimeRangeHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
+@Order(5)
+public class TimeRangeHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements XParamResolver {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 

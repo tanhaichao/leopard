@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ValueConstants;
@@ -21,7 +22,8 @@ import org.springframework.web.method.annotation.AbstractNamedValueMethodArgumen
  *
  */
 @Component // 之前为什么把这个注解去掉?
-public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
+@Order(7)
+public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements XParamResolver {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Override

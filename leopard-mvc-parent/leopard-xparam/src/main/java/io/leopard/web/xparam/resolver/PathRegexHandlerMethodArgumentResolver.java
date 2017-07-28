@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -22,7 +23,8 @@ import io.leopard.web.xparam.PathRegex;
  *
  */
 @Component
-public class PathRegexHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
+@Order(2)
+public class PathRegexHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver, XParamResolver {
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
