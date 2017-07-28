@@ -27,7 +27,7 @@ import io.leopard.web.xparam.resolver.XParamHandlerMethodArgumentResolver;
  */
 @Component
 public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware {
-	private BeanFactory beanFactory;
+	protected BeanFactory beanFactory;
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
