@@ -27,7 +27,7 @@ public class Finder {
 		return instance;
 	}
 
-	private Finder() {
+	public Finder() {
 	}
 
 	// private List<PassportValidator> list = Collections.synchronizedList(new ArrayList<PassportValidator>());
