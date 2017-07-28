@@ -47,7 +47,7 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 	 * 
 	 * @param adapter
 	 */
-	private void registerHandlerMethodArgumentResolver(RequestMappingHandlerAdapter adapter) {
+	protected void registerHandlerMethodArgumentResolver(RequestMappingHandlerAdapter adapter) {
 		List<HandlerMethodArgumentResolver> customArgumentResolvers = adapter.getCustomArgumentResolvers();
 		// new Exception("registerHandlerMethodArgumentResolver customArgumentResolvers:" + customArgumentResolvers).printStackTrace();
 		if (customArgumentResolvers == null) {
@@ -84,6 +84,10 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 			adapter.setCustomArgumentResolvers(customArgumentResolvers);
 			// adapter.setArgumentResolvers(customArgumentResolvers);
 		}
+		this.registerHandlerMethodArgumentResolver(customArgumentResolvers);
+	}
+
+	protected void registerHandlerMethodArgumentResolver(List<HandlerMethodArgumentResolver> customArgumentResolvers) {
 
 		{
 			XParamHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(XParamHandlerMethodArgumentResolver.class);
