@@ -16,6 +16,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -29,7 +30,8 @@ import io.leopard.web.xparam.api.UserinfoResolverImpl;
  *
  */
 @Component
-public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements BeanFactoryAware {
+@Order(1)
+public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements BeanFactoryAware, XParamResolver {
 	// TODO ahai 这里有必要使用线程安全的Map吗？
 	private static final Map<String, List<XParam>> DATA = new HashMap<String, List<XParam>>();
 
