@@ -69,8 +69,8 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		// System.err.println("XParamHandlerMethodArgumentResolver supportsParameter name:" + parameter.getParameterName() + " clazz:" + parameter.getParameterType());
-
 		String name = parameter.getParameterName();
+		logger.info("supportsParameter:" + name);
 		boolean isSpecialName = DATA.containsKey(name);
 		// logger.info("supportsParameter name:" + name + " isSpecialName:" + isSpecialName);
 		return isSpecialName;
