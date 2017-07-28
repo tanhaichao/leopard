@@ -17,7 +17,7 @@ import org.springframework.web.method.annotation.AbstractNamedValueMethodArgumen
 /**
  * 基本数据类型
  * 
- * @author ahai
+ * @author 谭海潮
  *
  */
 @Component // 之前为什么把这个注解去掉?
