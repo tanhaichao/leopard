@@ -1,5 +1,6 @@
 package io.leopard.im.huanxin;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import io.leopard.httpnb.Httpnb;
 import io.leopard.im.huanxin.model.AccessTokenResponseObject;
 import io.leopard.im.huanxin.model.AddUserRequestObject;
+import io.leopard.im.huanxin.model.MessageTargetType;
 import io.leopard.im.huanxin.model.TokenRequestObject;
 import io.leopard.im.huanxin.model.UserResponseObject;
 import io.leopard.json.Json;
@@ -82,7 +84,7 @@ public class HuanxinClientImpl implements HuanxinClient {
 		return this.toUser(json);
 	}
 
-	protected UserResponseObject toUser(String json) {
+	protected Map<String, Object> toResponseData(String json) {
 		// System.err.println("json:" + json);
 		Map<String, Object> map = Json.toMap(json);
 		String error = (String) map.get("error");
@@ -90,12 +92,34 @@ public class HuanxinClientImpl implements HuanxinClient {
 			String message = (String) map.get("error_description");
 			throw new RuntimeException(message);
 		}
+		return map;
+	}
+
+	protected UserResponseObject toUser(String json) {
+		// System.err.println("json:" + json);
+		Map<String, Object> data = this.toResponseData(json);
+
 		@SuppressWarnings("rawtypes")
-		List entities = (List) map.get("entities");
+		List entities = (List) data.get("entities");
 		if (entities.size() <= 0) {
 			return null;
 		}
 		return HuanxinJson.toObject(HuanxinJson.toJson(entities.get(0)), UserResponseObject.class);
+	}
+
+	@Override
+	public boolean sendMessage(List<String> targetList, MessageTargetType type, String from, Object msg) {
+		String url = this.getUrl("/messages");
+		Map<String, Object> requestObject = new LinkedHashMap<String, Object>();
+		requestObject.put("target_type", type.getKey());
+		requestObject.put("target", targetList);
+		requestObject.put("msg", msg);
+		requestObject.put("from", from);
+		String json = this.requestByToken("POST", url, requestObject);
+		Map<String, Object> data = this.toResponseData(json);
+		Object result = data.get("data");
+		// Json.print(result, "result");
+		return true;
 	}
 
 }
