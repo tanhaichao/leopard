@@ -115,6 +115,8 @@ public class HuanxinClientImpl implements HuanxinClient {
 		requestObject.put("target", targetList);
 		requestObject.put("msg", msg);
 		requestObject.put("from", from);
+		Json.print(msg, "msg");
+
 		String json = this.requestByToken("POST", url, requestObject);
 		Map<String, Object> data = this.toResponseData(json);
 		Object result = data.get("data");
