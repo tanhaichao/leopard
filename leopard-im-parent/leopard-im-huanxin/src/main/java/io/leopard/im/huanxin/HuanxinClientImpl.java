@@ -35,6 +35,7 @@ public class HuanxinClientImpl implements HuanxinClient {
 	@Override
 	public String getToken() {
 		String url = this.getUrl("/token");
+		System.err.println("url:" + url);
 		TokenRequestObject tokenRO = new TokenRequestObject();
 		tokenRO.setClientId(clientId);
 		tokenRO.setClientSecret(clientSecret);
