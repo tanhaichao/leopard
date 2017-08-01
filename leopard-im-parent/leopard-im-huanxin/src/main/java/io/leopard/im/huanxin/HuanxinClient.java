@@ -29,4 +29,12 @@ public interface HuanxinClient {
 	 * @return
 	 */
 	boolean sendMessage(List<String> targetList, MessageTargetType type, String from, Object msg);
+
+	/**
+	 * 强制用户下线
+	 * 
+	 * @param username
+	 * @return
+	 */
+	boolean disconnect(String username);
 }

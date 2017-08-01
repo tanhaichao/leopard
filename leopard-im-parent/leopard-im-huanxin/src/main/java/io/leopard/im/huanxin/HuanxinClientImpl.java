@@ -85,11 +85,14 @@ public class HuanxinClientImpl implements HuanxinClient {
 	}
 
 	protected Map<String, Object> toResponseData(String json) {
-		// System.err.println("json:" + json);
+		System.err.println("json:" + json);
 		Map<String, Object> map = Json.toMap(json);
 		String error = (String) map.get("error");
 		if (error != null) {
 			String message = (String) map.get("error_description");
+			if (message == null) {
+				message = error;// TODO
+			}
 			throw new RuntimeException(message);
 		}
 		return map;
@@ -122,6 +125,14 @@ public class HuanxinClientImpl implements HuanxinClient {
 		Object result = data.get("data");
 		// Json.print(result, "result");
 		return true;
+	}
+
+	@Override
+	public boolean disconnect(String username) {
+		String url = this.getUrl("/users/" + username + "/disconnect");
+		String json = this.requestByToken("GET", url, null);
+		Map<String, Object> data = this.toResponseData(json);
+		return (boolean) data.get("result");
 	}
 
 }
