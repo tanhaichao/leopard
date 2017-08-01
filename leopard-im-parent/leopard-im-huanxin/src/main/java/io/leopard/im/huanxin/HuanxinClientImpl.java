@@ -4,68 +4,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Value;
-
-import io.leopard.httpnb.Httpnb;
-import io.leopard.im.huanxin.model.AccessTokenResponseObject;
 import io.leopard.im.huanxin.model.AddUserRequestObject;
 import io.leopard.im.huanxin.model.MessageTargetType;
-import io.leopard.im.huanxin.model.TokenRequestObject;
 import io.leopard.im.huanxin.model.UserResponseObject;
 import io.leopard.json.Json;
 
-public class HuanxinClientImpl implements HuanxinClient {
-
-	@Value("${huanxin.appKey}")
-	private String appKey;
-
-	@Value("${huanxin.clientId}")
-	private String clientId;
-
-	@Value("${huanxin.clientSecret}")
-	private String clientSecret;
-
-	private String token;
-
-	protected String getUrl(String path) {
-		String url = "https://a1.easemob.com/" + appKey.replace("#", "/") + path;
-		return url;
-	}
-
-	@Override
-	public String getToken() {
-		String url = this.getUrl("/token");
-		System.err.println("url:" + url);
-		TokenRequestObject tokenRO = new TokenRequestObject();
-		tokenRO.setClientId(clientId);
-		tokenRO.setClientSecret(clientSecret);
-		String requestBody = HuanxinJson.toJson(tokenRO);
-		String json = Httpnb.execute(url, new HttpHeaderRequestBodyImpl("POST", requestBody));
-		AccessTokenResponseObject object = HuanxinJson.toObject(json, AccessTokenResponseObject.class);
-		return object.getAccessToken();
-	}
-
-	protected String loadToken() {
-		if (token != null) {
-			return this.token;
-		}
-		this.token = this.getToken();
-		return this.token;
-	}
-
-	protected String requestByToken(String method, String url, Object requestObject) {
-		if (token == null) {
-			this.loadToken();
-		}
-		String requestBody = null;
-		if (requestObject != null) {
-			requestBody = HuanxinJson.toJson(requestObject);
-		}
-
-		String authorization = "Bearer " + this.token;
-		String json = Httpnb.execute(url, new HttpHeaderRequestBodyImpl(method, requestBody, authorization));
-		return json;
-	}
+public class HuanxinClientImpl extends AbstractHuanxin implements HuanxinClient {
 
 	@Override
 	public UserResponseObject addUser(String username, String password, String nickname) {
@@ -83,20 +27,6 @@ public class HuanxinClientImpl implements HuanxinClient {
 		String url = this.getUrl("/users/" + username);
 		String json = this.requestByToken("GET", url, null);
 		return this.toUser(json);
-	}
-
-	protected Map<String, Object> toResponseData(String json) {
-		System.err.println("json:" + json);
-		Map<String, Object> map = Json.toMap(json);
-		String error = (String) map.get("error");
-		if (error != null) {
-			String message = (String) map.get("error_description");
-			if (message == null) {
-				message = error;// TODO
-			}
-			throw new RuntimeException(message);
-		}
-		return map;
 	}
 
 	protected UserResponseObject toUser(String json) {
