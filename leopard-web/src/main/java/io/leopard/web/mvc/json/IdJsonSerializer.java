@@ -1,4 +1,4 @@
-package io.leopard.web.mvc;
+package io.leopard.web.mvc.json;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,6 +7,8 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
+
+import io.leopard.web.mvc.AbstractJsonSerializer;
 
 /**
  * 支持单个和列表数据输出
