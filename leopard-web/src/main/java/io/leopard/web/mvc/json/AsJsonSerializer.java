@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
+import io.leopard.json.As;
 import io.leopard.web.mvc.AbstractJsonSerializer;
 
 /**
@@ -25,23 +26,27 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 	public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
 		// System.err.println("BaseJsonSerializer value:" + value);
 		String fieldName = gen.getOutputContext().getCurrentName();
-		getCurrentField(gen);
-
+		Field field = getCurrentField(gen);
+		field.setAccessible(true);
+		As as = field.getAnnotation(As.class);
+		if (as == null) {
+			throw new RuntimeException("属性[" + fieldName + "]没有设置@As");
+		}
+		Class<?> asClazz = as.value();
+//		System.err.println("field:" + field.toGenericString());
 		gen.writeObject(value);
-		Class<?> voClazz = null;
 		Object data;
 		if (value instanceof List) {
 			List<Object> list = new ArrayList<Object>();
 			for (T key : (List<T>) value) {
-				Object element = this.get(key, voClazz);
+				Object element = this.get(key, asClazz);
 				list.add(element);
 			}
 			data = list;
 		}
 		else {
-			data = this.get((T) value, voClazz);
+			data = this.get((T) value, asClazz);
 		}
-
 		String newFieldName = this.getFieldName(fieldName);
 		gen.writeFieldName(newFieldName);
 		gen.writeObject(data);
@@ -55,9 +60,23 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 	 * @return
 	 */
 	protected Field getCurrentField(JsonGenerator gen) {
-		String target = gen.getOutputTarget().getClass().getName();
-		System.err.println("target:" + target);
-		return null;
+		Object currentValue = gen.getOutputContext().getCurrentValue();
+		if (currentValue == null) {
+			return null;
+		}
+		String fieldName = gen.getOutputContext().getCurrentName();
+		Class<?> clazz = currentValue.getClass();
+		try {
+			Field field = clazz.getDeclaredField(fieldName);
+			// field.setAccessible(true);
+			return field;
+		}
+		catch (NoSuchFieldException e) {
+			return null;
+		}
+		catch (SecurityException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
 	}
 
 	protected String getFieldName(String fieldName) {
@@ -70,5 +89,5 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		return fieldName.replace("Id", "");
 	}
 
-	public abstract Object get(T value, Class<?> voClazz);
+	public abstract Object get(T value, Class<?> asClazz);
 }
