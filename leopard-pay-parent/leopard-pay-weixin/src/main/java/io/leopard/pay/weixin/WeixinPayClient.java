@@ -6,6 +6,6 @@ package io.leopard.pay.weixin;
  * @author 谭海潮
  *
  */
-public interface weixinPayClient {
+public interface WeixinPayClient {
 
 }
