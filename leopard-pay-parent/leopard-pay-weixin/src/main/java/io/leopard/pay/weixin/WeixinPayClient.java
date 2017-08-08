@@ -1,5 +1,7 @@
 package io.leopard.pay.weixin;
 
+import com.github.binarywang.wxpay.service.WxPayService;
+
 import me.chanjar.weixin.common.exception.WxErrorException;
 
 /**
@@ -18,5 +20,7 @@ public interface WeixinPayClient {
 	 * @throws WxErrorException
 	 */
 	String shortUrl(String longUrl) throws WxErrorException;
+
+	WxPayService getWxPayService();
 
 }

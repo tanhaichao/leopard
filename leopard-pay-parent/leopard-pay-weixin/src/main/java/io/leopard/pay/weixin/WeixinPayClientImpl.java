@@ -40,4 +40,9 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		return shortUrl;
 	}
 
+	@Override
+	public WxPayService getWxPayService() {
+		return wxPayService;
+	}
+
 }
