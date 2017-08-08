@@ -240,6 +240,7 @@
 		<module>beanunit</module>
 		<module>leopard-file-parent</module>
 		<module>leopard-im-parent</module>
+		<module>leopard-pay-parent</module>
 	</modules>
 
 
