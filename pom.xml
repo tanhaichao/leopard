@@ -241,6 +241,7 @@
 		<module>leopard-file-parent</module>
 		<module>leopard-im-parent</module>
 		<module>leopard-pay-parent</module>
+		<module>leopard-account-parent</module>
 	</modules>
 
 
