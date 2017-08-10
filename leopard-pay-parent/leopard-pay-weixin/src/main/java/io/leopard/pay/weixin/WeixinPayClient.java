@@ -23,4 +23,19 @@ public interface WeixinPayClient {
 
 	WxPayService getWxPayService();
 
+	/**
+	 * 统一下单
+	 * 
+	 * @param orderNo
+	 * @param tradeType
+	 * @param totalFee
+	 * @param body
+	 * @param detail
+	 * @param notifyUrl
+	 * @param spbillCreateIp
+	 * @return
+	 * @throws WxErrorException
+	 */
+	boolean unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxErrorException;
+
 }

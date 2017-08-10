@@ -4,10 +4,13 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
+import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
 import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 
+import io.leopard.json.Json;
 import me.chanjar.weixin.common.exception.WxErrorException;
 
 public class WeixinPayClientImpl implements WeixinPayClient {
@@ -38,6 +41,23 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	public String shortUrl(String longUrl) throws WxErrorException {
 		String shortUrl = wxPayService.shorturl(longUrl);
 		return shortUrl;
+	}
+
+	@Override
+	public boolean unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxErrorException {
+		WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
+		request.setOutTradeNo(orderNo);// 商户订单号
+		request.setTotalFee(totalFee);// 订单总金额
+		// request.setProductId(productId);// 商品ID
+		request.setBody(body);// 商品描述
+		request.setDetail(detail);// 商品详细介绍
+		request.setNotifyURL(notifyUrl);
+		request.setTradeType(tradeType.getKey());// JSAPI，NATIVE，APP
+		request.setSpbillCreateIp(spbillCreateIp);
+		WxPayUnifiedOrderResult result = wxPayService.unifiedOrder(request);
+		Json.print(result, "result");
+		// wxPayService.downloadBill(billDate, billType, tarType, deviceInfo);
+		return false;
 	}
 
 	@Override
