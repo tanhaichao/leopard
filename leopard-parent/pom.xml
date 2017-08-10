@@ -271,6 +271,11 @@
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
+				<artifactId>leopard-baidu</artifactId>
+				<version>0.9.12-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
 				<artifactId>leopard-convert</artifactId>
 				<version>0.9.12-SNAPSHOT</version>
 			</dependency>
