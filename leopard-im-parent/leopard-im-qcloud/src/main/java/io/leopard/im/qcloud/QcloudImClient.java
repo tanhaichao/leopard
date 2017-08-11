@@ -9,4 +9,6 @@ package io.leopard.im.qcloud;
 public interface QcloudImClient {
 	String addUser(String username, String password, String nickname);
 
+	String getGroupList();
+
 }

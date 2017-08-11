@@ -42,7 +42,7 @@ public class AbstractQcloudIm {
 		return content;
 	}
 
-	protected String getUrlSign() {
+	protected String getUserSign() {
 		try {
 			String urlSign = TlsSigatureUtil.getUrlSign(appId, identifier, privateKey);
 			return urlSign;
