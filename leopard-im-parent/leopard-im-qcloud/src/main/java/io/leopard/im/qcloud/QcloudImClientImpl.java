@@ -13,11 +13,11 @@ public class QcloudImClientImpl extends AbstractQcloudIm implements QcloudImClie
 	}
 
 	@Override
-	public boolean kick(String username) {
+	public boolean kick(String identifier) {
 		// usersig=xxx&identifier=admin&sdkappid=88888888&random=99999999&contenttype=json
 		// {"ActionStatus":"FAIL","ErrorCode":60008,"ErrorInfo":"service timeout or request format error,please check and try again"}
 
-		String userSig = this.getUserSign();
+		String userSig = this.getUserSign(identifier);
 		String url = "https://console.tim.qq.com/v4/im_open_login_svc/kick";
 		Map<String, Object> params = new HashMap<>();
 		params.put("contenttype", "json");
@@ -39,7 +39,7 @@ public class QcloudImClientImpl extends AbstractQcloudIm implements QcloudImClie
 
 	@Override
 	public String getGroupList() {
-		String userSig = this.getUserSign();
+		String userSig = this.getUserSign(identifier);
 		String url = "https://console.tim.qq.com/v4/group_open_http_svc/get_appid_group_list";
 		Map<String, Object> params = new HashMap<>();
 		params.put("contenttype", "json");
