@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -14,6 +15,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 
 import com.tls.tls_sigature.TlsSigatureUtil;
+
+import io.leopard.httpnb.Httpnb;
+import io.leopard.json.Json;
 
 public class AbstractQcloudIm {
 
@@ -76,7 +80,30 @@ public class AbstractQcloudIm {
 			}
 		}
 		return url + "?" + sb.toString();
+	}
 
+	protected String doRequest(String url, Map<String, Object> request) {
+		String method = "POST";
+		return this.doRequest(url, method, request);
+	}
+
+	protected String doRequest(String url, String method, Map<String, Object> request) {
+		String requestBody = Json.toFormatJson(request);
+
+		String userSig = this.getUserSign(identifier);
+		Map<String, Object> params = new HashMap<>();
+		params.put("contenttype", "json");
+		params.put("apn", "1");
+		params.put("usersig", userSig);
+		// params.put("random", "99999999");
+		params.put("sdkappid", appId);
+		params.put("identifier", this.identifier);
+
+		url = getUrl(url, params);
+
+		System.err.println("requestBody:" + requestBody);
+		String json = Httpnb.execute(url, new HttpHeaderRequestBodyImpl(method, requestBody));
+		return json;
 	}
 
 }
