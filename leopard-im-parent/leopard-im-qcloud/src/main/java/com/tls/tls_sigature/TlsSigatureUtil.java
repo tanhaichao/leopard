@@ -26,14 +26,23 @@ public class TlsSigatureUtil {
 
 	public static String getUrlSign(long appId, String identifier, File privKey) throws IOException {
 		String privStr = FileUtils.readFileToString(privKey);
-		GenTLSSignatureResult result = tls_sigature.GenTLSSignatureEx(appId, identifier, privStr);
+		return getUrlSign(appId, identifier, privStr);
+	}
+
+	public static String getUrlSign(long appId, String identifier, String privKey) throws IOException {
+		GenTLSSignatureResult result = tls_sigature.GenTLSSignatureEx(appId, identifier, privKey);
 		return result.urlSig;
 	}
 
 	public static CheckTLSSignatureResult checkSignature(String urlSig, long appId, String identifier, File publicKey) throws IOException, DataFormatException {
 		String pubStr = FileUtils.readFileToString(publicKey);
+		return checkSignature(urlSig, appId, identifier, pubStr);
+	}
+
+	public static CheckTLSSignatureResult checkSignature(String urlSig, long appId, String identifier, String publicKey) throws IOException, DataFormatException {
+
 		// System.err.println(pubStr);
-		CheckTLSSignatureResult checkResult = tls_sigature.CheckTLSSignatureEx(urlSig, appId, identifier, pubStr);
+		CheckTLSSignatureResult checkResult = tls_sigature.CheckTLSSignatureEx(urlSig, appId, identifier, publicKey);
 		return checkResult;
 	}
 

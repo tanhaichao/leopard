@@ -4,7 +4,6 @@ public class QcloudImClientImpl extends AbstractQcloudIm implements QcloudImClie
 
 	@Override
 	public String addUser(String username, String password, String nickname) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
