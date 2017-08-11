@@ -11,4 +11,6 @@ public interface QcloudImClient {
 
 	String getGroupList();
 
+	boolean kick(String username);
+
 }
