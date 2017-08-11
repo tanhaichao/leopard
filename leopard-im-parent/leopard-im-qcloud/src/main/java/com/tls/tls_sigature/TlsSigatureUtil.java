@@ -24,6 +24,12 @@ public class TlsSigatureUtil {
 		return result;
 	}
 
+	public static String getUrlSign(long appId, String identifier, File privKey) throws IOException {
+		String privStr = FileUtils.readFileToString(privKey);
+		GenTLSSignatureResult result = tls_sigature.GenTLSSignatureEx(appId, identifier, privStr);
+		return result.urlSig;
+	}
+
 	public static CheckTLSSignatureResult checkSignature(String urlSig, long appId, String identifier, File publicKey) throws IOException, DataFormatException {
 		String pubStr = FileUtils.readFileToString(publicKey);
 		// System.err.println(pubStr);
