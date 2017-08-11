@@ -10,5 +10,6 @@
 	<modules>
 		<module>leopard-im-huanxin</module>
 		<module>leopard-apns</module>
+		<module>leopard-im-qcloud</module>
 	</modules>
 </project>
