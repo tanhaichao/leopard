@@ -2,6 +2,10 @@ package io.leopard.im.qcloud;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.PostConstruct;
 
@@ -14,10 +18,10 @@ import com.tls.tls_sigature.TlsSigatureUtil;
 public class AbstractQcloudIm {
 
 	@Value("${qcloud.im.appId}")
-	private long appId;
+	protected long appId;
 
 	@Value("${qcloud.im.identifier}")
-	private String identifier;
+	protected String identifier;
 
 	/**
 	 * 秘钥
@@ -50,6 +54,29 @@ public class AbstractQcloudIm {
 		catch (IOException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
+	}
+
+	protected String getUrl(String url, Map<String, Object> params) {
+		if (params.isEmpty()) {
+			return url;
+		}
+		StringBuilder sb = new StringBuilder();
+		for (Entry<String, Object> param : params.entrySet()) {
+			if (param.getValue() == null) {
+				continue;
+			}
+			if (sb.length() > 0) {
+				sb.append('&');
+			}
+			try {
+				sb.append(param.getKey()).append('=').append(URLEncoder.encode(param.getValue().toString(), "UTF-8"));
+			}
+			catch (UnsupportedEncodingException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+		}
+		return url + "?" + sb.toString();
+
 	}
 
 }

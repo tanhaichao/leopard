@@ -18,11 +18,17 @@ public class QcloudImClientImpl extends AbstractQcloudIm implements QcloudImClie
 		String url = "https://console.tim.qq.com/v4/group_open_http_svc/get_appid_group_list";
 		Map<String, Object> params = new HashMap<>();
 		params.put("contenttype", "json");
+		params.put("apn", "1");
 		params.put("usersig", userSig);
-		params.put("random", "99999999");
-		params.put("sdkappid", "88888888");
-		params.put("identifier", "admin");
-		String json = Httpnb.doPost(url, params);
+		// params.put("random", "99999999");
+		params.put("sdkappid", appId);
+		params.put("identifier", identifier);
+
+		url = super.getUrl(url, params);
+
+		String json = Httpnb.doGet(url);
+		System.err.println("appId:" + appId + " identifier:" + identifier);
+		System.err.println("userSig:" + userSig);
 		System.err.println(json);
 
 		return null;
