@@ -1,6 +1,8 @@
 package io.leopard.web.mvc.option;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,4 +21,19 @@ public class OptionController {
 		}
 		return data;
 	}
+
+	@RequestMapping("enum/list")
+	@ResponseBody
+	public Map<String, List<Option>> list(List<String> idList) throws OptionNotFoundException {
+		Map<String, List<Option>> map = new LinkedHashMap<String, List<Option>>();
+		for (String id : idList) {
+			List<Option> data = OptionData.getData(id);
+			if (data == null) {
+				throw new OptionNotFoundException("枚举[" + id + "]不存在.");
+			}
+			map.put(id, data);
+		}
+		return map;
+	}
+
 }
