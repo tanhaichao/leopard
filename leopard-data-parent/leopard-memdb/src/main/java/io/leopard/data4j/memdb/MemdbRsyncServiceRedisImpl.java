@@ -56,8 +56,8 @@ public class MemdbRsyncServiceRedisImpl implements MemdbRsyncService {
 				redis.subscribe(queueListener, channel);
 			}
 			catch (ClassCastException e) {
-				// TODO 为什么会报错?
-				logger.error(e.getMessage(), e);
+				// FIXME 为什么会报错?
+				// logger.error(e.getMessage(), e);
 				Thread.sleep(1000);
 			}
 		}
