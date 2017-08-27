@@ -49,6 +49,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 	static {
 		set.add(MultipartFile.class);
 		set.add(String.class);
+		set.add(Boolean.class);
 		set.add(Date.class);
 		set.add(Integer.class);
 		set.add(Long.class);
