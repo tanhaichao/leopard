@@ -1,7 +1,8 @@
 package io.leopard.web.servlet;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,7 +31,7 @@ public class JsonDebugger {
 		@SuppressWarnings("unchecked")
 		Map<String, Object> map = (Map<String, Object>) request.getAttribute("debug");
 		if (map == null) {
-			map = new ConcurrentHashMap<String, Object>();
+			map = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
 			request.setAttribute("debug", map);
 		}
 		map.put(name, value);
