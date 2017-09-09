@@ -27,7 +27,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  */
 public class ProxyDataSource implements DataSource {
 
-	protected Log logger = LogFactory.getLog(ProxyDataSource.class);
+	protected static Log logger = LogFactory.getLog(ProxyDataSource.class);
 
 	protected JdbcConnectionListener jdbcConnectionListener;
 
@@ -202,7 +202,7 @@ public class ProxyDataSource implements DataSource {
 			driverClass = "org.gjt.mm.mysql.Driver";
 		}
 
-		System.err.println("createDataSource jdbcUrl:" + jdbcUrl);
+		logger.info("createDataSource jdbcUrl:" + jdbcUrl);
 		// ComboPooledDataSource dataSource = new ComboPooledDataSource();
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
 		try {
