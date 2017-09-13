@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 public interface PassportValidator {
-	
+
 	/**
 	 * 是否需要做登陆检查?
 	 * 
 	 * @param request
 	 * @param handler
-	 * @return
+	 * @return null:表示交给Leopard框架做判断
 	 */
 	Boolean isNeedCheckLogin(HttpServletRequest request, Object handler);
 
