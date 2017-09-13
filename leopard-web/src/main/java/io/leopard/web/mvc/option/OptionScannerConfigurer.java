@@ -31,7 +31,7 @@ public class OptionScannerConfigurer implements BeanFactoryPostProcessor, Applic
 		String basePackage = configurer.getProperty("base.package");
 		// logger.info("basePackage:" + basePackage);
 		if (StringUtils.isEmpty(basePackage)) {
-			String message = "app.properties没有配置base.package属性.";
+			String message = "app.properties没有配置base.package属性，Leopard无法扫描项目定义了哪些枚举类.";
 			logger.warn(message);
 			return;
 		}
