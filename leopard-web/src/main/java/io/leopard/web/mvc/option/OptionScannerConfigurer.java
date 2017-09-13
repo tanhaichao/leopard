@@ -31,7 +31,9 @@ public class OptionScannerConfigurer implements BeanFactoryPostProcessor, Applic
 		String basePackage = configurer.getProperty("base.package");
 		// logger.info("basePackage:" + basePackage);
 		if (StringUtils.isEmpty(basePackage)) {
-			throw new RuntimeException("app.properties没有配置base.package属性.");
+			String message = "app.properties没有配置base.package属性.";
+			logger.warn(message);
+			return;
 		}
 		// System.err.println("OptionScannerConfigurer postProcessBeanFactory");
 		OptionScanner scanner = new OptionScanner((BeanDefinitionRegistry) beanFactory);
