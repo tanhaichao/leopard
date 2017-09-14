@@ -6,10 +6,10 @@ import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Logger;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 
-public class LeopardClassLoader extends WebAppClassLoader {
-	protected static final Logger logger = Log.getLogger(LeopardClassLoader.class);
+public class LeopardWebAppClassLoader extends WebAppClassLoader {
+	protected static final Logger logger = Log.getLogger(LeopardWebAppClassLoader.class);
 
-	public LeopardClassLoader(Context context) throws IOException {
+	public LeopardWebAppClassLoader(Context context) throws IOException {
 		super(context);
 	}
 

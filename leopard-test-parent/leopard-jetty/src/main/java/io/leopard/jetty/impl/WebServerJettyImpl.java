@@ -15,7 +15,7 @@ import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
-import io.leopard.jetty.LeopardClassLoader;
+import io.leopard.jetty.LeopardWebAppClassLoader;
 import io.leopard.jetty.ResourcesManager;
 import io.leopard.jetty.ServerInitializer;
 import io.leopard.jetty.configuration.EmbedWebInfConfiguration;
@@ -73,7 +73,7 @@ public class WebServerJettyImpl extends AbstractWebServer {
 		WebAppClassLoader classLoader = null;
 		try {
 			// addTldLib(webContext);
-			classLoader = new LeopardClassLoader(webContext);
+			classLoader = new LeopardWebAppClassLoader(webContext);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
