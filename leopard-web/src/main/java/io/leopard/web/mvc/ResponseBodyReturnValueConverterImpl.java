@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ServiceLoader;
 
-public class ResponseBodyReturnValueConverterImpl implements ResponseBodyReturnValueConverter{
+public class ResponseBodyReturnValueConverterImpl implements ResponseBodyReturnValueConverter {
 
 	private final static ResponseBodyReturnValueConverter instance = new ResponseBodyReturnValueConverterImpl();
 
@@ -24,7 +24,7 @@ public class ResponseBodyReturnValueConverterImpl implements ResponseBodyReturnV
 
 	@Override
 	public Object convert(Object data) {
-		for (ResponseBodyReturnValueConverter converter: list) {
+		for (ResponseBodyReturnValueConverter converter : list) {
 			data = converter.convert(data);
 		}
 		return data;
