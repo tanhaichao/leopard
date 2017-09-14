@@ -54,8 +54,8 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("status", "success");
-		data = ResponseBodyReturnValueConverterImpl.getInstance().convert(data);
 		if (EnvUtil.isDevEnv()) {// 这里加上开发环境判断
+			data = ResponseBodyReturnValueConverterImpl.getInstance().convert(data);
 			Map<String, Object> debugMap = JsonDebugger.getDebugMap();
 			if (debugMap != null) {
 				map.putAll(debugMap);
