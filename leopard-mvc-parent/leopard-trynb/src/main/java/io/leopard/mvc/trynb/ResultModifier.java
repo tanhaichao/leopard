@@ -14,5 +14,5 @@ import org.springframework.web.method.HandlerMethod;
  */
 public interface ResultModifier {
 
-	void modify(HttpServletRequest request, HandlerMethod handler, Exception exception, Map<String, Object> map);
+	void modify(HttpServletRequest request, HandlerMethod handler, Exception exception, Map<String, Object> map, Object data);
 }

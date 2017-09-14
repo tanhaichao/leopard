@@ -63,7 +63,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 		}
 		map.put("data", data);
 
-		ResultModifierImpl.getInstance().modify(request, null, null, map);
+		ResultModifierImpl.getInstance().modify(request, null, null, map,data);
 
 		String json = null;
 		try {

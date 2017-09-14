@@ -29,9 +29,9 @@ public class ResultModifierImpl implements ResultModifier {
 	}
 
 	@Override
-	public void modify(HttpServletRequest request, HandlerMethod handler, Exception exception, Map<String, Object> map) {
+	public void modify(HttpServletRequest request, HandlerMethod handler, Exception exception, Map<String, Object> map, Object data) {
 		for (ResultModifier modifier : list) {
-			modifier.modify(request, handler, exception, map);
+			modifier.modify(request, handler, exception, map, data);
 		}
 	}
 
