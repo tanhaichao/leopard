@@ -54,7 +54,8 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("status", "success");
-		if (EnvUtil.isDevEnv()) {// TODO 这里加上开发环境判断
+		if (EnvUtil.isDevEnv()) {// 这里加上开发环境判断
+			data = ResponseBodyReturnValueConverterImpl.getInstance().convert(data);
 			Map<String, Object> debugMap = JsonDebugger.getDebugMap();
 			if (debugMap != null) {
 				map.putAll(debugMap);
@@ -63,7 +64,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 		}
 		map.put("data", data);
 
-		ResultModifierImpl.getInstance().modify(request, null, null, map,data);
+		ResultModifierImpl.getInstance().modify(request, null, null, map);
 
 		String json = null;
 		try {
