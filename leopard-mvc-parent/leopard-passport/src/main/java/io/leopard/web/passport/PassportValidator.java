@@ -1,7 +1,5 @@
 package io.leopard.web.passport;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
