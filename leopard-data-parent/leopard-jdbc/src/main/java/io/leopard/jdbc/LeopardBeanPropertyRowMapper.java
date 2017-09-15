@@ -138,6 +138,9 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 		}
 		else if (java.util.Date.class.isAssignableFrom(requiredType)) {
 			Timestamp timestamp = rs.getTimestamp(index);
+			if (timestamp == null) {
+				return null;
+			}
 			Date date;
 			try {
 				date = (Date) requiredType.newInstance();
