@@ -6,17 +6,17 @@ package io.leopard.web.mvc.option;
  * @author 谭海潮
  *
  */
-public class Option {
+public class OptionVO {
 
 	private Object key;
 
 	private String desc;
 
-	public Option() {
+	public OptionVO() {
 
 	}
 
-	public Option(Object key, String desc) {
+	public OptionVO(Object key, String desc) {
 		this.key = key;
 		this.desc = desc;
 	}

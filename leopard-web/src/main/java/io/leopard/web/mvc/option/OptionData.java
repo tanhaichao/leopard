@@ -36,7 +36,7 @@ public class OptionData {
 			}
 		}
 
-		List<Option> data = toData(clazz);
+		List<OptionVO> data = toData(clazz);
 
 		OptionInfo info = new OptionInfo();
 		info.setId(id);
@@ -47,9 +47,9 @@ public class OptionData {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static List<Option> toData(@SuppressWarnings("rawtypes") Class<? extends Enum> clazz) {
+	private static List<OptionVO> toData(@SuppressWarnings("rawtypes") Class<? extends Enum> clazz) {
 		Map<Object, Enum<?>> map = EnumUtil.toMap(clazz);
-		List<Option> constantList = new ArrayList<Option>();
+		List<OptionVO> constantList = new ArrayList<OptionVO>();
 		for (Entry<Object, Enum<?>> entry : map.entrySet()) {
 			Object key = entry.getKey();
 
@@ -58,7 +58,7 @@ public class OptionData {
 			String desc = (String) onum.getDesc();
 			// System.err.println("put key:"+key+" desc:"+desc);
 
-			Option option = new Option();
+			OptionVO option = new OptionVO();
 			option.setKey(key);
 			option.setDesc(desc);
 			constantList.add(option);
@@ -70,7 +70,7 @@ public class OptionData {
 		data.put(id, info);
 	}
 
-	public static List<Option> getData(String id) {
+	public static List<OptionVO> getData(String id) {
 		OptionInfo info = data.get(id);
 		if (info == null) {
 			return null;

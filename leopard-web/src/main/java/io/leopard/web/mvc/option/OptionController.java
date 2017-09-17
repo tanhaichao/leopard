@@ -14,8 +14,8 @@ public class OptionController {
 
 	@RequestMapping("enum/{id}")
 	@ResponseBody
-	public List<Option> onum(@PathVariable String id) throws OptionNotFoundException {
-		List<Option> data = OptionData.getData(id);
+	public List<OptionVO> onum(@PathVariable String id) throws OptionNotFoundException {
+		List<OptionVO> data = OptionData.getData(id);
 		if (data == null) {
 			throw new OptionNotFoundException("枚举[" + id + "]不存在.");
 		}
@@ -24,10 +24,10 @@ public class OptionController {
 
 	@RequestMapping("enum/list")
 	@ResponseBody
-	public Map<String, List<Option>> list(List<String> idList) throws OptionNotFoundException {
-		Map<String, List<Option>> map = new LinkedHashMap<String, List<Option>>();
+	public Map<String, List<OptionVO>> list(List<String> idList) throws OptionNotFoundException {
+		Map<String, List<OptionVO>> map = new LinkedHashMap<String, List<OptionVO>>();
 		for (String id : idList) {
-			List<Option> data = OptionData.getData(id);
+			List<OptionVO> data = OptionData.getData(id);
 			if (data == null) {
 				throw new OptionNotFoundException("枚举[" + id + "]不存在.");
 			}

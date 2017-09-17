@@ -10,7 +10,7 @@ public class OptionInfo {
 
 	private Class<?> clazz;
 
-	private List<Option> data;
+	private List<OptionVO> data;
 
 	public String getId() {
 		return id;
@@ -36,11 +36,11 @@ public class OptionInfo {
 		this.clazz = clazz;
 	}
 
-	public List<Option> getData() {
+	public List<OptionVO> getData() {
 		return data;
 	}
 
-	public void setData(List<Option> data) {
+	public void setData(List<OptionVO> data) {
 		this.data = data;
 	}
 
