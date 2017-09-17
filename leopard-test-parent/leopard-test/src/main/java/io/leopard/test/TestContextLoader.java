@@ -2,7 +2,6 @@ package io.leopard.test;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfigurationAttributes;
 import org.springframework.test.context.MergedContextConfiguration;
 import org.springframework.test.context.SmartContextLoader;
@@ -43,7 +42,7 @@ public class TestContextLoader implements SmartContextLoader {
 	@Override
 	public ApplicationContext loadContext(String... locations) throws Exception {
 		// System.err.println("loadContext:" + org.apache.commons.lang.StringUtils.join(locations, ","));
-		return new ClassPathXmlApplicationContext(locations);
+		return new LeopardTestClassPathXmlApplicationContext(locations);
 	}
 
 	@Override

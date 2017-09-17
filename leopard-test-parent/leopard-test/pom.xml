@@ -35,12 +35,12 @@
 			<artifactId>junit</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>javahost</artifactId>
@@ -54,6 +54,12 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-util</artifactId>
+			<version>0.9.12-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-schema</artifactId>
 			<version>0.9.12-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>

@@ -27,6 +27,13 @@
 			classpath:/leopard-web/applicationContext.xml
 		</param-value>
 	</context-param>
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>io.leopard.web.mvc.LeopardXmlWebApplicationContext</param-value>
+	</context-param>
+	
+	
+	
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
