@@ -13,7 +13,7 @@ import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.util.StringUtils;
 
-import io.leopard.beans.Option;
+import io.leopard.lang.inum.Option;
 
 public class OptionScanner extends ClassPathBeanDefinitionScanner {
 

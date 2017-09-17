@@ -1,4 +1,4 @@
-package io.leopard.beans;
+package io.leopard.lang.inum;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
