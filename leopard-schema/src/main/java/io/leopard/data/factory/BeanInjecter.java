@@ -13,5 +13,5 @@ import org.springframework.beans.factory.config.DependencyDescriptor;
  */
 public interface BeanInjecter {
 
-	Map<String, Object> findAutowireCandidates(BeanFactory beanFactory, String beanName, Class<?> requiredType, DependencyDescriptor descriptor);
+	void findAutowireCandidates(BeanFactory beanFactory, String beanName, Class<?> requiredType, DependencyDescriptor descriptor, Map<String, Object> matchingBeans);
 }

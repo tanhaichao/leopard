@@ -21,14 +21,10 @@ public class BeanInjecterImpl implements BeanInjecter {
 	}
 
 	@Override
-	public Map<String, Object> findAutowireCandidates(BeanFactory beanFactory, String beanName, Class<?> requiredType, DependencyDescriptor descriptor) {
+	public void findAutowireCandidates(BeanFactory beanFactory, String beanName, Class<?> requiredType, DependencyDescriptor descriptor, Map<String, Object> matchingBeans) {
 		for (BeanInjecter injecter : list) {
-			Map<String, Object> result = injecter.findAutowireCandidates(beanFactory, beanName, requiredType, descriptor);
-			if (result != null) {
-				return result;
-			}
+			injecter.findAutowireCandidates(beanFactory, beanName, requiredType, descriptor, matchingBeans);
 		}
-		return null;
 	}
 
 }
