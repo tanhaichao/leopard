@@ -11,7 +11,7 @@ import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebInfConfiguration;
 
-import io.leopard.jetty.ResourceLoaderImpl;
+import io.leopard.jetty.handler.ResourceLoaderImpl;
 
 /**
  * 解决jetty自带的WebInfConfiguration只扫描WEB-INF/lib的问题，maven编译后的目录为target，不符合其规则

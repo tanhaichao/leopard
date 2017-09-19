@@ -1,4 +1,4 @@
-package io.leopard.jetty;
+package io.leopard.jetty.handler;
 
 import java.util.List;
 
