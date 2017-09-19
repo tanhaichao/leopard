@@ -32,7 +32,7 @@ public class LeopardDefaultListableBeanFactory extends DefaultListableBeanFactor
 	protected Map<String, Object> findNoMatchingAutowireCandidates(String beanName, Class<?> requiredType, DependencyDescriptor descriptor) {
 		// Class<?> clazz = descriptor.getResolvableType().resolve();
 		// logger.info("findNoMatchingAutowireCandidates:" + clazz.getName());
-		Map<String, Object> result = beanInjecter.findAutowireCandidates(beanName, requiredType, descriptor);
+		Map<String, Object> result = beanInjecter.findAutowireCandidates(this, beanName, requiredType, descriptor);
 		if (result == null) {
 			result = new LinkedHashMap<String, Object>();
 		}

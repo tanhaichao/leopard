@@ -2,6 +2,7 @@ package io.leopard.data.factory;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.DependencyDescriptor;
 
 /**
@@ -12,5 +13,5 @@ import org.springframework.beans.factory.config.DependencyDescriptor;
  */
 public interface BeanInjecter {
 
-	Map<String, Object> findAutowireCandidates(String beanName, Class<?> requiredType, DependencyDescriptor descriptor);
+	Map<String, Object> findAutowireCandidates(BeanFactory beanFactory, String beanName, Class<?> requiredType, DependencyDescriptor descriptor);
 }
