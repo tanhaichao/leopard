@@ -25,11 +25,11 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 
 	@Override
 	public void preConfigure(WebAppContext context) throws Exception {
+		super.preConfigure(context);
 		System.err.println("EmbedWebInfConfiguration preConfigure...");
 		ClassPathService classPathService = new ClassPathServiceImpl();
 		classPathService.preConfigure(context, hostList, war);
 
-		super.preConfigure(context);
 	}
 
 	@Override
