@@ -1,17 +1,16 @@
 package io.leopard.myjetty.webapp;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebInfConfiguration;
 
-import io.leopard.jetty.handler.ResourceLoaderImpl;
+import io.leopard.myjetty.webapp.classpath.ClassPathService;
+import io.leopard.myjetty.webapp.classpath.ClassPathServiceImpl;
 
 public class EmbedWebInfConfiguration extends WebInfConfiguration {
 
@@ -25,28 +24,13 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 	}
 
 	@Override
-	protected List<Resource> findJars(WebAppContext context) throws Exception {
-		List<Resource> list = super.findJars(context);
-		if (list == null) {
-			list = new ArrayList<Resource>();
-		}
-		if (true) {
-			List<Resource> extendResourceList = new ResourceLoaderImpl().findJars(context);
-			// System.err.println("extendResourceList:" + extendResourceList);
-			if (extendResourceList != null) {
-				list.addAll(extendResourceList);
-			}
-		}
-		return list;
-	}
+	public void preConfigure(WebAppContext context) throws Exception {
+		System.err.println("EmbedWebInfConfiguration preConfigure...");
+		ClassPathService classPathService = new ClassPathServiceImpl();
+		classPathService.preConfigure(context, hostList, war);
 
-	// @Override
-	// public void preConfigure(WebAppContext context) throws Exception {
-	// ClassPathService classPathService = new ClassPathServiceImpl();
-	// classPathService.preConfigure(context, hostList, war);
-	//
-	// super.preConfigure(context);
-	// }
+		super.preConfigure(context);
+	}
 
 	@Override
 	public void configure(WebAppContext context) throws Exception {
