@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.SystemUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -58,6 +59,13 @@ public class MyJettyRunMojo extends AbstractMojo {
 
 		String rootDir = project.getFile().getAbsolutePath();
 		File webappDir = new File(target, artifactId);
+
+		if (SystemUtils.IS_OS_WINDOWS) {
+			File xiaoniuFile = new File("/Users/tanmr/xiaoniu");
+			if (xiaoniuFile.exists()) {
+				port = 80;
+			}
+		}
 
 		System.out.println("MyJettyRunMojo execute port:" + port);
 		System.out.println("MyJettyRunMojo execute projectId:" + projectId);
