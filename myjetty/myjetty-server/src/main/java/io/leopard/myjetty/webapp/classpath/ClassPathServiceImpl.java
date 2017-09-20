@@ -13,9 +13,9 @@ public class ClassPathServiceImpl implements ClassPathService {
 
 	public ClassPathServiceImpl() {
 		// list.add(new ClassPathServiceDataSourceImpl());
-
 		Iterator<ClassPathService> iterator = ServiceLoader.load(ClassPathService.class).iterator();
 		while (iterator.hasNext()) {
+			System.err.println("ClassPathService:" + iterator.getClass().getName());
 			list.add(iterator.next());
 		}
 	}
