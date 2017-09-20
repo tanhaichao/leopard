@@ -3,12 +3,13 @@ package io.leopard.myjetty.webapp.classpath;
 import java.io.File;
 import java.util.List;
 
+import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class ClassPathServiceProjectImpl extends AbstractClassPathService {
 
 	@Override
-	public void preConfigure(WebAppContext context, List<String> hostList, String war) {
+	public List<Resource> preConfigure(WebAppContext context, List<String> hostList, String war) {
 		// String war = "/work/feedback/feedback/feedback-web/target/feedback-web/";
 		String contextWar = context.getWar();
 		String projectName;
@@ -24,7 +25,7 @@ public class ClassPathServiceProjectImpl extends AbstractClassPathService {
 		}
 		File dir = new File(rootPath);
 		if (!dir.exists()) {
-			return;
+			return null;
 		}
 		File[] files = dir.listFiles();
 		for (File file : files) {
@@ -36,6 +37,7 @@ public class ClassPathServiceProjectImpl extends AbstractClassPathService {
 			this.addClassPath(context, newResource(path));
 			// System.err.println("name:" + name + " path:" + path);
 		}
+		return null;
 	}
 
 }

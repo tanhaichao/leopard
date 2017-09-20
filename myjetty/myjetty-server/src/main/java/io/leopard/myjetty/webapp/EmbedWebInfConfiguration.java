@@ -27,10 +27,10 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 	public void preConfigure(WebAppContext context) throws Exception {
 		// System.err.println("EmbedWebInfConfiguration preConfigure...");
 		// Class.forName("io.xiaoniu.myjetty.ClassPathServiceModuleMergeImpl");
+		super.preConfigure(context);
 
 		ClassPathService classPathService = new ClassPathServiceImpl();
 		classPathService.preConfigure(context, hostList, war);
-		super.preConfigure(context);
 
 	}
 

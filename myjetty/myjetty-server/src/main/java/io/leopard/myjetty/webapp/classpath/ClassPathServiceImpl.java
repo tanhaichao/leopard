@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ServiceLoader;
 
+import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class ClassPathServiceImpl implements ClassPathService {
@@ -29,10 +30,15 @@ public class ClassPathServiceImpl implements ClassPathService {
 	}
 
 	@Override
-	public void preConfigure(WebAppContext context, List<String> hostList, String war) throws Exception {
+	public List<Resource> preConfigure(WebAppContext context, List<String> hostList, String war) throws Exception {
+		List<Resource> result = new ArrayList<>();
 		for (ClassPathService service : list) {
-			service.preConfigure(context, hostList, war);
+			List<Resource> resourceList = service.preConfigure(context, hostList, war);
+			if (resourceList != null) {
+				result.addAll(resourceList);
+			}
 		}
+		return result;
 	}
 
 }
