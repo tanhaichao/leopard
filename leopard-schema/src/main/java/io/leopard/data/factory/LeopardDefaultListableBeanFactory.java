@@ -18,6 +18,13 @@ public class LeopardDefaultListableBeanFactory extends DefaultListableBeanFactor
 		super(parentBeanFactory);
 	}
 
+	// @Override
+	// public Object doResolveDependency(DependencyDescriptor descriptor, String beanName, Set<String> autowiredBeanNames, TypeConverter typeConverter) throws BeansException {
+	// Object obj = super.doResolveDependency(descriptor, beanName, autowiredBeanNames, typeConverter);
+	// logger.info("doResolveDependency beanName:" + beanName + " autowiredBeanNames:" + autowiredBeanNames);
+	// return obj;
+	// }
+
 	@Override
 	protected Map<String, Object> findAutowireCandidates(String beanName, Class<?> requiredType, DependencyDescriptor descriptor) {
 		Map<String, Object> matchingBeans = super.findAutowireCandidates(beanName, requiredType, descriptor);
