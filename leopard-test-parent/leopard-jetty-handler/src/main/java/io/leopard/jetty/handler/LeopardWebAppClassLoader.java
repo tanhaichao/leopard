@@ -1,4 +1,4 @@
-package io.leopard.jetty;
+package io.leopard.jetty.handler;
 
 import java.io.IOException;
 import java.net.URL;

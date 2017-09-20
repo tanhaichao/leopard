@@ -16,6 +16,7 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import io.leopard.jetty.handler.HostResourceHandler;
+import io.leopard.jetty.handler.LeopardWebAppClassLoader;
 import io.leopard.myjetty.LoggerConstant;
 
 public class WebappDaoImpl implements WebappDao {
@@ -74,7 +75,7 @@ public class WebappDaoImpl implements WebappDao {
 		// WebAppContext webapp = new WebAppContext();
 
 		if (true) {
-			MyJettyWebAppClassLoader classLoader = new MyJettyWebAppClassLoader(webapp);
+			LeopardWebAppClassLoader classLoader = new LeopardWebAppClassLoader(webapp);
 			webapp.setClassLoader(classLoader);
 			webapp.setParentLoaderPriority(false);
 			logger.info("classLoader:" + classLoader + " hashCode:" + classLoader.hashCode());

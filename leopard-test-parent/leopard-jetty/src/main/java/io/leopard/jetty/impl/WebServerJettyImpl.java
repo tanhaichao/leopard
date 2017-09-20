@@ -15,10 +15,10 @@ import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
-import io.leopard.jetty.LeopardWebAppClassLoader;
 import io.leopard.jetty.ResourcesManager;
 import io.leopard.jetty.ServerInitializer;
 import io.leopard.jetty.configuration.EmbedWebInfConfiguration;
+import io.leopard.jetty.handler.LeopardWebAppClassLoader;
 import io.leopard.jetty.proxy.IndexServlet;
 import io.leopard.jetty.proxy.ProxyServlet;
 
