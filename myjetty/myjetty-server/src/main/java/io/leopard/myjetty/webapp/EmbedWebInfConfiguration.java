@@ -5,13 +5,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebInfConfiguration;
 
-import io.leopard.jetty.handler.WebInfResolver;
-import io.leopard.jetty.handler.WebInfResolverImpl;
 import io.leopard.myjetty.webapp.classpath.ClassPathService;
 import io.leopard.myjetty.webapp.classpath.ClassPathServiceImpl;
 
@@ -21,63 +18,18 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 
 	private String war;
 
-	private WebInfResolver webInfResolver = new WebInfResolverImpl();
-
 	public EmbedWebInfConfiguration(List<String> hostList, String war) {
 		this.hostList = hostList;
 		this.war = war;
 	}
 
-	// @Override
-	// protected List<Resource> findJars(WebAppContext context) throws Exception {
-	// List<Resource> list = super.findJars(context);
-	// if (list == null) {
-	// list = new ArrayList<Resource>();
-	// }
-	// if (true) {
-	// List<Resource> extendResourceList = new ResourceLoaderImpl().findJars(context);
-	// System.err.println("EmbedWebInfConfiguration findJars:" + extendResourceList);
-	// if (extendResourceList != null) {
-	// list.addAll(extendResourceList);
-	// }
-	// }
-	// return list;
-	// }
-
-	// @Override
-	// protected List<Resource> findJars(WebAppContext context) throws Exception {
-	// List<Resource> resourceList = super.findJars(context);
-	// List<Resource> list = webInfResolver.findJars(context);
-	// if (list != null) {
-	// resourceList.addAll(list);
-	// }
-	// return resourceList;
-	// }
-	//
-	// @Override
-	// protected List<Resource> findExtraClasspathDirs(WebAppContext context) throws Exception {
-	// List<Resource> resourceList = super.findExtraClasspathDirs(context);
-	// List<Resource> list = webInfResolver.findClassDirs(context);
-	//
-	// System.err.println("findExtraClasspathDirs:" + resourceList);
-	// System.err.println("findClassDirs:" + list);
-	// if (resourceList == null) {
-	// return list;
-	// }
-	// if (list != null) {
-	// resourceList.addAll(list);
-	// }
-	// return resourceList;
-	// }
-
 	@Override
 	public void preConfigure(WebAppContext context) throws Exception {
-		System.err.println("EmbedWebInfConfiguration preConfigure...");
+		// System.err.println("EmbedWebInfConfiguration preConfigure...");
 		// Class.forName("io.xiaoniu.myjetty.ClassPathServiceModuleMergeImpl");
 
 		ClassPathService classPathService = new ClassPathServiceImpl();
 		classPathService.preConfigure(context, hostList, war);
-
 		super.preConfigure(context);
 
 	}
