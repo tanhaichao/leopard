@@ -40,13 +40,16 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 		return list;
 	}
 
-	@Override
-	public void preConfigure(WebAppContext context) throws Exception {
-		System.err.println("EmbedWebInfConfiguration preConfigure...");
-		super.preConfigure(context);
-		// ClassPathService classPathService = new ClassPathServiceImpl();
-		// classPathService.preConfigure(context, hostList, war);
-	}
+	// @Override
+	// public void preConfigure(WebAppContext context) throws Exception {
+	// System.err.println("EmbedWebInfConfiguration preConfigure...");
+	// super.preConfigure(context);
+	//
+	// Class.forName("io.xiaoniu.myjetty.ClassPathServiceModuleMergeImpl");
+	//
+	// ClassPathService classPathService = new ClassPathServiceImpl();
+	// classPathService.preConfigure(context, hostList, war);
+	// }
 
 	@Override
 	public void configure(WebAppContext context) throws Exception {
