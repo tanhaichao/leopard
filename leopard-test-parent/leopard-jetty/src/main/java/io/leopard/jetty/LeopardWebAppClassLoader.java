@@ -1,6 +1,7 @@
 package io.leopard.jetty;
 
 import java.io.IOException;
+import java.net.URL;
 
 import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Logger;
@@ -11,6 +12,17 @@ public class LeopardWebAppClassLoader extends WebAppClassLoader {
 
 	public LeopardWebAppClassLoader(Context context) throws IOException {
 		super(context);
+	}
+
+	@Override
+	public URL getResource(String name) {
+		URL oUrl = super.getResource(name);
+		if (name.endsWith(".xml")) {
+			if (oUrl != null) {
+				logger.info("getResource:" + name + " url:" + oUrl.toString());
+			}
+		}
+		return oUrl;
 	}
 
 	@Override
