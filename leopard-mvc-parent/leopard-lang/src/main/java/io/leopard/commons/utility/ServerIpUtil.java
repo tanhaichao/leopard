@@ -30,7 +30,11 @@ public class ServerIpUtil {
 		}
 		else if (SystemUtils.IS_OS_LINUX) {
 			try {
-				return getServerIp("eth0");
+				NetworkInterface networkInterface = NetworkInterface.getByName("eth0");
+				if (networkInterface == null) {
+					networkInterface = NetworkInterface.getByName("eth1");
+				}
+				return getServerIp(networkInterface);
 			}
 			catch (SocketException e) {
 				throw new RuntimeException(e.getMessage(), e);
@@ -47,6 +51,10 @@ public class ServerIpUtil {
 		if (networkInterface == null) {
 			throw new NullPointerException("网卡[" + displayName + "]找不到.");
 		}
+		return getServerIp(networkInterface);
+	}
+
+	public static String getServerIp(NetworkInterface networkInterface) throws SocketException {
 		List<String> subIpList = listSubIp(networkInterface);
 		List<String> ipList = listAllIp(networkInterface);
 		// System.out.println("ipList:" + ipList);
