@@ -17,11 +17,11 @@ public class LeopardWebAppClassLoader extends WebAppClassLoader {
 	@Override
 	public URL getResource(String name) {
 		URL oUrl = super.getResource(name);
-		if (name.endsWith(".xml")) {
-			if (oUrl != null) {
-				logger.info("getResource:" + name + " url:" + oUrl.toString());
-			}
-		}
+		// if (name.endsWith(".xml")) {
+		// if (oUrl != null) {
+		// logger.info("getResource:" + name + " url:" + oUrl.toString());
+		// }
+		// }
 		return oUrl;
 	}
 
