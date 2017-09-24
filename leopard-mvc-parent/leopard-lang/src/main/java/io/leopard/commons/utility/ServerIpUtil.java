@@ -33,6 +33,9 @@ public class ServerIpUtil {
 				NetworkInterface networkInterface = NetworkInterface.getByName("eth0");
 				if (networkInterface == null) {
 					networkInterface = NetworkInterface.getByName("eth1");
+					if (networkInterface == null) {
+						throw new NullPointerException("网卡eth0和eth1都找不到，没办法获取到IP.");
+					}
 				}
 				return getServerIp(networkInterface);
 			}
