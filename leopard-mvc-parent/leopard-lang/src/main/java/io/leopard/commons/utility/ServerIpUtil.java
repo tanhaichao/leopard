@@ -44,6 +44,9 @@ public class ServerIpUtil {
 
 	public static String getServerIp(String displayName) throws SocketException {
 		NetworkInterface networkInterface = NetworkInterface.getByName(displayName);
+		if (networkInterface == null) {
+			throw new NullPointerException("网卡[" + displayName + "]找不到.");
+		}
 		List<String> subIpList = listSubIp(networkInterface);
 		List<String> ipList = listAllIp(networkInterface);
 		// System.out.println("ipList:" + ipList);
