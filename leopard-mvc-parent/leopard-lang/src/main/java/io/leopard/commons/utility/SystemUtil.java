@@ -21,8 +21,7 @@ public final class SystemUtil {
 	/**
 	 * 执行shell命令</br>
 	 * 
-	 * @param cmd
-	 *            需要执行的命令
+	 * @param cmd 需要执行的命令
 	 * @return 输出执行后的结果
 	 */
 	public static String execShell2(final String cmd) {
@@ -62,10 +61,8 @@ public final class SystemUtil {
 	/**
 	 * 执行Shell命令</br>
 	 * 
-	 * @param cmd
-	 *            Shell命令
-	 * @param wait
-	 *            是否输出结果
+	 * @param cmd Shell命令
+	 * @param wait 是否输出结果
 	 * @return 返回的结果
 	 */
 	public static String execShell(final String cmd, final boolean wait) {
@@ -76,6 +73,7 @@ public final class SystemUtil {
 			if (wait) {
 				InputStream input = pro.getErrorStream();
 				msg = IOUtils.toString(input);
+				input.close();
 			}
 		}
 		catch (Exception e) {
@@ -112,8 +110,7 @@ public final class SystemUtil {
 	/**
 	 * 休眠</br>
 	 * 
-	 * @param mills
-	 *            休眠时间，单位毫秒
+	 * @param mills 休眠时间，单位毫秒
 	 */
 	public static void sleep(long mills) {
 		try {
