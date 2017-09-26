@@ -28,7 +28,7 @@ public class MessageParserImpl implements MessageParser {
 		return null;
 	}
 
-	public static String parse(MysqlDataTruncation exception) {
+	public static String parse(MysqlDataTruncation exception) {//TODO 这里改成SQLException
 		String msg;
 		try {
 			msg = INSTANCE.parse(exception.getMessage());
