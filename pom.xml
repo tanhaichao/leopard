@@ -44,7 +44,12 @@
 				<artifactId>c3p0</artifactId>
 				<version>0.9.1.2</version>
 			</dependency>
-
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>2.9.1</version>
+				<scope>compile</scope>
+			</dependency>
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
