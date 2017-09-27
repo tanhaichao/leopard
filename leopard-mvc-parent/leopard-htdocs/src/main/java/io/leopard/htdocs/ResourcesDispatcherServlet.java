@@ -26,6 +26,7 @@ public class ResourcesDispatcherServlet extends DispatcherServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ResourceTransformerImpl transformer = new ResourceTransformerImpl();
+
 	private List<ResourceHandler> resourceHandlers;
 
 	@Override
@@ -124,7 +125,8 @@ public class ResourcesDispatcherServlet extends DispatcherServlet {
 			for (ResourceHandler handler : resourceHandlers) {
 				// logger.info("path:" + path);
 				Resource resource = handler.doHandler(path, request, response);
-				if (resource != null) {
+				if (resource != null && resource.exists()) {
+					// logger.info("handler:" + handler.getClass().getSimpleName() + " resource:" + resource.exists());
 					return resource;
 				}
 			}
