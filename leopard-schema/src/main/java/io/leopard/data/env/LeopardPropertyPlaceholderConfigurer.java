@@ -5,10 +5,12 @@ import java.util.Properties;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class LeopardPropertyPlaceholderConfigurer extends org.springframework.beans.factory.config.PropertyPlaceholderConfigurer {
 
-	private ResolvePlaceholderLei resolvePlaceholderLei = new ResolvePlaceholderLeiImpl();
+	@Autowired
+	private ResolvePlaceholderLei resolvePlaceholderLei;
 
 	public LeopardPropertyPlaceholderConfigurer() {
 		// System.err.println("LeopardPropertyPlaceholderConfigurer new.");
@@ -45,6 +47,7 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 	protected String resolvePlaceholder(String placeholder, Properties props) {
 		String value = super.resolvePlaceholder(placeholder, props);
 		if (value == null) {
+			System.err.println("resolvePlaceholderLei:" + resolvePlaceholderLei.getClass().getName());
 			value = resolvePlaceholderLei.resolvePlaceholder(placeholder, props);
 		}
 		return value;
