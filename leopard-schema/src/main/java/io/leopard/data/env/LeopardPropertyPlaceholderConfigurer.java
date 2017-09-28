@@ -2,14 +2,14 @@ package io.leopard.data.env;
 
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class LeopardPropertyPlaceholderConfigurer extends org.springframework.beans.factory.config.PropertyPlaceholderConfigurer {
 
-	@Autowired
 	private ResolvePlaceholderLei resolvePlaceholderLei;
 
 	public LeopardPropertyPlaceholderConfigurer() {
@@ -21,9 +21,14 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 
 	}
 
+	@PostConstruct
+	public void init() {
+		logger.info("init:" + this.getClass().getName());
+	}
+
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
-		// logger.info("setBeanFactory");
+		logger.info("setBeanFactory:" + beanFactory.getClass().getName());
 		super.setBeanFactory(beanFactory);
 		PropertyDecoder propertyDecoder;
 		try {
@@ -34,8 +39,13 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 			propertyDecoder = new PropertyDecoderImpl();
 		}
 		catch (NoSuchBeanDefinitionException e) {
+			// logger.error(e.getMessage(), e);
 			propertyDecoder = new PropertyDecoderImpl();
 		}
+
+		this.resolvePlaceholderLei = beanFactory.getBean(ResolvePlaceholderLei.class);
+		logger.info("resolvePlaceholderLei:" + resolvePlaceholderLei);
+
 		String env = EnvUtil.getEnv();
 		PropertyPlaceholderLeiImpl propertyPlaceholderLeiImpl = new PropertyPlaceholderLeiImpl();
 		propertyPlaceholderLeiImpl.setPropertyDecoder(propertyDecoder);
