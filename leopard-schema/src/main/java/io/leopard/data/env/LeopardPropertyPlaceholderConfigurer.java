@@ -63,7 +63,7 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 		if (matchingBeans.isEmpty()) {
 			throw new NoSuchBeanDefinitionException(requiredType);
 		}
-		if (matchingBeans.size() == 0) {
+		if (matchingBeans.size() == 1) {
 			return matchingBeans.entrySet().iterator().next().getValue();
 		}
 		for (Entry<String, T> entry : matchingBeans.entrySet()) {
