@@ -33,7 +33,7 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
-		logger.info("setBeanFactory:" + beanFactory.getClass().getName());
+		// logger.info("setBeanFactory:" + beanFactory.getClass().getName());
 		super.setBeanFactory(beanFactory);
 		PropertyDecoder propertyDecoder;
 		try {
