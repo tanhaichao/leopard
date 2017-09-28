@@ -6,7 +6,10 @@ public class ResolvePlaceholderLeiImpl implements ResolvePlaceholderLei {
 
 	// 配置文件里不存在的占位符时触发该接口.
 	@Override
-	public String resolvePlaceholder(String placeholder, Properties props) {
+	public String resolvePlaceholder(String placeholder, Properties props, String defaultValue) {
+		if (defaultValue != null) {
+			return defaultValue;
+		}
 		String value;
 		if (placeholder.endsWith(".redis")) {
 			value = resolveRedisDsnPlaceholder(placeholder, props);

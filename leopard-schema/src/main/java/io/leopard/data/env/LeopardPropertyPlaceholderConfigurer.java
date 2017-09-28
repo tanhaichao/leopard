@@ -48,7 +48,7 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 			propertyDecoder = new PropertyDecoderImpl();
 		}
 
-		this.resolvePlaceholderLei = beanFactory.getBean(ResolvePlaceholderLei.class);
+		this.resolvePlaceholderLei = getBean(beanFactory, ResolvePlaceholderLei.class);
 		// logger.info("resolvePlaceholderLei:" + resolvePlaceholderLei);
 
 		String env = EnvUtil.getEnv();

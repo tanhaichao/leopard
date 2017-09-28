@@ -16,5 +16,5 @@ public interface ResolvePlaceholderLei {
 	 * @param props
 	 * @return
 	 */
-	String resolvePlaceholder(String placeholder, Properties props);
+	String resolvePlaceholder(String placeholder, Properties props, String defaultValue);
 }
