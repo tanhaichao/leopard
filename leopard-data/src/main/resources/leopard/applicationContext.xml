@@ -3,7 +3,7 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean class="io.leopard.data.env.LeopardPropertyPlaceholderConfigurer" lazy-init="false" />
-	<bean class="io.leopard.data.env.PropertyPlaceholderLeiImpl"/>
+	<bean class="io.leopard.data.env.ResolvePlaceholderLeiImpl"/>
 
 	<!-- 
 	<bean class="io.leopard.aop.LeopardAopBeanPostProcessor" />
