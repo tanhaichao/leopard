@@ -6,9 +6,9 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public interface WebServer {
-	public Server start(int port) throws Exception;
+	Server start(int port) throws Exception;
 
-	public void stop() throws Exception;
+	void stop() throws Exception;
 
 	WebAppContext startWebapp(String war) throws Exception;
 
