@@ -1,5 +1,6 @@
 package io.leopard.data.kit.password;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -17,6 +18,9 @@ public class PassportTokenUtil {
 	}
 
 	public static String getEncryptedPassword(String token) {
+		if (StringUtils.isEmpty(token)) {
+			return null;
+		}
 		try {
 			String str = Base64.decode(token);
 			String encryptedPassword = str.split(":")[0];
