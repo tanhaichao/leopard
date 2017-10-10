@@ -8,6 +8,17 @@ package io.leopard.exporter;
  */
 public @interface Table {
 
-	String value();
-	
+	/**
+	 * 新表名称
+	 * 
+	 * @return
+	 */
+	String value() default "";
+
+	/**
+	 * 旧表名称
+	 * 
+	 * @return
+	 */
+	String oldTable() default "";
 }
