@@ -19,7 +19,6 @@ import io.leopard.data.env.LeopardPropertyPlaceholderConfigurer;
 import io.leopard.data4j.pubsub.IPubSub;
 import io.leopard.data4j.pubsub.Publisher;
 import io.leopard.jdbc.Jdbc;
-import io.leopard.json.Json;
 import io.leopard.lang.inum.daynamic.DynamicEnum;
 import io.leopard.lang.inum.daynamic.EnumConstant;
 import io.leopard.redis.Redis;
@@ -39,7 +38,7 @@ public class DynamicEnumScannerConfigurer implements BeanFactoryPostProcessor, A
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		// logger.info("setApplicationContext");
 		this.applicationContext = applicationContext;
-		jdbc = applicationContext.getBean(Jdbc.class);
+		jdbc = (Jdbc) applicationContext.getBean("jdbc");
 		Redis redis = (Redis) applicationContext.getBean("sessionRedis");
 		Publisher.listen(this, redis);
 	}
