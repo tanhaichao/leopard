@@ -3,6 +3,7 @@ package io.leopard.jdbc.oracle;
 import java.util.List;
 
 import io.leopard.jdbc.Jdbc;
+import io.leopard.jdbc.oracle.model.UserTable;
 import io.leopard.jdbc.oracle.model.UserTableComment;
 
 public class OracleManagerImpl implements OracleManager {
@@ -17,6 +18,12 @@ public class OracleManagerImpl implements OracleManager {
 	public List<UserTableComment> listUserTableComments() {
 		String sql = "select * from user_tab_comments";
 		return jdbc.queryForList(sql, UserTableComment.class);
+	}
+
+	@Override
+	public List<UserTable> listUserTables() {
+		String sql = "select * from user_tables;";
+		return jdbc.queryForList(sql, UserTable.class);
 	}
 
 }
