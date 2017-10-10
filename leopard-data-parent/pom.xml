@@ -27,6 +27,7 @@
 		<module>leopard-table</module>
 		<module>leopard-elasticsearch</module>
 		<module>leopard-sysconfig</module>
+		<module>leopard-oracle</module>
 	</modules>
 
 </project>
