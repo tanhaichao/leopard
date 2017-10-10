@@ -33,7 +33,7 @@ public class SysconfigBeanPostProcessor implements BeanPostProcessor, BeanFactor
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		this.beanFactory = (ConfigurableListableBeanFactory) beanFactory;
-		jdbc = beanFactory.getBean(Jdbc.class);
+		jdbc = (Jdbc) beanFactory.getBean("jdbc");
 		Redis redis = (Redis) beanFactory.getBean("sessionRedis");
 		Publisher.listen(this, redis);
 	}
