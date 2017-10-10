@@ -28,6 +28,7 @@
 		<module>leopard-elasticsearch</module>
 		<module>leopard-sysconfig</module>
 		<module>leopard-oracle</module>
+		<module>leopard-exporter</module>
 	</modules>
 
 </project>
