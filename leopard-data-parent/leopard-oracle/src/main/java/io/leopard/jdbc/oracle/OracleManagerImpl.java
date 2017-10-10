@@ -1,6 +1,8 @@
 package io.leopard.jdbc.oracle;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.leopard.jdbc.Jdbc;
 import io.leopard.jdbc.oracle.model.UserTable;
@@ -22,8 +24,24 @@ public class OracleManagerImpl implements OracleManager {
 
 	@Override
 	public List<UserTable> listUserTables() {
-		String sql = "select * from user_tables;";
+		String sql = "select * from user_tables";
 		return jdbc.queryForList(sql, UserTable.class);
 	}
 
+	@Override
+	public List<UserTable> listUserTables2() {
+		List<UserTable> tableList = this.listUserTables();
+		List<UserTableComment> commentList = this.listUserTableComments();
+		Map<String, UserTableComment> commentMap = new LinkedHashMap<>();
+		for (UserTableComment comment : commentList) {
+			String tableName = comment.getTableName();
+			commentMap.put(tableName, comment);
+		}
+		for (UserTable table : tableList) {
+			UserTableComment comment = commentMap.get(table.getTableName());
+			String comments = comment.getComments();
+			table.setComments(comments);
+		}
+		return tableList;
+	}
 }

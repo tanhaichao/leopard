@@ -11,4 +11,11 @@ public interface OracleManager {
 
 	List<UserTableComment> listUserTableComments();
 
+	/**
+	 * 获取所有表(包含注释)
+	 * 
+	 * @return
+	 */
+	List<UserTable> listUserTables2();
+
 }
