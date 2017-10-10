@@ -1,5 +1,6 @@
 package io.leopard.myjetty;
 
+import java.io.FilePermission;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import io.leopard.myjetty.webapp.WebappServiceImpl;
 
 public class MyJettyServer implements WebServer {
 	protected static Log logger = LoggerConstant.getJettyLogger(MyJettyServer.class);
+
+	public static Class<?> filePermissionClass = FilePermission.class;
 
 	private Server server;
 
