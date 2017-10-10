@@ -76,7 +76,7 @@ public final class SystemUtil {
 				input.close();
 			}
 		}
-		catch (Exception e) {
+		catch (IOException e) {
 			msg = e.getMessage();
 			logger.error(e.getMessage(), e);
 		}
