@@ -1,5 +1,6 @@
 package io.leopard.jdbc.oracle;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,5 +48,31 @@ public class OracleManagerImpl implements OracleManager {
 			column.setComments(comment.getComments());
 		}
 		return columnList;
+	}
+
+	@Override
+	public Map<String, List<Column>> listColumns() {
+		List<Column> columnList = jdbc.queryForList("select * from user_tab_columns", Column.class);
+		List<Column.Comment> commentList = jdbc.queryForList("select * from user_col_comments", Column.Comment.class);
+		Map<String, Column.Comment> commentMap = new LinkedHashMap<>();
+		for (Column.Comment comment : commentList) {
+			String columnName = comment.getTableName() + ":" + comment.getColumnName();
+			commentMap.put(columnName, comment);
+		}
+		for (Column column : columnList) {
+			Column.Comment comment = commentMap.get(column.getTableName() + ":" + column.getColumnName());
+			column.setComments(comment.getComments());
+		}
+		Map<String, List<Column>> columnMap = new LinkedHashMap<>();
+		for (Column column : columnList) {
+			String tableName = column.getTableName();
+			List<Column> tableColumnList = columnMap.get(tableName);
+			if (tableColumnList == null) {
+				tableColumnList = new ArrayList<>();
+				columnMap.put(tableName, tableColumnList);
+			}
+			tableColumnList.add(column);
+		}
+		return columnMap;
 	}
 }
