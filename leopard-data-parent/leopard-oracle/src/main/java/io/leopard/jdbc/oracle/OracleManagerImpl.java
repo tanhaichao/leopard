@@ -7,7 +7,6 @@ import java.util.Map;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.jdbc.oracle.model.Column;
 import io.leopard.jdbc.oracle.model.UserTable;
-import io.leopard.jdbc.oracle.model.UserTableComment;
 
 public class OracleManagerImpl implements OracleManager {
 
@@ -18,30 +17,18 @@ public class OracleManagerImpl implements OracleManager {
 	}
 
 	@Override
-	public List<UserTableComment> listUserTableComments() {
-		String sql = "select * from user_tab_comments";
-		return jdbc.queryForList(sql, UserTableComment.class);
-	}
-
-	@Override
 	public List<UserTable> listUserTables() {
-		String sql = "select * from user_tables";
-		return jdbc.queryForList(sql, UserTable.class);
-	}
-
-	@Override
-	public List<UserTable> listUserTables2() {
-		List<UserTable> tableList = this.listUserTables();
-		List<UserTableComment> commentList = this.listUserTableComments();
-		Map<String, UserTableComment> commentMap = new LinkedHashMap<>();
-		for (UserTableComment comment : commentList) {
+		List<UserTable> tableList = jdbc.queryForList("select * from user_tables", UserTable.class);
+		List<UserTable.Comment> commentList = jdbc.queryForList("select * from user_tab_comments", UserTable.Comment.class);
+		Map<String, UserTable.Comment> commentMap = new LinkedHashMap<>();
+		for (UserTable.Comment comment : commentList) {
 			String tableName = comment.getTableName();
 			commentMap.put(tableName, comment);
 		}
 		for (UserTable table : tableList) {
-			UserTableComment comment = commentMap.get(table.getTableName());
-			String comments = comment.getComments();
-			table.setComments(comments);
+			UserTable.Comment comment = commentMap.get(table.getTableName());
+			table.setTableType(comment.getTableType());
+			table.setComments(comment.getComments());
 		}
 		return tableList;
 	}
