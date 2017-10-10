@@ -13,5 +13,10 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-jdbc</artifactId>
+			<version>0.9.12-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
