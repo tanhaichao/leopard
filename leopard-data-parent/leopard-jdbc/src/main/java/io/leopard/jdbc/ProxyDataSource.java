@@ -44,6 +44,11 @@ public class ProxyDataSource implements DataSource {
 	}
 
 	protected void initJdbcConnectionListener() {
+		String className = System.getProperty(JdbcConnectionListener.class.getName());
+		if (StringUtils.isEmpty(className)) {
+			return;
+		}
+
 		String host;
 		int port;
 		int maxPoolSize = this.dataSource.getMaxPoolSize();
@@ -64,10 +69,6 @@ public class ProxyDataSource implements DataSource {
 			throw new RuntimeException("解析jdbcUrl出错[" + jdbcUrl + "].");
 		}
 
-		String className = System.getProperty(JdbcConnectionListener.class.getName());
-		if (StringUtils.isEmpty(className)) {
-			return;
-		}
 		Class<?> clazz;
 		try {
 			clazz = Class.forName(className);
