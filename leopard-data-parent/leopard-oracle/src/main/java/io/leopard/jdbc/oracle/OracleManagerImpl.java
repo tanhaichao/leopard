@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.leopard.jdbc.Jdbc;
+import io.leopard.jdbc.oracle.model.Column;
 import io.leopard.jdbc.oracle.model.UserTable;
 import io.leopard.jdbc.oracle.model.UserTableComment;
 
@@ -43,5 +44,11 @@ public class OracleManagerImpl implements OracleManager {
 			table.setComments(comments);
 		}
 		return tableList;
+	}
+
+	@Override
+	public List<Column> listColumns(String tableName) {
+		String sql = "select * from user_tab_columns where Table_Name=?";
+		return jdbc.queryForList(sql, Column.class, tableName);
 	}
 }
