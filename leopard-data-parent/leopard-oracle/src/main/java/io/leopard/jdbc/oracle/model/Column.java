@@ -23,6 +23,11 @@ public class Column {
 	private String dataType;
 
 	/**
+	 * 是否允许null
+	 */
+	private String nullable;
+
+	/**
 	 * 数据长度
 	 */
 	private int dataLength;
@@ -70,6 +75,14 @@ public class Column {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public String getNullable() {
+		return nullable;
+	}
+
+	public void setNullable(String nullable) {
+		this.nullable = nullable;
 	}
 
 	public static class Comment {

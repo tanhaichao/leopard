@@ -35,7 +35,17 @@ public class OracleManagerImpl implements OracleManager {
 
 	@Override
 	public List<Column> listColumns(String tableName) {
-		String sql = "select * from user_tab_columns where Table_Name=?";
-		return jdbc.queryForList(sql, Column.class, tableName);
+		List<Column> columnList = jdbc.queryForList("select * from user_tab_columns where Table_Name=?", Column.class, tableName);
+		List<Column.Comment> commentList = jdbc.queryForList("select * from user_col_comments where Table_Name=?", Column.Comment.class, tableName);
+		Map<String, Column.Comment> commentMap = new LinkedHashMap<>();
+		for (Column.Comment comment : commentList) {
+			String columnName = comment.getColumnName();
+			commentMap.put(columnName, comment);
+		}
+		for (Column column : columnList) {
+			Column.Comment comment = commentMap.get(column.getColumnName());
+			column.setComments(comment.getComments());
+		}
+		return columnList;
 	}
 }
