@@ -4,10 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
+import io.leopard.core.exception.InvalidException;
+import io.leopard.data.env.EnvUtil;
 import io.leopard.web.mvc.AbstractJsonSerializer;
 
 /**
@@ -18,14 +23,35 @@ import io.leopard.web.mvc.AbstractJsonSerializer;
  * @param <T>
  */
 public abstract class IdJsonSerializer<T, V> extends AbstractJsonSerializer<Object> {
+	protected static Log logger = LogFactory.getLog(IdJsonSerializer.class);
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
 		// System.err.println("BaseJsonSerializer value:" + value);
 		String fieldName = gen.getOutputContext().getCurrentName();
 
 		gen.writeObject(value);
+		Object data;
+		if (EnvUtil.isDevEnv()) {
+			try {
+				data = getData(value);
+			}
+			catch (InvalidException e) {
+				logger.warn(e.getMessage(), e);
+				data = null;
+			}
+		}
+		else {
+			data = getData(value);
+		}
+
+		String newFieldName = this.getFieldName(fieldName);
+		gen.writeFieldName(newFieldName);
+		gen.writeObject(data);
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Object getData(Object value) {
 		Object data;
 		if (value instanceof List) {
 			List<V> list = new ArrayList<V>();
@@ -38,10 +64,7 @@ public abstract class IdJsonSerializer<T, V> extends AbstractJsonSerializer<Obje
 		else {
 			data = this.get((T) value);
 		}
-
-		String newFieldName = this.getFieldName(fieldName);
-		gen.writeFieldName(newFieldName);
-		gen.writeObject(data);
+		return data;
 	}
 
 	protected String getFieldName(String fieldName) {
