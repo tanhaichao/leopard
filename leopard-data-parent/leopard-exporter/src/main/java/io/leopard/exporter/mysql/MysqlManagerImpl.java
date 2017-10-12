@@ -25,15 +25,18 @@ public class MysqlManagerImpl implements MysqlManager {
 		// ResultSet rs = conn.getMetaData().getTables(null, "%", "%", new String[] { "TABLE" });
 		ResultSet rs = conn.getMetaData().getTables(null, null, null, new String[] { "TABLE" });
 		List<UserTable> tableList = new ArrayList<UserTable>();
-
 		while (rs.next()) {
 			UserTable table = new UserTable();
 			String tableName = rs.getString("TABLE_NAME");
-			String comment = rs.getString("REMARKS");
+			// String comment = rs.getString("REMARKS");
+			String comment = getTableComment(jdbc, tableName);
 			table.setTableName(tableName);
+			table.setTableType(rs.getString("TABLE_TYPE"));
 			table.setComments(comment);
 			tableList.add(table);
 		}
+		rs.close();
+		conn.close();
 		return tableList;
 	}
 
@@ -78,6 +81,7 @@ public class MysqlManagerImpl implements MysqlManager {
 			int decimalDigits = rs.getInt("DECIMAL_DIGITS");// 小数部分的位数。对于 DECIMAL_DIGITS 不适用的数据类型，则返回 Null。
 			int nullable = rs.getInt("NULLABLE");// 是否允许使用 NULL。
 
+			System.err.println("comment:" + comment);
 			Column column = new Column();
 			column.setTableName(rs.getString("TABLE_NAME"));
 			column.setColumnName(columnName);
@@ -95,4 +99,30 @@ public class MysqlManagerImpl implements MysqlManager {
 		return columnList;
 	}
 
+	protected String getTableComment(Jdbc jdbc, String tableName) {
+		String tableSql = this.showCreateTable(jdbc, tableName);
+		String comment = parseTableComment(tableSql);
+		// System.out.println("getTableComment table:" + tableName + " comment:" + comment + " tableSql:" + tableSql);
+		return comment;
+	}
+
+	private String showCreateTable(Jdbc jdbc, String tableName) {
+		List<Map<String, Object>> list = jdbc.queryForMaps("show create table " + tableName);
+		for (Map<String, Object> map : list) {
+			String sql = (String) map.get("Create Table");
+			return sql;
+		}
+		return null;
+	}
+
+	protected static String parseTableComment(String tableSql) {
+		String comment = null;
+		int index = tableSql.indexOf("COMMENT='");
+		if (index < 0) {
+			return null;
+		}
+		comment = tableSql.substring(index + 9);
+		comment = comment.substring(0, comment.length() - 1);
+		return comment;
+	}
 }
