@@ -7,7 +7,11 @@ package io.leopard.exporter;
  *
  */
 public @interface Column {
-	
-	String value();
+
+	// String value();
+
+	String alias() default "";
+
+	String comment() default "";
 
 }

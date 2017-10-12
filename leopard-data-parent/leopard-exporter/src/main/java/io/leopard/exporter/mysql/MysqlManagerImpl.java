@@ -45,6 +45,7 @@ public class MysqlManagerImpl implements MysqlManager {
 		Connection conn = jdbc.getDataSource().getConnection();
 		ResultSet rs = conn.getMetaData().getColumns(null, "%", "%", "%");
 		List<Column> columnList = listColumns(rs);
+		rs.close();
 		conn.close();
 
 		Map<String, List<Column>> columnMap = new LinkedHashMap<>();
@@ -65,6 +66,7 @@ public class MysqlManagerImpl implements MysqlManager {
 		Connection conn = jdbc.getDataSource().getConnection();
 		ResultSet rs = conn.getMetaData().getColumns(null, "%", tableName, "%");
 		List<Column> columnList = listColumns(rs);
+		rs.close();
 		conn.close();
 		return columnList;
 	}
