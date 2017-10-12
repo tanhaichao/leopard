@@ -12,7 +12,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import io.leopard.core.exception.InvalidException;
-import io.leopard.data.env.EnvUtil;
 import io.leopard.web.mvc.AbstractJsonSerializer;
 
 /**
@@ -25,6 +24,15 @@ import io.leopard.web.mvc.AbstractJsonSerializer;
 public abstract class IdJsonSerializer<T, V> extends AbstractJsonSerializer<Object> {
 	protected static Log logger = LogFactory.getLog(IdJsonSerializer.class);
 
+	/**
+	 * 是否忽略非法参数异常
+	 */
+	private static boolean ignoreInvalid = false;
+
+	public static void setIgnoreInvalid(boolean ignoreInvalid) {
+		IdJsonSerializer.ignoreInvalid = ignoreInvalid;
+	}
+
 	@Override
 	public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
 		// System.err.println("BaseJsonSerializer value:" + value);
@@ -32,7 +40,7 @@ public abstract class IdJsonSerializer<T, V> extends AbstractJsonSerializer<Obje
 
 		gen.writeObject(value);
 		Object data;
-		if (EnvUtil.isDevEnv()) {
+		if (ignoreInvalid) {
 			try {
 				data = getData(value);
 			}
