@@ -81,7 +81,7 @@ public class MysqlManagerImpl implements MysqlManager {
 			int decimalDigits = rs.getInt("DECIMAL_DIGITS");// 小数部分的位数。对于 DECIMAL_DIGITS 不适用的数据类型，则返回 Null。
 			int nullable = rs.getInt("NULLABLE");// 是否允许使用 NULL。
 
-			System.err.println("comment:" + comment);
+			// System.err.println("comment:" + comment);
 			Column column = new Column();
 			column.setTableName(rs.getString("TABLE_NAME"));
 			column.setColumnName(columnName);
