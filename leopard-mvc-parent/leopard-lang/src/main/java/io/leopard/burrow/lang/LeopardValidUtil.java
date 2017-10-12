@@ -1,9 +1,11 @@
 package io.leopard.burrow.lang;
 
-import io.leopard.burrow.util.DateTime;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
+
+import io.leopard.burrow.util.DateTime;
 
 /**
  * 参数合法性验证.
@@ -100,5 +102,32 @@ public class LeopardValidUtil {
 	 */
 	public static boolean isNotNull(Object obj) {
 		return obj != null;
+	}
+
+	private static String ID_REGEX = "^[a-zA-Z0-9_\\-]{32}$";
+
+	/**
+	 * 允许非法的uuid
+	 */
+	private static boolean allowInvalidUuid = false;
+
+	public static void setAllowInvalidUuid(boolean allowInvalidUuid) {
+		LeopardValidUtil.allowInvalidUuid = allowInvalidUuid;
+	}
+
+	/**
+	 * 是否合法的uuid
+	 * 
+	 * @param uuid
+	 * @return
+	 */
+	public static boolean isUuid(String uuid) {
+		if (StringUtils.isEmpty(uuid)) {
+			return false;
+		}
+		if (allowInvalidUuid) {
+			return true;
+		}
+		return uuid.matches(ID_REGEX);
 	}
 }
