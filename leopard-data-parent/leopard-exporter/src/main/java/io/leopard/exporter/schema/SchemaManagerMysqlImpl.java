@@ -1,5 +1,6 @@
 package io.leopard.exporter.schema;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class SchemaManagerMysqlImpl implements SchemaManager {
 	}
 
 	@Override
-	public List<Table> listTables() {
+	public List<Table> listTables() throws SQLException {
 		List<UserTable> userTableList = mysqlManager.listUserTables();
 		Map<String, List<io.leopard.jdbc.oracle.model.Column>> columnMap = mysqlManager.listColumns();
 		List<Table> tableList = new ArrayList<Table>();
