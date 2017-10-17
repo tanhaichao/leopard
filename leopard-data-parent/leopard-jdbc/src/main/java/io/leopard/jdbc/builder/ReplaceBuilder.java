@@ -49,8 +49,8 @@ public class ReplaceBuilder extends AbstractSqlBuilder implements SqlBuilder {
 
 		// System.out.println("fields:" + fields.toString());
 
-		StringBuilder sb = new StringBuilder("REPLACE INTO ");
-		sb.append(tableName).append("(");
+		StringBuilder sb = new StringBuilder("REPLACE INTO `");
+		sb.append(tableName).append("`(");
 		sb.append(fields.toString()).append(") values(");
 		sb.append(values.toString()).append(");");
 
