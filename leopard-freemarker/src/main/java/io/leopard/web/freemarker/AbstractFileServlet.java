@@ -43,7 +43,7 @@ public abstract class AbstractFileServlet extends ClassPathHtdocs {
 			sb.append("</head>\n");
 			sb.append("<body>\n");
 			sb.append("<h2>HTTP ERROR: 404</h2>\n");
-			sb.append("<pre>    程序发布中，请耐心等候，预计还有xx秒重启完成.</pre></p>\n");
+			sb.append("<pre>文件找不到.</pre></p>\n");
 			sb.append("<hr /><i>Powered by Leopard</i>\n");
 			sb.append("</body>\n");
 			sb.append("</html>\n");
