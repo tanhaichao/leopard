@@ -40,6 +40,8 @@ public class ClassPathHtdocsView extends ModelAndView {
 
 		@Override
 		public InputStream readFile(HttpServletRequest request, String filename) throws IOException {
+			filename = filename.replaceAll("/+", "/");
+			
 			String path = "/htdocs" + this.getHtdocsPath() + filename;
 			// System.out.println("path:" + path);
 			Resource resource = resourceLoader.getResource(path);
