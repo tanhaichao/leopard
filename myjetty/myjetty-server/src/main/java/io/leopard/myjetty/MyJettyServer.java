@@ -72,6 +72,7 @@ public class MyJettyServer implements WebServer {
 		// webappService.addHandler(new WorkbenchHandler(server));//TODO
 
 		handlers.addHandler(webappService.getContextHandlerCollection());
+		new HandlerServiceImpl().execute(handlers);
 
 		handlers.addHandler(new RestartingHandler());
 
