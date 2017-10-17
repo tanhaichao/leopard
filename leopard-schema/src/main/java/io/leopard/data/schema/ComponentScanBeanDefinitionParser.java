@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
@@ -17,7 +18,13 @@ public class ComponentScanBeanDefinitionParser extends org.springframework.conte
 
 	protected List<String> timerList = new ArrayList<String>();
 
+	private static boolean defaultQualifiedBeanName = false;
+
 	// name-generator="io.leopard.core.beans.LeopardAnnotationBeanNameGenerator"
+
+	public static void setDefaultQualifiedBeanName(boolean defaultQualifiedBeanName) {
+		ComponentScanBeanDefinitionParser.defaultQualifiedBeanName = defaultQualifiedBeanName;
+	}
 
 	private ParserContext parserContext;
 
@@ -26,7 +33,14 @@ public class ComponentScanBeanDefinitionParser extends org.springframework.conte
 		// BeanDefinitionParserUtil.printParserContext(ComponentScanBeanDefinitionParser.class, parserContext);
 		this.parserContext = parserContext;
 
-		boolean qualifiedBeanName = "true".equals(element.getAttribute("qualified-name"));
+		String qualifiedName = element.getAttribute("qualified-name");
+		boolean qualifiedBeanName;
+		if (StringUtils.isEmpty(qualifiedName)) {
+			qualifiedBeanName = defaultQualifiedBeanName;
+		}
+		else {
+			qualifiedBeanName = "true".equals(qualifiedName);
+		}
 
 		LeopardAnnotationBeanNameGenerator.setQualifiedBeanName(qualifiedBeanName);
 
