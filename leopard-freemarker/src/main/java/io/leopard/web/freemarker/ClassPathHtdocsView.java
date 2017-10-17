@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
@@ -19,7 +20,7 @@ import io.leopard.web.freemarker.htdocs.ClassPathHtdocs;
 
 public class ClassPathHtdocsView extends ModelAndView {
 	public ClassPathHtdocsView() {
-		super(createView(""));
+		super(createView(null));
 	}
 
 	public ClassPathHtdocsView(String folder) {
@@ -50,10 +51,10 @@ public class ClassPathHtdocsView extends ModelAndView {
 
 			String path;
 			if (StringUtils.isNotEmpty(folder)) {
-				path = "/htdocs" + this.getHtdocsPath() + filename;
+				path = "/htdocs" + folder + filename.substring(filename.indexOf("/", 2));
 			}
 			else {
-				path = "/htdocs" + this.getHtdocsPath() + filename;
+				path = "/htdocs" + filename;
 			}
 			// System.out.println("path:" + path);
 			Resource resource = resourceLoader.getResource(path);
@@ -81,7 +82,7 @@ public class ClassPathHtdocsView extends ModelAndView {
 
 		@Override
 		public String getHtdocsPath() {
-			return folder;
+			throw new NotImplementedException();
 		}
 
 	}
