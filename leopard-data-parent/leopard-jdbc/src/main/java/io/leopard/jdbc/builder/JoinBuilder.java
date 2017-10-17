@@ -62,7 +62,7 @@ public class JoinBuilder {
 			paging.setPageSize(limitSize);
 		}
 		if (!set.isEmpty()) {
-			String sql = "select * from " + tableName + " where " + this.fieldName + " in (" + SqlUtil.toIn(set) + ")";
+			String sql = "select * from `" + tableName + "` where " + this.fieldName + " in (" + SqlUtil.toIn(set) + ")";
 			List<T> list = jdbc.queryForList(sql, elementType);
 			paging.setList(list);
 		}
@@ -87,7 +87,7 @@ public class JoinBuilder {
 			page.setPageSize(limitSize);
 		}
 		if (!set.isEmpty()) {
-			String sql = "select * from " + tableName + " where " + this.fieldName + " in (" + SqlUtil.toIn(set) + ")";
+			String sql = "select * from `" + tableName + "` where " + this.fieldName + " in (" + SqlUtil.toIn(set) + ")";
 			List<T> list = jdbc.queryForList(sql, elementType);
 			page.setList(list);
 		}

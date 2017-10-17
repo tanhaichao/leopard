@@ -44,8 +44,8 @@ public class UpdateBuilder extends AbstractSqlBuilder implements SqlBuilder {
 			throw new NullPointerException("还没有设置任何参数.");
 		}
 
-		StringBuilder sb = new StringBuilder("UPDATE ");
-		sb.append(tableName).append(" SET ");
+		StringBuilder sb = new StringBuilder("UPDATE `");
+		sb.append(tableName).append("` SET ");
 		int count = 0;
 		for (String filedName : fieldList) {
 			if (count > 0) {
