@@ -48,7 +48,7 @@
 				</xsd:annotation>
 			</xsd:attribute>
 			
-			<xsd:attribute name="qualified-name" type="xsd:boolean" default="false" />
+			<xsd:attribute name="qualified-name" type="xsd:boolean" />
 		</xsd:complexType>
 	</xsd:element>
 
