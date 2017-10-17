@@ -62,8 +62,8 @@ public class InsertBuilder extends AbstractSqlBuilder implements SqlBuilder {
 		if (insertIgnore) {
 			sb.append("IGNORE ");
 		}
-		sb.append("INTO ");
-		sb.append(tableName).append("(");
+		sb.append("INTO `");
+		sb.append(tableName).append("`(");
 		sb.append(fields.toString()).append(") values(");
 		sb.append(values.toString()).append(");");
 
