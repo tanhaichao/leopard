@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -41,8 +42,19 @@ public class ClassPathHtdocsView extends ModelAndView {
 		@Override
 		public InputStream readFile(HttpServletRequest request, String filename) throws IOException {
 			filename = filename.replaceAll("/+", "/");
-			
-			String path = "/htdocs" + this.getHtdocsPath() + filename;
+			isValidFilename(filename);
+
+			if (!filename.startsWith("/")) {
+				throw new IllegalArgumentException("非法文件名称[" + filename + "].");
+			}
+
+			String path;
+			if (StringUtils.isNotEmpty(folder)) {
+				path = "/htdocs" + this.getHtdocsPath() + filename;
+			}
+			else {
+				path = "/htdocs" + this.getHtdocsPath() + filename;
+			}
 			// System.out.println("path:" + path);
 			Resource resource = resourceLoader.getResource(path);
 			if (resource == null || !resource.exists()) {
