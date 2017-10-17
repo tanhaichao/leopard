@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -34,6 +36,8 @@ public class ClassPathHtdocsView extends ModelAndView {
 
 	public static class HtdocsView extends ClassPathHtdocs implements View {
 
+		protected static Log logger = LogFactory.getLog(HtdocsView.class);
+
 		private static final long serialVersionUID = 1L;
 
 		private String folder;
@@ -51,7 +55,7 @@ public class ClassPathHtdocsView extends ModelAndView {
 
 			String path;
 			if (StringUtils.isNotEmpty(folder)) {
-				path = "/htdocs" + folder + filename.substring(filename.indexOf("/", 2));
+				path = "/htdocs/" + folder + filename.substring(filename.indexOf("/", 2));
 			}
 			else {
 				path = "/htdocs" + filename;
@@ -77,7 +81,13 @@ public class ClassPathHtdocsView extends ModelAndView {
 		public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 			String filename = request.getRequestURI();
 			// System.out.println("render filename:" + filename);
-			this.doFile(request, response, filename);
+			try {
+				this.doFile(request, response, filename);
+			}
+			catch (Exception e) {
+				logger.warn(e.getMessage(), e);
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			}
 		}
 
 		@Override
