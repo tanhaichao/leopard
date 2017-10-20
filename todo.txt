@@ -9,6 +9,7 @@
 	9、多环境properties支持
 	
 	
+
 Leopard-MVC:
 	1、Ajax和Freemarker共用一个接口。
 	
