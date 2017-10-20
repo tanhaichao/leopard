@@ -10,7 +10,13 @@ import java.util.List;
  */
 public class BitInumUtil {
 
-	public static int getValue(List<? extends Inum> constantList) {
+	/**
+	 * 获取位掩码
+	 * 
+	 * @param constantList 枚举元素列表
+	 * @return
+	 */
+	public static int getBitMask(List<? extends Inum> constantList) {
 		int value = 0;
 		if (constantList != null) {
 			for (Inum inum : constantList) {
