@@ -18,17 +18,20 @@ import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import io.leopard.jdbc.onum.OnumResolver;
+import io.leopard.jdbc.onum.OnumResolverImpl;
 import io.leopard.json.Json;
 import io.leopard.json.JsonException;
 import io.leopard.lang.inum.Bnum;
 import io.leopard.lang.inum.EnumConstantInvalidException;
-import io.leopard.lang.inum.EnumUtil;
 import io.leopard.lang.inum.Inum;
 import io.leopard.lang.inum.Snum;
 import io.leopard.lang.inum.daynamic.DynamicEnum;
 import io.leopard.lang.inum.daynamic.DynamicEnumUtil;
 
 public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
+
+	private static OnumResolver onumResolver = new OnumResolverImpl();
 
 	private Class<T> mappedClass;
 
@@ -178,7 +181,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 					throw new RuntimeException(e.getMessage(), e);
 				}
 				if (elementType.isEnum()) {
-					return toEnumList(json, requiredType, elementType);
+					return toEnumList(json, requiredType, elementType, field);
 				}
 				else {
 					Class<?> clazz = (Class<?>) type.getActualTypeArguments()[0];
@@ -196,7 +199,8 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 					return null;
 				}
 				try {
-					return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+					return onumResolver.toEnum(key, (Class<? extends Enum>) requiredType, field);
+					// return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
 				}
 				catch (EnumConstantInvalidException e) {
 					if ("".equals(key)) {
@@ -207,11 +211,13 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 			}
 			else if (Inum.class.isAssignableFrom(requiredType)) {
 				int key = rs.getInt(index);
-				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+				return onumResolver.toEnum(key, (Class<? extends Enum>) requiredType, field);
+				// return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
 			}
 			else if (Bnum.class.isAssignableFrom(requiredType)) {
 				byte key = rs.getByte(index);
-				return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
+				return onumResolver.toEnum(key, (Class<? extends Enum>) requiredType, field);
+				// return EnumUtil.toEnum(key, (Class<? extends Enum>) requiredType);
 			}
 			else {
 				throw new RuntimeException("未知枚举类型[" + requiredType.getName() + "].");
@@ -268,7 +274,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected static <T> List<T> toEnumList(String json, Class<?> requiredType, Class<T> elementType) {
+	protected static <T> List<T> toEnumList(String json, Class<?> requiredType, Class<T> elementType, Field field) {
 		if (StringUtils.isEmpty(json)) {
 			return null;
 		}
@@ -276,7 +282,8 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 			List<String> keyList = Json.toListObject(json, String.class);
 			List<T> list = new ArrayList<T>();
 			for (String key : keyList) {
-				T onum = (T) EnumUtil.toEnum(key, (Class<Enum>) elementType);
+				// T onum = (T) EnumUtil.toEnum(key, (Class<Enum>) elementType);
+				T onum = (T) onumResolver.toEnum(key, (Class<Enum>) elementType, field);
 				list.add(onum);
 			}
 			return list;
@@ -286,7 +293,8 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 			// return Json.toListObject(json, elementType);
 			List<T> list = new ArrayList<T>();
 			for (Integer key : keyList) {
-				T onum = (T) EnumUtil.toEnum(key, (Class<Enum>) elementType);
+				// T onum = (T) EnumUtil.toEnum(key, (Class<Enum>) elementType);
+				T onum = (T) onumResolver.toEnum(key, (Class<Enum>) elementType, field);
 				list.add(onum);
 			}
 			return list;
