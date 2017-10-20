@@ -16,18 +16,19 @@ public class OnumResolverImpl implements OnumResolver {
 	/**
 	 * 找不到元素时，使用的枚举解析器
 	 */
-	private static OnumResolver notFoundConstantOnumResolver = null;
+	private static OnumResolver constantNotFoundOnumResolver = null;
 
-	public static void setNotFoundConstantOnumResolver(OnumResolver notFoundConstantOnumResolver) {
-		OnumResolverImpl.notFoundConstantOnumResolver = notFoundConstantOnumResolver;
+	public static void setConstantNotFoundOnumResolver(OnumResolver constantNotFoundOnumResolver) {
+		OnumResolverImpl.constantNotFoundOnumResolver = constantNotFoundOnumResolver;
 	}
 
 	@Override
 	public <E extends Enum<E>> E toEnum(Object key, Class<E> clazz, Field field) {
 		// return EnumUtil.toEnum(key, clazz);
 		E onum = EnumUtil.get(key, clazz);
-		if (onum == null && notFoundConstantOnumResolver != null) {
-			onum = notFoundConstantOnumResolver.toEnum(key, clazz, field);
+		// System.err.println("constantNotFoundOnumResolver:" + constantNotFoundOnumResolver);
+		if (onum == null && constantNotFoundOnumResolver != null) {
+			onum = constantNotFoundOnumResolver.toEnum(key, clazz, field);
 		}
 		if (onum == null) {
 			// System.err.println("key:" + key.getClass().getName());
