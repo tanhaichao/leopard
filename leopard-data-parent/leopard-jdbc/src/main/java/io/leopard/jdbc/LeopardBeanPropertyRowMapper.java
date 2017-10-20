@@ -314,6 +314,14 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 		}
 	}
 
+	/**
+	 * 枚举位运算，将数据库中的数字转换成枚举列表
+	 * 
+	 * @param json
+	 * @param elementType
+	 * @param field
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	protected static <T> List<T> toBitEnumList(String json, Class<T> elementType, Field field) {
 		int value = Integer.parseInt(json);
