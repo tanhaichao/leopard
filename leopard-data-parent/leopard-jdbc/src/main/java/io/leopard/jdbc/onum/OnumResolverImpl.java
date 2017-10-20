@@ -18,6 +18,10 @@ public class OnumResolverImpl implements OnumResolver {
 	 */
 	private static OnumResolver notFoundConstantOnumResolver = null;
 
+	public static void setNotFoundConstantOnumResolver(OnumResolver notFoundConstantOnumResolver) {
+		OnumResolverImpl.notFoundConstantOnumResolver = notFoundConstantOnumResolver;
+	}
+
 	@Override
 	public <E extends Enum<E>> E toEnum(Object key, Class<E> clazz, Field field) {
 		// return EnumUtil.toEnum(key, clazz);
