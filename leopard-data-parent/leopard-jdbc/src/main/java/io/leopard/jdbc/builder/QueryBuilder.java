@@ -141,6 +141,39 @@ public class QueryBuilder {
 		return this;
 	}
 
+	/**
+	 * 位与运算
+	 * 
+	 * @param fieldName
+	 * @param value
+	 * @return
+	 */
+	public QueryBuilder addWhereBitAnd(String fieldName, int value) {
+		if (value > 0) {
+			String expression = fieldName + "&" + value + "=" + value;
+			this.addWhere(expression);
+		}
+		return this;
+	}
+
+	/**
+	 * 位与运算
+	 * 
+	 * @param fieldName
+	 * @param value
+	 * @return
+	 */
+	public QueryBuilder addWhereBitAnd(String fieldName, Inum inum) {
+		if (inum != null) {
+			int value = inum.getKey();
+			// if (value <= 0) {
+			// throw new RuntimeException("位与运算，枚举元素key必须大于0[" + value + "].");
+			// }
+			this.addWhereBitAnd(fieldName, value);
+		}
+		return this;
+	}
+
 	public QueryBuilder addLike(String fieldName, String value) {
 		if (StringUtils.isEmpty(value)) {
 			// throw new IllegalArgumentException("参数不能为空.");
