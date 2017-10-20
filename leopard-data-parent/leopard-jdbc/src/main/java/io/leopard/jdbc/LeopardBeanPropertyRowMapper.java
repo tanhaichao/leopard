@@ -7,10 +7,13 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.jdbc.core.RowMapper;
@@ -24,6 +27,7 @@ import io.leopard.json.Json;
 import io.leopard.json.JsonException;
 import io.leopard.lang.inum.Bnum;
 import io.leopard.lang.inum.EnumConstantInvalidException;
+import io.leopard.lang.inum.EnumUtil;
 import io.leopard.lang.inum.Inum;
 import io.leopard.lang.inum.Snum;
 import io.leopard.lang.inum.daynamic.DynamicEnum;
@@ -158,18 +162,19 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 			value = date;
 		}
 		else if (List.class.equals(requiredType)) {
-			String json = rs.getString(index);
 			// System.out.println("name:" + field.getName() + " json:" + json);
 			ParameterizedType type = (ParameterizedType) field.getGenericType();
 			String elementClassName = type.getActualTypeArguments()[0].getTypeName();
-
 			if (int.class.getName().equals(elementClassName) || Integer.class.getName().equals(elementClassName)) {
+				String json = rs.getString(index);
 				value = Json.toListObject(json, Integer.class);
 			}
 			else if (long.class.getName().equals(elementClassName) || Long.class.getName().equals(elementClassName)) {
+				String json = rs.getString(index);
 				value = Json.toListObject(json, Long.class);
 			}
 			else if (String.class.getName().equals(elementClassName)) {
+				String json = rs.getString(index);
 				value = Json.toListObject(json, String.class);
 			}
 			else {
@@ -181,10 +186,12 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 					throw new RuntimeException(e.getMessage(), e);
 				}
 				if (elementType.isEnum()) {
-					return toEnumList(json, requiredType, elementType, field);
+					String json = rs.getString(index);
+					return toEnumList(json, elementType, field);
 				}
 				else {
 					Class<?> clazz = (Class<?>) type.getActualTypeArguments()[0];
+					String json = rs.getString(index);
 					// System.out.println("clazz:" + clazz.getName());
 					value = Json.toListObject(json, clazz, true);
 					// throw new IllegalArgumentException("未知数据类型[" +
@@ -274,7 +281,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected static <T> List<T> toEnumList(String json, Class<?> requiredType, Class<T> elementType, Field field) {
+	protected static <T> List<T> toEnumList(String json, Class<T> elementType, Field field) {
 		if (StringUtils.isEmpty(json)) {
 			return null;
 		}
@@ -289,20 +296,51 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 			return list;
 		}
 		else if (Inum.class.isAssignableFrom(elementType)) {
-			List<Integer> keyList = Json.toListObject(json, Integer.class);
-			// return Json.toListObject(json, elementType);
-			List<T> list = new ArrayList<T>();
-			for (Integer key : keyList) {
-				// T onum = (T) EnumUtil.toEnum(key, (Class<Enum>) elementType);
-				T onum = (T) onumResolver.toEnum(key, (Class<Enum>) elementType, field);
-				list.add(onum);
+			if (isNumeric(json)) {// 枚举位运算
+				return toBitEnumList(json, elementType, field);
 			}
-			return list;
+			else {
+				List<T> list = new ArrayList<T>();
+				List<Integer> keyList = Json.toListObject(json, Integer.class);
+				for (Integer key : keyList) {
+					T onum = (T) onumResolver.toEnum(key, (Class<Enum>) elementType, field);
+					list.add(onum);
+				}
+				return list;
+			}
 		}
 		else {
-			throw new RuntimeException("未知枚举类型[" + requiredType.getName() + "].");
+			throw new RuntimeException("未知枚举类型[" + elementType.getName() + "].");
 		}
-
 	}
 
+	@SuppressWarnings("unchecked")
+	protected static <T> List<T> toBitEnumList(String json, Class<T> elementType, Field field) {
+		int value = Integer.parseInt(json);
+
+		@SuppressWarnings({ "rawtypes" })
+		Map<Object, Enum<?>> map = EnumUtil.toMap((Class<Enum>) elementType);
+		Collection<Enum<?>> constants = map.values();
+		List<T> list = new ArrayList<T>();
+		for (Enum<?> constant : constants) {
+			Inum inum = (Inum) constant;
+			int constantKey = inum.getKey();
+			if ((constantKey & value) > 0) {
+				list.add((T) constant);
+			}
+		}
+		return list;
+	}
+
+	/**
+	 * 判断是否为数字
+	 * 
+	 * @param json
+	 * @return
+	 */
+	protected static boolean isNumeric(String json) {
+		Pattern pattern = Pattern.compile("^[0-9]+");
+		Matcher m = pattern.matcher(json);
+		return m.matches();
+	}
 }
