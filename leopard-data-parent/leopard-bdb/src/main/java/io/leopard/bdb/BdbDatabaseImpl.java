@@ -66,7 +66,7 @@ public class BdbDatabaseImpl implements Bdb {
 	@Override
 	public long count() throws DatabaseException {
 		// TODO 未正确实现
-		database.sync();
+		// database.sync();
 		return database.count();
 	}
 
