@@ -56,7 +56,17 @@ public class BdbImpl implements Bdb {
 	public String getString(String key) throws DatabaseException {
 		DatabaseEntry data = new DatabaseEntry();
 		database.get(transaction, new DatabaseEntry(key.getBytes()), data, LockMode.DEFAULT);
-		return new String(data.getData());
+		byte[] bytes = data.getData();
+		if (bytes == null) {
+			return null;
+		}
+		return new String(bytes);
+	}
+
+	@Override
+	public boolean delete(String key) throws DatabaseException {
+		database.delete(transaction, new DatabaseEntry(key.getBytes()));
+		return true;
 	}
 
 	public void destroy() throws DatabaseException {
