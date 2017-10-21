@@ -2,6 +2,7 @@ package io.leopard.exporter;
 
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import io.leopard.jdbc.LeopardBeanPropertyRowMapper;
@@ -18,9 +19,11 @@ public class ExporterLeopardBeanPropertyRowMapper<T> extends LeopardBeanProperty
 	}
 
 	@Override
-	protected Object getColumnValue(ResultSet rs, int index, String columnName, Field field) throws SQLException {
-		Object value = super.getColumnValue(rs, index, columnName, field);
-		// Object value = rs.getObject(index);
+	protected Object getColumnValue(ResultSet rs, int index, ResultSetMetaData resultSetMetaData, String columnName, Field field) throws SQLException {
+		int columnType = resultSetMetaData.getColumnType(index);
+		// Object value = super.getColumnValue(rs, index, resultSetMetaData, columnName, field);
+		Object value = rs.getObject(index);
+		
 		return fieldResolver.transformColumnValue(tableName, field, columnName, value);
 	}
 }
