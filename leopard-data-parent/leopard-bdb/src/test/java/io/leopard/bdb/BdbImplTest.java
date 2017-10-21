@@ -15,7 +15,7 @@ public class BdbImplTest {
 		bdb.setDataDir(new File("/tmp/dbd/"));
 		bdb.init();
 		Assert.assertNull(bdb.getString("key"));
-		bdb.add("key", "value");
+		bdb.put("key", "value");
 		String value = bdb.getString("key");
 		Assert.assertEquals(value, "value");
 		System.out.println("value:" + value);

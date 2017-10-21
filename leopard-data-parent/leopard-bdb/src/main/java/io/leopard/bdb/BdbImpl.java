@@ -49,8 +49,13 @@ public class BdbImpl implements Bdb {
 	}
 
 	@Override
-	public boolean add(String key, String value) throws DatabaseException {
-		return bdb.add(key, value);
+	public boolean put(String key, String value) throws DatabaseException {
+		return bdb.put(key, value);
+	}
+
+	@Override
+	public boolean putNoDupData(String key, String value) throws DatabaseException {
+		return bdb.putNoDupData(key, value);
 	}
 
 	@Override

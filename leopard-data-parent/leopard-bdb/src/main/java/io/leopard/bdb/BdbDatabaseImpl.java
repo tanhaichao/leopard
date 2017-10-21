@@ -5,10 +5,10 @@ import com.sleepycat.je.DatabaseConfig;
 import com.sleepycat.je.DatabaseEntry;
 import com.sleepycat.je.DatabaseException;
 import com.sleepycat.je.Environment;
-import com.sleepycat.je.EnvironmentConfig;
-import com.sleepycat.je.EnvironmentLockedException;
 import com.sleepycat.je.LockMode;
+import com.sleepycat.je.OperationStatus;
 import com.sleepycat.je.Transaction;
+import com.sleepycat.je.tree.DuplicateEntryException;
 
 public class BdbDatabaseImpl implements Bdb {
 
@@ -24,8 +24,19 @@ public class BdbDatabaseImpl implements Bdb {
 	}
 
 	@Override
-	public boolean add(String key, String value) throws DatabaseException {
+	public boolean put(String key, String value) throws DatabaseException {
 		database.put(transaction, new DatabaseEntry(key.getBytes()), new DatabaseEntry(value.getBytes()));
+		return true;
+	}
+
+	@Override
+	public boolean putNoDupData(String key, String value) throws DatabaseException {
+		OperationStatus status = database.putNoDupData(transaction, new DatabaseEntry(key.getBytes()), new DatabaseEntry(value.getBytes()));
+		String result = status.toString();
+		if (result.endsWith(".KEYEXIST")) {
+			throw new DuplicateEntryException("key[" + key + "]已存在.");
+		}
+		// System.err.println(status);
 		return true;
 	}
 

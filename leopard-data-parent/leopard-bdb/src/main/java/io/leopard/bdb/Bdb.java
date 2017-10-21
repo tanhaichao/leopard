@@ -10,9 +10,11 @@ import com.sleepycat.je.DatabaseException;
  */
 public interface Bdb {
 
-	boolean add(String key, String value) throws DatabaseException;
+	boolean put(String key, String value) throws DatabaseException;
 
 	String getString(String key) throws DatabaseException;
 
 	boolean delete(String key) throws DatabaseException;
+
+	boolean putNoDupData(String key, String value) throws DatabaseException;
 }
