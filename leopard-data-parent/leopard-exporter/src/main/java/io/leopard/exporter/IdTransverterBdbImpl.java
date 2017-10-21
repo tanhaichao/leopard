@@ -72,7 +72,7 @@ public class IdTransverterBdbImpl implements IdTransverter {
 	public String generateNewId(String tableName, String id) {
 		String prefix = tableName.replace("_", "");
 		String uuid = StringUtil.uuid();
-		return prefix + uuid.substring(prefix.length() - 1);
+		return prefix + uuid.substring(prefix.length());
 	}
 
 }
