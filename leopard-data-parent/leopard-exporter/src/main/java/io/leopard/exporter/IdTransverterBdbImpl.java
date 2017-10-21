@@ -2,6 +2,9 @@ package io.leopard.exporter;
 
 import java.io.File;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.sleepycat.je.DatabaseException;
 import com.sleepycat.je.EnvironmentLockedException;
 import com.sleepycat.je.tree.DuplicateEntryException;
@@ -10,6 +13,7 @@ import io.leopard.bdb.Bdb;
 import io.leopard.bdb.BdbMultiDatabaseImpl;
 
 public class IdTransverterBdbImpl implements IdTransverter {
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private BdbMultiDatabaseImpl bdb;
 
@@ -54,7 +58,7 @@ public class IdTransverterBdbImpl implements IdTransverter {
 			return bdb.putNoDupData(id, newId);
 		}
 		catch (DuplicateEntryException e) {
-			System.err.println(e.getMessage());
+			logger.warn(e.getMessage());
 			return false;
 		}
 		catch (DatabaseException e) {
