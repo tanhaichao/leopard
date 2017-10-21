@@ -14,6 +14,11 @@
 			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-lang</artifactId>
+			<version>0.9.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
