@@ -8,11 +8,15 @@ package io.leopard.exporter;
  */
 public interface IdTransverter {
 
+	boolean add(String tableName, String id, String newId);
+
 	/**
 	 * ID转换
 	 * 
+	 * @param tableName 表名
 	 * @param id 旧ID
 	 * @return 新ID
 	 */
-	String transform(String id);
+	String transform(String tableName, String id);
+
 }
