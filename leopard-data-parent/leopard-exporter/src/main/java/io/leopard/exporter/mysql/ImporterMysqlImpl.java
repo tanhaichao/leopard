@@ -5,6 +5,7 @@ import java.util.List;
 import io.leopard.exporter.Exporter;
 import io.leopard.exporter.Importer;
 import io.leopard.jdbc.Jdbc;
+import io.leopard.json.Json;
 
 public class ImporterMysqlImpl implements Importer {
 
@@ -38,7 +39,7 @@ public class ImporterMysqlImpl implements Importer {
 	}
 
 	protected void execute(Class<?> model, Object bean) {
-
+		Json.print(bean, model.getSimpleName());
 	}
 
 }
