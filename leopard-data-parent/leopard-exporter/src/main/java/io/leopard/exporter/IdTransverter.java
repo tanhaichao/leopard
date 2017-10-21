@@ -19,4 +19,13 @@ public interface IdTransverter {
 	 */
 	String transform(String tableName, String id);
 
+	/**
+	 * 生成新ID
+	 * 
+	 * @param tableName 表名
+	 * @param id 旧ID
+	 * @return
+	 */
+	String generateNewId(String tableName, String id);
+
 }

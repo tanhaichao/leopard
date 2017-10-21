@@ -108,30 +108,55 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 		if (idTransformTableName == null) {
 			return value;
 		}
-
 		if (value instanceof String) {
 			String id = (String) value;
-			String newId = idTransverter.transform(idTransformTableName, id);
-			if (StringUtils.isEmpty(newId)) {
-				throw new IdTransformException(idTransformTableName, newId);
+			if (id.length() == 0) {
+				return id;
 			}
-		}
 
-		String id = value.toString();
-		String newId = idTransverter.transform(idTransformTableName, id);
-		if (StringUtils.isEmpty(newId)) {
-			throw new IdTransformException(idTransformTableName, newId);
+			String newId = idTransform(idTransformTableName, id);
+			if (newId == null) {
+				return value;
+			}
+			return newId;
 		}
-
-		if (value instanceof Integer) {
+		else if (value instanceof Integer) {
+			int id = (int) value;
+			if (id <= 0) {
+				return id;
+			}
+			String newId = idTransform(idTransformTableName, Integer.toString(id));
+			if (newId == null) {
+				return value;
+			}
 			return Integer.parseInt(newId);
 		}
 		else if (value instanceof Long) {
+			long id = (long) value;
+			if (id <= 0) {
+				return id;
+			}
+			String newId = idTransform(idTransformTableName, Long.toString(id));
+			if (newId == null) {
+				return value;
+			}
 			return Long.parseLong(newId);
 		}
 		else {
 			throw new RuntimeException("未知ID类型[" + value.getClass().getSimpleName() + "].");
 		}
+	}
+
+	protected String idTransform(String tableName, String id) {
+		String newId = idTransverter.transform(tableName, id);
+		if (StringUtils.isEmpty(newId)) {
+			newId = idTransverter.generateNewId(tableName, newId);
+			if (newId == null) {
+				throw new IdTransformException(tableName, newId);
+			}
+			return null;
+		}
+		return newId;
 	}
 
 	@Override

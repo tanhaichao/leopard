@@ -11,8 +11,10 @@ import com.sleepycat.je.tree.DuplicateEntryException;
 
 import io.leopard.bdb.Bdb;
 import io.leopard.bdb.BdbMultiDatabaseImpl;
+import io.leopard.burrow.util.StringUtil;
 
 public class IdTransverterBdbImpl implements IdTransverter {
+
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private BdbMultiDatabaseImpl bdb;
@@ -64,6 +66,13 @@ public class IdTransverterBdbImpl implements IdTransverter {
 		catch (DatabaseException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
+	}
+
+	@Override
+	public String generateNewId(String tableName, String id) {
+		String prefix = tableName.replace("_", "");
+		String uuid = StringUtil.uuid();
+		return prefix + uuid.substring(prefix.length() - 1);
 	}
 
 }
