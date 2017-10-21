@@ -23,7 +23,7 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
+	public void out(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
 		// System.err.println("BaseJsonSerializer value:" + value);
 		String fieldName = gen.getOutputContext().getCurrentName();
 		Field field = getCurrentField(gen);
@@ -33,7 +33,7 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 			throw new RuntimeException("属性[" + fieldName + "]没有设置@As");
 		}
 		Class<?> asClazz = as.value();
-//		System.err.println("field:" + field.toGenericString());
+		// System.err.println("field:" + field.toGenericString());
 		gen.writeObject(value);
 		Object data;
 		if (value instanceof List) {
