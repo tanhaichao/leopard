@@ -1,5 +1,7 @@
 package io.leopard.bdb;
 
+import com.sleepycat.je.DatabaseException;
+
 /**
  * Oracle Berkeley DB
  * 
@@ -8,5 +10,7 @@ package io.leopard.bdb;
  */
 public interface Bdb {
 
-	
+	boolean add(String key, String value) throws DatabaseException;
+
+	String getString(String key) throws DatabaseException;
 }

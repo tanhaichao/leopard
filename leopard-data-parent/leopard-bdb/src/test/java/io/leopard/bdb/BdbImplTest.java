@@ -14,6 +14,8 @@ public class BdbImplTest {
 		bdb.setDataDir(new File("/tmp/dbd/"));
 		bdb.init();
 		bdb.add("key", "value");
+		String value = bdb.getString("key");
+		System.out.println("value:" + value);
 		bdb.destroy();
 	}
 

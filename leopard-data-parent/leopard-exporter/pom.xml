@@ -24,11 +24,6 @@
 			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sleepycat</groupId>
-			<artifactId>je</artifactId>
-			<version>3.3.75</version>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
