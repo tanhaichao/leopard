@@ -29,6 +29,7 @@
 		<module>leopard-sysconfig</module>
 		<module>leopard-oracle</module>
 		<module>leopard-exporter</module>
+		<module>leopard-bdb</module>
 	</modules>
 
 </project>
