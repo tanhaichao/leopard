@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.sleepycat.je.DatabaseException;
 import com.sleepycat.je.EnvironmentLockedException;
+import com.sleepycat.je.tree.DuplicateEntryException;
 
 import io.leopard.bdb.Bdb;
 import io.leopard.bdb.BdbMultiDatabaseImpl;
@@ -50,7 +51,11 @@ public class IdTransverterBdbImpl implements IdTransverter {
 	@Override
 	public boolean add(String tableName, String id, String newId) {
 		try {
-			return bdb.put(id, newId);
+			return bdb.putNoDupData(id, newId);
+		}
+		catch (DuplicateEntryException e) {
+			System.err.println(e.getMessage());
+			return false;
 		}
 		catch (DatabaseException e) {
 			throw new RuntimeException(e.getMessage(), e);
