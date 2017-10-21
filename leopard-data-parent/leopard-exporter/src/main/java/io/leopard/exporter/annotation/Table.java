@@ -1,4 +1,4 @@
-package io.leopard.exporter;
+package io.leopard.exporter.annotation;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

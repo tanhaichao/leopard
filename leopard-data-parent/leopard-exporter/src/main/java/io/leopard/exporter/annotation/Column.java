@@ -1,4 +1,4 @@
-package io.leopard.exporter;
+package io.leopard.exporter.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

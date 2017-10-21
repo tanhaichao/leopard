@@ -5,6 +5,8 @@ import java.lang.reflect.Field;
 import org.springframework.util.StringUtils;
 
 import io.leopard.burrow.util.StringUtil;
+import io.leopard.exporter.annotation.Column;
+import io.leopard.exporter.annotation.Table;
 
 /**
  * 导出SQL生成器

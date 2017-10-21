@@ -1,6 +1,10 @@
 package io.leopard.exporter.mysql;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 
 import io.leopard.exporter.Exporter;
 import io.leopard.exporter.Importer;
@@ -40,6 +44,22 @@ public class ImporterMysqlImpl implements Importer {
 
 	protected void execute(Class<?> model, Object bean) {
 		Json.print(bean, model.getSimpleName());
+
+		String sql = null;
+		jdbc.batchUpdate(sql, new BatchPreparedStatementSetter() {
+			@Override
+			public int getBatchSize() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+
+			@Override
+			public void setValues(PreparedStatement arg0, int arg1) throws SQLException {
+				// TODO Auto-generated method stub
+				
+			}
+
+		});
 	}
 
 }

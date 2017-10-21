@@ -1,4 +1,4 @@
-package io.leopard.exporter;
+package io.leopard.exporter.annotation;
 
 /**
  * SQL语句
