@@ -14,7 +14,7 @@ import io.leopard.exporter.annotation.Table;
  * @author 谭海潮
  *
  */
-public class ExportSqlBuilder {
+public class ImportSqlBuilder {
 
 	public static final char ESC_ORACLE = '"';
 
@@ -24,7 +24,7 @@ public class ExportSqlBuilder {
 
 	private Class<?> model;
 
-	public ExportSqlBuilder(Class<?> model, char esc) {
+	public ImportSqlBuilder(Class<?> model, char esc) {
 		this.model = model;
 		this.esc = esc;
 	}
@@ -32,19 +32,22 @@ public class ExportSqlBuilder {
 	public String buildSql() {
 		String tableName = this.getTableName();
 		StringBuilder sb = new StringBuilder();
-		sb.append("select ");
-		int index = 0;
+		sb.append("insert into ").append(esc).append(tableName).append(esc);
+		StringBuilder columnNameBuilder = new StringBuilder();
+		StringBuilder valueBuilder = new StringBuilder();
+		int i = 0;
 		for (Field field : model.getDeclaredFields()) {
-			if (index > 0) {
-				sb.append(", ");
-			}
 			String columnName = getColumnName(field);
-			String fieldName = getFieldName(field);
-			sb.append(esc).append(columnName).append(esc);
-			sb.append(" as ").append(esc).append(fieldName).append(esc);
-			index++;
+			if (i > 0) {
+				columnNameBuilder.append(", ");
+				valueBuilder.append(", ");
+			}
+			columnNameBuilder.append(esc).append(columnName).append(esc);
+			valueBuilder.append("?");
+			i++;
 		}
-		sb.append(" from `").append(tableName).append("`");
+		sb.append('(').append(columnNameBuilder).append(')');
+		sb.append(" values(").append(valueBuilder).append(")");
 		return sb.toString();
 	}
 
@@ -67,16 +70,6 @@ public class ExportSqlBuilder {
 	}
 
 	/**
-	 * 获取属性名称
-	 * 
-	 * @param field
-	 * @return
-	 */
-	public String getFieldName(Field field) {
-		return field.getName();
-	}
-
-	/**
 	 * 获取表名称
 	 * 
 	 * @return
@@ -86,7 +79,7 @@ public class ExportSqlBuilder {
 		if (table == null) {
 			throw new NullPointerException("模型[" + model.getName() + "]没有@Table.");
 		}
-		String tableName = table.oldTable();
+		String tableName = table.value();
 		if (StringUtils.isEmpty(tableName)) {
 			tableName = StringUtil.camelToUnderline(model.getName());
 		}

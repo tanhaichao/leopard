@@ -12,22 +12,22 @@ import io.leopard.json.Json;
 import io.leopard.lang.datatype.Month;
 import io.leopard.lang.datatype.OnlyDate;
 
-public class ImporterBatchPreparedStatementSetter<T> implements BatchPreparedStatementSetter {
+public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatementSetter {
 
 	private static FieldTypeResolver fieldTypeResolver = new FieldTypeResolverImpl();
 
-	private List<T> list;
+	private List<?> list;
 
 	private Field[] fields;
 
-	public ImporterBatchPreparedStatementSetter(List<T> list, Class<T> model) {
+	public ImporterBatchPreparedStatementSetter(List<?> list, Class<?> model) {
 		this.list = list;
 		this.fields = model.getDeclaredFields();
 	}
 
 	@Override
 	public void setValues(PreparedStatement ps, int row) throws SQLException {
-		T bean = list.get(row);
+		Object bean = list.get(row);
 
 		int parameterIndex = 0;
 		for (Field field : fields) {
