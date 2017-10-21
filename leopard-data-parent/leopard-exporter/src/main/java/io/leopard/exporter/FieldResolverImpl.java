@@ -131,8 +131,7 @@ public class FieldResolverImpl implements FieldResolver {
 		catch (IllegalAccessException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
-		String fieldName = field.getName();
-		return transverter.transform(tableName, fieldName, columnName, value);
+		return transverter.transform(tableName, field, columnName, value);
 		// return value;
 	}
 
