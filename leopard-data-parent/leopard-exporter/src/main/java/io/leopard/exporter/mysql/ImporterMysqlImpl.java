@@ -1,9 +1,11 @@
 package io.leopard.exporter.mysql;
 
+import java.io.File;
 import java.util.List;
 
 import io.leopard.exporter.Exporter;
 import io.leopard.exporter.IdTransverter;
+import io.leopard.exporter.IdTransverterBdbImpl;
 import io.leopard.exporter.ImportSqlBuilder;
 import io.leopard.exporter.Importer;
 import io.leopard.exporter.ImporterBatchPreparedStatementSetter;
@@ -17,14 +19,10 @@ public class ImporterMysqlImpl implements Importer {
 
 	private IdTransverter idTransverter;
 
-	public ImporterMysqlImpl(Jdbc jdbc, Exporter exporter) {
+	public ImporterMysqlImpl(Jdbc jdbc, Exporter exporter, File idDataDir) {
 		this.jdbc = jdbc;
 		this.exporter = exporter;
-	}
-
-	@Override
-	public void setIdTransverter(IdTransverter idTransverter) {
-		this.idTransverter = idTransverter;
+		idTransverter = new IdTransverterBdbImpl(idDataDir);
 	}
 
 	@Override
@@ -46,6 +44,11 @@ public class ImporterMysqlImpl implements Importer {
 		System.out.println("sql:" + sql);
 		jdbc.batchUpdate(sql, new ImporterBatchPreparedStatementSetter(list, model, idTransverter));
 		return list;
+	}
+
+	@Override
+	public void destroy() {
+		idTransverter.destroy();
 	}
 
 }

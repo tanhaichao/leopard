@@ -14,5 +14,7 @@ public interface Importer {
 
 	<T> List<T> execute(Class<T> model, int start, int size);
 
-	void setIdTransverter(IdTransverter idTransverter);
+	// void setIdTransverter(IdTransverter idTransverter);
+
+	void destroy();
 }
