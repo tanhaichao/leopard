@@ -34,7 +34,7 @@ public abstract class IdJsonSerializer<T, V> extends AbstractJsonSerializer<Obje
 	}
 
 	@Override
-	public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
+	public void out(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
 		// System.err.println("BaseJsonSerializer value:" + value);
 		String fieldName = gen.getOutputContext().getCurrentName();
 

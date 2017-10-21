@@ -1,11 +1,14 @@
 package io.leopard.web.mvc;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 
 import io.leopard.jdbc.LeopardBeanFactoryAware;
 
@@ -74,5 +77,23 @@ public abstract class AbstractJsonSerializer<T> extends JsonSerializer<T> {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
+
+	@Override
+	public final void serialize(T value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+		try {
+			this.out(value, gen, serializers);
+		}
+		catch (RuntimeException e) {
+			throw e;
+		}
+		catch (IOException e) {
+			throw e;
+		}
+		catch (Exception e) {
+			throw new JsonGenerationException(e.getMessage(), e, gen);
+		}
+	}
+
+	public abstract void out(T value, JsonGenerator gen, SerializerProvider serializers) throws Exception;
 
 }
