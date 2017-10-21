@@ -2,26 +2,23 @@ package io.leopard.bdb;
 
 import java.io.File;
 
-import com.sleepycat.je.Database;
 import com.sleepycat.je.DatabaseConfig;
-import com.sleepycat.je.DatabaseEntry;
 import com.sleepycat.je.DatabaseException;
 import com.sleepycat.je.Environment;
 import com.sleepycat.je.EnvironmentConfig;
 import com.sleepycat.je.EnvironmentLockedException;
-import com.sleepycat.je.LockMode;
 import com.sleepycat.je.Transaction;
 
 public class BdbImpl implements Bdb {
 
-	private Environment environment;
+	protected Environment environment;
 
-	private Database database;
+	private BdbDatabaseImpl bdb;
 
 	// private EntityStore store;
-	private File dataDir;
+	protected File dataDir;
 
-	private Transaction transaction;
+	protected Transaction transaction;
 
 	public File getDataDir() {
 		return dataDir;
@@ -29,6 +26,10 @@ public class BdbImpl implements Bdb {
 
 	public void setDataDir(File dataDir) {
 		this.dataDir = dataDir;
+	}
+
+	public Environment getEnvironment() {
+		return environment;
 	}
 
 	public void init() throws EnvironmentLockedException, DatabaseException {
@@ -43,36 +44,27 @@ public class BdbImpl implements Bdb {
 			dataDir.mkdirs();
 		}
 		environment = new Environment(dataDir, environmentConfig);
-		database = environment.openDatabase(transaction, "BDB", dbConfig);
+		// Database database = environment.openDatabase(transaction, "BDB", dbConfig);
+		this.bdb = new BdbDatabaseImpl(environment, "DEFAULT");
 	}
 
 	@Override
 	public boolean add(String key, String value) throws DatabaseException {
-		database.put(transaction, new DatabaseEntry(key.getBytes()), new DatabaseEntry(value.getBytes()));
-		return true;
+		return bdb.add(key, value);
 	}
 
 	@Override
 	public String getString(String key) throws DatabaseException {
-		DatabaseEntry data = new DatabaseEntry();
-		database.get(transaction, new DatabaseEntry(key.getBytes()), data, LockMode.DEFAULT);
-		byte[] bytes = data.getData();
-		if (bytes == null) {
-			return null;
-		}
-		return new String(bytes);
+		return bdb.getString(key);
 	}
 
 	@Override
 	public boolean delete(String key) throws DatabaseException {
-		database.delete(transaction, new DatabaseEntry(key.getBytes()));
-		return true;
+		return bdb.delete(key);
 	}
 
 	public void destroy() throws DatabaseException {
-		if (database != null) {
-			database.close();
-		}
+		bdb.destroy();
 		if (environment != null) {
 			environment.close();
 		}
