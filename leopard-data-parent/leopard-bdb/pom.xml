@@ -8,7 +8,6 @@
 	<artifactId>leopard-bdb</artifactId>
 	<description>Oracle Berkeley DB</description>
 
-
 	<dependencies>
 		<dependency>
 			<groupId>io.leopard</groupId>
@@ -25,7 +24,7 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
-	
+
 	<repositories>
 		<repository>
 			<id>oracleReleases</id>
