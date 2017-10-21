@@ -117,10 +117,12 @@ public class FieldResolverImpl implements FieldResolver {
 		if (column == null) {
 			return value;
 		}
+		
 		Class<? extends ColumnTransverter> clazz = column.transverter();
 		if (clazz.equals(ColumnTransverter.None.class)) {
 			return value;
 		}
+		
 		ColumnTransverter transverter;
 		try {
 			transverter = clazz.newInstance();

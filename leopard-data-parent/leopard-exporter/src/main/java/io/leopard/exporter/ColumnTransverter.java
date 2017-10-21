@@ -13,5 +13,7 @@ public abstract class ColumnTransverter {
 	public abstract Object transform(String tableName, Field field, String columnName, Object value);
 
 	public abstract static class None extends ColumnTransverter {
+		
+		
 	}
 }
