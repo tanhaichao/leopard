@@ -2,26 +2,24 @@ package io.leopard.exporter;
 
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
-import java.sql.Types;
 import java.util.Date;
 import java.util.List;
 
+import io.leopard.exporter.annotation.IdTransform;
 import io.leopard.lang.datatype.Month;
 import io.leopard.lang.datatype.OnlyDate;
 import io.leopard.lang.inum.Bnum;
-import io.leopard.lang.inum.EnumConstantInvalidException;
 import io.leopard.lang.inum.Inum;
 import io.leopard.lang.inum.Snum;
 import io.leopard.lang.inum.daynamic.DynamicEnum;
-import io.leopard.lang.inum.daynamic.DynamicEnumUtil;
 
 /**
- * 属性类型解析器
+ * 属性解析器
  * 
  * @author 谭海潮
  *
  */
-public class FieldTypeResolverImpl implements FieldTypeResolver {
+public class FieldResolverImpl implements FieldResolver {
 
 	@Override
 	public FieldType resolveType(Field field) {
@@ -94,6 +92,15 @@ public class FieldTypeResolverImpl implements FieldTypeResolver {
 		else {
 			throw new IllegalArgumentException("未知类型[" + type.getName() + "].");
 		}
+	}
+
+	@Override
+	public String getIdTransformTableName(Field field) {
+		IdTransform anno = field.getAnnotation(IdTransform.class);
+		if (anno == null) {
+			return null;
+		}
+		return anno.value();
 	}
 
 }

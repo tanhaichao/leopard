@@ -20,5 +20,5 @@ public @interface IdTransform {
 	 * 
 	 * @return
 	 */
-	String tableName();
+	String value();
 }

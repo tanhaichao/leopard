@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 
 import io.leopard.json.Json;
@@ -14,15 +15,18 @@ import io.leopard.lang.datatype.OnlyDate;
 
 public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatementSetter {
 
-	private static FieldTypeResolver fieldTypeResolver = new FieldTypeResolverImpl();
+	private static FieldResolver fieldResolver = new FieldResolverImpl();
 
 	private List<?> list;
 
 	private Field[] fields;
 
-	public ImporterBatchPreparedStatementSetter(List<?> list, Class<?> model) {
+	private IdTransverter idTransverter;
+
+	public ImporterBatchPreparedStatementSetter(List<?> list, Class<?> model, IdTransverter idTransverter) {
 		this.list = list;
 		this.fields = model.getDeclaredFields();
+		this.idTransverter = idTransverter;
 	}
 
 	@Override
@@ -31,7 +35,7 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 
 		int parameterIndex = 0;
 		for (Field field : fields) {
-			FieldType type = fieldTypeResolver.resolveType(field);
+			FieldType type = fieldResolver.resolveType(field);
 			Object value;
 			try {
 				value = field.get(bean);
@@ -39,6 +43,11 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 			catch (IllegalAccessException e) {
 				throw new RuntimeException(e.getMessage(), e);
 			}
+
+			if (value != null && fieldResolver != null) {
+				value = idTransform(field, value);
+			}
+
 			parameterIndex++;
 			if (type == FieldType.STRING) {
 				ps.setString(parameterIndex, (String) value);
@@ -77,6 +86,51 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 			}
 		}
 
+	}
+
+	/**
+	 * ID转换
+	 * 
+	 * @param field
+	 * @param value
+	 * @return
+	 */
+	protected Object idTransform(Field field, Object value) {
+		if (value == null) {
+			return value;
+		}
+		if (!(value instanceof String || value instanceof Integer || value instanceof Long)) {
+			return value;
+		}
+
+		String idTransformTableName = fieldResolver.getIdTransformTableName(field);
+		if (idTransformTableName == null) {
+			return value;
+		}
+
+		if (value instanceof String) {
+			String id = (String) value;
+			String newId = idTransverter.transform(idTransformTableName, id);
+			if (StringUtils.isEmpty(newId)) {
+				throw new RuntimeException("ID[" + idTransformTableName + "." + id + "]转换失败.");
+			}
+		}
+
+		String id = value.toString();
+		String newId = idTransverter.transform(idTransformTableName, id);
+		if (StringUtils.isEmpty(newId)) {
+			throw new RuntimeException("ID[" + idTransformTableName + "." + id + "]转换失败.");
+		}
+
+		if (value instanceof Integer) {
+			return Integer.parseInt(newId);
+		}
+		else if (value instanceof Long) {
+			return Long.parseLong(newId);
+		}
+		else {
+			throw new RuntimeException("未知ID类型[" + value.getClass().getSimpleName() + "].");
+		}
 	}
 
 	@Override
