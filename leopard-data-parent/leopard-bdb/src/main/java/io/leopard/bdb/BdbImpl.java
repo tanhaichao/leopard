@@ -80,4 +80,10 @@ public class BdbImpl implements Bdb {
 		return bdb.count();
 	}
 
+	@Override
+	public boolean sync() throws DatabaseException {
+		environment.sync();
+		return true;
+	}
+
 }

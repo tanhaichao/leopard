@@ -20,9 +20,17 @@ public interface Bdb {
 	 * 获取记录条数
 	 * 
 	 * @return
-	 * @throws DatabaseException 
+	 * @throws DatabaseException
 	 */
 	long count() throws DatabaseException;
+
+	/**
+	 * 同步数据到磁盘
+	 * 
+	 * @return
+	 * @throws DatabaseException
+	 */
+	boolean sync() throws DatabaseException;
 
 	boolean putNoDupData(String key, String value) throws DatabaseException;
 }
