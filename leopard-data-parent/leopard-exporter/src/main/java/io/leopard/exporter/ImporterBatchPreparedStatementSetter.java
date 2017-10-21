@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 
+import io.leopard.exporter.exception.IdTransformException;
 import io.leopard.json.Json;
 import io.leopard.lang.datatype.Month;
 import io.leopard.lang.datatype.OnlyDate;
@@ -112,14 +113,14 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 			String id = (String) value;
 			String newId = idTransverter.transform(idTransformTableName, id);
 			if (StringUtils.isEmpty(newId)) {
-				throw new RuntimeException("ID[" + idTransformTableName + "." + id + "]转换失败.");
+				throw new IdTransformException(idTransformTableName, newId);
 			}
 		}
 
 		String id = value.toString();
 		String newId = idTransverter.transform(idTransformTableName, id);
 		if (StringUtils.isEmpty(newId)) {
-			throw new RuntimeException("ID[" + idTransformTableName + "." + id + "]转换失败.");
+			throw new IdTransformException(idTransformTableName, newId);
 		}
 
 		if (value instanceof Integer) {
