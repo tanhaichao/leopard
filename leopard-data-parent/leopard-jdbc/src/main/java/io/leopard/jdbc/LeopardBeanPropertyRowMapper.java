@@ -71,27 +71,27 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int columnCount = rsmd.getColumnCount();
 		for (int index = 1; index <= columnCount; index++) {
-			String column = JdbcUtils.lookupColumnName(rsmd, index);
+			String columnName = JdbcUtils.lookupColumnName(rsmd, index);
 			// System.err.println("column:" + column);
-			column = column.replaceAll(" ", "").toLowerCase();
-			column = column.replace("_", "");
+			columnName = columnName.replaceAll(" ", "").toLowerCase();
+			columnName = columnName.replace("_", "");
 
-			Field field = this.mappedFields.get(column);
+			Field field = this.mappedFields.get(columnName);
 
 			// if (field == null) {
 			// this.mappedFields.get(underscoreName(column));
 			// }
 			// System.out.println("column:" + column + " field:" + field);
 
-			if (field == null && column.endsWith("s")) {
+			if (field == null && columnName.endsWith("s")) {
 				// TODO images转imageList的临时实现?
-				String column2 = column.substring(0, column.length() - 1) + "list";
+				String column2 = columnName.substring(0, columnName.length() - 1) + "list";
 				field = this.mappedFields.get(column2);
 				// System.out.println("column2:" + column2 + " field:" + field);
 			}
 
 			if (field != null) {
-				Object value = getColumnValue(rs, index, field);
+				Object value = getColumnValue(rs, index, columnName, field);
 
 				field.setAccessible(true);
 				try {
@@ -109,7 +109,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected Object getColumnValue(ResultSet rs, int index, Field field) throws SQLException {
+	protected Object getColumnValue(ResultSet rs, int index, String columnName, Field field) throws SQLException {
 		Class<?> requiredType = field.getType();
 		JdbcUtils.getResultSetValue(rs, index, requiredType);// TODO 20171012 这是多余的代码吧?
 		Object value;
