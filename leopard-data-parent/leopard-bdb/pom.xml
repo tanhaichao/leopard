@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.leopard</groupId>
+		<artifactId>leopard-data-parent</artifactId>
+		<version>0.9.12-SNAPSHOT</version>
+	</parent>
+	<artifactId>leopard-bdb</artifactId>
+	<description>Oracle Berkeley DB</description>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-lang</artifactId>
+			<version>0.9.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sleepycat</groupId>
+			<artifactId>je</artifactId>
+			<version>3.3.75</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>oracleReleases</id>
+			<name>Oracle Released Java Packages</name>
+			<url>http://download.oracle.com/maven</url>
+		</repository>
+	</repositories>
+</project>
