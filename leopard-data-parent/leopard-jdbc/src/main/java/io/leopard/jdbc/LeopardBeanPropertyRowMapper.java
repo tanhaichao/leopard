@@ -91,7 +91,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 			}
 
 			if (field != null) {
-				Object value = getColumnValue(rs, index, columnName, field);
+				Object value = getColumnValue(rs, index, rsmd, columnName, field);
 
 				field.setAccessible(true);
 				try {
@@ -109,7 +109,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected Object getColumnValue(ResultSet rs, int index, String columnName, Field field) throws SQLException {
+	protected Object getColumnValue(ResultSet rs, int index, ResultSetMetaData resultSetMetaData, String columnName, Field field) throws SQLException {
 		Class<?> requiredType = field.getType();
 		// JdbcUtils.getResultSetValue(rs, index, requiredType);// TODO 20171012 这是多余的代码吧?
 		Object value;
