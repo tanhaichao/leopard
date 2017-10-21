@@ -16,5 +16,13 @@ public interface Bdb {
 
 	boolean delete(String key) throws DatabaseException;
 
+	/**
+	 * 获取记录条数
+	 * 
+	 * @return
+	 * @throws DatabaseException 
+	 */
+	long count() throws DatabaseException;
+
 	boolean putNoDupData(String key, String value) throws DatabaseException;
 }

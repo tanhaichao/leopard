@@ -20,7 +20,7 @@ public class BdbDatabaseImpl implements Bdb {
 		DatabaseConfig dbConfig = new DatabaseConfig();
 		dbConfig.setAllowCreate(true);
 		dbConfig.setSortedDuplicates(true);
-		database = environment.openDatabase(transaction, "BDB", dbConfig);
+		database = environment.openDatabase(transaction, databaseName, dbConfig);
 	}
 
 	@Override
@@ -61,5 +61,10 @@ public class BdbDatabaseImpl implements Bdb {
 		if (database != null) {
 			database.close();
 		}
+	}
+
+	@Override
+	public long count() throws DatabaseException {
+		return database.count();
 	}
 }

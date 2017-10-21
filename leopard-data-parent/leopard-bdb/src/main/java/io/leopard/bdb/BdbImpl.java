@@ -75,4 +75,9 @@ public class BdbImpl implements Bdb {
 		}
 	}
 
+	@Override
+	public long count() throws DatabaseException {
+		return bdb.count();
+	}
+
 }
