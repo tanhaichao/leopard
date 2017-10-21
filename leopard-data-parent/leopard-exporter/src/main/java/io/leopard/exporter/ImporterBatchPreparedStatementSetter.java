@@ -151,7 +151,7 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 		String newId = idTransverter.transform(tableName, id);
 		if (StringUtils.isEmpty(newId)) {
 			newId = idTransverter.generateNewId(tableName, newId);
-			// System.err.println("newId:" + newId);
+			System.err.println("newId:" + newId);
 			if (newId == null) {
 				throw new IdTransformException(tableName, newId);
 			}

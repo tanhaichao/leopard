@@ -28,4 +28,6 @@ public interface IdTransverter {
 	 */
 	String generateNewId(String tableName, String id);
 
+	void destroy();
+
 }

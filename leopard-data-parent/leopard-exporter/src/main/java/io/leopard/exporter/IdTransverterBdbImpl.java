@@ -37,6 +37,7 @@ public class IdTransverterBdbImpl implements IdTransverter {
 	public String transform(String tableName, String id) {
 		try {
 			Bdb database = bdb.getDatabase(tableName);
+			System.err.println("getString tableName:" + tableName + " id:" + id + " count:" + bdb.count());
 			String newId = database.getString(id);
 			return newId;
 		}
@@ -45,6 +46,7 @@ public class IdTransverterBdbImpl implements IdTransverter {
 		}
 	}
 
+	@Override
 	public void destroy() {
 		try {
 			bdb.destroy();
@@ -57,7 +59,9 @@ public class IdTransverterBdbImpl implements IdTransverter {
 	@Override
 	public boolean add(String tableName, String id, String newId) {
 		try {
-			return bdb.putNoDupData(id, newId);
+			Bdb database = bdb.getDatabase(tableName);
+			System.err.println("add tableName:" + tableName + " id:" + id);
+			return database.putNoDupData(id, newId);
 		}
 		catch (DuplicateEntryException e) {
 			logger.warn(e.getMessage());
