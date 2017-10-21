@@ -36,7 +36,7 @@ public class ImporterMysqlImpl implements Importer {
 		}
 		String sql = new ImportSqlBuilder(model, ImportSqlBuilder.ESC_MYSQL).buildSql();
 		System.out.println("sql:" + sql);
-		// jdbc.batchUpdate(sql, new ImporterBatchPreparedStatementSetter(list, model));
+		jdbc.batchUpdate(sql, new ImporterBatchPreparedStatementSetter(list, model));
 		return list;
 	}
 
