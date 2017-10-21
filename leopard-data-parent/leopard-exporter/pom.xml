@@ -19,6 +19,11 @@
 			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-bdb</artifactId>
+			<version>0.9.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>com.sleepycat</groupId>
 			<artifactId>je</artifactId>
 			<version>3.3.75</version>
@@ -30,11 +35,5 @@
 	</dependencies>
 
 
-	<repositories>
-		<repository>
-			<id>oracleReleases</id>
-			<name>Oracle Released Java Packages</name>
-			<url>http://download.oracle.com/maven</url>
-		</repository>
-	</repositories>
+
 </project>
