@@ -19,6 +19,17 @@ public interface FieldResolver {
 	FieldType resolveType(Field field);
 
 	/**
+	 * 转换列值
+	 * 
+	 * @param table
+	 * @param fieldName
+	 * @param columnName
+	 * @param value
+	 * @return
+	 */
+	Object transformColumnValue(String tableName, Field field, String columnName, Object value);
+
+	/**
 	 * 获取ID转换的表名
 	 * 
 	 * @param field

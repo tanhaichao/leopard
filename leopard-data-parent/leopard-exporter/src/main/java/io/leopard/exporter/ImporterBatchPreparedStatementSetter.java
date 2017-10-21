@@ -16,7 +16,7 @@ import io.leopard.lang.datatype.OnlyDate;
 
 public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatementSetter {
 
-	private static FieldResolver fieldResolver = new FieldResolverImpl();
+	private static FieldResolver fieldResolver = FieldResolverImpl.getInstance();
 
 	private List<?> list;
 
@@ -44,6 +44,9 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 			catch (IllegalAccessException e) {
 				throw new RuntimeException(e.getMessage(), e);
 			}
+			
+			
+			
 
 			if (value != null && fieldResolver != null) {
 				value = idTransform(field, value);

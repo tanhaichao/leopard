@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import io.leopard.exporter.annotation.Column;
 import io.leopard.exporter.annotation.IdTransform;
 import io.leopard.lang.datatype.Month;
 import io.leopard.lang.datatype.OnlyDate;
@@ -20,6 +21,12 @@ import io.leopard.lang.inum.daynamic.DynamicEnum;
  *
  */
 public class FieldResolverImpl implements FieldResolver {
+
+	private static final FieldResolver instance = new FieldResolverImpl();
+
+	public static FieldResolver getInstance() {
+		return instance;
+	}
 
 	@Override
 	public FieldType resolveType(Field field) {
@@ -101,6 +108,32 @@ public class FieldResolverImpl implements FieldResolver {
 			return null;
 		}
 		return anno.value();
+	}
+
+	@Override
+	public Object transformColumnValue(String tableName, Field field, String columnName, Object value) {
+		// System.err.println("transformColumnValue tableName:" + tableName + " columnName:" + columnName + " value:" + value);
+		Column column = field.getAnnotation(Column.class);
+		if (column == null) {
+			return value;
+		}
+		Class<? extends ColumnTransverter> clazz = column.transverter();
+		if (clazz.equals(ColumnTransverter.None.class)) {
+			return value;
+		}
+		ColumnTransverter transverter;
+		try {
+			transverter = clazz.newInstance();
+		}
+		catch (InstantiationException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		catch (IllegalAccessException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		String fieldName = field.getName();
+		return transverter.transform(tableName, fieldName, columnName, value);
+		// return value;
 	}
 
 }
