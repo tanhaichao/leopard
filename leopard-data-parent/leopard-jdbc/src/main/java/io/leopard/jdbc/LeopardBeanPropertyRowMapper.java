@@ -111,7 +111,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected Object getColumnValue(ResultSet rs, int index, Field field) throws SQLException {
 		Class<?> requiredType = field.getType();
-		JdbcUtils.getResultSetValue(rs, index, requiredType);
+		JdbcUtils.getResultSetValue(rs, index, requiredType);// TODO 20171012 这是多余的代码吧?
 		Object value;
 		if (String.class.equals(requiredType)) {
 			value = rs.getString(index);
