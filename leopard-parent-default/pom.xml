@@ -113,6 +113,11 @@
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
+				<artifactId>leopard-dbd</artifactId>
+				<version>0.9.12-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
 				<artifactId>leopard-exporter</artifactId>
 				<version>0.9.12-SNAPSHOT</version>
 			</dependency>
