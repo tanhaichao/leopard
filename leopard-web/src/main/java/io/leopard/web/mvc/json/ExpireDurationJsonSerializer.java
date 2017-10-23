@@ -16,12 +16,17 @@ import io.leopard.web.mvc.AbstractJsonSerializer;
 public class ExpireDurationJsonSerializer extends AbstractJsonSerializer<Date> {
 
 	@Override
-	public void out(Date value, JsonGenerator gen, SerializerProvider serializers) throws Exception {
-		gen.writeObject(value);
+	public void out(Date expireTime, JsonGenerator gen, SerializerProvider serializers) throws Exception {
+		gen.writeObject(expireTime);
 		String fieldName = gen.getOutputContext().getCurrentName();
-
 		String durationFieldName = fieldName.replaceFirst("Time$", "Duration");
 		int expireDuration = 0;
+		if (expireTime != null) {
+			expireDuration = (int) ((expireTime.getTime() - System.currentTimeMillis()) / 1000L);
+			if (expireDuration < 0) {
+				expireDuration = 0;
+			}
+		}
 		gen.writeFieldName(durationFieldName);
 		gen.writeNumber(expireDuration);
 	}
