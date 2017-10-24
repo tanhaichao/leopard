@@ -35,10 +35,13 @@ public class ExportSqlBuilder {
 		sb.append("select ");
 		int index = 0;
 		for (Field field : model.getDeclaredFields()) {
+			String columnName = getColumnName(field);
+			if (StringUtils.isEmpty(columnName)) {
+				continue;
+			}
 			if (index > 0) {
 				sb.append(", ");
 			}
-			String columnName = getColumnName(field);
 			String fieldName = getFieldName(field);
 			sb.append(esc).append(columnName).append(esc);
 			sb.append(" as ").append(esc).append(fieldName).append(esc);
@@ -57,11 +60,12 @@ public class ExportSqlBuilder {
 	public String getColumnName(Field field) {
 		Column column = model.getAnnotation(Column.class);
 		if (column == null) {
-			return field.getName();
+			// return field.getName();
+			return null;
 		}
 		String columnName = column.alias();
 		if (StringUtils.isEmpty(columnName)) {
-			columnName = field.getName();
+			return null;
 		}
 		return columnName;
 	}
