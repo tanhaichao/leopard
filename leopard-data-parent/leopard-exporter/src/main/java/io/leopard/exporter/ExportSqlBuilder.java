@@ -44,7 +44,7 @@ public class ExportSqlBuilder {
 			sb.append(" as ").append(esc).append(fieldName).append(esc);
 			index++;
 		}
-		sb.append(" from `").append(tableName).append("`");
+		sb.append(" from ").append(esc).append(tableName).append(esc);
 		return sb.toString();
 	}
 
