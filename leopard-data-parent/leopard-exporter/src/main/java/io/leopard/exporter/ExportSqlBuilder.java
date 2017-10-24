@@ -33,6 +33,7 @@ public class ExportSqlBuilder {
 		String tableName = this.getTableName();
 		StringBuilder sb = new StringBuilder();
 		sb.append("select ");
+
 		int index = 0;
 		for (Field field : model.getDeclaredFields()) {
 			String columnName = getColumnName(field);
@@ -54,6 +55,10 @@ public class ExportSqlBuilder {
 			throw new RuntimeException("表[" + tableName + "]没有任何字段配置了别名");
 		}
 		sb.append(" from ").append(esc).append(tableName).append(esc);
+
+		if (esc == ESC_ORACLE) {
+			sb.append(" WHERE ROWNUM <= 100 ");
+		}
 		return sb.toString();
 	}
 

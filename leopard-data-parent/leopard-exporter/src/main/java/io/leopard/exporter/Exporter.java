@@ -2,6 +2,8 @@ package io.leopard.exporter;
 
 import java.util.List;
 
+import io.leopard.jdbc.Jdbc;
+
 /**
  * 数据导出器
  * 
@@ -11,4 +13,6 @@ import java.util.List;
 public interface Exporter {
 
 	<T> List<T> export(Class<T> model, int start, int size);
+
+	Jdbc getJdbc();
 }

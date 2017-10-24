@@ -32,4 +32,9 @@ public class ExporterOracleImpl implements Exporter {
 		}
 	}
 
+	@Override
+	public Jdbc getJdbc() {
+		return jdbc;
+	}
+
 }

@@ -32,4 +32,9 @@ public class ExporterMysqlImpl implements Exporter {
 		}
 	}
 
+	@Override
+	public Jdbc getJdbc() {
+		return jdbc;
+	}
+
 }
