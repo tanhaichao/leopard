@@ -37,10 +37,10 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 		if (index == 0) {
 			Class<?> type = field.getType();
 			if (type.equals(String.class)) {
-				return FieldType.STRING;
+				return FieldType.STRING_ID;
 			}
 			else if (type.equals(long.class)) {
-				return FieldType.LONG;
+				return FieldType.LONG_ID;
 			}
 			else {
 				throw new RuntimeException("未知主键数据类型[" + type.getSimpleName() + "].");
@@ -54,14 +54,28 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 		return type;
 	}
 
-	protected Object getValue(Field field, Object bean, int index) {
-
+	protected Object getValue(Field field, Object bean, int index, FieldType type) {
+		Object value;
 		try {
-			return field.get(bean);
+			value = field.get(bean);
 		}
 		catch (IllegalAccessException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
+		if (index == 0) {
+			if (type == FieldType.STRING_ID) {
+				if (value == null) {
+					value = StringUtil.uuid();
+				}
+			}
+			else if (type == FieldType.LONG_ID) {
+				long id = (long) value;
+				if (id <= 0) {
+					value = (long) NumberUtil.random(10000000);
+				}
+			}
+		}
+		return value;
 	}
 
 	@Override
@@ -77,12 +91,18 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 				continue;
 			}
 			// System.err.println("setValues:" + field.getName() + " parameterIndex:" + parameterIndex);
-			Object value = this.getValue(field, bean, i);
+			Object value = this.getValue(field, bean, i, type);
 			if (value != null && fieldResolver != null) {
 				value = idTransform(field, value);
 			}
 			parameterIndex++;
-			if (type == FieldType.STRING) {
+			if (type == FieldType.STRING_ID) {
+				ps.setString(parameterIndex, (String) value);
+			}
+			else if (type == FieldType.LONG_ID) {
+				ps.setLong(parameterIndex, (long) value);
+			}
+			else if (type == FieldType.STRING) {
 				ps.setString(parameterIndex, (String) value);
 			}
 			else if (type == FieldType.JSON) {

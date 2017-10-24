@@ -24,6 +24,7 @@ public class ExporterLeopardBeanPropertyRowMapper<T> extends LeopardBeanProperty
 		// Object value = super.getColumnValue(rs, index, resultSetMetaData, columnName, field);
 		// System.err.println("transformColumnValue tableName:" + tableName + " columnName:" + columnName + " value:" + value);
 		ColumnTransverter transverter = this.getColumnTransverter(field);
+		// System.err.println("field:" + field.getName() + " transverter:" + transverter);
 		if (transverter == null) {
 			return super.getColumnValue(rs, index, resultSetMetaData, columnName, field);
 		}
