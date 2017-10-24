@@ -12,7 +12,7 @@ import io.leopard.exporter.ColumnTransverter;
  * @author 谭海潮
  *
  */
-public class AutoIdColumnTransverter extends ColumnTransverter {
+public class AutoIdColumnTransverter extends ColumnTransverter<Object> {
 
 	@Override
 	public Object transform(String tableName, Field field, String columnName, Object value) {

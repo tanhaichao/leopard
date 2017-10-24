@@ -8,12 +8,11 @@ import java.lang.reflect.Field;
  * @author 谭海潮
  *
  */
-public abstract class ColumnTransverter {
+public abstract class ColumnTransverter<T> {
 
-	public abstract Object transform(String tableName, Field field, String columnName, Object value);
+	public abstract Object transform(String tableName, Field field, String columnName, T value);
 
-	public abstract static class None extends ColumnTransverter {
-		
-		
+	public abstract static class None extends ColumnTransverter<Object> {
+
 	}
 }
