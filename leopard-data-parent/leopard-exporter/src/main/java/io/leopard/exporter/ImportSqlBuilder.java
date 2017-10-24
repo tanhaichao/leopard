@@ -35,16 +35,24 @@ public class ImportSqlBuilder {
 		sb.append("insert into ").append(esc).append(tableName).append(esc);
 		StringBuilder columnNameBuilder = new StringBuilder();
 		StringBuilder valueBuilder = new StringBuilder();
+		int index = 0;
 		int i = 0;
 		for (Field field : model.getDeclaredFields()) {
-			String columnName = getColumnName(field);
-			if (i > 0) {
+			String columnName = getColumnName(field, i);
+			i++;
+			if (StringUtils.isEmpty(columnName)) {
+				continue;
+			}
+			if (index > 0) {
 				columnNameBuilder.append(", ");
 				valueBuilder.append(", ");
 			}
 			columnNameBuilder.append(esc).append(columnName).append(esc);
 			valueBuilder.append("?");
-			i++;
+			index++;
+		}
+		if (index <= 0) {
+			throw new RuntimeException("表[" + tableName + "]没有设置任何属性.");
 		}
 		sb.append('(').append(columnNameBuilder).append(')');
 		sb.append(" values(").append(valueBuilder).append(")");
@@ -57,16 +65,19 @@ public class ImportSqlBuilder {
 	 * @param field
 	 * @return
 	 */
-	public String getColumnName(Field field) {
-		Column column = model.getAnnotation(Column.class);
-		if (column == null) {
+	public String getColumnName(Field field, int index) {
+		if (index == 0) {
 			return field.getName();
+		}
+		Column column = field.getAnnotation(Column.class);
+		if (column == null) {
+			return null;
 		}
 		String columnName = column.alias();
 		if (StringUtils.isEmpty(columnName)) {
-			columnName = field.getName();
+			return null;
 		}
-		return columnName;
+		return field.getName();
 	}
 
 	/**

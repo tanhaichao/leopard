@@ -9,6 +9,9 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 
+import io.leopard.burrow.util.NumberUtil;
+import io.leopard.burrow.util.StringUtil;
+import io.leopard.exporter.annotation.Column;
 import io.leopard.exporter.exception.IdTransformException;
 import io.leopard.json.Json;
 import io.leopard.lang.datatype.Month;
@@ -16,13 +19,13 @@ import io.leopard.lang.datatype.OnlyDate;
 
 public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatementSetter {
 
-	private static FieldResolver fieldResolver = FieldResolverImpl.getInstance();
+	protected static FieldResolver fieldResolver = FieldResolverImpl.getInstance();
 
-	private List<?> list;
+	protected List<?> list;
 
-	private Field[] fields;
+	protected Field[] fields;
 
-	private IdTransverter idTransverter;
+	protected IdTransverter idTransverter;
 
 	public ImporterBatchPreparedStatementSetter(List<?> list, Class<?> model, IdTransverter idTransverter) {
 		this.list = list;
@@ -30,25 +33,67 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 		this.idTransverter = idTransverter;
 	}
 
+	protected FieldType getFieldType(Field field, int index) {
+		if (index == 0) {
+			Class<?> type = field.getType();
+			if (type.equals(String.class)) {
+				return FieldType.STRING;
+			}
+			else if (type.equals(long.class)) {
+				return FieldType.LONG;
+			}
+			else {
+				throw new RuntimeException("未知主键数据类型[" + type.getSimpleName() + "].");
+			}
+		}
+		Column column = field.getAnnotation(Column.class);
+		if (column == null || StringUtils.isEmpty(column.alias())) {
+			return null;
+		}
+		FieldType type = fieldResolver.resolveType(field);
+		return type;
+	}
+
+	protected Object getValue(Field field, Object bean, int index) {
+		if (index == 0) {
+			Class<?> type = field.getType();
+			if (type.equals(String.class)) {
+				return StringUtil.uuid();
+			}
+			else if (type.equals(long.class)) {
+				return (long) NumberUtil.random(10000000);
+				// return System.currentTimeMillis();
+			}
+			else {
+				throw new RuntimeException("未知主键数据类型[" + type.getSimpleName() + "].");
+			}
+		}
+
+		try {
+			return field.get(bean);
+		}
+		catch (IllegalAccessException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+	}
+
 	@Override
 	public void setValues(PreparedStatement ps, int row) throws SQLException {
 		Object bean = list.get(row);
 
 		int parameterIndex = 0;
+		int i = -1;
 		for (Field field : fields) {
-			FieldType type = fieldResolver.resolveType(field);
-			Object value;
-			try {
-				value = field.get(bean);
+			i++;
+			FieldType type = this.getFieldType(field, i);
+			if (type == null) {
+				continue;
 			}
-			catch (IllegalAccessException e) {
-				throw new RuntimeException(e.getMessage(), e);
-			}
-
+			System.err.println("setValues:" + field.getName() + " parameterIndex:" + parameterIndex);
+			Object value = this.getValue(field, bean, i);
 			if (value != null && fieldResolver != null) {
 				value = idTransform(field, value);
 			}
-
 			parameterIndex++;
 			if (type == FieldType.STRING) {
 				ps.setString(parameterIndex, (String) value);
