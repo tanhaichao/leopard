@@ -47,6 +47,9 @@ public class ExportSqlBuilder {
 			sb.append(" as ").append(esc).append(fieldName).append(esc);
 			index++;
 		}
+		if (index <= 0) {
+			throw new RuntimeException("表[" + tableName + "]没有任何字段配置了别名");
+		}
 		sb.append(" from ").append(esc).append(tableName).append(esc);
 		return sb.toString();
 	}
@@ -58,12 +61,14 @@ public class ExportSqlBuilder {
 	 * @return
 	 */
 	public String getColumnName(Field field) {
-		Column column = model.getAnnotation(Column.class);
+		Column column = field.getAnnotation(Column.class);
+		// System.err.println("field:" + field.getName() + " column:" + column);
 		if (column == null) {
 			// return field.getName();
 			return null;
 		}
 		String columnName = column.alias();
+		// System.err.println("columnName:" + columnName);
 		if (StringUtils.isEmpty(columnName)) {
 			return null;
 		}
