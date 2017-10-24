@@ -68,10 +68,6 @@ public class ExportSqlBuilder {
 			return null;
 		}
 		String columnName = column.alias();
-		// System.err.println("columnName:" + columnName);
-		if (StringUtils.isEmpty(columnName)) {
-			return null;
-		}
 		return columnName;
 	}
 
