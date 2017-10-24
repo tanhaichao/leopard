@@ -37,7 +37,7 @@ public class IdTransverterBdbImpl implements IdTransverter {
 	public String transform(String tableName, String id) {
 		try {
 			Bdb database = bdb.getDatabase(tableName);
-			System.err.println("getString tableName:" + tableName + " id:" + id + " count:" + bdb.count());
+			// System.err.println("getString tableName:" + tableName + " id:" + id + " count:" + bdb.count());
 			String newId = database.getString(id);
 			return newId;
 		}

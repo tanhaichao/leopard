@@ -89,7 +89,7 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 			if (type == null) {
 				continue;
 			}
-			System.err.println("setValues:" + field.getName() + " parameterIndex:" + parameterIndex);
+			// System.err.println("setValues:" + field.getName() + " parameterIndex:" + parameterIndex);
 			Object value = this.getValue(field, bean, i);
 			if (value != null && fieldResolver != null) {
 				value = idTransform(field, value);
