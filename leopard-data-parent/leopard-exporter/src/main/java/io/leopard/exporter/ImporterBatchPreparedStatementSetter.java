@@ -44,9 +44,6 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 			catch (IllegalAccessException e) {
 				throw new RuntimeException(e.getMessage(), e);
 			}
-			
-			
-			
 
 			if (value != null && fieldResolver != null) {
 				value = idTransform(field, value);
@@ -58,6 +55,9 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 			}
 			else if (type == FieldType.JSON) {
 				ps.setString(parameterIndex, Json.toJson(value));
+			}
+			else if (type == FieldType.BOOLEAN) {
+				ps.setBoolean(parameterIndex, (boolean) value);
 			}
 			else if (type == FieldType.INTEGER) {
 				ps.setInt(parameterIndex, (int) value);
@@ -72,8 +72,13 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 				ps.setDouble(parameterIndex, (double) value);
 			}
 			else if (type == FieldType.DATE) {
-				long time = ((java.util.Date) value).getTime();
-				ps.setTimestamp(parameterIndex, new Timestamp(time));
+				if (value == null) {
+					ps.setTimestamp(parameterIndex, null);
+				}
+				else {
+					long time = ((java.util.Date) value).getTime();
+					ps.setTimestamp(parameterIndex, new Timestamp(time));
+				}
 			}
 			else if (type == FieldType.TIMESTAMP) {
 				ps.setTimestamp(parameterIndex, (Timestamp) value);
