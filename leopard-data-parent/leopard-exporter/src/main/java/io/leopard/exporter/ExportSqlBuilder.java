@@ -39,6 +39,9 @@ public class ExportSqlBuilder {
 			if (StringUtils.isEmpty(columnName)) {
 				continue;
 			}
+			if (esc == ESC_ORACLE) {
+				columnName = columnName.toUpperCase();
+			}
 			if (index > 0) {
 				sb.append(", ");
 			}
