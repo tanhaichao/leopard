@@ -55,19 +55,6 @@ public class ImporterBatchPreparedStatementSetter implements BatchPreparedStatem
 	}
 
 	protected Object getValue(Field field, Object bean, int index) {
-		if (index == 0) {
-			Class<?> type = field.getType();
-			if (type.equals(String.class)) {
-				return StringUtil.uuid();
-			}
-			else if (type.equals(long.class)) {
-				return (long) NumberUtil.random(10000000);
-				// return System.currentTimeMillis();
-			}
-			else {
-				throw new RuntimeException("未知主键数据类型[" + type.getSimpleName() + "].");
-			}
-		}
 
 		try {
 			return field.get(bean);
