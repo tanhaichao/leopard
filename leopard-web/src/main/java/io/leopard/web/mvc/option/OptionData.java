@@ -76,10 +76,10 @@ public class OptionData {
 	}
 
 	@SuppressWarnings("rawtypes")
-	protected static List<OptionVO> getChildList(@SuppressWarnings("rawtypes") Onum onum) {
+	protected static List<OptionVO> getChildList(Onum onum) {
 		SubEnum subEnum = (SubEnum) onum;
 		List subList = subEnum.getSubList();
-		System.err.println("getChildList:" + onum.getClass().getName());
+//		System.err.println("getChildList:" + onum.getClass().getName());
 		List<OptionVO> childList = new ArrayList<OptionVO>();
 		for (Object child : subList) {
 			Onum childConstant = (Onum) child;
