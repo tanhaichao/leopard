@@ -1,5 +1,10 @@
 package io.leopard.web.mvc.option;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
  * 枚举信息模型(在Controller中使用)
  * 
@@ -11,6 +16,12 @@ public class OptionVO {
 	private Object key;
 
 	private String desc;
+
+	/**
+	 * 子枚举列表
+	 */
+	@JsonInclude(Include.NON_NULL)
+	private List<OptionVO> childList;
 
 	public OptionVO() {
 
@@ -35,6 +46,14 @@ public class OptionVO {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+
+	public List<OptionVO> getChildList() {
+		return childList;
+	}
+
+	public void setChildList(List<OptionVO> childList) {
+		this.childList = childList;
 	}
 
 }

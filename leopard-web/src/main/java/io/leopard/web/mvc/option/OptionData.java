@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import io.leopard.lang.inum.EnumUtil;
 import io.leopard.lang.inum.Onum;
+import io.leopard.lang.inum.SubEnum;
 
 public class OptionData {
 
@@ -48,6 +49,9 @@ public class OptionData {
 
 	@SuppressWarnings("unchecked")
 	private static List<OptionVO> toData(@SuppressWarnings("rawtypes") Class<? extends Enum> clazz) {
+		boolean isSubEnum = SubEnum.class.isAssignableFrom(clazz);
+		// System.err.println("clazz:" + clazz.getSimpleName() + " isSubEnum:" + isSubEnum);
+
 		Map<Object, Enum<?>> map = EnumUtil.toMap(clazz);
 		List<OptionVO> constantList = new ArrayList<OptionVO>();
 		for (Entry<Object, Enum<?>> entry : map.entrySet()) {
@@ -61,9 +65,32 @@ public class OptionData {
 			OptionVO option = new OptionVO();
 			option.setKey(key);
 			option.setDesc(desc);
+
+			if (isSubEnum) {
+				List<OptionVO> childList = getChildList(onum);
+				option.setChildList(childList);
+			}
 			constantList.add(option);
 		}
 		return constantList;
+	}
+
+	@SuppressWarnings("rawtypes")
+	protected static List<OptionVO> getChildList(@SuppressWarnings("rawtypes") Onum onum) {
+		SubEnum subEnum = (SubEnum) onum;
+		List subList = subEnum.getSubList();
+		System.err.println("getChildList:" + onum.getClass().getName());
+		List<OptionVO> childList = new ArrayList<OptionVO>();
+		for (Object child : subList) {
+			Onum childConstant = (Onum) child;
+			OptionVO option = new OptionVO();
+			Object key = childConstant.getKey();
+			String desc = (String) childConstant.getDesc();
+			option.setKey(key);
+			option.setDesc(desc);
+			childList.add(option);
+		}
+		return childList;
 	}
 
 	public static void put(String id, OptionInfo info) {
