@@ -640,6 +640,6 @@ public class StringUtil {// NOPMD
 				sb.append(c);
 			}
 		}
-		return sb.toString();
+		return firstCharToUpperCase(sb.toString());
 	}
 }
