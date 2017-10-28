@@ -372,10 +372,20 @@ public class QueryBuilder {
 	}
 
 	protected SQLInfo toSqlInfo() {
+		return this.toSqlInfo(false);
+	}
+
+	protected SQLInfo toSqlInfo(boolean count) {
 		StatementParameter param = new StatementParameter();
 		StringBuilder sb = new StringBuilder();
-
-		sb.append("select * from `" + tableName + "`");
+		sb.append("select ");
+		if (count) {
+			sb.append("count(*)");
+		}
+		else {
+			sb.append("*");
+		}
+		sb.append(" from `" + tableName + "`");
 		StringBuilder where = new StringBuilder();
 
 		{
@@ -415,16 +425,19 @@ public class QueryBuilder {
 		if (where.length() > 0) {
 			sb.append(" where " + where.toString());
 		}
-		// System.err.println("groupbyFieldName:" + groupbyFieldName + " orderFieldName:" + orderFieldName);
-		if (groupbyFieldName != null && groupbyFieldName.length() > 0) {
-			sb.append(" group by " + groupbyFieldName);
+
+		if (!count) {
+			// System.err.println("groupbyFieldName:" + groupbyFieldName + " orderFieldName:" + orderFieldName);
+			if (groupbyFieldName != null && groupbyFieldName.length() > 0) {
+				sb.append(" group by " + groupbyFieldName);
+			}
+			if (orderFieldName != null && orderFieldName.length() > 0) {
+				sb.append(" order by " + orderFieldName + " " + orderDirection);
+			}
+			sb.append(" limit ?,?");
+			param.setInt(limitStart);
+			param.setInt(limitSize);
 		}
-		if (orderFieldName != null && orderFieldName.length() > 0) {
-			sb.append(" order by " + orderFieldName + " " + orderDirection);
-		}
-		sb.append(" limit ?,?");
-		param.setInt(limitStart);
-		param.setInt(limitSize);
 
 		String sql = sb.toString();
 		SQLInfo sqlInfo = new SQLInfo();
@@ -465,4 +478,10 @@ public class QueryBuilder {
 		this.limit(start, size);
 		return this.queryForList(jdbc, elementType);
 	}
+
+	public int count(Jdbc jdbc) {
+		SQLInfo sqlInfo = this.toSqlInfo();
+		return jdbc.queryForInt(sqlInfo.getSql(), sqlInfo.getParam());
+	}
+
 }
