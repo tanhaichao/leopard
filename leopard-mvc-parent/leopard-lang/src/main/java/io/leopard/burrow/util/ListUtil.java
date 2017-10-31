@@ -613,6 +613,20 @@ public class ListUtil {
 		return newList;
 	}
 
+	/**
+	 * 列表元素倒转
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public static <T> List<T> reverse(List<T> list) {
+		List<T> newList = new ArrayList<T>();
+		for (T element : list) {
+			newList.add(0, element);
+		}
+		return newList;
+	}
+
 	public static <T> List<T> sub(List<T> list, int max) {
 		if (ListUtil.isEmpty(list)) {
 			return list;
