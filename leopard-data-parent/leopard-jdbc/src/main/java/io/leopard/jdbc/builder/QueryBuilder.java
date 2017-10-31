@@ -480,7 +480,7 @@ public class QueryBuilder {
 	}
 
 	public int count(Jdbc jdbc) {
-		SQLInfo sqlInfo = this.toSqlInfo();
+		SQLInfo sqlInfo = this.toSqlInfo(true);
 		return jdbc.queryForInt(sqlInfo.getSql(), sqlInfo.getParam());
 	}
 
