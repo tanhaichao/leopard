@@ -34,7 +34,7 @@ public class StatementParameter {
 	protected void checkNull(Object value) {
 		// AssertUtil.assertNotNull(value, "参数值[" + list.size() + "]不能为NULL.");
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + list.size() + "]不能为NULL.");
+			throw new ParameterNotNullException(list.size());
 		}
 	}
 
