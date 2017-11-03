@@ -594,9 +594,9 @@ public class JdbcMysqlImpl implements Jdbc {
 			try {
 				obj = field.get(bean);
 			}
-			catch (IllegalArgumentException e) {
-				throw new InvalidDataAccessApiUsageException(e.getMessage());
-			}
+			// catch (IllegalArgumentException e) {
+			// throw new InvalidDataAccessApiUsageException(e.getMessage());
+			// }
 			catch (IllegalAccessException e) {
 				throw new InvalidDataAccessApiUsageException(e.getMessage());
 			}

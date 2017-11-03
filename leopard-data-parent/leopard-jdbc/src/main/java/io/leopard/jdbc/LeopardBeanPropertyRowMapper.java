@@ -97,9 +97,9 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 				try {
 					field.set(bean, value);
 				}
-				catch (IllegalArgumentException e) {
-					throw new SQLException(e.getMessage(), e);
-				}
+				// catch (IllegalArgumentException e) {
+				// throw new SQLException(e.getMessage(), e);
+				// }
 				catch (IllegalAccessException e) {
 					throw new SQLException(e.getMessage(), e);
 				}
