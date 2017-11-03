@@ -15,11 +15,11 @@ public class ParameterNotNullException extends RuntimeException {
 	private String columnName;
 
 	public ParameterNotNullException(int parameterIndex) {
-		this("参数值[" + parameterIndex + "]不能为NULL.", parameterIndex, null);
+		this(parameterIndex, null);
 	}
 
 	public ParameterNotNullException(int parameterIndex, String columnName) {
-		this("参数值[" + parameterIndex + "]不能为NULL.", parameterIndex, columnName);
+		this("JDBC参数值[" + parameterIndex + "]不能为NULL.", parameterIndex, columnName);
 	}
 
 	public ParameterNotNullException(String message, int parameterIndex, String columnName) {
