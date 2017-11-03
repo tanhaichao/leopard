@@ -1,8 +1,5 @@
 package io.leopard.jdbc;
 
-import io.leopard.jdbc.builder.InsertParser;
-import io.leopard.jdbc.builder.UpdateParser;
-
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,14 +9,19 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import io.leopard.jdbc.builder.InsertParser;
+import io.leopard.jdbc.builder.UpdateParser;
+
 public class SqlParserUtil {
 	public static StatementParameter toUpdateParameter(String sql, Object bean) {
 		StatementParameter param = new StatementParameter();
 		UpdateParser updateParser = new UpdateParser(sql);
 		List<String> fieldList = updateParser.getFields();
+		int parameterIndex = 0;
 		for (String fieldName : fieldList) {
+			parameterIndex++;
 			try {
-				toStatementParameter(param, bean, fieldName);
+				toStatementParameter(param, bean, fieldName, parameterIndex);
 			}
 			catch (Exception e) {
 				throw new RuntimeException(e.getMessage(), e);
@@ -32,9 +34,11 @@ public class SqlParserUtil {
 		StatementParameter param = new StatementParameter();
 		InsertParser insertParser = new InsertParser(sql);
 		LinkedHashSet<String> fieldSet = insertParser.getFields();
+		int parameterIndex = 0;
 		for (String fieldName : fieldSet) {
+			parameterIndex++;
 			try {
-				toStatementParameter(param, bean, fieldName);
+				toStatementParameter(param, bean, fieldName, parameterIndex);
 			}
 			catch (Exception e) {
 				throw new RuntimeException(e.getMessage(), e);
@@ -63,7 +67,8 @@ public class SqlParserUtil {
 		return sb.toString();
 	}
 
-	protected static void toStatementParameter(StatementParameter param, Object bean, String fieldName) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+	protected static void toStatementParameter(StatementParameter param, Object bean, String fieldName, int parameterIndex)
+			throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		Class<?> clazz = bean.getClass();
 
 		String propertyName = toPropertyName(fieldName);
@@ -80,7 +85,8 @@ public class SqlParserUtil {
 		Method method = desc.getReadMethod();
 		Object value = method.invoke(bean, new Object[] {});
 		if (value == null) {
-			throw new IllegalArgumentException("参数[" + propertyName + "]不能为null.");
+			// throw new IllegalArgumentException("参数[" + propertyName + "]不能为null.");
+			throw new ParameterNotNullException(parameterIndex, propertyName);
 		}
 		setValue(param, type, value);
 	}

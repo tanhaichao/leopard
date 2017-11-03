@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import io.leopard.jdbc.ParameterNotNullException;
 //import io.leopard.burrow.lang.datatype.OnlyDate;
 import io.leopard.jdbc.StatementParameter;
 import io.leopard.lang.inum.Onum;
@@ -22,7 +23,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	 */
 	public void setString(String fieldName, String value) {
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + fieldName + "]不能为NULL.");
+			throw new ParameterNotNullException(fieldList.size(), fieldName);
 		}
 
 		fieldList.add(fieldName);
@@ -44,20 +45,20 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 		statementParameter.setList(value);
 	}
 
-//	/**
-//	 * 设置Enum类型参数.
-//	 * 
-//	 * @param fieldName 参数名
-//	 * @param value 参数值
-//	 */
-//	public void setEnum(String fieldName, Enum<?> value) {
-//		if (value == null) {
-//			// list默认允许传入null
-//			return;
-//		}
-//		fieldList.add(fieldName);
-//		statementParameter.setEnum(value);
-//	}
+	// /**
+	// * 设置Enum类型参数.
+	// *
+	// * @param fieldName 参数名
+	// * @param value 参数值
+	// */
+	// public void setEnum(String fieldName, Enum<?> value) {
+	// if (value == null) {
+	// // list默认允许传入null
+	// return;
+	// }
+	// fieldList.add(fieldName);
+	// statementParameter.setEnum(value);
+	// }
 
 	/**
 	 * 设置Onum类型参数.
@@ -97,7 +98,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	 */
 	public void setTimestamp(String fieldName, Timestamp value) {
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + fieldName + "]不能为NULL.");
+			throw new ParameterNotNullException(fieldList.size(), fieldName);
 		}
 		fieldList.add(fieldName);
 		statementParameter.setTimestamp(value);
@@ -124,7 +125,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	 */
 	public void setBool(String fieldName, Boolean value) {
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + fieldName + "]不能为NULL.");
+			throw new ParameterNotNullException(fieldList.size(), fieldName);
 		}
 		fieldList.add(fieldName);
 		statementParameter.setBool(value);
@@ -138,7 +139,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	 */
 	public void setInt(String fieldName, Integer value) {
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + fieldName + "]不能为NULL.");
+			throw new ParameterNotNullException(fieldList.size(), fieldName);
 		}
 		fieldList.add(fieldName);
 		statementParameter.setInt(value);
@@ -152,7 +153,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	 */
 	public void setShort(String fieldName, Short value) {
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + fieldName + "]不能为NULL.");
+			throw new ParameterNotNullException(fieldList.size(), fieldName);
 		}
 		fieldList.add(fieldName);
 		statementParameter.setShort(value);
@@ -166,7 +167,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	 */
 	public void setDate(String fieldName, Date value) {
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + fieldName + "]不能为NULL.");
+			throw new ParameterNotNullException(fieldList.size(), fieldName);
 		}
 		fieldList.add(fieldName);
 		statementParameter.setDate(value);
@@ -180,7 +181,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	 */
 	public void setLong(String fieldName, Long value) {
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + fieldName + "]不能为NULL.");
+			throw new ParameterNotNullException(fieldList.size(), fieldName);
 		}
 		fieldList.add(fieldName);
 		statementParameter.setLong(value);
@@ -188,7 +189,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 
 	public void setBytes(String fieldName, byte[] value) {
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + fieldName + "]不能为NULL.");
+			throw new ParameterNotNullException(fieldList.size(), fieldName);
 		}
 		fieldList.add(fieldName);
 		statementParameter.setBytes(value);
@@ -202,7 +203,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	 */
 	public void setFloat(String fieldName, Float value) {
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + fieldName + "]不能为NULL.");
+			throw new ParameterNotNullException(fieldList.size(), fieldName);
 		}
 		fieldList.add(fieldName);
 		statementParameter.setFloat(value);
@@ -216,7 +217,7 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	 */
 	public void setDouble(String fieldName, Double value) {
 		if (value == null) {
-			throw new IllegalArgumentException("参数值[" + fieldName + "]不能为NULL.");
+			throw new ParameterNotNullException(fieldList.size(), fieldName);
 		}
 		fieldList.add(fieldName);
 		statementParameter.setDouble(value);
