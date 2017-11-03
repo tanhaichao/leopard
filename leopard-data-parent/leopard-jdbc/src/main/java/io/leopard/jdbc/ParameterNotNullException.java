@@ -13,8 +13,12 @@ public class ParameterNotNullException extends RuntimeException {
 	private int parameterIndex;
 
 	public ParameterNotNullException(int parameterIndex) {
-		super("参数值[" + parameterIndex + "]不能为NULL.");
+		this("参数值[" + parameterIndex + "]不能为NULL.");
 		this.parameterIndex = parameterIndex;
+	}
+
+	public ParameterNotNullException(String message) {
+		super(message);
 	}
 
 	public int getParameterIndex() {
