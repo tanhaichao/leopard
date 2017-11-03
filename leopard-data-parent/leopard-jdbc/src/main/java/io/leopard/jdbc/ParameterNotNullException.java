@@ -25,4 +25,8 @@ public class ParameterNotNullException extends RuntimeException {
 		return parameterIndex;
 	}
 
+	public void setParameterIndex(int parameterIndex) {
+		this.parameterIndex = parameterIndex;
+	}
+
 }
