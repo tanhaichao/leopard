@@ -13,20 +13,17 @@ public class ParameterNotNullException extends RuntimeException {
 	private int parameterIndex;
 
 	public ParameterNotNullException(int parameterIndex) {
-		this("参数值[" + parameterIndex + "]不能为NULL.");
-		this.parameterIndex = parameterIndex;
+		this("参数值[" + parameterIndex + "]不能为NULL.", parameterIndex);
 	}
 
-	public ParameterNotNullException(String message) {
+	public ParameterNotNullException(String message, int parameterIndex) {
 		super(message);
+		this.parameterIndex = parameterIndex;
+
 	}
 
 	public int getParameterIndex() {
 		return parameterIndex;
-	}
-
-	public void setParameterIndex(int parameterIndex) {
-		this.parameterIndex = parameterIndex;
 	}
 
 }
