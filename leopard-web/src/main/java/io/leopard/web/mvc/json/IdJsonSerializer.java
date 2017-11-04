@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -63,11 +64,9 @@ public abstract class IdJsonSerializer<T, V> extends AbstractJsonSerializer<Obje
 		Object data;
 		if (value instanceof List) {
 			List<V> list = new ArrayList<V>();
-			if (isNotEmpty(value)) {
-				for (T key : (List<T>) value) {
-					V element = this.get(key);
-					list.add(element);
-				}
+			for (T key : (List<T>) value) {
+				V element = this.get(key);
+				list.add(element);
 			}
 			data = list;
 		}
@@ -85,6 +84,13 @@ public abstract class IdJsonSerializer<T, V> extends AbstractJsonSerializer<Obje
 	protected boolean isNotEmpty(Object value) {
 		if (value == null) {
 			return false;
+		}
+
+		if (value instanceof String) {
+			return StringUtils.isNotEmpty((String) value);
+		}
+		if (value instanceof Long) {
+			return ((long) value) > 0;
 		}
 
 		return true;
