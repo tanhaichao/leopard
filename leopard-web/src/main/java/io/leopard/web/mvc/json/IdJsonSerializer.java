@@ -63,16 +63,31 @@ public abstract class IdJsonSerializer<T, V> extends AbstractJsonSerializer<Obje
 		Object data;
 		if (value instanceof List) {
 			List<V> list = new ArrayList<V>();
-			for (T key : (List<T>) value) {
-				V element = this.get(key);
-				list.add(element);
+			if (isNotEmpty(value)) {
+				for (T key : (List<T>) value) {
+					V element = this.get(key);
+					list.add(element);
+				}
 			}
 			data = list;
 		}
 		else {
-			data = this.get((T) value);
+			if (isNotEmpty(value)) {
+				data = this.get((T) value);
+			}
+			else {
+				return null;
+			}
 		}
 		return data;
+	}
+
+	protected boolean isNotEmpty(Object value) {
+		if (value == null) {
+			return false;
+		}
+
+		return true;
 	}
 
 	protected String getFieldName(String fieldName) {
