@@ -39,13 +39,13 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		if (value instanceof List) {
 			List<Object> list = new ArrayList<Object>();
 			for (T key : (List<T>) value) {
-				Object element = this.get(key, asClazz);
+				Object element = this.get(key, asClazz, gen, field);
 				list.add(element);
 			}
 			data = list;
 		}
 		else {
-			data = this.get((T) value, asClazz);
+			data = this.get((T) value, asClazz, gen, field);
 		}
 		String newFieldName = this.getFieldName(fieldName);
 		gen.writeFieldName(newFieldName);
@@ -53,7 +53,7 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 	}
 
 	/**
-	 * 获取VO的属性值
+	 * 获取VO的属性
 	 * 
 	 * @param gen
 	 * @param fieldName
@@ -79,6 +79,35 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		}
 	}
 
+	/**
+	 * 获取VO的属性值
+	 * 
+	 * @param gen
+	 * @param fieldName
+	 * @return
+	 */
+	protected Object getFieldValue(JsonGenerator gen, String fieldName) {
+		Object currentValue = gen.getOutputContext().getCurrentValue();
+		if (currentValue == null) {
+			return null;
+		}
+		Class<?> clazz = currentValue.getClass();
+		try {
+			Field field = clazz.getDeclaredField(fieldName);
+			field.setAccessible(true);
+			return field.get(currentValue);
+		}
+		catch (NoSuchFieldException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		catch (SecurityException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		catch (IllegalAccessException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+	}
+
 	protected String getFieldName(String fieldName) {
 		if ("uid".equals(fieldName)) {
 			return "user";
@@ -89,5 +118,5 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		return fieldName.replace("Id", "");
 	}
 
-	public abstract Object get(T value, Class<?> asClazz);
+	public abstract Object get(T value, Class<?> asClazz, JsonGenerator gen, Field field);
 }
