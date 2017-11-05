@@ -5,11 +5,14 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
+
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import io.leopard.json.As;
+import io.leopard.lang.util.BeanUtil;
 import io.leopard.web.mvc.AbstractJsonSerializer;
 
 /**
@@ -30,7 +33,16 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		field.setAccessible(true);
 		As as = field.getAnnotation(As.class);
 		if (as == null) {
-			throw new RuntimeException("属性[" + fieldName + "]没有设置@As");
+			if (value instanceof List) {
+				throw new RuntimeException("属性[" + fieldName + "]没有设置@As");
+			}
+			else {
+				Object data = this.get((T) value, gen, field);
+				Object currentValue = gen.getOutputContext().getCurrentValue();
+				BeanUtils.copyProperties(data, currentValue);
+				gen.writeObject(value);
+			}
+			return;
 		}
 		Class<?> asClazz = as.value();
 		// System.err.println("field:" + field.toGenericString());
@@ -39,13 +51,14 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		if (value instanceof List) {
 			List<Object> list = new ArrayList<Object>();
 			for (T key : (List<T>) value) {
-				Object element = this.get(key, asClazz, gen, field);
-				list.add(element);
+				Object element = this.get(key, gen, field);
+				list.add(BeanUtil.convert(element, asClazz));
 			}
 			data = list;
 		}
 		else {
-			data = this.get((T) value, asClazz, gen, field);
+			Object element = this.get((T) value, gen, field);
+			data = BeanUtil.convert(element, asClazz);
 		}
 		String newFieldName = this.getFieldName(fieldName);
 		gen.writeFieldName(newFieldName);
@@ -118,5 +131,5 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		return fieldName.replace("Id", "");
 	}
 
-	public abstract Object get(T value, Class<?> asClazz, JsonGenerator gen, Field field);
+	public abstract Object get(T value, JsonGenerator gen, Field field);
 }
