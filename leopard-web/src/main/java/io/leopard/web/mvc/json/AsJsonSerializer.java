@@ -39,6 +39,7 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 			else {
 				Object data = this.get((T) value, gen, field);
 				Object currentValue = gen.getOutputContext().getCurrentValue();
+				// TODO 这里需要忽略有值的属性
 				BeanUtils.copyProperties(data, currentValue);
 				gen.writeObject(value);
 			}
