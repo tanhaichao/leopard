@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
@@ -47,6 +48,7 @@ public class JsonJacksonImpl implements IJson {
 		mapperIgnoreUnknownField.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
 
 		writer = mapper.writer().withDefaultPrettyPrinter();
+		// mapper.configure(SerializationFeature.INDENT_OUTPUT, true);// 缩进
 		mapperIgnoreUnknownField.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 
