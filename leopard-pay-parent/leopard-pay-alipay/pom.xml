@@ -7,4 +7,25 @@
 	</parent>
 	<artifactId>leopard-pay-alipay</artifactId>
 	<description>支付宝支付</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-datatype</artifactId>
+			<version>0.9.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-json</artifactId>
+			<version>0.9.12-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
