@@ -17,15 +17,12 @@ public class AlipayClientImpl implements AlipayClient {
 	@Value("${alipay.gatewayUrl}")
 	private String gatewayUrl;
 
-	@Value("${alipay.returnUrl}")
-	private String returnUrl;
-
 	@Value("${alipay.notifyUrl}")
 	private String notifyUrl;
 
 	@Override
-	public PreparePayResult preparePay(String outTradeNo, double amount, String subject, String description) {
-		final Map<String, String> paramsMap = getParamsMap(outTradeNo, amount, subject, description);
+	public PreparePayResult preparePay(String outTradeNo, double amount, String returnUrl, String subject, String description) {
+		final Map<String, String> paramsMap = getParamsMap(outTradeNo, amount, returnUrl, subject, description);
 		final StringBuilder formBuilder = new StringBuilder();
 		final String action = gatewayUrl + "?_input_charset=UTF-8";
 		formBuilder.append("<form id=\"alipay_submit\" name=\"alipaysubmit\" method=\"GET\" action=\"").append(action).append("\">");
@@ -45,7 +42,9 @@ public class AlipayClientImpl implements AlipayClient {
 		return preparePayResult;
 	}
 
-	private Map<String, String> getParamsMap(String outTradeNo, double amount, String subject, String description) {
+	// #页面跳转同步通知页面路径 需http://或者https://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问 商户可以自定义同步跳转地址
+
+	private Map<String, String> getParamsMap(String outTradeNo, double amount, String returnUrl, String subject, String description) {
 		// 该笔订单的资金总额, 单位为RMB-Yuan. 取值范围为[0.01, 100000000.00], 精确到小数点后两位
 		int totalFee = (int) (amount * 100);
 		// FIXME 还没有判断小数点精度

@@ -18,6 +18,11 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-datatype</artifactId>
 			<version>0.9.12-SNAPSHOT</version>

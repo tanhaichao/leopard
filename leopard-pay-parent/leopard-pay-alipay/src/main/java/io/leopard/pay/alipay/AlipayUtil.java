@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 支付宝工具类
  * 
@@ -16,6 +18,40 @@ import java.util.SortedMap;
  *
  */
 public class AlipayUtil {
+
+	public static String getReturnUrl(HttpServletRequest request, String uri) {
+		boolean isHttps = "true".equals(request.getHeader("isHttps"));
+		StringBuilder sb = new StringBuilder(48);
+		int port = request.getServerPort();
+		String scheme;
+		if (isHttps) {
+			scheme = "https";
+			if (port == 80) {
+				port = 443;
+			}
+		}
+		else {
+			scheme = "http";
+		}
+
+		sb.append(scheme);
+		sb.append("://");
+		sb.append(request.getServerName());
+		if (port == 80 && "http".equals(scheme)) {
+			//
+		}
+		else if (port == 443 && "https".equals(scheme)) {
+			//
+		}
+		else {
+			sb.append(':');
+			sb.append(port);
+		}
+		sb.append(uri);
+		return sb.toString();
+
+	}
+
 	/**
 	 * 签名,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
 	 */
