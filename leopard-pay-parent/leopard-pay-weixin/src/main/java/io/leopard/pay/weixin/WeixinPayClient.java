@@ -1,5 +1,6 @@
 package io.leopard.pay.weixin;
 
+import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
 import com.github.binarywang.wxpay.service.WxPayService;
 
 import me.chanjar.weixin.common.exception.WxErrorException;
@@ -36,6 +37,6 @@ public interface WeixinPayClient {
 	 * @return
 	 * @throws WxErrorException
 	 */
-	boolean unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxErrorException;
+	WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxErrorException;
 
 }

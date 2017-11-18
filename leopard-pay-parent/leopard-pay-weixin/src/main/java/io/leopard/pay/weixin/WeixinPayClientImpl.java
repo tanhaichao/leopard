@@ -44,7 +44,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	}
 
 	@Override
-	public boolean unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxErrorException {
+	public WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxErrorException {
 		WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
 		request.setOutTradeNo(orderNo);// 商户订单号
 		request.setTotalFee(totalFee);// 订单总金额
@@ -57,7 +57,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		WxPayUnifiedOrderResult result = wxPayService.unifiedOrder(request);
 		Json.print(result, "result");
 		// wxPayService.downloadBill(billDate, billType, tarType, deviceInfo);
-		return false;
+		return result;
 	}
 
 	@Override
