@@ -2,14 +2,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>io.leopard</groupId>
-		<artifactId>leopard</artifactId>
+		<artifactId>leopard-pay-parent</artifactId>
 		<version>0.9.12-SNAPSHOT</version>
 	</parent>
-	<artifactId>leopard-pay-parent</artifactId>
-	<packaging>pom</packaging>
-	<description>第三方支付</description>
-	<modules>
-		<module>leopard-pay-weixin</module>
-		<module>leopard-pay-alipay</module>
-	</modules>
+	<artifactId>leopard-pay-alipay</artifactId>
+	<description>支付宝支付</description>
 </project>
