@@ -9,9 +9,13 @@ import io.leopard.lang.inum.Snum;
  *
  */
 public enum TradeType implements Snum {
-	JSAPI("JSAPI", "JSAPI")//
-	, NATIVE("NATIVE", "NATIVE")//
-	, APP("APP", "APP")//
+
+	/** 交易类型: JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付、MWEB--手机网站支付 */
+
+	JSAPI("JSAPI", "公众号支付")//
+	, NATIVE("NATIVE", "原生扫码支付")//
+	, APP("APP", "app支付")//
+	, MWEB("MWEB", "手机网站支付")//
 	;
 
 	private String key;
