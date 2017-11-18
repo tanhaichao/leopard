@@ -26,6 +26,17 @@ public class LeopardValidUtil {
 		return m.find();
 	}
 
+	public static boolean isValidEmail(String email) {
+		if (StringUtils.isEmpty(email)) {
+			return false;
+		}
+		// FIXME 未严谨判断
+		if (email.indexOf("@") > -1) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * 是否非法的用户名
 	 * 
