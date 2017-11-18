@@ -10,6 +10,8 @@
 
 	<dependencies>
 		<dependency>
+			<!-- <dependency> <groupId>com.github.wxpay</groupId> <artifactId>wxpay-sdk</artifactId> <version>0.0.3</version> </dependency> -->
+
 			<groupId>com.github.binarywang</groupId>
 			<artifactId>weixin-java-pay</artifactId>
 			<version>2.6.0</version>
