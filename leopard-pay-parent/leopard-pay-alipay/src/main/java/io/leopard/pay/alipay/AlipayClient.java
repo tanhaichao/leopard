@@ -8,4 +8,6 @@ package io.leopard.pay.alipay;
  */
 public interface AlipayClient {
 
+	PreparePayResult preparePay(String outTradeNo, double amount, String subject, String description);
+
 }

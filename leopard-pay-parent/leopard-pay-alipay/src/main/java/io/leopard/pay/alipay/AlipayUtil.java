@@ -19,7 +19,7 @@ public class AlipayUtil {
 	/**
 	 * 签名,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
 	 */
-	public static String signature(final SortedMap<String, String> sortedParams, final String privateKey, final String encoding) {
+	public static String signature(final SortedMap<String, String> sortedParams, final String privateKey) {
 		Set<String> ignoredKeySet = new HashSet<String>();
 		ignoredKeySet.add("sign");
 		ignoredKeySet.add("sign_type");
