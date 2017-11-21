@@ -11,8 +11,8 @@ public class CorsConfigTest {
 	
 	@Test
 	public void get() throws MalformedURLException {
-		String url = getHostAndPort("http://xxx.baidu.com", "zhhr.com", "*.zhhr.xiaoniu.io");
-		System.out.println("url:" + url);
+		String url = getHostAndPort("http://weixin.zhhr.xiaoniu.io", "zhhr.com", "*.zhhr.xiaoniu.io");
+		System.err.println("url:" + url);
 	}
 
 	@Test
