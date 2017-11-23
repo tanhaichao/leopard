@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class AlipayClientImpl implements AlipayClient {
 
+	
 	@Value("${alipay.partner}")
 	private String partner;
 
