@@ -117,6 +117,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		if (StringUtils.isEmpty(paymentId)) {
 			throw new RuntimeException("订单[" + orderNo + "]支付记录不存在.");
 		}
+		// paymentId = paymentId.substring(0, 31) + "x";
 		return wxPayService.queryOrder(null, paymentId);
 	}
 
