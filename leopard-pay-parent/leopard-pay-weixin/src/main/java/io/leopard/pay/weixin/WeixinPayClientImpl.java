@@ -2,8 +2,10 @@ package io.leopard.pay.weixin;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.github.binarywang.wxpay.bean.request.WxPayMicropayRequest;
@@ -18,6 +20,8 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 
+import io.leopard.burrow.util.StringUtil;
+import io.leopard.jdbc.Jdbc;
 import io.leopard.json.Json;
 
 public class WeixinPayClientImpl implements WeixinPayClient {
@@ -33,7 +37,12 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	@Value("${weixin.mchKey}")
 	private String mchKey;
 
+	@Autowired
+	private Jdbc jdbc;
+
 	private WxPayService wxPayService;
+
+	private WeixinPayDao weixinPayDao;
 
 	@PostConstruct
 	public void init() {
@@ -44,6 +53,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		wxPayService = new WxPayServiceImpl();
 		wxPayService.setConfig(payConfig);
 
+		this.weixinPayDao = new WeixinPayDaoMysqlImpl(jdbc);
 	}
 
 	@Override
@@ -54,8 +64,11 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 
 	@Override
 	public WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxPayException {
+		String paymentId = StringUtil.uuid();
+		weixinPayDao.add(paymentId, orderNo);
+
 		WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
-		request.setOutTradeNo(orderNo);// 商户订单号
+		request.setOutTradeNo(paymentId);// 商户订单号
 		request.setTotalFee(totalFee);// 订单总金额
 		// request.setProductId(productId);// 商品ID
 		request.setBody(body);// 商品描述
@@ -76,11 +89,14 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 
 	@Override
 	public WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException {
+		String paymentId = StringUtil.uuid();
+		weixinPayDao.add(paymentId, orderNo);
+
 		// 接口文档地址: https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_10&index=1
 		WxPayMicropayRequest.Builder builder = WxPayMicropayRequest.newBuilder();// .appid(appId).mchId(mchId);
 		// builder .nonceStr(nonceStr);
 		// builder .sign(sign)
-		builder.outTradeNo(orderNo);
+		builder.outTradeNo(paymentId);
 		builder.totalFee(totalFee);
 
 		builder.body(body);
@@ -97,13 +113,21 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 
 	@Override
 	public WxPayOrderQueryResult queryOrder(String orderNo) throws WxPayException {
-		return wxPayService.queryOrder(null, orderNo);
+		String paymentId = weixinPayDao.getPaymentId(orderNo);
+		if (StringUtils.isEmpty(paymentId)) {
+			throw new RuntimeException("订单[" + orderNo + "]支付记录不存在.");
+		}
+		return wxPayService.queryOrder(null, paymentId);
 	}
 
 	@Override
 	public WxPayOrderReverseResult reverseOrder(String orderNo) throws WxPayException {
+		String paymentId = weixinPayDao.getPaymentId(orderNo);
+		if (StringUtils.isEmpty(paymentId)) {
+			throw new RuntimeException("订单[" + orderNo + "]支付记录不存在.");
+		}
 		WxPayOrderReverseRequest.Builder builder = WxPayOrderReverseRequest.newBuilder();
-		builder.outTradeNo(orderNo);
+		builder.outTradeNo(paymentId);
 		WxPayOrderReverseRequest request = builder.build();
 
 		return this.wxPayService.reverseOrder(request);

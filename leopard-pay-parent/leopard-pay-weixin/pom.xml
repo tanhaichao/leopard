@@ -37,6 +37,16 @@
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
+			<artifactId>leopard-lang</artifactId>
+			<version>0.9.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-jdbc</artifactId>
+			<version>0.9.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
 			<artifactId>leopard-json</artifactId>
 			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
