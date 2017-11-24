@@ -78,7 +78,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		// builder .sign(sign)
 		builder.outTradeNo(orderNo);
 		builder.totalFee(totalFee);
-		
+
 		builder.body(body);
 		builder.spbillCreateIp(spbillCreateIp);
 		builder.authCode(authCode);
