@@ -50,6 +50,6 @@ public interface WeixinPayClient {
 	 * @param spbillCreateIp
 	 * @return
 	 */
-	WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WxPayException;
+	WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException;
 
 }

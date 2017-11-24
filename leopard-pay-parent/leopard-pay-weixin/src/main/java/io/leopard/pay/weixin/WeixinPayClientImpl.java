@@ -72,7 +72,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	}
 
 	@Override
-	public WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WxPayException {
+	public WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException {
 		WxPayMicropayRequest.Builder builder = WxPayMicropayRequest.newBuilder();// .appid(appId).mchId(mchId);
 		// builder .nonceStr(nonceStr);
 		// builder .sign(sign)
@@ -83,7 +83,12 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		builder.spbillCreateIp(spbillCreateIp);
 		builder.authCode(authCode);
 		WxPayMicropayRequest request = builder.build();
-		return wxPayService.micropay(request);
+		try {
+			return wxPayService.micropay(request);
+		}
+		catch (WxPayException e) {
+			throw new WeixinPayException("访问刷卡支付接口出现异常.", e);
+		}
 	}
 
 }
