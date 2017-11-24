@@ -4,7 +4,9 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import com.github.binarywang.wxpay.bean.request.WxPayMicropayRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
+import com.github.binarywang.wxpay.bean.result.WxPayMicropayResult;
 import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
 import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.service.WxPayService;
@@ -63,6 +65,20 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	@Override
 	public WxPayService getWxPayService() {
 		return wxPayService;
+	}
+
+	@Override
+	public WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WxErrorException {
+		WxPayMicropayRequest.Builder builder = WxPayMicropayRequest.newBuilder();// .appid(appId).mchId(mchId);
+		// builder .nonceStr(nonceStr);
+		// builder .sign(sign)
+		builder.outTradeNo(orderNo);
+		builder.totalFee(totalFee);
+		builder.body(body);
+		builder.spbillCreateIp(spbillCreateIp);
+		builder.authCode(authCode);
+		WxPayMicropayRequest request = builder.build();
+		return wxPayService.micropay(request);
 	}
 
 }
