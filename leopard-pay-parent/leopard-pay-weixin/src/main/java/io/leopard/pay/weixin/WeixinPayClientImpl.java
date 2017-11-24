@@ -73,6 +73,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 
 	@Override
 	public WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException {
+		// 接口文档地址: https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_10&index=1
 		WxPayMicropayRequest.Builder builder = WxPayMicropayRequest.newBuilder();// .appid(appId).mchId(mchId);
 		// builder .nonceStr(nonceStr);
 		// builder .sign(sign)
