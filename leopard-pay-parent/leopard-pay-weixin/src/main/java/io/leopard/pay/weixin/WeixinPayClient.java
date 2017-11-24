@@ -2,6 +2,7 @@ package io.leopard.pay.weixin;
 
 import com.github.binarywang.wxpay.bean.result.WxPayMicropayResult;
 import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
+import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 
 import me.chanjar.weixin.common.exception.WxErrorException;
@@ -21,7 +22,7 @@ public interface WeixinPayClient {
 	 * @return
 	 * @throws WxErrorException
 	 */
-	String shortUrl(String longUrl) throws WxErrorException;
+	String shortUrl(String longUrl) throws WxPayException;
 
 	WxPayService getWxPayService();
 
@@ -36,9 +37,8 @@ public interface WeixinPayClient {
 	 * @param notifyUrl
 	 * @param spbillCreateIp
 	 * @return
-	 * @throws WxErrorException
 	 */
-	WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxErrorException;
+	WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxPayException;
 
 	/**
 	 * 提交刷卡支付
@@ -49,8 +49,7 @@ public interface WeixinPayClient {
 	 * @param authCode
 	 * @param spbillCreateIp
 	 * @return
-	 * @throws WxErrorException
 	 */
-	WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WxErrorException;
+	WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WxPayException;
 
 }

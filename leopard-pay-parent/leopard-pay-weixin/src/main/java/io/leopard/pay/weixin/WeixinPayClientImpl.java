@@ -11,11 +11,11 @@ import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.bean.result.WxPayMicropayResult;
 import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
 import com.github.binarywang.wxpay.config.WxPayConfig;
+import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 
 import io.leopard.json.Json;
-import me.chanjar.weixin.common.exception.WxErrorException;
 
 public class WeixinPayClientImpl implements WeixinPayClient {
 
@@ -44,13 +44,13 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	}
 
 	@Override
-	public String shortUrl(String longUrl) throws WxErrorException {
+	public String shortUrl(String longUrl) throws WxPayException {
 		String shortUrl = wxPayService.shorturl(longUrl);
 		return shortUrl;
 	}
 
 	@Override
-	public WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxErrorException {
+	public WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxPayException {
 		WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
 		request.setOutTradeNo(orderNo);// 商户订单号
 		request.setTotalFee(totalFee);// 订单总金额
@@ -72,7 +72,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	}
 
 	@Override
-	public WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WxErrorException {
+	public WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WxPayException {
 		WxPayMicropayRequest.Builder builder = WxPayMicropayRequest.newBuilder();// .appid(appId).mchId(mchId);
 		// builder .nonceStr(nonceStr);
 		// builder .sign(sign)
