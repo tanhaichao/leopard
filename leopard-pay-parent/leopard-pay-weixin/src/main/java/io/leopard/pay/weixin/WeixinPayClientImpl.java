@@ -10,6 +10,7 @@ import com.github.binarywang.wxpay.bean.request.WxPayMicropayRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayOrderReverseRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.bean.result.WxPayMicropayResult;
+import com.github.binarywang.wxpay.bean.result.WxPayOrderQueryResult;
 import com.github.binarywang.wxpay.bean.result.WxPayOrderReverseResult;
 import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
 import com.github.binarywang.wxpay.config.WxPayConfig;
@@ -95,10 +96,16 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	}
 
 	@Override
+	public WxPayOrderQueryResult queryOrder(String orderNo) throws WxPayException {
+		return wxPayService.queryOrder(null, orderNo);
+	}
+
+	@Override
 	public WxPayOrderReverseResult reverseOrder(String orderNo) throws WxPayException {
 		WxPayOrderReverseRequest.Builder builder = WxPayOrderReverseRequest.newBuilder();
 		builder.outTradeNo(orderNo);
 		WxPayOrderReverseRequest request = builder.build();
+
 		return this.wxPayService.reverseOrder(request);
 	}
 }
