@@ -2,6 +2,8 @@ package io.leopard.pay.weixin;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.github.binarywang.wxpay.bean.request.WxPayMicropayRequest;
@@ -16,6 +18,8 @@ import io.leopard.json.Json;
 import me.chanjar.weixin.common.exception.WxErrorException;
 
 public class WeixinPayClientImpl implements WeixinPayClient {
+
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Value("${weixin.appId}")
 	private String appId;
@@ -74,6 +78,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		// builder .sign(sign)
 		builder.outTradeNo(orderNo);
 		builder.totalFee(totalFee);
+		
 		builder.body(body);
 		builder.spbillCreateIp(spbillCreateIp);
 		builder.authCode(authCode);
