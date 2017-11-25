@@ -58,4 +58,6 @@ public interface WeixinPayClient {
 
 	WxPayOrderQueryResult queryOrder(String orderNo) throws WxPayException;
 
+	WeixinMicropayStatus micropayForStatus(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException;
+
 }

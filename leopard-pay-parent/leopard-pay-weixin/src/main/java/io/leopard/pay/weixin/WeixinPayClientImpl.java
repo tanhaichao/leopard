@@ -23,6 +23,8 @@ import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import io.leopard.burrow.util.StringUtil;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.json.Json;
+import io.leopard.lang.inum.EnumConstantInvalidException;
+import io.leopard.lang.inum.EnumUtil;
 
 public class WeixinPayClientImpl implements WeixinPayClient {
 
@@ -85,6 +87,28 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	@Override
 	public WxPayService getWxPayService() {
 		return wxPayService;
+	}
+
+	@Override
+	public WeixinMicropayStatus micropayForStatus(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException {
+		try {
+			WxPayMicropayResult result = this.micropay(orderNo, totalFee, body, authCode, spbillCreateIp);
+			Json.print(result, "result");
+			return WeixinMicropayStatus.SUCCESS;
+		}
+		catch (WeixinPayException e) {
+			logger.error(e.getMessage(), e);
+			String errCode = e.getErrCode().toLowerCase();
+
+			try {
+				WeixinMicropayStatus status = EnumUtil.toEnum(errCode, WeixinMicropayStatus.class);
+				return status;
+			}
+			catch (EnumConstantInvalidException e2) {
+				System.err.println("resultCode:" + e.getResultCode() + " errCode:" + e.getErrCode() + " errMsg:" + e.getErrCodeDes());
+				throw e;
+			}
+		}
 	}
 
 	@Override
