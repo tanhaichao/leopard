@@ -4,11 +4,21 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import javax.annotation.PostConstruct;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import me.hao0.alipay.core.Alipay;
+import me.hao0.alipay.core.AlipayBuilder;
+import me.hao0.alipay.model.pay.WebPayDetail;
 
 public class AlipayClientImpl implements AlipayClient {
 
-	
+	protected Log logger = LogFactory.getLog(this.getClass());
+
 	@Value("${alipay.partner}")
 	private String partner;
 
@@ -17,6 +27,24 @@ public class AlipayClientImpl implements AlipayClient {
 
 	@Value("${alipay.gatewayUrl}")
 	private String gatewayUrl;
+
+	private Alipay alipay;
+
+	@PostConstruct
+	public void init() {
+		alipay = AlipayBuilder.newBuilder(partner, privateKey).build();
+	}
+
+	@Override
+	public String webPay(String orderNo, String orderName, String payNotifyUrl, double amount, String webReturnUrl) {
+		String totalFee = Double.toString(amount);
+		WebPayDetail detail = new WebPayDetail(orderNo, orderName, totalFee);
+		detail.setNotifyUrl(payNotifyUrl);
+		detail.setReturnUrl(webReturnUrl);
+		String form = alipay.pay().webPay(detail);
+		// logger.info("web pay form: {}", form);
+		return form;
+	}
 
 	@Override
 	public PreparePayResult preparePay(String outTradeNo, double amount, String notifyUrl, String returnUrl, String subject, String description) {

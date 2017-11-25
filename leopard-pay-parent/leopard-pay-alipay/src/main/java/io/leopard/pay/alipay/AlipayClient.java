@@ -13,4 +13,6 @@ public interface AlipayClient {
 
 	PreparePayResult preparePay(String outTradeNo, double amount, String notifyUrl, String returnUrl, String subject, String description);
 
+	String webPay(String orderNo, String orderName, String payNotifyUrl, double amount, String webReturnUrl);
+
 }
