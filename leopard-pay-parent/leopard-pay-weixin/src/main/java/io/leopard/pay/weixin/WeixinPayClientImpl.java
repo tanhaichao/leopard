@@ -105,7 +105,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 				return status;
 			}
 			catch (EnumConstantInvalidException e2) {
-				System.err.println("resultCode:" + e.getResultCode() + " errCode:" + e.getErrCode() + " errMsg:" + e.getErrCodeDes());
+				logger.error("resultCode:" + e.getResultCode() + " errCode:" + e.getErrCode() + " errMsg:" + e.getErrCodeDes());
 				throw e;
 			}
 		}
