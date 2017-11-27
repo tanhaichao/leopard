@@ -23,6 +23,7 @@ import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import io.leopard.burrow.util.StringUtil;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.json.Json;
+import io.leopard.lang.DecimalUtil;
 import io.leopard.lang.inum.EnumConstantInvalidException;
 import io.leopard.lang.inum.EnumUtil;
 
@@ -65,9 +66,11 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	}
 
 	@Override
-	public WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxPayException {
+	public WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, double amount, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxPayException {
 		String paymentId = StringUtil.uuid();
 		weixinPayDao.add(paymentId, orderNo);
+
+		int totalFee = (int) DecimalUtil.multiply(amount, 100);// TODO
 
 		WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
 		request.setOutTradeNo(paymentId);// 商户订单号

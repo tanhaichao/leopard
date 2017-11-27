@@ -40,7 +40,7 @@ public interface WeixinPayClient {
 	 * @param spbillCreateIp
 	 * @return
 	 */
-	WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, int totalFee, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxPayException;
+	WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, double amount, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxPayException;
 
 	/**
 	 * 提交刷卡支付
