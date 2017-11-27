@@ -8,8 +8,11 @@ import javax.annotation.PostConstruct;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.domain.AlipayTradePayModel;
+import com.jpay.alipay.AliPayApi;
 
 import me.hao0.alipay.core.Alipay;
 import me.hao0.alipay.core.AlipayBuilder;
@@ -44,6 +47,17 @@ public class AlipayClientImpl implements AlipayClient {
 		String form = alipay.pay().webPay(detail);
 		// logger.info("web pay form: {}", form);
 		return form;
+	}
+
+	@Override
+	public String micropay(String outTradeNo, String scene, String authCode, String subject, double totalAmount, String notifyUrl) throws AlipayApiException {
+		AlipayTradePayModel model = new AlipayTradePayModel();
+		model.setOutTradeNo(outTradeNo);
+		model.setScene(scene);
+		model.setAuthCode(authCode);
+		model.setSubject(subject);
+		model.setTotalAmount(Double.toString(totalAmount));
+		return AliPayApi.tradePay(model, notifyUrl);
 	}
 
 	@Override

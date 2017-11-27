@@ -1,5 +1,7 @@
 package io.leopard.pay.alipay;
 
+import com.alipay.api.AlipayApiException;
+
 /**
  * 支付宝
  * 
@@ -14,5 +16,7 @@ public interface AlipayClient {
 	PreparePayResult preparePay(String outTradeNo, double amount, String notifyUrl, String returnUrl, String subject, String description);
 
 	String webPay(String orderNo, String orderName, String payNotifyUrl, double amount, String webReturnUrl);
+
+	String micropay(String outTradeNo, String scene, String authCode, String subject, double totalAmount, String notifyUrl) throws AlipayApiException;
 
 }

@@ -32,6 +32,17 @@
 			<artifactId>leopard-json</artifactId>
 			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.alipay</groupId>
+			<artifactId>alipay-sdk-java</artifactId>
+			<version>20171123203126</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.javen205</groupId>
+			<artifactId>IJPay</artifactId>
+			<version>0.8</version>
+		</dependency>
 
 		<dependency>
 			<groupId>me.hao0</groupId>
