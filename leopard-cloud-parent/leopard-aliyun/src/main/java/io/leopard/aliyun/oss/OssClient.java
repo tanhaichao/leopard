@@ -19,4 +19,6 @@ public interface OssClient {
 
 	String add(String dir, MultipartFile file) throws IOException;
 
+	boolean move(String uri, String destUri);
+
 }

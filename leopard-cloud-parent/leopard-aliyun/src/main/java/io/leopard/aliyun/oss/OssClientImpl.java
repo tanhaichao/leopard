@@ -28,8 +28,10 @@ public class OssClientImpl implements OssClient {
 
 	@Value("${aliyun.oss.bucketName}")
 	private String bucketName;
+
 	@Value("${aliyun.oss.accessKeyId}")
 	private String accessKeyId;
+
 	@Value("${aliyun.oss.secretAccessKey}")
 	private String secretAccessKey;
 
@@ -122,6 +124,11 @@ public class OssClientImpl implements OssClient {
 	public static String toUuidFileName(String filename) {
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
 		return uuid + filename.substring(filename.lastIndexOf("."));
+	}
+
+	@Override
+	public boolean move(String uri, String destUri) {
+		throw new RuntimeException("not impl.");
 	}
 
 }
