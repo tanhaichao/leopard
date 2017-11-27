@@ -11,7 +11,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.alipay.api.AlipayApiException;
+import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradePayModel;
+import com.alipay.api.request.AlipayTradePayRequest;
+import com.alipay.api.response.AlipayTradePayResponse;
 import com.jpay.alipay.AliPayApi;
 import com.jpay.alipay.AliPayApiConfig;
 import com.jpay.alipay.AliPayApiConfigKit;
@@ -27,6 +30,9 @@ public class AlipayClientImpl implements AlipayClient {
 	@Value("${alipay.partner}")
 	private String partner;
 
+	@Value("${alipay.appId}")
+	private String appId;
+
 	@Value("${alipay.privateKey}")
 	private String privateKey;
 
@@ -37,6 +43,8 @@ public class AlipayClientImpl implements AlipayClient {
 	private String gatewayUrl;
 
 	private Alipay alipay;
+
+	DefaultAlipayClient alipayClient;
 
 	@PostConstruct
 	public void init() {
@@ -49,7 +57,11 @@ public class AlipayClientImpl implements AlipayClient {
 		aliPayApiConfig.setCharset("UTF-8");
 		aliPayApiConfig.setSignType("RSA2");
 		aliPayApiConfig.build();
+		System.err.println("appId:" + appId);
+		System.err.println("gatewayUrl:" + gatewayUrl);
 		AliPayApiConfigKit.putApiConfig(aliPayApiConfig);
+
+		alipayClient = new DefaultAlipayClient(gatewayUrl, appId, privateKey, "json", "UTF-8", publicKey, "RSA2");
 	}
 
 	@Override
@@ -71,7 +83,20 @@ public class AlipayClientImpl implements AlipayClient {
 		model.setAuthCode(authCode);
 		model.setSubject(subject);
 		model.setTotalAmount(Double.toString(totalAmount));
-		return AliPayApi.tradePay(model, notifyUrl);
+		System.err.println("authCode:" + authCode);
+		System.err.println("totalAmount:" + totalAmount);
+
+		AlipayTradePayRequest request = new AlipayTradePayRequest();
+		request.setBizModel(model);
+		AlipayTradePayResponse response = alipayClient.execute(request);
+		if (response.isSuccess()) {
+			System.out.println("调用成功");
+		}
+		else {
+			System.out.println("调用失败");
+		}
+		return response.getCode() + ":" + response.getSubCode() + ":" + response.getSubMsg();
+		// return AliPayApi.tradePay(model, notifyUrl);
 	}
 
 	@Override
