@@ -3,3 +3,5 @@ https://docs.open.alipay.com/54/103419	SDK
 http://blog.csdn.net/zyw_java/article/details/71372789	支付宝支付-刷卡支付(条码支付)详解
 https://docs.open.alipay.com/194/105072		当面付产品介绍
 
+https://docs.open.alipay.com/194/105170	当面付快速接入
+
