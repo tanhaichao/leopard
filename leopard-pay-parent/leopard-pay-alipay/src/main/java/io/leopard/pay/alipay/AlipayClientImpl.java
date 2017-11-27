@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.domain.AlipayTradePayModel;
 import com.jpay.alipay.AliPayApi;
+import com.jpay.alipay.AliPayApiConfig;
+import com.jpay.alipay.AliPayApiConfigKit;
 
 import me.hao0.alipay.core.Alipay;
 import me.hao0.alipay.core.AlipayBuilder;
@@ -28,6 +30,9 @@ public class AlipayClientImpl implements AlipayClient {
 	@Value("${alipay.privateKey}")
 	private String privateKey;
 
+	@Value("${alipay.publicKey}")
+	private String publicKey;
+
 	@Value("${alipay.gatewayUrl}")
 	private String gatewayUrl;
 
@@ -36,6 +41,15 @@ public class AlipayClientImpl implements AlipayClient {
 	@PostConstruct
 	public void init() {
 		alipay = AlipayBuilder.newBuilder(partner, privateKey).build();
+		AliPayApiConfig aliPayApiConfig = AliPayApiConfig.New();
+		aliPayApiConfig.setAppId(partner);
+		aliPayApiConfig.setPrivateKey(privateKey);
+		aliPayApiConfig.setAlipayPublicKey(publicKey);
+		aliPayApiConfig.setServiceUrl(gatewayUrl);
+		aliPayApiConfig.setCharset("UTF-8");
+		aliPayApiConfig.setSignType("RSA2");
+		aliPayApiConfig.build();
+		AliPayApiConfigKit.putApiConfig(aliPayApiConfig);
 	}
 
 	@Override
