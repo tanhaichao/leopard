@@ -55,4 +55,13 @@
 			<version>2.7.5</version>
 		</dependency>
 	</dependencies>
+
+
+	<repositories>
+		<repository>
+			<id>leopard-thirdparty</id>
+			<name>Leopard thirdparty Java Packages</name>
+			<url>http://leopard.io/nexus/content/repositories/thirdparty/</url>
+		</repository>
+	</repositories>
 </project>
