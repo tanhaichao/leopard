@@ -183,4 +183,16 @@ public class AlipayClientImpl implements AlipayClient {
 		sortedParams.put("sign", signature);
 		return sortedParams;
 	}
+
+	@Override
+	public AlipayMicropayStatus micropayForStatus(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws AlipayApiException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AlipayOrderTradeStatus queryOrderForStatus(String orderNo) throws AlipayApiException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
