@@ -9,6 +9,8 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.util.Assert;
@@ -30,6 +32,8 @@ import io.leopard.web.mvc.AbstractJsonSerializer;
  * @param <T>
  */
 public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object> {
+
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -104,7 +108,9 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 				catch (InvocationTargetException e) {
 					throw new RuntimeException(e.getMessage(), e);
 				}
-				if (!isDefaultValue(value)) {
+				boolean isDefaultValue = isDefaultValue(value);
+				if (!isDefaultValue) {
+					logger.info("fieldName:" + targetPd.getName() + " isDefaultValue:" + isDefaultValue + " value:" + value);
 					continue;
 				}
 			}
@@ -132,7 +138,7 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		if (value == null) {
 			return true;
 		}
-		
+
 		if (value instanceof Integer) {
 			int number = (int) value;
 			return number <= 0;
@@ -140,7 +146,8 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		else if (value instanceof Long) {
 			long number = (long) value;
 			return number <= 0;
-		}else if (value instanceof Float) {
+		}
+		else if (value instanceof Float) {
 			float number = (float) value;
 			return number <= 0;
 		}
