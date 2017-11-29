@@ -21,6 +21,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import io.leopard.json.As;
+import io.leopard.json.Json;
 import io.leopard.lang.util.BeanUtil;
 import io.leopard.web.mvc.AbstractJsonSerializer;
 
@@ -78,7 +79,7 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 
 	// TODO 这里需要忽略有值的属性
 	protected void copyProperties(Object source, Object target) {
-		BeanUtils.copyProperties(source, target);
+		// BeanUtils.copyProperties(source, target);
 		Assert.notNull(source, "Source must not be null");
 		Assert.notNull(target, "Target must not be null");
 
@@ -110,12 +111,13 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 				}
 				boolean isDefaultValue = isDefaultValue(value);
 				if (!isDefaultValue) {
-					logger.info("fieldName:" + targetPd.getName() + " isDefaultValue:" + isDefaultValue + " value:" + value);
+					// logger.info("fieldName:" + targetPd.getName() + " isDefaultValue:" + isDefaultValue + " value:" + value + " targetReadMethod:" + targetReadMethod.toGenericString());
 					continue;
 				}
 			}
 
 			Method readMethod = sourcePd.getReadMethod();
+			// logger.info("write fieldName:" + targetPd.getName() + " readMethod:" + readMethod.toGenericString());
 			if (readMethod != null && ClassUtils.isAssignable(writeMethod.getParameterTypes()[0], readMethod.getReturnType())) {
 				try {
 					if (!Modifier.isPublic(readMethod.getDeclaringClass().getModifiers())) {
