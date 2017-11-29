@@ -1,11 +1,18 @@
 package io.leopard.web.mvc.json;
 
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.FatalBeanException;
+import org.springframework.util.Assert;
+import org.springframework.util.ClassUtils;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -39,8 +46,7 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 			else {
 				Object data = this.get((T) value, gen, field);
 				Object currentValue = gen.getOutputContext().getCurrentValue();
-				// TODO 这里需要忽略有值的属性
-				BeanUtils.copyProperties(data, currentValue);
+				copyProperties(data, currentValue);
 				gen.writeObject(value);
 			}
 			return;
@@ -64,6 +70,84 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		String newFieldName = this.getFieldName(fieldName);
 		gen.writeFieldName(newFieldName);
 		gen.writeObject(data);
+	}
+
+	// TODO 这里需要忽略有值的属性
+	protected void copyProperties(Object source, Object target) {
+		BeanUtils.copyProperties(source, target);
+		Assert.notNull(source, "Source must not be null");
+		Assert.notNull(target, "Target must not be null");
+
+		Class<?> actualEditable = target.getClass();
+		PropertyDescriptor[] targetPds = BeanUtils.getPropertyDescriptors(actualEditable);
+
+		for (PropertyDescriptor targetPd : targetPds) {
+			Method writeMethod = targetPd.getWriteMethod();
+			if (writeMethod == null) {
+				continue;
+			}
+
+			PropertyDescriptor sourcePd = BeanUtils.getPropertyDescriptor(source.getClass(), targetPd.getName());
+			if (sourcePd == null) {
+				continue;
+			}
+
+			{
+				Method targetReadMethod = targetPd.getReadMethod();
+				Object value;
+				try {
+					value = targetReadMethod.invoke(target);
+				}
+				catch (IllegalAccessException e) {
+					throw new RuntimeException(e.getMessage(), e);
+				}
+				catch (InvocationTargetException e) {
+					throw new RuntimeException(e.getMessage(), e);
+				}
+				if (!isDefaultValue(value)) {
+					continue;
+				}
+			}
+
+			Method readMethod = sourcePd.getReadMethod();
+			if (readMethod != null && ClassUtils.isAssignable(writeMethod.getParameterTypes()[0], readMethod.getReturnType())) {
+				try {
+					if (!Modifier.isPublic(readMethod.getDeclaringClass().getModifiers())) {
+						readMethod.setAccessible(true);
+					}
+					Object value = readMethod.invoke(source);
+					if (!Modifier.isPublic(writeMethod.getDeclaringClass().getModifiers())) {
+						writeMethod.setAccessible(true);
+					}
+					writeMethod.invoke(target, value);
+				}
+				catch (Throwable ex) {
+					throw new FatalBeanException("Could not copy property '" + targetPd.getName() + "' from source to target", ex);
+				}
+			}
+		}
+	}
+
+	protected boolean isDefaultValue(Object value) {
+		if (value == null) {
+			return true;
+		}
+		if (value instanceof Integer) {
+			int number = (int) value;
+			return number <= 0;
+		}
+		else if (value instanceof Long) {
+			long number = (long) value;
+			return number <= 0;
+		}else if (value instanceof Float) {
+			float number = (float) value;
+			return number <= 0;
+		}
+		else if (value instanceof Double) {
+			double number = (double) value;
+			return number <= 0;
+		}
+		return true;
 	}
 
 	/**
