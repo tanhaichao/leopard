@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Value;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradePayModel;
+import com.alipay.api.domain.AlipayTradeQueryModel;
 import com.alipay.api.request.AlipayTradePayRequest;
+import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.response.AlipayTradePayResponse;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.jpay.alipay.AliPayApiConfig;
 import com.jpay.alipay.AliPayApiConfigKit;
 
@@ -185,20 +188,27 @@ public class AlipayClientImpl implements AlipayClient {
 	}
 
 	@Override
-	public AlipayOrderTradeStatus queryOrderForStatus(String orderNo) throws AlipayApiException {
-		// AlipayTradePayModel model = new AlipayTradePayModel();
-		// model.setOutTradeNo(outTradeNo);
-		// model.setScene(scene);
-		// model.setAuthCode(authCode);
-		// model.setSubject(subject);
-		// model.setTotalAmount(Double.toString(totalAmount));
-		// System.err.println("authCode:" + authCode);
-		// System.err.println("totalAmount:" + totalAmount);
-		//
-		// AlipayTradePayRequest request = new AlipayTradePayRequest();
-		// request.setBizModel(model);
-		// return alipayClient.execute(request);
-		return null;
+	public AlipayTradeQueryResponse queryOrder(String outTradeNo) throws AlipayApiException {
+		AlipayTradeQueryModel model = new AlipayTradeQueryModel();
+		model.setOutTradeNo(outTradeNo);
+
+		AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+		request.setBizModel(model);
+		return alipayClient.execute(request);
+	}
+
+	@Override
+	public AlipayOrderTradeStatus queryOrderForStatus(String outTradeNo) throws AlipayApiException {
+		AlipayTradeQueryResponse response = this.queryOrder(outTradeNo);
+		String tradeStatus = response.getTradeStatus();
+		if ("WAIT_BUYER_PAY".equals(tradeStatus)) {
+			return AlipayOrderTradeStatus.USERPAYING;
+		}
+		else if ("TRADE_SUCCESS".equals(tradeStatus)) {
+			return AlipayOrderTradeStatus.SUCCESS;
+		}
+		logger.error("tradeStatus:" + tradeStatus);
+		return AlipayOrderTradeStatus.PAYERROR;
 	}
 
 }

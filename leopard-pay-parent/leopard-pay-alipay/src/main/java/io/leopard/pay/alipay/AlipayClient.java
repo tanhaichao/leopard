@@ -2,6 +2,7 @@ package io.leopard.pay.alipay;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.response.AlipayTradePayResponse;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 
 /**
  * 支付宝
@@ -23,4 +24,6 @@ public interface AlipayClient {
 	AlipayMicropayStatus micropayForStatus(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws AlipayApiException;
 
 	AlipayOrderTradeStatus queryOrderForStatus(String orderNo) throws AlipayApiException;
+
+	AlipayTradeQueryResponse queryOrder(String outTradeNo) throws AlipayApiException;
 }
