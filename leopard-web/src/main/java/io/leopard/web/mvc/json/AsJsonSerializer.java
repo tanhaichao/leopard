@@ -132,6 +132,7 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 		if (value == null) {
 			return true;
 		}
+		
 		if (value instanceof Integer) {
 			int number = (int) value;
 			return number <= 0;
