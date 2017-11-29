@@ -105,15 +105,15 @@ public class AlipayClientImpl implements AlipayClient {
 	}
 
 	@Override
-	public AlipayTradePayResponse micropay(String outTradeNo, String scene, String authCode, String subject, double totalAmount, String notifyUrl) throws AlipayApiException {
+	public AlipayTradePayResponse micropay(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws AlipayApiException {
 		AlipayTradePayModel model = new AlipayTradePayModel();
 		model.setOutTradeNo(outTradeNo);
 		model.setScene(scene);
 		model.setAuthCode(authCode);
 		model.setSubject(subject);
-		model.setTotalAmount(Double.toString(totalAmount));
+		model.setTotalAmount(Double.toString(amount));
 		System.err.println("authCode:" + authCode);
-		System.err.println("totalAmount:" + totalAmount);
+		System.err.println("totalAmount:" + amount);
 
 		AlipayTradePayRequest request = new AlipayTradePayRequest();
 		request.setBizModel(model);
@@ -185,14 +185,20 @@ public class AlipayClientImpl implements AlipayClient {
 	}
 
 	@Override
-	public AlipayMicropayStatus micropayForStatus(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws AlipayApiException {
-		// TODO Auto-generated method stub
+	public AlipayOrderTradeStatus queryOrderForStatus(String orderNo) throws AlipayApiException {
+		// AlipayTradePayModel model = new AlipayTradePayModel();
+		// model.setOutTradeNo(outTradeNo);
+		// model.setScene(scene);
+		// model.setAuthCode(authCode);
+		// model.setSubject(subject);
+		// model.setTotalAmount(Double.toString(totalAmount));
+		// System.err.println("authCode:" + authCode);
+		// System.err.println("totalAmount:" + totalAmount);
+		//
+		// AlipayTradePayRequest request = new AlipayTradePayRequest();
+		// request.setBizModel(model);
+		// return alipayClient.execute(request);
 		return null;
 	}
 
-	@Override
-	public AlipayOrderTradeStatus queryOrderForStatus(String orderNo) throws AlipayApiException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

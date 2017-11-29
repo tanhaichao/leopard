@@ -18,11 +18,9 @@ public interface AlipayClient {
 
 	String webPay(String orderNo, String orderName, String payNotifyUrl, double amount, String webReturnUrl);
 
-	AlipayTradePayResponse micropay(String outTradeNo, String scene, String authCode, String subject, double totalAmount, String notifyUrl) throws AlipayApiException;
+	AlipayTradePayResponse micropay(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws AlipayApiException;
 
-	AlipayMicropayStatus micropayForStatus(String outTradeNo, String scene, String authCode, String subject, double totalAmount, String notifyUrl) throws AlipayApiException;
-
-	AlipayMicropayStatus micropayForStatus(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws AlipayApiException;
+	AlipayMicropayStatus micropayForStatus(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws AlipayApiException;
 
 	AlipayOrderTradeStatus queryOrderForStatus(String orderNo) throws AlipayApiException;
 }
