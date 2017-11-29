@@ -15,7 +15,6 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradePayModel;
 import com.alipay.api.request.AlipayTradePayRequest;
 import com.alipay.api.response.AlipayTradePayResponse;
-import com.jpay.alipay.AliPayApi;
 import com.jpay.alipay.AliPayApiConfig;
 import com.jpay.alipay.AliPayApiConfigKit;
 
@@ -76,7 +75,37 @@ public class AlipayClientImpl implements AlipayClient {
 	}
 
 	@Override
-	public String micropay(String outTradeNo, String scene, String authCode, String subject, double totalAmount, String notifyUrl) throws AlipayApiException {
+	public AlipayMicropayStatus micropayForStatus(String outTradeNo, String scene, String authCode, String subject, double totalAmount, String notifyUrl) throws AlipayApiException {
+		AlipayTradePayResponse response = this.micropay(outTradeNo, scene, authCode, subject, totalAmount, notifyUrl);
+
+		String code = response.getCode();
+		// https://docs.open.alipay.com/194/105170/
+
+		if ("10000".equals(code)) {
+			return AlipayMicropayStatus.SUCCESS;
+		}
+		else if ("40004".equals(code)) {
+			return AlipayMicropayStatus.TRADE_ERROR;
+		}
+		else if ("10003".equals(code)) {// 等待用户付款
+			return AlipayMicropayStatus.SUCCESS;
+		}
+		else if ("20000".equals(code)) {
+			return AlipayMicropayStatus.TRADE_ERROR;
+		}
+		else {
+			return AlipayMicropayStatus.TRADE_ERROR;
+		}
+		// if (response.isSuccess()) {
+		// return AlipayMicropayStatus.SUCCESS;
+		// }
+		// else {
+		// return AlipayMicropayStatus.TRADE_ERROR;
+		// }
+	}
+
+	@Override
+	public AlipayTradePayResponse micropay(String outTradeNo, String scene, String authCode, String subject, double totalAmount, String notifyUrl) throws AlipayApiException {
 		AlipayTradePayModel model = new AlipayTradePayModel();
 		model.setOutTradeNo(outTradeNo);
 		model.setScene(scene);
@@ -88,14 +117,14 @@ public class AlipayClientImpl implements AlipayClient {
 
 		AlipayTradePayRequest request = new AlipayTradePayRequest();
 		request.setBizModel(model);
-		AlipayTradePayResponse response = alipayClient.execute(request);
-		if (response.isSuccess()) {
-			System.out.println("调用成功");
-		}
-		else {
-			System.out.println("调用失败");
-		}
-		return response.getCode() + ":" + response.getSubCode() + ":" + response.getSubMsg();
+		return alipayClient.execute(request);
+		// if (response.isSuccess()) {
+		// System.out.println("调用成功");
+		// }
+		// else {
+		// System.out.println("调用失败");
+		// }
+		// return response.getCode() + ":" + response.getSubCode() + ":" + response.getSubMsg();
 		// return AliPayApi.tradePay(model, notifyUrl);
 	}
 
