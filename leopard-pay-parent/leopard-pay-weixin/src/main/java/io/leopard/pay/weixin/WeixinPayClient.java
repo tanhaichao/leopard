@@ -45,20 +45,21 @@ public interface WeixinPayClient {
 	/**
 	 * 提交刷卡支付
 	 * 
-	 * @param orderNo
-	 * @param totalFee
+	 * @param outTradeNo
+	 * @param amount
 	 * @param body
 	 * @param authCode
 	 * @param spbillCreateIp
 	 * @return
 	 */
-	WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException;
+	// WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException;
+	WxPayMicropayResult micropay(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws WeixinPayException;
 
 	WxPayOrderReverseResult reverseOrder(String orderNo) throws WxPayException;
 
 	WxPayOrderQueryResult queryOrder(String orderNo) throws WxPayException;
 
-	WeixinMicropayStatus micropayForStatus(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException;
+	WeixinMicropayStatus micropayForStatus(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws WeixinPayException;
 
 	WeixinOrderTradeStatus queryOrderForStatus(String orderNo) throws WxPayException;
 

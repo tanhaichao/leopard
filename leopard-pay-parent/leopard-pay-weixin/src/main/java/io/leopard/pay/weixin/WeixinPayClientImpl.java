@@ -93,9 +93,9 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	}
 
 	@Override
-	public WeixinMicropayStatus micropayForStatus(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException {
+	public WeixinMicropayStatus micropayForStatus(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws WeixinPayException {
 		try {
-			WxPayMicropayResult result = this.micropay(orderNo, totalFee, body, authCode, spbillCreateIp);
+			WxPayMicropayResult result = this.micropay(outTradeNo, scene, authCode, subject, amount, spbillCreateIp);
 			Json.print(result, "result");
 			return WeixinMicropayStatus.SUCCESS;
 		}
@@ -114,10 +114,13 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		}
 	}
 
+	// String outTradeNo, String scene, String authCode, String subject, double totalAmount, String notifyUrl
 	@Override
-	public WxPayMicropayResult micropay(String orderNo, int totalFee, String body, String authCode, String spbillCreateIp) throws WeixinPayException {
+	public WxPayMicropayResult micropay(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws WeixinPayException {
 		String paymentId = StringUtil.uuid();
-		weixinPayDao.add(paymentId, orderNo);
+		weixinPayDao.add(paymentId, outTradeNo);
+
+		int totalFee = (int) DecimalUtil.multiply(amount, 100);// TODO
 
 		// 接口文档地址: https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_10&index=1
 		WxPayMicropayRequest.Builder builder = WxPayMicropayRequest.newBuilder();// .appid(appId).mchId(mchId);
@@ -126,7 +129,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		builder.outTradeNo(paymentId);
 		builder.totalFee(totalFee);
 
-		builder.body(body);
+		builder.body(subject);
 		builder.spbillCreateIp(spbillCreateIp);
 		builder.authCode(authCode);
 		WxPayMicropayRequest request = builder.build();
