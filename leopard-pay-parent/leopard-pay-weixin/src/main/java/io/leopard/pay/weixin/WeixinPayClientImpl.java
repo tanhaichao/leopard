@@ -149,6 +149,21 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	}
 
 	@Override
+	public WeixinOrderTradeStatus queryOrderForStatus(String orderNo) throws WxPayException {
+		WxPayOrderQueryResult result = this.queryOrder(orderNo);
+		// SUCCESS—支付成功
+		// REFUND—转入退款
+		// NOTPAY—未支付
+		// CLOSED—已关闭
+		// REVOKED—已撤销（刷卡支付）
+		// USERPAYING--用户支付中
+		// PAYERROR--支付失败(其他原因，如银行返回失败)
+		// 支付状态机请见下单API页面
+		String tradeState = result.getTradeState();
+		return EnumUtil.toEnum(tradeState, WeixinOrderTradeStatus.class);
+	}
+
+	@Override
 	public WxPayOrderReverseResult reverseOrder(String orderNo) throws WxPayException {
 		String paymentId = weixinPayDao.getPaymentId(orderNo);
 		if (StringUtils.isEmpty(paymentId)) {
