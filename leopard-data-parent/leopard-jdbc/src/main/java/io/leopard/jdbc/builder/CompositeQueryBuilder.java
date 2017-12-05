@@ -5,6 +5,7 @@ import io.leopard.jdbc.StatementParameter;
 import java.util.LinkedList;
 import java.util.List;
 
+@Deprecated
 public class CompositeQueryBuilder {
 
 	/**
