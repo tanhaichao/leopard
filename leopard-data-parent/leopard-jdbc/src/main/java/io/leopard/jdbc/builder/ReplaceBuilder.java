@@ -15,8 +15,7 @@ public class ReplaceBuilder extends AbstractSqlBuilder implements SqlBuilder {
 
 	/**
 	 * 
-	 * @param tableName
-	 *            表名称.
+	 * @param tableName 表名称.
 	 */
 	public ReplaceBuilder(String tableName) {
 		// AssertUtil.assertNotEmpty(tableName, "参数tableName不能为空.");
@@ -43,7 +42,7 @@ public class ReplaceBuilder extends AbstractSqlBuilder implements SqlBuilder {
 				fields.append(", ");
 				values.append(", ");
 			}
-			fields.append(fieldName);
+			fields.append("`").append(fieldName).append("`");
 			values.append("?");
 		}
 

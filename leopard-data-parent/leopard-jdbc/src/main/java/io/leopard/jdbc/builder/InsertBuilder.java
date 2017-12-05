@@ -15,8 +15,7 @@ public class InsertBuilder extends AbstractSqlBuilder implements SqlBuilder {
 
 	/**
 	 * 
-	 * @param tableName
-	 *            表名称.
+	 * @param tableName 表名称.
 	 */
 	public InsertBuilder(String tableName) {
 		this(tableName, false);
@@ -24,10 +23,8 @@ public class InsertBuilder extends AbstractSqlBuilder implements SqlBuilder {
 
 	/**
 	 * 
-	 * @param tableName
-	 *            表名称.
-	 * @param insertIgnore
-	 *            是否使用insert ignore into
+	 * @param tableName 表名称.
+	 * @param insertIgnore 是否使用insert ignore into
 	 */
 	public InsertBuilder(String tableName, boolean insertIgnore) {
 		// AssertUtil.assertNotEmpty(tableName, "参数tableName不能为空.");
@@ -52,7 +49,7 @@ public class InsertBuilder extends AbstractSqlBuilder implements SqlBuilder {
 				fields.append(", ");
 				values.append(", ");
 			}
-			fields.append(fieldName);
+			fields.append("`").append(fieldName).append("`");
 			values.append("?");
 		}
 

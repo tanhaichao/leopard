@@ -51,7 +51,7 @@ public class UpdateBuilder extends AbstractSqlBuilder implements SqlBuilder {
 			if (count > 0) {
 				sb.append(", ");
 			}
-			sb.append(filedName).append("=?");
+			sb.append("`").append(filedName).append("`=?");
 			count++;
 		}
 
