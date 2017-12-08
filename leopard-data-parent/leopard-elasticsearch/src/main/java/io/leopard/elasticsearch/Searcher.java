@@ -2,6 +2,8 @@ package io.leopard.elasticsearch;
 
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.search.SearchHits;
 
 /**
  * 搜索器
@@ -35,5 +37,7 @@ public interface Searcher {
 	 * @return
 	 */
 	GetResponse get(String index, String type, String id);
+
+	SearchHits search(QueryBuilder query, int start, int size);
 
 }

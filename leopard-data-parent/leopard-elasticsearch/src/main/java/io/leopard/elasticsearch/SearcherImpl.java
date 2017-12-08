@@ -9,10 +9,14 @@ import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 public class SearcherImpl implements Searcher {
@@ -111,6 +115,12 @@ public class SearcherImpl implements Searcher {
 	public boolean add(String index, String type, String id, String json) {
 		IndexResponse response = client.prepareIndex(index, type, id).setSource(json, XContentType.JSON).execute().actionGet();
 		return true;
+	}
+
+	@Override
+	public SearchHits search(QueryBuilder query, int start, int size) {
+		SearchResponse response = client.prepareSearch().setQuery(query).setFrom(start).setSize(size).execute().actionGet();
+		return response.getHits();
 	}
 
 	@Override
