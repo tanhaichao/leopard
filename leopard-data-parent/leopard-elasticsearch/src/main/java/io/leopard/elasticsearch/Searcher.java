@@ -13,7 +13,7 @@ import org.elasticsearch.search.SearchHits;
  */
 public interface Searcher {
 
-	boolean createIndex(String index);
+	boolean createIndex(String indexName);
 
 	TransportClient getClient();
 
@@ -26,7 +26,7 @@ public interface Searcher {
 	 * @param json 数据
 	 * @return
 	 */
-	boolean add(String index, String type, String id, String json);
+	boolean add(String indexName, String type, String id, String json);
 
 	/**
 	 * 根据主键查询
@@ -36,10 +36,10 @@ public interface Searcher {
 	 * @param id
 	 * @return
 	 */
-	GetResponse get(String index, String type, String id);
+	GetResponse get(String indexName, String type, String id);
 
 	SearchHits search(QueryBuilder query, int start, int size);
 
-	boolean clean(String index, String type);
+	boolean clean(String indexName);
 
 }

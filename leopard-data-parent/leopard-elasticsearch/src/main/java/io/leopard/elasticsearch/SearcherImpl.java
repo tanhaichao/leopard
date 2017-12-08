@@ -7,7 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
-import org.elasticsearch.action.delete.DeleteResponse;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
@@ -96,9 +96,9 @@ public class SearcherImpl implements Searcher {
 	}
 
 	@Override
-	public boolean createIndex(String index) {
+	public boolean createIndex(String indexName) {
 		Settings indexSettings = Settings.builder().put("number_of_shards", 5).put("number_of_replicas", 1).build();
-		CreateIndexRequest indexRequest = new CreateIndexRequest(index, indexSettings);
+		CreateIndexRequest indexRequest = new CreateIndexRequest(indexName, indexSettings);
 		CreateIndexResponse response = client.admin().indices().create(indexRequest).actionGet();
 		return true;
 		// Json.printFormat(response, "response");
@@ -112,8 +112,8 @@ public class SearcherImpl implements Searcher {
 	}
 
 	@Override
-	public boolean add(String index, String type, String id, String json) {
-		IndexResponse response = client.prepareIndex(index, type, id).setSource(json, XContentType.JSON).execute().actionGet();
+	public boolean add(String indexName, String type, String id, String json) {
+		IndexResponse response = client.prepareIndex(indexName, type, id).setSource(json, XContentType.JSON).execute().actionGet();
 		return true;
 	}
 
@@ -124,14 +124,14 @@ public class SearcherImpl implements Searcher {
 	}
 
 	@Override
-	public boolean clean(String index, String type) {
-		DeleteResponse resposne = client.prepareDelete().setIndex(index).setType(type).execute().actionGet();
+	public boolean clean(String indexName) {
+		DeleteIndexResponse response = client.admin().indices().prepareDelete(indexName).execute().actionGet();
 		return true;
 	}
 
 	@Override
-	public GetResponse get(String index, String type, String id) {
-		GetResponse response = client.prepareGet(index, type, id).execute().actionGet();
+	public GetResponse get(String indexName, String type, String id) {
+		GetResponse response = client.prepareGet(indexName, type, id).execute().actionGet();
 		return response;
 	}
 }
