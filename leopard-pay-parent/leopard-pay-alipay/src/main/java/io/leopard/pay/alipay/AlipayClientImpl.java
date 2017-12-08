@@ -78,6 +78,11 @@ public class AlipayClientImpl implements AlipayClient {
 	}
 
 	@Override
+	public AlipayMicropayStatus micropayForStatus(String outTradeNo, String authCode, String subject, double totalAmount, String spbillCreateIp) throws AlipayApiException {
+		return micropayForStatus(outTradeNo, "bar_code", authCode, subject, totalAmount, spbillCreateIp);
+	}
+
+	@Override
 	public AlipayMicropayStatus micropayForStatus(String outTradeNo, String scene, String authCode, String subject, double totalAmount, String spbillCreateIp) throws AlipayApiException {
 		AlipayTradePayResponse response = this.micropay(outTradeNo, scene, authCode, subject, totalAmount, spbillCreateIp);
 

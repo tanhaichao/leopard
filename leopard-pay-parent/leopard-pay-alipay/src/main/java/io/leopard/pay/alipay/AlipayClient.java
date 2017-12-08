@@ -23,7 +23,9 @@ public interface AlipayClient {
 
 	AlipayMicropayStatus micropayForStatus(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws AlipayApiException;
 
-	AlipayOrderTradeStatus queryOrderForStatus(String orderNo) throws AlipayApiException;
+	AlipayMicropayStatus micropayForStatus(String outTradeNo, String authCode, String subject, double amount, String spbillCreateIp) throws AlipayApiException;
+
+	AlipayOrderTradeStatus queryOrderForStatus(String outTradeNo) throws AlipayApiException;
 
 	AlipayTradeQueryResponse queryOrder(String outTradeNo) throws AlipayApiException;
 }
