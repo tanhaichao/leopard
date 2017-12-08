@@ -1,5 +1,6 @@
 package io.leopard.elasticsearch;
 
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.transport.TransportClient;
 
 /**
@@ -24,5 +25,15 @@ public interface Searcher {
 	 * @return
 	 */
 	boolean add(String index, String type, String id, String json);
+
+	/**
+	 * 根据主键查询
+	 * 
+	 * @param index
+	 * @param type
+	 * @param id
+	 * @return
+	 */
+	GetResponse get(String index, String type, String id);
 
 }
