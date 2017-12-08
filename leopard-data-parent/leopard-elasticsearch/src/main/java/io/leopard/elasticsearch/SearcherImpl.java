@@ -13,7 +13,7 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.IndexNotFoundException;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -87,7 +87,7 @@ public class SearcherImpl implements Searcher {
 		}
 		Settings settings = Settings.builder().build();
 		this.client = new PreBuiltTransportClient(settings);
-		InetSocketTransportAddress transportAddress = new InetSocketTransportAddress(inetAddress, port);
+		TransportAddress transportAddress = new TransportAddress(inetAddress, port);
 		client.addTransportAddress(transportAddress);
 	}
 
