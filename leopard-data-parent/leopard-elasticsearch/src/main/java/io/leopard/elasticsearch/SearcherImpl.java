@@ -13,12 +13,12 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.IndexNotFoundException;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 
 public class SearcherImpl implements Searcher {
 	protected Log logger = LogFactory.getLog(this.getClass());
@@ -87,7 +87,7 @@ public class SearcherImpl implements Searcher {
 		}
 		Settings settings = Settings.builder().build();
 		this.client = new PreBuiltTransportClient(settings);
-		TransportAddress transportAddress = new TransportAddress(inetAddress, port);
+		InetSocketTransportAddress transportAddress = new InetSocketTransportAddress(inetAddress, port);
 		client.addTransportAddress(transportAddress);
 	}
 
