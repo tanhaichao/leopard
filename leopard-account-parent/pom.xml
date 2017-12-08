@@ -10,5 +10,6 @@
   <description>第三方账号</description>
   <modules>
   	<module>leopard-account-weixin</module>
+  	<module>leopard-account-qq</module>
   </modules>
 </project>
