@@ -15,6 +15,7 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.IndexNotFoundException;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
@@ -125,7 +126,12 @@ public class SearcherImpl implements Searcher {
 
 	@Override
 	public boolean clean(String indexName) {
-		DeleteIndexResponse response = client.admin().indices().prepareDelete(indexName).execute().actionGet();
+		try {
+			DeleteIndexResponse response = client.admin().indices().prepareDelete(indexName).execute().actionGet();
+		}
+		catch (IndexNotFoundException e) {
+			return false;
+		}
 		return true;
 	}
 
