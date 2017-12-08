@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
@@ -15,7 +16,6 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
@@ -121,6 +121,12 @@ public class SearcherImpl implements Searcher {
 	public SearchHits search(QueryBuilder query, int start, int size) {
 		SearchResponse response = client.prepareSearch().setQuery(query).setFrom(start).setSize(size).execute().actionGet();
 		return response.getHits();
+	}
+
+	@Override
+	public boolean clean(String index, String type) {
+		DeleteResponse resposne = client.prepareDelete().setIndex(index).setType(type).execute().actionGet();
+		return true;
 	}
 
 	@Override

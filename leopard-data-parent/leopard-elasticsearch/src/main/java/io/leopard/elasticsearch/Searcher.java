@@ -40,4 +40,6 @@ public interface Searcher {
 
 	SearchHits search(QueryBuilder query, int start, int size);
 
+	boolean clean(String index, String type);
+
 }
