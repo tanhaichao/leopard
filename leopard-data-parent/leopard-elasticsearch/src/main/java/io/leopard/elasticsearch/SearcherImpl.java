@@ -7,9 +7,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 public class SearcherImpl implements Searcher {
@@ -102,5 +104,11 @@ public class SearcherImpl implements Searcher {
 			return;
 		}
 		this.client.close();
+	}
+
+	@Override
+	public boolean add(String index, String type, String id, String json) {
+		IndexResponse response = client.prepareIndex(index, type, id).setSource(json, XContentType.JSON).execute().actionGet();
+		return false;
 	}
 }
