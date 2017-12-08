@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
+import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 
 public class WeixinAccountClientImpl implements WeixinAccountClient {
 
@@ -41,6 +42,11 @@ public class WeixinAccountClientImpl implements WeixinAccountClient {
 	}
 
 	@Override
+	public WxMpOAuth2AccessToken oauth2getAccessToken(String code) throws WxErrorException {
+		return mpService.oauth2getAccessToken(code);
+	}
+
+	@Override
 	public List<String> getCallbackIP() throws WxErrorException {
 		String[] ips = mpService.getCallbackIP();
 		if (ips == null) {
@@ -55,6 +61,7 @@ public class WeixinAccountClientImpl implements WeixinAccountClient {
 
 	@Override
 	public String shortUrl(String longUrl) throws WxErrorException {
+
 		return this.mpService.shortUrl(longUrl);
 	}
 
