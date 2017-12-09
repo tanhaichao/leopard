@@ -93,6 +93,11 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	}
 
 	@Override
+	public WeixinMicropayStatus micropayForStatus(String outTradeNo, String authCode, String subject, double amount, String spbillCreateIp) throws WeixinPayException {
+		return this.micropayForStatus(outTradeNo, null, authCode, subject, amount, spbillCreateIp);
+	}
+
+	@Override
 	public WeixinMicropayStatus micropayForStatus(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws WeixinPayException {
 		try {
 			WxPayMicropayResult result = this.micropay(outTradeNo, scene, authCode, subject, amount, spbillCreateIp);
