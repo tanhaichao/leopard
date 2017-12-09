@@ -75,7 +75,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
 		request.setOutTradeNo(paymentId);// 商户订单号
 		request.setTotalFee(totalFee);// 订单总金额
-		// request.setProductId(productId);// 商品ID
+		request.setProductId(orderNo);// 商品ID
 		request.setBody(body);// 商品描述
 		request.setDetail(detail);// 商品详细介绍
 		request.setNotifyURL(notifyUrl);
