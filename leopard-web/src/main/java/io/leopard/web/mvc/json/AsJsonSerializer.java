@@ -21,7 +21,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import io.leopard.json.As;
-import io.leopard.json.Json;
 import io.leopard.lang.util.BeanUtil;
 import io.leopard.web.mvc.AbstractJsonSerializer;
 
