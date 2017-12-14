@@ -51,8 +51,10 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 			else {
 				Object data = this.get((T) value, gen, field);
 				Object currentValue = gen.getOutputContext().getCurrentValue();
-				copyProperties(data, currentValue);
-				gen.writeObject(value);
+				if (data != null) {
+					copyProperties(data, currentValue);
+				}
+				gen.writeObject(currentValue);
 			}
 			return;
 		}
