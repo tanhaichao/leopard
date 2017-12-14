@@ -21,6 +21,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import io.leopard.json.As;
+import io.leopard.json.Json;
 import io.leopard.lang.util.BeanUtil;
 import io.leopard.web.mvc.AbstractJsonSerializer;
 
@@ -53,7 +54,7 @@ public abstract class AsJsonSerializer<T> extends AbstractJsonSerializer<Object>
 				if (data != null) {
 					copyProperties(data, currentValue);
 				}
-				gen.writeObject(currentValue);
+				gen.writeObject(value);// TODO 这里输出的对象有问题?
 			}
 			return;
 		}
