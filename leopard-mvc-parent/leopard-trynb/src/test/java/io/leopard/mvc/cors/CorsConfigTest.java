@@ -1,22 +1,21 @@
 package io.leopard.mvc.cors;
 
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Field;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.util.StringUtils;
 
 public class CorsConfigTest {
-	
+
 	@Test
-	public void get() throws MalformedURLException {
+	public void get() throws Exception {
 		String url = getHostAndPort("http://weixin.zhhr.xiaoniu.io", "zhhr.com", "*.zhhr.xiaoniu.io");
 		System.err.println("url:" + url);
 	}
 
 	@Test
-	public void getHostAndPort() throws MalformedURLException {
+	public void getHostAndPort() throws Exception {
 		// getHostAndPort("http://baidu.com", "*");
 		// getHostAndPort("http://baidu.com", "zhhr.com");
 		// getHostAndPort("http://zhhr.com", "zhhr.com");
@@ -29,14 +28,16 @@ public class CorsConfigTest {
 		Assert.assertEquals(getHostAndPort("lexfei"), null);
 	}
 
-	private static String getHostAndPort(String referer, String... origins) throws MalformedURLException {
-		List<String> allowOriginList = new ArrayList<String>();
-		for (String origin : origins) {
-			allowOriginList.add(origin);
-		}
-		allowOriginList = CorsConfig.toRegexList(allowOriginList);
-		String domain = CorsConfig.getHostAndPort(referer, allowOriginList);
-		System.err.println("domain:" + domain + " referer:" + referer + " allowOriginList:" + allowOriginList);
+	private static String getHostAndPort(String referer, String... origins) throws Exception {
+		String cors = StringUtils.arrayToDelimitedString(origins, ",");
+		AllowOriginResolver allowOriginResolver = new AllowOriginResolverImpl();
+		allowOriginResolver.setCors(cors);
+		CorsConfig corsConfig = new CorsConfig();
+		Field allowOriginResolverField = corsConfig.getClass().getDeclaredField("allowOriginResolver");
+		allowOriginResolverField.setAccessible(true);
+		allowOriginResolverField.set(corsConfig, allowOriginResolver);
+		String domain = corsConfig.getHostAndPort(referer);
+		System.err.println("domain:" + domain + " referer:" + referer);
 		return domain;
 	}
 

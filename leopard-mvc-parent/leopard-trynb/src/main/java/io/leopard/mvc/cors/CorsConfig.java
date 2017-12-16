@@ -2,7 +2,6 @@ package io.leopard.mvc.cors;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -29,28 +28,17 @@ public class CorsConfig {
 	@Autowired
 	private AllowOriginResolver allowOriginResolver;
 
-	private List<String> allowOriginList;
-
-	private boolean enable;
-
 	@PostConstruct
 	public void init() {
 		// logger.info("cors:" + cors);
 		if ("${mvc.cors}".equals(cors)) {// TODO
 			cors = null;
 		}
-		List<String> allowOriginList = allowOriginResolver.resolve(cors);
-		if (allowOriginList == null) {
-			allowOriginList = new ArrayList<>();
-		}
-		this.allowOriginList = toRegexList(allowOriginList);
-		// logger.info("init:" + enable);
-		enable = !allowOriginList.isEmpty();
+		allowOriginResolver.setCors(cors);
 	}
 
 	public boolean isEnable() {
-		// System.err.println("cors:" + ENABLE);
-		return enable;
+		return allowOriginResolver.isEnable();
 	}
 
 	public String getAccessControlAllowOrigin(HttpServletRequest request) {
@@ -58,43 +46,10 @@ public class CorsConfig {
 		if (StringUtils.isEmpty(referer)) {
 			return null;
 		}
-		return getHostAndPort(referer, allowOriginList);
+		return getHostAndPort(referer);
 	}
 
-	/**
-	 * 转换成正则表达式
-	 * 
-	 * @param allowOriginList
-	 * @return
-	 */
-	protected static List<String> toRegexList(List<String> allowOriginList) {
-		List<String> regexList = new ArrayList<>();
-		for (String origin : allowOriginList) {
-			if ("*".equals(origin)) {
-				regexList.add("^[a-zA-Z0-9_\\-\\.]+$");
-			}
-			else if (origin.startsWith("*.")) {
-				regexList.add("^[a-zA-Z0-9_\\-\\.]+" + origin.substring(2) + "$");
-			}
-			else {
-				regexList.add("^" + origin + "$");
-			}
-		}
-		return regexList;
-	}
-
-	protected static boolean match(String host, List<String> originRegexList) {
-		for (String regex : originRegexList) {
-			// System.err.println("host:" + host + " regex:" + regex + " match:" + host.matches(regex));
-			if (host.matches(regex)) {
-				return true;
-			}
-		}
-		return false;
-
-	}
-
-	protected static String getHostAndPort(String referer, List<String> originRegexList) {
+	protected String getHostAndPort(String referer) {
 		URL url;
 		try {
 			url = new URL(referer);
@@ -104,7 +59,7 @@ public class CorsConfig {
 		}
 		String host = url.getHost();
 
-		boolean matched = match(host, originRegexList);
+		boolean matched = allowOriginResolver.match(host);
 		// System.err.println("host:" + host + " matched:" + matched + " originRegexList:" + originRegexList);
 		if (!matched) {
 			return null;
