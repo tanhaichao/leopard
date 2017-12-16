@@ -1,5 +1,6 @@
 package io.leopard.pay.weixin;
 
+import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.result.WxPayMicropayResult;
 import com.github.binarywang.wxpay.bean.result.WxPayOrderQueryResult;
 import com.github.binarywang.wxpay.bean.result.WxPayOrderReverseResult;
@@ -64,5 +65,7 @@ public interface WeixinPayClient {
 	WeixinOrderTradeStatus queryOrderForStatus(String orderNo) throws WxPayException;
 
 	WeixinMicropayStatus micropayForStatus(String outTradeNo, String authCode, String subject, double amount, String spbillCreateIp) throws WeixinPayException;
+
+	WxPayOrderNotifyResult parseOrderNotifyResult(String xmlData) throws WxPayException;
 
 }

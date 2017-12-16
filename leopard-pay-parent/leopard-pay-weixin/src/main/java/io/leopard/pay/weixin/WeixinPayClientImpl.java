@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.request.WxPayMicropayRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayOrderReverseRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
@@ -67,13 +68,13 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 
 	@Override
 	public WxPayUnifiedOrderResult unifiedOrder(String orderNo, TradeType tradeType, double amount, String body, String detail, String notifyUrl, String spbillCreateIp) throws WxPayException {
-		String paymentId = StringUtil.uuid();
-		weixinPayDao.add(paymentId, orderNo);
+		// String paymentId = StringUtil.uuid();
+		// weixinPayDao.add(paymentId, orderNo);
 
 		int totalFee = (int) DecimalUtil.multiply(amount, 100);// TODO
 
 		WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
-		request.setOutTradeNo(paymentId);// 商户订单号
+		request.setOutTradeNo(orderNo);// 商户订单号
 		request.setTotalFee(totalFee);// 订单总金额
 		request.setProductId(orderNo);// TODO 商品ID
 		request.setBody(body);// 商品描述
@@ -85,6 +86,11 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		Json.print(result, "result");
 		// wxPayService.downloadBill(billDate, billType, tarType, deviceInfo);
 		return result;
+	}
+
+	@Override
+	public WxPayOrderNotifyResult parseOrderNotifyResult(String xmlData) throws WxPayException {
+		return this.wxPayService.parseOrderNotifyResult(xmlData);
 	}
 
 	@Override
@@ -122,8 +128,8 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 	// String outTradeNo, String scene, String authCode, String subject, double totalAmount, String notifyUrl
 	@Override
 	public WxPayMicropayResult micropay(String outTradeNo, String scene, String authCode, String subject, double amount, String spbillCreateIp) throws WeixinPayException {
-		String paymentId = StringUtil.uuid();
-		weixinPayDao.add(paymentId, outTradeNo);
+		// String paymentId = StringUtil.uuid();
+		// weixinPayDao.add(paymentId, outTradeNo);
 
 		int totalFee = (int) DecimalUtil.multiply(amount, 100);// TODO
 
@@ -131,7 +137,7 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 		WxPayMicropayRequest.Builder builder = WxPayMicropayRequest.newBuilder();// .appid(appId).mchId(mchId);
 		// builder .nonceStr(nonceStr);
 		// builder .sign(sign)
-		builder.outTradeNo(paymentId);
+		builder.outTradeNo(outTradeNo);
 		builder.totalFee(totalFee);
 
 		builder.body(subject);
@@ -148,12 +154,12 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 
 	@Override
 	public WxPayOrderQueryResult queryOrder(String orderNo) throws WxPayException {
-		String paymentId = weixinPayDao.getPaymentId(orderNo);
-		if (StringUtils.isEmpty(paymentId)) {
-			throw new RuntimeException("订单[" + orderNo + "]支付记录不存在.");
-		}
+		// String paymentId = weixinPayDao.getPaymentId(orderNo);
+		// if (StringUtils.isEmpty(paymentId)) {
+		// throw new RuntimeException("订单[" + orderNo + "]支付记录不存在.");
+		// }
 		// paymentId = paymentId.substring(0, 31) + "x";
-		return wxPayService.queryOrder(null, paymentId);
+		return wxPayService.queryOrder(null, orderNo);
 	}
 
 	@Override
@@ -173,12 +179,12 @@ public class WeixinPayClientImpl implements WeixinPayClient {
 
 	@Override
 	public WxPayOrderReverseResult reverseOrder(String orderNo) throws WxPayException {
-		String paymentId = weixinPayDao.getPaymentId(orderNo);
-		if (StringUtils.isEmpty(paymentId)) {
-			throw new RuntimeException("订单[" + orderNo + "]支付记录不存在.");
-		}
+		// String paymentId = weixinPayDao.getPaymentId(orderNo);
+		// if (StringUtils.isEmpty(paymentId)) {
+		// throw new RuntimeException("订单[" + orderNo + "]支付记录不存在.");
+		// }
 		WxPayOrderReverseRequest.Builder builder = WxPayOrderReverseRequest.newBuilder();
-		builder.outTradeNo(paymentId);
+		builder.outTradeNo(orderNo);
 		WxPayOrderReverseRequest request = builder.build();
 
 		return this.wxPayService.reverseOrder(request);
