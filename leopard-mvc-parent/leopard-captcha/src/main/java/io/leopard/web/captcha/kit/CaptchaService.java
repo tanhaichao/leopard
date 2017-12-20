@@ -26,4 +26,6 @@ public interface CaptchaService {
 
 	void checkSessCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException;
 
+	String send(String account, CaptchaType type, String target, String content, String data) throws FrequencyException;
+
 }

@@ -68,11 +68,12 @@ public class CaptchaServiceImpl implements CaptchaService {
 		this.captchaDao = captchaDaoMysqlImpl;
 	}
 
-	protected String add(String account, CaptchaType type, String target, String captcha) {
+	protected String add(String account, CaptchaType type, String target, String captcha, String data) {
 		Assert.hasText(account, "参数account不能为空");
 		Assert.notNull(type, "参数type不能为空");
 		Assert.hasText(target, "参数target不能为空");
 		Assert.hasText(captcha, "参数captcha不能为空");
+		Assert.hasText(data, "参数data不能为空");
 		String captchaId = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
 		Date posttime = new Date();
 		Date expiryTime = DateUtil.addTime(posttime, 10);// 10分钟有效
@@ -83,6 +84,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		bean.setTarget(target);
 		bean.setPosttime(posttime);
 		bean.setCaptcha(captcha);
+		bean.setData(data);
 		bean.setExpiryTime(expiryTime);
 		bean.setLmodify(posttime);
 		bean.setUsed(false);
@@ -169,16 +171,22 @@ public class CaptchaServiceImpl implements CaptchaService {
 
 	@Override
 	public String send(String account, CaptchaType type, String target, String content) throws FrequencyException {
+		return this.add(account, type, target, content, "");
+	}
+
+	@Override
+	public String send(String account, CaptchaType type, String target, String content, String data) throws FrequencyException {
 		Assert.hasText(account, "参数account不能为空");
 		Assert.notNull(type, "参数type不能为空");
 		Assert.hasText(target, "参数target不能为空");
+		Assert.hasText(data, "参数data不能为空");
 
 		Captcha bean = this.last(account, type, target);
 		String seccode;
 		if (bean == null) {
 			String str = Long.toString(System.nanoTime());
 			seccode = str.substring(str.length() - 4);
-			this.add(account, type, target, seccode);
+			this.add(account, type, target, seccode, data);
 		}
 		else {
 			this.checkFrequency(bean);

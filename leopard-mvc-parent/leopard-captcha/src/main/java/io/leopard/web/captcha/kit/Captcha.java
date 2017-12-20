@@ -23,9 +23,17 @@ public class Captcha {
 	 */
 	private String target;
 
+	/**
+	 * 扩展数据
+	 */
+	private String data;
+
 	private String captcha;
+
 	private Date posttime;
+
 	private Date expiryTime;
+
 	private Date lmodify;
 
 	private boolean used;
@@ -108,6 +116,14 @@ public class Captcha {
 
 	public void setLmodify(Date lmodify) {
 		this.lmodify = lmodify;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}
 
 }
