@@ -171,7 +171,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 
 	@Override
 	public String send(String account, CaptchaType type, String target, String content) throws FrequencyException {
-		return this.add(account, type, target, content, "");
+		return this.send(account, type, target, content, "");
 	}
 
 	@Override
