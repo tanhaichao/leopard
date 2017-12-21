@@ -179,7 +179,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		Assert.hasText(account, "参数account不能为空");
 		Assert.notNull(type, "参数type不能为空");
 		Assert.hasText(target, "参数target不能为空");
-		Assert.hasText(data, "参数data不能为空");
+		Assert.notNull(data, "参数data不能为空");
 
 		Captcha bean = this.last(account, type, target);
 		String seccode;
