@@ -73,7 +73,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		Assert.notNull(type, "参数type不能为空");
 		Assert.hasText(target, "参数target不能为空");
 		Assert.hasText(captcha, "参数captcha不能为空");
-		Assert.hasText(data, "参数data不能为空");
+		Assert.notNull(data, "参数data不能为空");
 		String captchaId = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
 		Date posttime = new Date();
 		Date expiryTime = DateUtil.addTime(posttime, 10);// 10分钟有效
