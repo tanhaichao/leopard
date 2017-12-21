@@ -69,19 +69,34 @@ public class Json {
 		return instance.toListObject(jsonList, clazz, ignoreUnknownField);
 	}
 
+	private static String getTargetClassSimpleName() {
+		StackTraceElement element = Thread.currentThread().getStackTrace()[2];
+		String className = element.getClassName();
+		int index = className.lastIndexOf(".");
+		if (index == -1) {
+			return className;
+		}
+		else {
+			return className.substring(index + 1);
+		}
+	}
+
 	public static void print(Object obj) {
 		String json = toJson(obj);
-		System.out.println("json:" + json);
+		String targetClassSimpleName = getTargetClassSimpleName();
+		System.out.println("json[" + targetClassSimpleName + "]:" + json);
 	}
 
 	public static void print(Object obj, String name) {
 		String json = toJson(obj);
-		System.out.println("json info " + name + "::" + json);
+		String targetClassSimpleName = getTargetClassSimpleName();
+		System.out.println("json[" + targetClassSimpleName + "] info " + name + "::" + json);
 	}
 
 	public static void printFormat(Object obj, String name) {
 		String json = toFormatJson(obj);
-		System.out.println("json info " + name + "::" + json);
+		String targetClassSimpleName = getTargetClassSimpleName();
+		System.out.println("json[" + targetClassSimpleName + "] info " + name + "::" + json);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
