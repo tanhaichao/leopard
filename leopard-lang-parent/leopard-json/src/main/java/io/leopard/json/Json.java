@@ -70,7 +70,7 @@ public class Json {
 	}
 
 	private static String getTargetClassSimpleName() {
-		StackTraceElement element = Thread.currentThread().getStackTrace()[2];
+		StackTraceElement element = Thread.currentThread().getStackTrace()[3];
 		String className = element.getClassName();
 		int index = className.lastIndexOf(".");
 		if (index == -1) {
