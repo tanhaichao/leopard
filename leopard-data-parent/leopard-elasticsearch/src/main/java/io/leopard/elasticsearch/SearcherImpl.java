@@ -19,6 +19,7 @@ import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.IndexNotFoundException;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.sort.SortOrder;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 public class SearcherImpl implements Searcher {
@@ -128,6 +129,12 @@ public class SearcherImpl implements Searcher {
 	@Override
 	public SearchHits search(QueryBuilder query, int start, int size) {
 		SearchResponse response = client.prepareSearch().setQuery(query).setFrom(start).setSize(size).execute().actionGet();
+		return response.getHits();
+	}
+
+	@Override
+	public SearchHits search(QueryBuilder query, String orderField, int start, int size) {
+		SearchResponse response = client.prepareSearch().setQuery(query).addSort(orderField, SortOrder.DESC).setFrom(start).setSize(size).execute().actionGet();
 		return response.getHits();
 	}
 

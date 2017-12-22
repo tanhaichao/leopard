@@ -52,4 +52,6 @@ public interface Searcher {
 	 */
 	boolean delete(String indexName, String type, String id);
 
+	SearchHits search(QueryBuilder query, String orderField, int start, int size);
+
 }
