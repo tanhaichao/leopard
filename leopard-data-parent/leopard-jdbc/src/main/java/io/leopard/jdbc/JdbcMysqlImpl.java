@@ -47,7 +47,10 @@ public class JdbcMysqlImpl implements Jdbc {
 
 	protected JdbcTemplate jdbcTemplate;
 
+	protected DataSource dataSource;
+
 	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 		if (this.jdbcTemplate == null || dataSource != this.jdbcTemplate.getDataSource()) {
 			this.jdbcTemplate = new JdbcTemplate(dataSource);
 		}
@@ -760,5 +763,14 @@ public class JdbcMysqlImpl implements Jdbc {
 		page.setPageSize(size);
 
 		return page;
+	}
+
+	@Override
+	public void destroy() {
+		if (dataSource != null) {
+			if (dataSource instanceof JdbcDataSource) {
+				((JdbcDataSource) dataSource).destroy();
+			}
+		}
 	}
 }
