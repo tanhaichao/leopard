@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
@@ -110,6 +111,12 @@ public class SearcherImpl implements Searcher {
 			return;
 		}
 		this.client.close();
+	}
+
+	@Override
+	public boolean delete(String indexName, String type, String id) {
+		DeleteResponse deleteresponse = client.prepareDelete(indexName, type, id).execute().actionGet();
+		return true;
 	}
 
 	@Override

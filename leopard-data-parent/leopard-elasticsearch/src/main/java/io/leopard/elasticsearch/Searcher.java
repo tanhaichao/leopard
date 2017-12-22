@@ -31,9 +31,9 @@ public interface Searcher {
 	/**
 	 * 根据主键查询
 	 * 
-	 * @param index
-	 * @param type
-	 * @param id
+	 * @param index 索引名称
+	 * @param type 类型名称
+	 * @param id ID
 	 * @return
 	 */
 	GetResponse get(String indexName, String type, String id);
@@ -41,5 +41,15 @@ public interface Searcher {
 	SearchHits search(QueryBuilder query, int start, int size);
 
 	boolean clean(String indexName);
+
+	/**
+	 * 删除
+	 * 
+	 * @param indexName 索引名称
+	 * @param type 类型名称
+	 * @param id ID
+	 * @return
+	 */
+	boolean delete(String indexName, String type, String id);
 
 }
