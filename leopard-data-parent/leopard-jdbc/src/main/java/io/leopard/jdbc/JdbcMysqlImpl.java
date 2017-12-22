@@ -771,6 +771,7 @@ public class JdbcMysqlImpl implements Jdbc {
 			if (dataSource instanceof JdbcDataSource) {
 				((JdbcDataSource) dataSource).destroy();
 			}
+			// TODO
 		}
 	}
 }

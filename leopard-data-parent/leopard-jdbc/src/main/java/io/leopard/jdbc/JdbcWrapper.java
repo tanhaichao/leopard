@@ -358,4 +358,9 @@ public class JdbcWrapper implements Jdbc {
 		return this.getJdbc().queryForPage(sql, elementType, param, start, size);
 	}
 
+	@Override
+	public void destroy() {
+		this.getJdbc().destroy();
+	}
+
 }

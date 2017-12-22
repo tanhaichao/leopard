@@ -569,4 +569,5 @@ public interface Jdbc {
 
 	<T> Page<T> queryForPage(String sql, Class<T> elementType, StatementParameter param, int start, int size);
 
+	void destroy();
 }
