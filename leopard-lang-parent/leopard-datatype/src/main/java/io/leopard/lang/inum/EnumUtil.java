@@ -14,7 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class EnumUtil {
 
-	protected static final Map<Object, Map<Object, Enum<?>>> cache = new ConcurrentHashMap<Object, Map<Object, Enum<?>>>();
+	//Map<枚举类名,Map<元素key, 元素>>
+	protected static final Map<String, Map<Object, Enum<?>>> cache = new ConcurrentHashMap<String, Map<Object, Enum<?>>>();
 
 	// public static <E extends Enum<E>> EnumSet<E> of(E e) {
 
