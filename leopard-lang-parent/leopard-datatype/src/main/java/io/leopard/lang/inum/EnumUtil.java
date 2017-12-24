@@ -1,6 +1,7 @@
 package io.leopard.lang.inum;
 
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,8 +15,21 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class EnumUtil {
 
-	//Map<枚举类名,Map<元素key, 元素>>
+	// Map<枚举类名,Map<元素key, 元素>>
 	protected static final Map<String, Map<Object, Enum<?>>> cache = new ConcurrentHashMap<String, Map<Object, Enum<?>>>();
+
+	public static <E extends Enum<E>> void add(Object key, E onum) {
+		String className = onum.getClass().getName();
+		Map<Object, Enum<?>> constantMap = cache.get(className);
+		if (constantMap == null) {
+			constantMap = new HashMap<>();
+			cache.put(className, constantMap);
+		}
+		if (cache.containsKey(key)) {
+			throw new RuntimeException("枚举元素[" + key + "]已存在.");
+		}
+		constantMap.put(key, onum);
+	}
 
 	// public static <E extends Enum<E>> EnumSet<E> of(E e) {
 
