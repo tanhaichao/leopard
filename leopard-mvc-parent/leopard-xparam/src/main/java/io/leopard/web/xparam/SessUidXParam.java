@@ -44,6 +44,10 @@ public class SessUidXParam implements XParam {
 		// throw new UnsupportedOperationException("未知类型[" + sessUid.getClass().getName() + "].");
 	}
 
+	public static void setSessUid(HttpServletRequest request, long uid) {
+		request.getSession().setAttribute("sessUid", uid);
+	}
+
 	public static long getSessUid(HttpServletRequest request) {
 		Number sessUid = (Number) request.getSession().getAttribute("sessUid");
 		if (sessUid == null) {
