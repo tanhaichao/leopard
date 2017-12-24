@@ -92,7 +92,7 @@ public class EnumUtil {
 		// key = toLowerCase(key);
 		Map<Object, Enum<?>> map = cache.get(key);
 		if (map == null) {
-			map = toMap(key, clazz);
+			map = toMap(clazz);
 		}
 		return map.containsKey(key);
 	}
@@ -107,20 +107,20 @@ public class EnumUtil {
 	@SuppressWarnings("unchecked")
 	public static <E extends Enum<E>> E get(Object key, Class<E> clazz) {
 		// key = toLowerCase(key);
-		Map<Object, Enum<?>> map = cache.get(key);
+		Map<Object, Enum<?>> map = cache.get(clazz.getName());
 		if (map == null) {
-			map = toMap(key, clazz);
+			map = toMap(clazz);
 		}
 		return (E) map.get(key);
 	}
 
-	public static synchronized <E extends Enum<E>> Map<Object, Enum<?>> toMap(Class<E> clazz) {
-		return toMap(clazz.getName(), clazz);
-	}
+	// public static synchronized <E extends Enum<E>> Map<Object, Enum<?>> toMap(Class<E> clazz) {
+	// return toMap(clazz.getName(), clazz);
+	// }
 
 	@SuppressWarnings("unchecked")
-	protected static synchronized <E extends Enum<E>> Map<Object, Enum<?>> toMap(Object key, Class<E> clazz) {
-		Map<Object, Enum<?>> map = cache.get(key);
+	protected static synchronized <E extends Enum<E>> Map<Object, Enum<?>> toMap(Class<E> clazz) {
+		Map<Object, Enum<?>> map = cache.get(clazz.getName());
 		if (map != null) {
 			return map;
 		}
