@@ -39,7 +39,7 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 
 	private Class<T> mappedClass;
 
-	private Map<String, Field> mappedFields;
+	protected Map<String, Field> mappedFields;
 
 	public LeopardBeanPropertyRowMapper(Class<T> mappedClass) {
 		this.mappedClass = mappedClass;
