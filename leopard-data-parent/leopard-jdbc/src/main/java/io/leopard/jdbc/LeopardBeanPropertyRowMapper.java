@@ -91,21 +91,26 @@ public class LeopardBeanPropertyRowMapper<T> implements RowMapper<T> {
 			}
 
 			if (field != null) {
-				Object value = getColumnValue(rs, index, rsmd, columnName, field);
-
-				field.setAccessible(true);
-				try {
-					field.set(bean, value);
-				}
-				// catch (IllegalArgumentException e) {
-				// throw new SQLException(e.getMessage(), e);
-				// }
-				catch (IllegalAccessException e) {
-					throw new SQLException(e.getMessage(), e);
-				}
+				this.loadFieldValue(bean, rs, index, rsmd, columnName, field);
 			}
 		}
 		return bean;
+	}
+
+	protected Object loadFieldValue(T bean, ResultSet rs, int index, ResultSetMetaData rsmd, String columnName, Field field) throws SQLException {
+		Object value = getColumnValue(rs, index, rsmd, columnName, field);
+
+		field.setAccessible(true);
+		try {
+			field.set(bean, value);
+		}
+		// catch (IllegalArgumentException e) {
+		// throw new SQLException(e.getMessage(), e);
+		// }
+		catch (IllegalAccessException e) {
+			throw new SQLException(e.getMessage(), e);
+		}
+		return value;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
