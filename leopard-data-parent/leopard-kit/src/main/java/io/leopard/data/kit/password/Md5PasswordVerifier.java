@@ -1,6 +1,7 @@
 package io.leopard.data.kit.password;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang.StringUtils;
 
 import io.leopard.core.exception.forbidden.PasswordWrongException;
 import io.leopard.util.EncryptUtil;
@@ -14,7 +15,13 @@ public class Md5PasswordVerifier implements PasswordVerifier {
 			encryptedPassword = password;
 		}
 		else {
-			String str = password + "@" + salt;
+			String str;
+			if (StringUtils.isEmpty(salt)) {
+				str = password;
+			}
+			else {
+				str = password + "@" + salt;
+			}
 			encryptedPassword = EncryptUtil.md5(str).toLowerCase();
 		}
 		return encryptedPassword.equalsIgnoreCase(dbEncryptedPassword);
