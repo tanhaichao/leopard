@@ -1178,4 +1178,10 @@ public class RedisMemoryImpl implements Redis {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Long> bitfield(String arg0, String... arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

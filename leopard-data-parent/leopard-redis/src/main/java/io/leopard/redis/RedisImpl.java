@@ -2158,4 +2158,10 @@ public class RedisImpl extends AbstractRedis implements Redis {
 			}
 		});
 	}
+
+	@Override
+	public List<Long> bitfield(String arg0, String... arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
