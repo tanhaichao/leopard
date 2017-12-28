@@ -1,6 +1,7 @@
 package io.leopard.schema;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
@@ -57,7 +58,7 @@ public class JdbcBeanDefinitionParser implements BeanDefinitionParser {
 		final String port = element.getAttribute("port");
 
 		int idleConnectionTestPeriod = 0;
-		if (EnvUtil.isDevEnv()) {
+		if (EnvUtil.isDevEnv() && SystemUtils.IS_OS_WINDOWS) {
 			idleConnectionTestPeriod = 60;// 间隔60秒检查空闲连接
 		}
 
