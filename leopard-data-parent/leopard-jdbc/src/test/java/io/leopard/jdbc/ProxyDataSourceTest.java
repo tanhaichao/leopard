@@ -92,7 +92,7 @@ public class ProxyDataSourceTest {
 	@Test
 	public void createDataSource() throws PropertyVetoException {
 		String jdbcUrl = ProxyDataSource.getJdbcUrl("host", 3306, "leopard");
-		ProxyDataSource.createDataSource("org.gjt.mm.mysql.Driver", jdbcUrl, "user", "password", 10);
+		ProxyDataSource.createDataSource("org.gjt.mm.mysql.Driver", jdbcUrl, "user", "password", 10, 60);
 	}
 
 }
