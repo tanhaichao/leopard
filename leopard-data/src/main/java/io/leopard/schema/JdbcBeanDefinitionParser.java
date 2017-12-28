@@ -7,6 +7,7 @@ import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
+import io.leopard.data.env.EnvUtil;
 import io.leopard.data.schema.RegisterComponentUtil;
 
 public class JdbcBeanDefinitionParser implements BeanDefinitionParser {
@@ -55,6 +56,11 @@ public class JdbcBeanDefinitionParser implements BeanDefinitionParser {
 		final String driverClass = element.getAttribute("driverClass");
 		final String port = element.getAttribute("port");
 
+		int idleConnectionTestPeriod = 0;
+		if (EnvUtil.isDevEnv()) {
+			idleConnectionTestPeriod = 60;// 间隔60秒检查空闲连接
+		}
+
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSourceManager.getJdbcDataSource());
 
 		builder.addPropertyValue("host", host);
@@ -68,6 +74,7 @@ public class JdbcBeanDefinitionParser implements BeanDefinitionParser {
 		if (StringUtils.isNotEmpty(maxPoolSize)) {
 			builder.addPropertyValue("maxPoolSize", maxPoolSize);
 		}
+		builder.addPropertyValue("idleConnectionTestPeriod", idleConnectionTestPeriod);
 
 		builder.setInitMethodName("init");
 		builder.setDestroyMethodName("destroy");

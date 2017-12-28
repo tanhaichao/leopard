@@ -43,6 +43,15 @@ public class ProxyDataSource implements DataSource {
 		}
 	}
 
+	/**
+	 * 每N秒检查所有连接池中的空闲连接。Default: 0
+	 * 
+	 * @param idleConnectionTestPeriod 间隔多少秒，默认:0(不检查)
+	 */
+	public void setIdleConnectionTestPeriod(int idleConnectionTestPeriod) {
+		this.dataSource.setIdleConnectionTestPeriod(idleConnectionTestPeriod);
+	}
+
 	protected void initJdbcConnectionListener() {
 		String className = System.getProperty(JdbcConnectionListener.class.getName());
 		if (StringUtils.isEmpty(className)) {
@@ -227,8 +236,8 @@ public class ProxyDataSource implements DataSource {
 
 		// <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
 		// <property name="idleConnectionTestPeriod" value="60" />
+		// dataSource.setIdleConnectionTestPeriod(60);
 
-		dataSource.setIdleConnectionTestPeriod(60);
 		dataSource.setInitialPoolSize(1);
 		dataSource.setMinPoolSize(1);
 		dataSource.setMaxPoolSize(maxPoolSize);

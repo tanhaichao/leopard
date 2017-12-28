@@ -30,15 +30,29 @@ public class JdbcDataSource implements DataSource {
 	// <property name="maxStatements" value="0" />
 	// </bean>
 
-	protected DataSource dataSource;
+	// testConnectionOnCheckout
+	// 如果设置为true,每次从池中取一个连接，将做一下测试，使用automaticTestTable 或者 preferredTestQuery,
+	// 做一条查询语句.看看连接好不好用，不好用，就关闭它，重新从池中拿一个.
+	// idleConnectionTestPeriod
+	// 设置在池中的没有被使用的连接，是否定时做测试，看看这个连接还可以用吗？
+
+	protected ProxyDataSource dataSource;
 
 	protected String host;
+
 	protected String database;
+
 	protected String user;
+
 	protected String password;
+
 	protected String driverClass;
+
 	protected int port = 3306;
+
 	protected int maxPoolSize = 15;
+
+	protected int idleConnectionTestPeriod = 0;
 
 	public void setHost(String host) {
 		// System.out.println("JdbcDataSourceImpl setHost:" + host);
@@ -69,6 +83,14 @@ public class JdbcDataSource implements DataSource {
 
 	public void setMaxPoolSize(int maxPoolSize) {
 		this.maxPoolSize = maxPoolSize;
+	}
+
+	public int getIdleConnectionTestPeriod() {
+		return idleConnectionTestPeriod;
+	}
+
+	public void setIdleConnectionTestPeriod(int idleConnectionTestPeriod) {
+		this.idleConnectionTestPeriod = idleConnectionTestPeriod;
 	}
 
 	public String getHost() {
@@ -121,6 +143,7 @@ public class JdbcDataSource implements DataSource {
 		// dataSource.setMaxStatements(0);
 		String jdbcUrl = ProxyDataSource.getJdbcUrl(host, port, database);
 		this.dataSource = ProxyDataSource.createDataSource(driverClass, jdbcUrl, user, password, maxPoolSize);
+		dataSource.setIdleConnectionTestPeriod(idleConnectionTestPeriod);
 	}
 
 	public void destroy() {
