@@ -206,7 +206,7 @@ public class ProxyDataSource implements DataSource {
 		return jdbcUrl;
 	}
 
-	public static ProxyDataSource createDataSource(String driverClass, String jdbcUrl, String user, String password, int maxPoolSize) {
+	public static ProxyDataSource createDataSource(String driverClass, String jdbcUrl, String user, String password, int maxPoolSize, int idleConnectionTestPeriod) {
 		if (StringUtils.isEmpty(driverClass)) {
 			// System.err.println("驱动程序没有设置.");
 			driverClass = "org.gjt.mm.mysql.Driver";
@@ -236,7 +236,7 @@ public class ProxyDataSource implements DataSource {
 
 		// <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
 		// <property name="idleConnectionTestPeriod" value="60" />
-		// dataSource.setIdleConnectionTestPeriod(60);
+		dataSource.setIdleConnectionTestPeriod(idleConnectionTestPeriod);
 
 		dataSource.setInitialPoolSize(1);
 		dataSource.setMinPoolSize(1);

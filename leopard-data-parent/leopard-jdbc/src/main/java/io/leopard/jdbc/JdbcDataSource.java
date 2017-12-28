@@ -142,8 +142,7 @@ public class JdbcDataSource implements DataSource {
 		// dataSource.setMaxIdleTime(7200);
 		// dataSource.setMaxStatements(0);
 		String jdbcUrl = ProxyDataSource.getJdbcUrl(host, port, database);
-		this.dataSource = ProxyDataSource.createDataSource(driverClass, jdbcUrl, user, password, maxPoolSize);
-		dataSource.setIdleConnectionTestPeriod(idleConnectionTestPeriod);
+		this.dataSource = ProxyDataSource.createDataSource(driverClass, jdbcUrl, user, password, maxPoolSize, idleConnectionTestPeriod);
 	}
 
 	public void destroy() {
