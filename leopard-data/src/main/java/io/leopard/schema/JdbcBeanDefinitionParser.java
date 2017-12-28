@@ -58,7 +58,7 @@ public class JdbcBeanDefinitionParser implements BeanDefinitionParser {
 		final String port = element.getAttribute("port");
 
 		int idleConnectionTestPeriod = 0;
-		if (EnvUtil.isDevEnv() && SystemUtils.IS_OS_WINDOWS) {
+		if (EnvUtil.isDevEnv() && (SystemUtils.IS_OS_WINDOWS || SystemUtils.IS_OS_MAC)) {
 			idleConnectionTestPeriod = 60;// 间隔60秒检查空闲连接
 		}
 
