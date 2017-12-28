@@ -218,6 +218,17 @@ public class ProxyDataSource implements DataSource {
 		dataSource.setUser(user);
 		dataSource.setPassword(password);
 		dataSource.setTestConnectionOnCheckout(false);
+
+		// testConnectionOnCheckout
+		// 如果设置为true,每次从池中取一个连接，将做一下测试，使用automaticTestTable 或者 preferredTestQuery,
+		// 做一条查询语句.看看连接好不好用，不好用，就关闭它，重新从池中拿一个.
+		// idleConnectionTestPeriod
+		// 设置在池中的没有被使用的连接，是否定时做测试，看看这个连接还可以用吗？
+
+		// <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+		// <property name="idleConnectionTestPeriod" value="60" />
+
+		dataSource.setIdleConnectionTestPeriod(60);
 		dataSource.setInitialPoolSize(1);
 		dataSource.setMinPoolSize(1);
 		dataSource.setMaxPoolSize(maxPoolSize);
