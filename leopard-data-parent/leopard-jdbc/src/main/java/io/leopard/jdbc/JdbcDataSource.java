@@ -36,7 +36,7 @@ public class JdbcDataSource implements DataSource {
 	// idleConnectionTestPeriod
 	// 设置在池中的没有被使用的连接，是否定时做测试，看看这个连接还可以用吗？
 
-	protected ProxyDataSource dataSource;
+	protected DataSource dataSource;
 
 	protected String host;
 
