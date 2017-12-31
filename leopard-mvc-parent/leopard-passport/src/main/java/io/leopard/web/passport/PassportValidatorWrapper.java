@@ -30,7 +30,7 @@ public class PassportValidatorWrapper implements PassportValidator {
 		if (StringUtils.isEmpty(sessionKey)) {
 			sessionKey = "sessUid";
 		}
-		corsConfig = (CorsConfig) beanFactory.getBean("corsConfig");
+		corsConfig = beanFactory.getBean(CorsConfig.class);
 	}
 
 	public PassportValidator getValidator() {
