@@ -37,15 +37,15 @@ public class Finder {
 		DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
 		Map<String, PassportValidator> map = factory.getBeansOfType(PassportValidator.class);
 		for (Entry<String, PassportValidator> entry : map.entrySet()) {
-			list.add(new DefaultPassportValidatorWrapper(entry.getValue()));
+			list.add(new DefaultPassportValidatorWrapper(entry.getValue(), beanFactory));
 		}
 		// System.err.println("list:" + list);
 		passportChecker.setBeanFactory(beanFactory);
 	}
 
 	public static class DefaultPassportValidatorWrapper extends PassportValidatorWrapper {
-		public DefaultPassportValidatorWrapper(PassportValidator validator) {
-			super(validator);
+		public DefaultPassportValidatorWrapper(PassportValidator validator, BeanFactory beanFactory) {
+			super(validator, beanFactory);
 		}
 
 		@Override

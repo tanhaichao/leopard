@@ -6,10 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.util.StringUtils;
+import org.springframework.beans.factory.BeanFactory;
 
+import io.leopard.mvc.cors.CorsConfig;
 import io.leopard.web.servlet.RequestUtil;
 
 public class PassportValidatorWrapper implements PassportValidator {
@@ -20,12 +22,15 @@ public class PassportValidatorWrapper implements PassportValidator {
 
 	protected String sessionKey;
 
-	public PassportValidatorWrapper(PassportValidator validator) {
+	protected CorsConfig corsConfig;
+
+	public PassportValidatorWrapper(PassportValidator validator, BeanFactory beanFactory) {
 		this.validator = validator;
 		this.sessionKey = Finder.getSessionKey(validator);
 		if (StringUtils.isEmpty(sessionKey)) {
 			sessionKey = "sessUid";
 		}
+		corsConfig = (CorsConfig) beanFactory.getBean("corsConfig");
 	}
 
 	public PassportValidator getValidator() {
@@ -66,6 +71,16 @@ public class PassportValidatorWrapper implements PassportValidator {
 		logger.info(message);
 		if (validator.showLoginBox(request, response)) {
 			return true;
+		}
+
+		if (true) {
+			if (corsConfig.isEnable()) {
+				String allowOrigin = corsConfig.getAccessControlAllowOrigin(request);
+				if (StringUtils.isNotEmpty(allowOrigin)) {
+					response.addHeader("Access-Control-Allow-Origin", allowOrigin);
+					response.addHeader("Access-Control-Allow-Credentials", "true");
+				}
+			}
 		}
 
 		FtlView view = new FtlView("/passport/ftl", "login");
