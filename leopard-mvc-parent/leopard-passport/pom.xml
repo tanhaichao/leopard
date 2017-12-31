@@ -54,12 +54,6 @@
 			<artifactId>leopard-xparam</artifactId>
 			<version>0.9.12-SNAPSHOT</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>io.leopard</groupId>
-			<artifactId>leopard-trynb</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
-		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jetty-test</artifactId>
