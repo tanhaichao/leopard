@@ -28,6 +28,11 @@ public @interface Column {
 	boolean text() default false;
 
 	/**
+	 * 是否HTML类型
+	 */
+	boolean html() default false;
+
+	/**
 	 * 字段名称
 	 * 
 	 * @return
