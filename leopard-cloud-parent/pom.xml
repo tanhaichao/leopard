@@ -16,5 +16,6 @@
 	<modules>
 		<module>leopard-aliyun</module>
 		<module>leopard-baidu</module>
+		<module>leopard-xiaoniu</module>
 	</modules>
 </project>
