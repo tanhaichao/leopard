@@ -345,6 +345,11 @@
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
+				<artifactId>leopard-xiaoniu</artifactId>
+				<version>0.9.12-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
 				<artifactId>htdocs</artifactId>
 				<version>0.2-SNAPSHOT</version>
 			</dependency>
