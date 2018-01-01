@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 列信息
+ * 列信息(只在开发环境使用)
  * 
  * @author 谭海潮
  *
