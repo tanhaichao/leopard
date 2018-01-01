@@ -356,12 +356,6 @@
 
 			<dependency>
 				<groupId>io.leopard</groupId>
-				<artifactId>leopard-xiaoniu</artifactId>
-				<version>0.1-SNAPSHOT</version>
-			</dependency>
-
-			<dependency>
-				<groupId>io.leopard</groupId>
 				<artifactId>xiaoniu-apitest</artifactId>
 				<version>0.1-SNAPSHOT</version>
 			</dependency>
