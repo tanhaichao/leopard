@@ -41,9 +41,11 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 	@Override
 	public Object beforeBodyWrite(Object data, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest req,
 			ServerHttpResponse response) {
-
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		return this.getJson(data, request);
+	}
 
+	public String getJson(Object data, HttpServletRequest request) {
 		String callback = request.getParameter("callback");
 
 		String format = request.getParameter("format");
