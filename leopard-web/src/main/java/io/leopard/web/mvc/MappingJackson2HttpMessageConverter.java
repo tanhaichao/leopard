@@ -25,7 +25,7 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	// TODO ahai 这里使用application/json是否会有安全性问题?
-	public static final MediaType jsonType = MediaType.valueOf("application/json;charset=UTF-8");
+	public static final MediaType JSON_MEDIA_TYPE = MediaType.valueOf("application/json;charset=UTF-8");
 
 	@Override
 	public boolean canRead(Class<?> clazz, MediaType mediaType) {
@@ -51,7 +51,7 @@ public class MappingJackson2HttpMessageConverter implements HttpMessageConverter
 
 	@Override
 	public void write(Object body, MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
-		outputMessage.getHeaders().setContentType(jsonType);
+		outputMessage.getHeaders().setContentType(JSON_MEDIA_TYPE);
 
 		// outputMessage.getHeaders().setAccessControlAllowOrigin("*");// FIXME 暂时的写法
 
