@@ -34,7 +34,6 @@
 		<!-- 自定义数据类型 -->
 		<property name="converters">
 			<list>
-				<bean class="io.leopard.web.editor.IntegerConverter" />
 				<bean class="io.leopard.web.editor.DateConverter" />
 				<bean class="io.leopard.web.editor.OnlyDateConverter" />
 				<bean class="io.leopard.web.editor.MonthConverter" />
