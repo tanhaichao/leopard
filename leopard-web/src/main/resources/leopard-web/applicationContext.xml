@@ -47,6 +47,8 @@
 		<property name="conversionService" ref="conversionService" />
 	</bean>
 
+	<bean id="mappingJacksonResponseBodyAdvice" class="io.leopard.web.mvc.MappingJacksonResponseBodyAdvice"/>
+	
 	<bean class="io.leopard.web.mvc.LeopardRequestMappingHandlerAdapter">
 
 		<property name="webBindingInitializer" ref="leopardWebBindingInitializer" />
@@ -57,7 +59,10 @@
 		</property>
 		<property name="responseBodyAdvice">
 			<list>
+				<ref bean="mappingJacksonResponseBodyAdvice" />  
+				<!-- 
 				<bean class="io.leopard.web.mvc.MappingJacksonResponseBodyAdvice" />
+				 -->
 			</list>
 		</property>
 	</bean>
