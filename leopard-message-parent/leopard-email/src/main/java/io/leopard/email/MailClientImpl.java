@@ -13,6 +13,9 @@ public class MailClientImpl implements MailClient {
 	@Value("${mail.user}")
 	private String user;
 
+	@Value("${mail.port}")
+	private int port;
+
 	@Value("${mail.password}")
 	private String password;
 
@@ -26,7 +29,7 @@ public class MailClientImpl implements MailClient {
 		email.setSubject(subject);
 		email.setMsg(content);
 		email.setSSLOnConnect(true);
-		email.setSslSmtpPort("465"); // 若启用，设置smtp协议的SSL端口号
+		email.setSslSmtpPort(Integer.toString(port)); // 若启用，设置smtp协议的SSL端口号
 		email.send();
 		return true;
 	}
