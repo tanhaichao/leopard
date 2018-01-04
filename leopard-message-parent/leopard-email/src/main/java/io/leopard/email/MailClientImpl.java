@@ -13,6 +13,9 @@ public class MailClientImpl implements MailClient {
 	@Value("${mail.user}")
 	private String user;
 
+	@Value("${mail.from}")
+	private String from;
+
 	@Value("${mail.port}")
 	private int port;
 
@@ -25,7 +28,7 @@ public class MailClientImpl implements MailClient {
 		email.setHostName(host);// 设置使用发电子邮件的邮件服务器
 		email.addTo(to);
 		email.setAuthentication(user, password);
-		email.setFrom(user);
+		email.setFrom(from);
 		email.setSubject(subject);
 		email.setMsg(content);
 		email.setSSLOnConnect(true);
