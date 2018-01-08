@@ -73,6 +73,24 @@ public class QueryBuilder {
 		return this;
 	}
 
+	public QueryBuilder addEnums(String fieldName, Snum... snums) {
+		if (snums.length == 0) {
+			throw new IllegalArgumentException("枚举参数不能为空.");
+		}
+
+		StringBuilder sb = new StringBuilder();
+		for (Snum snum : snums) {
+			if (sb.length() > 0) {
+				sb.append(", ");
+			}
+			// TODO 枚举key含有特殊符号时，未做过滤
+			sb.append("'" + snum.getKey() + "'");
+		}
+		this.addWhere(fieldName + " in (" + sb.toString() + ") ");
+
+		return this;
+	}
+
 	public QueryBuilder addEnum(String fieldName, Snum snum) {
 		if (snum != null) {
 			this.addString(fieldName, snum.getKey());
