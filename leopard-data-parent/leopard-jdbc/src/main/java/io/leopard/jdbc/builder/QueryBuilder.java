@@ -87,7 +87,6 @@ public class QueryBuilder {
 			sb.append("'" + snum.getKey() + "'");
 		}
 		this.addWhere(fieldName + " in (" + sb.toString() + ") ");
-
 		return this;
 	}
 
