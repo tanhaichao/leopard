@@ -27,8 +27,8 @@ public class CountSqlParser {
 
 	protected void parse() {
 		String sql = this.sql;
-		sql = sql.replaceAll("select .*? from", "select count(*) from");
-		sql = sql.replaceAll("SELECT .*? FROM", "SELECT count(*) FROM");
+		sql = sql.replaceFirst("select .*? from", "select count(*) from");
+		sql = sql.replaceFirst("SELECT .*? FROM", "SELECT count(*) FROM");
 		this.parsePostfix(sql);
 	}
 
