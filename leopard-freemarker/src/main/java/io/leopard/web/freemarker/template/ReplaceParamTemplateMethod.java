@@ -55,7 +55,6 @@ public class ReplaceParamTemplateMethod implements TemplateMethodModelEx, Templa
 			if (sb.length() > 0) {
 				sb.append("&");
 			}
-			// FIXME 参数名称和参数值合法性判断
 			sb.append(name).append("=").append(value2);
 		}
 		if (!hasReplace) {
