@@ -340,6 +340,11 @@
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
+				<artifactId>leopard-vhost</artifactId>
+				<version>0.9.12-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
 				<artifactId>leopard-pay-alipay</artifactId>
 				<version>0.9.12-SNAPSHOT</version>
 			</dependency>
