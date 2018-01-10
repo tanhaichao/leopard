@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -44,8 +45,7 @@ public class VhostRequestMappingInfoBuilder implements RequestMappingInfoBuilder
 			return vhost.value();
 		}
 		Class<?> clazz = method.getDeclaringClass();
-		// System.err.println("getVhosts clazz:" + clazz.getName());
-		vhost = clazz.getAnnotation(Vhost.class);
+		vhost = AnnotationUtils.findAnnotation(clazz, Vhost.class);
 		if (vhost == null) {
 			return null;
 		}
