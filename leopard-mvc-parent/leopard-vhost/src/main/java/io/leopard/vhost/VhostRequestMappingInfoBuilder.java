@@ -44,6 +44,7 @@ public class VhostRequestMappingInfoBuilder implements RequestMappingInfoBuilder
 			return vhost.value();
 		}
 		Class<?> clazz = method.getDeclaringClass();
+		// System.err.println("getVhosts clazz:" + clazz.getName());
 		vhost = clazz.getAnnotation(Vhost.class);
 		if (vhost == null) {
 			return null;
