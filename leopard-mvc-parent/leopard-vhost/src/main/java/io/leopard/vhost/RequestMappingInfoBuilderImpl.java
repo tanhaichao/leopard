@@ -1,4 +1,4 @@
-package io.leopard.web.mvc;
+package io.leopard.vhost;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import io.leopard.web.mvc.condition.ExtensiveDomain;
 
 public class RequestMappingInfoBuilderImpl implements RequestMappingInfoBuilder {
 

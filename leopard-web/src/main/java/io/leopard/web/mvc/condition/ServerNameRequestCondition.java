@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.condition.ConsumesRequestCondition;
 import org.springframework.web.servlet.mvc.condition.NameValueExpression;
 import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
 
+import io.leopard.vhost.ExtensiveDomain;
+
 public class ServerNameRequestCondition extends AbstractRequestCondition<ServerNameRequestCondition> {
 
 	protected Log logger = LogFactory.getLog(this.getClass());

@@ -28,7 +28,9 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import io.leopard.redis.Redis;
-import io.leopard.web.mvc.condition.ExtensiveDomain;
+import io.leopard.vhost.ExtensiveDomain;
+import io.leopard.vhost.RequestMappingInfoBuilder;
+import io.leopard.vhost.RequestMappingInfoBuilderImpl;
 import io.leopard.web.mvc.condition.ServerNameRequestCondition;
 import io.leopard.web.session.StoreRedisImpl;
 

@@ -1,11 +1,9 @@
-package io.leopard.web.mvc;
+package io.leopard.vhost;
 
 import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import io.leopard.web.mvc.condition.ExtensiveDomain;
 
 public interface RequestMappingInfoBuilder {
 

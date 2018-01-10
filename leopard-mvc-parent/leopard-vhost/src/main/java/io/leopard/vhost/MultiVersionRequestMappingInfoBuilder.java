@@ -1,12 +1,10 @@
-package io.leopard.web.mvc;
+package io.leopard.vhost;
 
 import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import io.leopard.web.mvc.condition.ExtensiveDomain;
 
 /**
  * APP多版本.
@@ -15,6 +13,8 @@ import io.leopard.web.mvc.condition.ExtensiveDomain;
  *
  */
 public class MultiVersionRequestMappingInfoBuilder implements RequestMappingInfoBuilder {
+	
+	// TODO 测试类
 
 	@Override
 	public void getHeaders(RequestMapping annotation, Method method, ExtensiveDomain extensiveDomain, Map<String, String> headers) {
