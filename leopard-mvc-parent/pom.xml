@@ -74,6 +74,7 @@
 		<module>leopard-chart</module>
 		<module>leopard-upload</module>
 		<module>leopard-htdocs</module>
+		<module>leopard-vhost</module>
 	</modules>
 
 </project>
