@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author 谭海潮
  *
  */
+@Order(1)
 public class VhostRequestMappingInfoBuilder implements RequestMappingInfoBuilder {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
