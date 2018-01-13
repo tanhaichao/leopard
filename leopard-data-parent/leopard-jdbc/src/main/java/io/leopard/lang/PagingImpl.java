@@ -132,6 +132,7 @@ public class PagingImpl<E> implements Paging<E> {
 	public Boolean isNextPage() {
 		if (nextPage == null && pageSize != null) {
 			int size = (list == null) ? 0 : list.size();
+			// 传入list时，因为没有totalCount，无法准确判断是否有下一页，所以当前页记录数量>=pageSize即视为有下一页
 			return (size >= this.pageSize);
 		}
 		return nextPage;
