@@ -11,14 +11,13 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.aliyun.openservices.oss.OSSClient;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import com.aliyun.openservices.oss.model.PutObjectResult;
 
 @Service
-public class OssClientImpl implements OssClient {
+public class OssClientImpl extends AbstractOssClient {
 
 	// private static final String endpoint = "http://oss.aliyuncs.com";
 	// private static final String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
@@ -55,25 +54,11 @@ public class OssClientImpl implements OssClient {
 	}
 
 	@Override
-	public String add(String dir, MultipartFile file) throws IOException {
-		if (file == null) {
-			throw new NullPointerException("文件不能为空.");
-		}
-		return this.add(file.getInputStream(), dir, file.getOriginalFilename(), file.getSize());
-	}
-
-	@Override
-	public String add(InputStream input, String dir, String filename, long lenght) throws IOException {
-
-		return this.add(input, dir, filename, lenght, null);
-	}
-
-	@Override
 	public String add(InputStream input, String dir, String filename, long lenght, String contentType) throws IOException {
 		if (input == null) {
 			throw new NullPointerException("input不能为空.");
 		}
-		checkExtname(filename);
+		
 		OSSClient client = new OSSClient(endpoint, accessKeyId, secretAccessKey);
 		// System.err.println("endpoint:" + endpoint);
 		ObjectMetadata meta = new ObjectMetadata();
@@ -93,37 +78,6 @@ public class OssClientImpl implements OssClient {
 		PutObjectResult result = client.putObject(bucketName, uri, input, meta);
 		System.out.println(result.getETag());
 		return "/" + uri;
-	}
-
-	/** 支持的图片后缀，支持大小写 */
-	private static Set<String> extnameSet = new HashSet<String>();
-	static {
-		extnameSet.add("jpg");
-		extnameSet.add("png");
-		extnameSet.add("gif");
-		extnameSet.add("jpeg");
-	}
-
-	/**
-	 * 检查文件扩展名
-	 * 
-	 * @param fileName
-	 * @param picPrefix
-	 * @return
-	 */
-	private static void checkExtname(String filename) {
-		if (StringUtils.isEmpty(filename)) {
-			throw new IllegalArgumentException("文件名称不能为空.");
-		}
-		String extname = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
-		if (!extnameSet.contains(extname)) {
-			throw new IllegalArgumentException("文件格式不合法[" + extname + "].");
-		}
-	}
-
-	public static String toUuidFileName(String filename) {
-		String uuid = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
-		return uuid + filename.substring(filename.lastIndexOf("."));
 	}
 
 	@Override
