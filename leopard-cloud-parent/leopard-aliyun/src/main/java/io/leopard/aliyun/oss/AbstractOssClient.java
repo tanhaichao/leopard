@@ -31,8 +31,9 @@ public abstract class AbstractOssClient implements OssClient {
 	}
 
 	/** 支持的图片后缀，支持大小写 */
-	private static Set<String> extnameSet = new HashSet<String>();
-	static {
+	protected Set<String> extnameSet = new HashSet<String>();
+
+	public AbstractOssClient() {
 		extnameSet.add("jpg");
 		extnameSet.add("png");
 		extnameSet.add("gif");
