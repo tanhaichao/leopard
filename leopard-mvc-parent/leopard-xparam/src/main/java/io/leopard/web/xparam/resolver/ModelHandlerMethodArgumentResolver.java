@@ -103,7 +103,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 				if (value == null) {
 					continue;
 				}
-				obj = toObject(value, type);
+				obj = toObject(value, type, fieldName);
 			}
 			field.setAccessible(true);
 			field.set(bean, obj);
@@ -152,7 +152,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		// return ParamListHandlerMethodArgumentResolver.toList(subType, values);
 	}
 
-	public static Object toObject(String value, Class<?> type) {
+	private static Object toObject(String value, Class<?> type, String fieldName) {
 		if (String.class.equals(type)) {
 			return value;
 		}
@@ -219,7 +219,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		}
 		else if (type.isEnum()) {
 			// throw new RuntimeException("枚举类型未实现[" + type.getName() + " value:" + value + "].");
-			return toEnum(value, type);
+			return toEnum(value, type, fieldName);
 		}
 		else {
 			return UnderlineJson.toObject(value, type);
@@ -228,7 +228,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected static Enum<?> toEnum(String value, Class<?> type) {
+	private static Enum<?> toEnum(String value, Class<?> type, String fieldName) {
 		if (value == null) {
 			return null;
 		}
@@ -255,7 +255,13 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			}
 		}
 		else if (Inum.class.isAssignableFrom(type)) {
-			int key = Integer.parseInt(value);
+			int key;
+			try {
+				key = Integer.parseInt(value);
+			}
+			catch (NumberFormatException e) {
+				throw new NumberFormatException("参数[" + fieldName + "]枚举[" + type.getSimpleName() + "]值必须为数字[" + value + "].");
+			}
 			return EnumUtil.toEnum(key, (Class<Enum>) type);
 		}
 		else if (Bnum.class.isAssignableFrom(type)) {
