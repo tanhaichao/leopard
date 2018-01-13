@@ -250,7 +250,8 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 					return null;
 				}
 				else {
-					throw e;
+					throw new NumberFormatException("参数(" + fieldName + ")枚举元素[" + value + "]不存在[" + type.getSimpleName() + "].");
+					// throw e;
 				}
 			}
 		}
@@ -260,7 +261,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 				key = Integer.parseInt(value);
 			}
 			catch (NumberFormatException e) {
-				throw new NumberFormatException("参数[" + fieldName + "]枚举[" + type.getSimpleName() + "]值必须为数字[" + value + "].");
+				throw new NumberFormatException("参数(" + fieldName + ")枚举[" + type.getSimpleName() + "]值必须为数字[" + value + "].");
 			}
 			return EnumUtil.toEnum(key, (Class<Enum>) type);
 		}
