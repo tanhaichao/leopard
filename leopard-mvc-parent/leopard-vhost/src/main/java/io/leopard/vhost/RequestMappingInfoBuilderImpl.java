@@ -33,7 +33,9 @@ public class RequestMappingInfoBuilderImpl implements RequestMappingInfoBuilder 
 			return;
 		}
 		for (RequestMappingInfoBuilder builder : builders) {
-			logger.info("builder:" + builder + " Host:" + headers.get("Host") + " method:" + method.toGenericString());
+			if (method != null) {
+				logger.info("builder:" + builder + " Host:" + headers.get("Host") + " method:" + method.toGenericString());
+			}
 			builder.getHeaders(annotation, method, extensiveDomain, headers);
 		}
 	}
