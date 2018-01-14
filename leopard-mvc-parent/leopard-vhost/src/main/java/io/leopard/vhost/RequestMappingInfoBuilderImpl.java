@@ -5,12 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 public class RequestMappingInfoBuilderImpl implements RequestMappingInfoBuilder {
+
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private List<RequestMappingInfoBuilder> builders;
 
@@ -29,7 +33,7 @@ public class RequestMappingInfoBuilderImpl implements RequestMappingInfoBuilder 
 			return;
 		}
 		for (RequestMappingInfoBuilder builder : builders) {
-			// System.err.println("builder:" + builder);
+			logger.info("builder:" + builder + " Host:" + headers.get("Host"));
 			builder.getHeaders(annotation, method, extensiveDomain, headers);
 		}
 	}
