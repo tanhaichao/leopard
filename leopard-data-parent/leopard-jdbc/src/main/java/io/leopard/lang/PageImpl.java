@@ -122,6 +122,21 @@ public class PageImpl<E> implements Page<E> {
 		return this.pageCount;
 	}
 
+	/**
+	 * 判断是否有下一页
+	 * 
+	 * @param totalCount
+	 * @param start
+	 * @param pageSize
+	 * @return
+	 */
+	public static boolean hasNextPage(int totalCount, Integer start, int pageSize) {
+		if (start == null) {
+			start = 0;
+		}
+		return totalCount > start + pageSize;
+	}
+
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
 	}

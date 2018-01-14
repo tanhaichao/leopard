@@ -665,6 +665,7 @@ public class JdbcMysqlImpl implements Jdbc {
 		paging.setList(list);
 
 		if (parser.getSize() != null) {
+			paging.setNextPage(PageImpl.hasNextPage(totalCount, parser.getStart(), parser.getSize()));
 			paging.setPageSize(parser.getSize());
 		}
 		return paging;
@@ -683,6 +684,7 @@ public class JdbcMysqlImpl implements Jdbc {
 		paging.setTotalCount(totalCount);
 		paging.setList(list);
 		if (parser.getSize() != null) {
+			paging.setNextPage(PageImpl.hasNextPage(totalCount, parser.getStart(), parser.getSize()));
 			paging.setPageSize(parser.getSize());
 		}
 		return paging;
@@ -697,6 +699,7 @@ public class JdbcMysqlImpl implements Jdbc {
 		paging.setTotalCount(totalCount);
 		paging.setList(list);
 
+		paging.setNextPage(PageImpl.hasNextPage(totalCount, start, size));
 		paging.setPageSize(size);
 
 		return paging;
@@ -728,6 +731,7 @@ public class JdbcMysqlImpl implements Jdbc {
 		page.setList(list);
 
 		if (parser.getSize() != null) {
+			page.setNextPage(PageImpl.hasNextPage(totalCount, parser.getStart(), parser.getSize()));
 			page.setPageSize(parser.getSize());
 		}
 		return page;
@@ -746,6 +750,7 @@ public class JdbcMysqlImpl implements Jdbc {
 		page.setTotalCount(totalCount);
 		page.setList(list);
 		if (parser.getSize() != null) {
+			page.setNextPage(PageImpl.hasNextPage(totalCount, parser.getStart(), parser.getSize()));
 			page.setPageSize(parser.getSize());
 		}
 		return page;
@@ -761,6 +766,7 @@ public class JdbcMysqlImpl implements Jdbc {
 		page.setList(list);
 
 		page.setPageSize(size);
+		page.setNextPage(PageImpl.hasNextPage(totalCount, start, size));
 
 		return page;
 	}
