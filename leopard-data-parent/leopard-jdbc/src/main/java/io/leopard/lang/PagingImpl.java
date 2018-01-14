@@ -3,6 +3,13 @@ package io.leopard.lang;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 请改用 PageImpl
+ * 
+ * @author 谭海潮
+ *
+ * @param <E>
+ */
 public class PagingImpl<E> implements Paging<E> {
 
 	private List<E> list = new ArrayList<E>();

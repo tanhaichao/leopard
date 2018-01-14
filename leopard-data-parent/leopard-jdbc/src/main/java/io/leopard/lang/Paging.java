@@ -2,6 +2,13 @@ package io.leopard.lang;
 
 import java.util.List;
 
+/**
+ * 请改用 Page
+ * 
+ * @author 谭海潮
+ *
+ * @param <E>
+ */
 public interface Paging<E> {
 
 	void add(E element);
