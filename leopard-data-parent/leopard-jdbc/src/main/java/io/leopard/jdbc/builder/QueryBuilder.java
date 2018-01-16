@@ -389,19 +389,14 @@ public class QueryBuilder {
 	}
 
 	protected SQLInfo toSqlInfo() {
-		return this.toSqlInfo(false);
+		return this.toSqlInfo("*", false);
 	}
 
-	protected SQLInfo toSqlInfo(boolean count) {
+	protected SQLInfo toSqlInfo(String select, boolean counting) {
 		StatementParameter param = new StatementParameter();
 		StringBuilder sb = new StringBuilder();
 		sb.append("select ");
-		if (count) {
-			sb.append("count(*)");
-		}
-		else {
-			sb.append("*");
-		}
+		sb.append(select);
 		sb.append(" from `" + tableName + "`");
 		StringBuilder where = new StringBuilder();
 
@@ -443,7 +438,7 @@ public class QueryBuilder {
 			sb.append(" where " + where.toString());
 		}
 
-		if (!count) {
+		if (!counting) {
 			// System.err.println("groupbyFieldName:" + groupbyFieldName + " orderFieldName:" + orderFieldName);
 			if (groupbyFieldName != null && groupbyFieldName.length() > 0) {
 				sb.append(" group by " + groupbyFieldName);
@@ -497,8 +492,12 @@ public class QueryBuilder {
 	}
 
 	public int count(Jdbc jdbc) {
-		SQLInfo sqlInfo = this.toSqlInfo(true);
+		SQLInfo sqlInfo = this.toSqlInfo("count(*)", true);
 		return jdbc.queryForInt(sqlInfo.getSql(), sqlInfo.getParam());
 	}
 
+	public Double sumForDouble(Jdbc jdbc, String columnName) {
+		SQLInfo sqlInfo = this.toSqlInfo("sum(`" + columnName + "`)", true);
+		return jdbc.queryForDouble(sqlInfo.getSql(), sqlInfo.getParam());
+	}
 }
