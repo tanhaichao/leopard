@@ -1,6 +1,7 @@
 package io.leopard.schema;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
+import io.leopard.data.env.EnvUtil;
 import io.leopard.data.schema.RegisterComponentUtil;
 
 /**
@@ -90,6 +92,16 @@ public class MysqlDsnBeanDefinitionParser implements BeanDefinitionParser {
 		}
 		if (StringUtils.isNotEmpty(maxPoolSize)) {
 			builder.addPropertyValue("maxPoolSize", maxPoolSize);
+		}
+
+		if (EnvUtil.isDevEnv() && (SystemUtils.IS_OS_WINDOWS || SystemUtils.IS_OS_MAC)) {
+			builder.addPropertyValue("idleConnectionTestPeriod", 60);// 间隔60秒检查空闲连接
+		}
+		else {
+			final String idleConnectionTestPeriod = element.getAttribute("idleConnectionTestPeriod");
+			if (StringUtils.isNotEmpty(idleConnectionTestPeriod)) {
+				builder.addPropertyValue("idleConnectionTestPeriod", idleConnectionTestPeriod);
+			}
 		}
 
 		builder.setInitMethodName("init");
