@@ -144,6 +144,7 @@
 					<xsd:attribute name="password" type="xsd:string" use="required" />
 					<xsd:attribute name="maxPoolSize" type="xsd:string" />
 					<xsd:attribute name="port" type="xsd:string" />
+					<xsd:attribute name="idleConnectionTestPeriod" type="xsd:string" />
 					<xsd:attribute name="dataSourceId" type="xsd:string" />
 				</xsd:extension>
 			</xsd:complexContent>
