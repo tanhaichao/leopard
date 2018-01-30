@@ -9,6 +9,7 @@ import io.leopard.jdbc.ParameterNotNullException;
 //import io.leopard.burrow.lang.datatype.OnlyDate;
 import io.leopard.jdbc.StatementParameter;
 import io.leopard.lang.inum.Onum;
+import io.leopard.lang.inum.Snum;
 
 public abstract class AbstractSqlBuilder implements SqlBuilder {
 	protected StatementParameter statementParameter = new StatementParameter();
@@ -59,6 +60,22 @@ public abstract class AbstractSqlBuilder implements SqlBuilder {
 	// fieldList.add(fieldName);
 	// statementParameter.setEnum(value);
 	// }
+
+	/**
+	 * 设置Snum类型参数
+	 * 
+	 * @param fieldName
+	 * @param value
+	 */
+	public void setSnum(String fieldName, Snum value) {
+		fieldList.add(fieldName);
+		if (value == null) {
+			statementParameter.setNull(String.class);
+		}
+		else {
+			statementParameter.setString(value.getKey());
+		}
+	}
 
 	/**
 	 * 设置Onum类型参数.

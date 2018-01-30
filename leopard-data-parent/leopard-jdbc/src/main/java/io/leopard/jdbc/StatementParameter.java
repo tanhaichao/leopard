@@ -150,6 +150,16 @@ public class StatementParameter {
 	}
 
 	/**
+	 * 设置空值
+	 * 
+	 * @param type
+	 */
+	public void setNull(Class<?> type) {
+		list.add(null);
+		this.type.add(type);
+	}
+
+	/**
 	 * 设置List类型参数.
 	 * 
 	 * @param value

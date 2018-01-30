@@ -3,6 +3,7 @@ package io.leopard.jdbc.builder;
 import java.util.Date;
 
 import io.leopard.lang.inum.Onum;
+import io.leopard.lang.inum.Snum;
 
 public class NullUpdateBuilder extends UpdateBuilder {
 
