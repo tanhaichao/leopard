@@ -116,6 +116,18 @@
 						<version>1.7</version>
 						<executions>
 							<execution>
+								<id>add-source</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>gen/main/java</source>
+									</sources>
+								</configuration>
+							</execution>
+							<execution>
 								<id>add-test-source</id>
 								<phase>generate-test-sources</phase>
 								<goals>
@@ -128,7 +140,23 @@
 									<sources>
 										<source>src/mvcunit/java</source>
 										<source>src/apimock/java</source>
+										<source>gen/test/java</source>
 									</sources>
+								</configuration>
+							</execution>
+
+							<execution>
+								<id>add-resource</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>add-resource</goal>
+								</goals>
+								<configuration>
+									<resources>
+										<resource>
+											<directory>gen/main/resources</directory>
+										</resource>
+									</resources>
 								</configuration>
 							</execution>
 						</executions>
