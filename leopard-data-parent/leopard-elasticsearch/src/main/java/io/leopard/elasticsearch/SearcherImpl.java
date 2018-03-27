@@ -31,6 +31,8 @@ public class SearcherImpl implements Searcher {
 
 	protected String server;
 
+	protected String clusterName;
+
 	protected TransportClient client;
 
 	public SearcherImpl() {
@@ -66,6 +68,14 @@ public class SearcherImpl implements Searcher {
 		this.server = server;
 	}
 
+	public String getClusterName() {
+		return clusterName;
+	}
+
+	public void setClusterName(String c) {
+		this.clusterName = clusterName;
+	}
+
 	public void init() {
 
 		if (server != null && server.length() > 0) {
@@ -87,10 +97,19 @@ public class SearcherImpl implements Searcher {
 		catch (UnknownHostException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
-		Settings settings = Settings.builder().build();
+		Settings settings = getSettingsBuilder().build();
 		this.client = new PreBuiltTransportClient(settings);
 		TransportAddress transportAddress = new TransportAddress(inetAddress, port);
 		client.addTransportAddress(transportAddress);
+	}
+
+	protected Settings.Builder getSettingsBuilder() {
+		if (clusterName == null || clusterName.length() == 0) {
+			return Settings.builder();
+		}
+		else {
+			return Settings.builder().put("cluster.name", this.clusterName);
+		}
 	}
 
 	@Override
@@ -100,7 +119,7 @@ public class SearcherImpl implements Searcher {
 
 	@Override
 	public boolean createIndex(String indexName) {
-		Settings indexSettings = Settings.builder().put("number_of_shards", 5).put("number_of_replicas", 1).build();
+		Settings indexSettings = getSettingsBuilder().put("number_of_shards", 5).put("number_of_replicas", 1).build();
 		CreateIndexRequest indexRequest = new CreateIndexRequest(indexName, indexSettings);
 		CreateIndexResponse response = client.admin().indices().create(indexRequest).actionGet();
 		return true;
