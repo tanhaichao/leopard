@@ -32,6 +32,7 @@ public class SearcherDsnBeanDefinitionParser implements BeanDefinitionParser {
 		// logger.info("parse:");
 		String id = element.getAttribute("id");
 		String name = element.getAttribute("name");
+		String clusterName = element.getAttribute("clusterName");
 
 		String maxActive = element.getAttribute("maxActive");
 		String timeout = element.getAttribute("timeout");
@@ -46,6 +47,10 @@ public class SearcherDsnBeanDefinitionParser implements BeanDefinitionParser {
 		if (StringUtils.isNotEmpty(timeout)) {
 			builder.addPropertyValue("timeout", Integer.valueOf(timeout));
 		}
+		if (StringUtils.isNotEmpty(clusterName)) {
+			builder.addPropertyValue("clusterName", clusterName);
+		}
+
 		// if (StringUtils.isNotEmpty(password)) {
 		// builder.addPropertyValue("password", password);
 		// }
