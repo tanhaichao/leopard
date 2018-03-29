@@ -1,6 +1,7 @@
 package io.leopard.security.admin.menu;
 
-import io.leopard.burrow.ArrayList;
+import java.util.ArrayList;
+
 import io.leopard.json.Json;
 
 public class MenuList extends ArrayList<Menu> {

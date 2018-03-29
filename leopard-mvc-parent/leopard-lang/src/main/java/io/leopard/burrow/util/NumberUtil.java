@@ -506,7 +506,7 @@ public class NumberUtil {
 	 */
 	public static double scale(double num, int n) {
 		double scale = Math.pow(10, n);
-		return (int) (num * scale) / scale;
+		return (double) (num * scale) / scale;
 	}
 
 	/**
@@ -520,7 +520,7 @@ public class NumberUtil {
 	public static float scale(float num, int n) {
 		float scale = (float) Math.pow(10, n);
 		// System.out.println("scale:" + scale);
-		return ((int) (num * scale)) / scale;
+		return ((float) (num * scale)) / scale;
 	}
 
 	public static int random(int max) {
