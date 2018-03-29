@@ -172,6 +172,7 @@
 		<xsd:complexType>
 			<xsd:attribute name="id" type="xsd:string" use="required" />
 			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="clusterName" type="xsd:string" />
 		</xsd:complexType>
 	</xsd:element>
 
