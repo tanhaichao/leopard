@@ -10,4 +10,14 @@ public class NumberUtilTest {
 		System.out.println("percent:" + percent);
 	}
 
+	@Test
+	public void scale() {
+		double totalCount = 1446;
+		double count = 92;
+		double avg = count / totalCount;
+		double percent = (double) (avg * 100);
+		double ratio = NumberUtil.scale(percent, 2);
+		System.out.println("avg:" + avg + " ratio:" + ratio);
+	}
+
 }
