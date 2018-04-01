@@ -8,10 +8,8 @@ public class NumberUtil {
 	/**
 	 * 判断两个数是否相等
 	 * 
-	 * @param num1
-	 *            数1
-	 * @param num2
-	 *            数2
+	 * @param num1 数1
+	 * @param num2 数2
 	 * @return boolean
 	 */
 	public static boolean equals(long num1, int num2) {
@@ -21,8 +19,7 @@ public class NumberUtil {
 	/**
 	 * 判断Number对象是否为空
 	 * 
-	 * @param num
-	 *            Number对象
+	 * @param num Number对象
 	 * @return boolean
 	 */
 	public static boolean isNull(Number num) {
@@ -32,8 +29,7 @@ public class NumberUtil {
 	/**
 	 * 判断Number对象是否非空
 	 * 
-	 * @param num
-	 *            Number对象
+	 * @param num Number对象
 	 * @return boolean
 	 */
 	public static boolean isNotNull(Number num) {
@@ -43,10 +39,8 @@ public class NumberUtil {
 	/**
 	 * 返回整数值，为null返回默认整数值
 	 * 
-	 * @param num
-	 *            整型对象
-	 * @param defaultNum
-	 *            默认整数值
+	 * @param num 整型对象
+	 * @param defaultNum 默认整数值
 	 * @return 整数值
 	 */
 	public static int defaultInt(Integer num, int defaultNum) {
@@ -59,10 +53,8 @@ public class NumberUtil {
 	/**
 	 * 获取百分比.
 	 * 
-	 * @param current
-	 *            分子
-	 * @param total
-	 *            分母
+	 * @param current 分子
+	 * @param total 分母
 	 * @return 百分比
 	 */
 	public static int percent(double current, double total) {
@@ -74,10 +66,8 @@ public class NumberUtil {
 	/**
 	 * 每秒平均值.
 	 * 
-	 * @param count
-	 *            总数
-	 * @param time
-	 *            秒数
+	 * @param count 总数
+	 * @param time 秒数
 	 * @return 平均值
 	 */
 	public static long perSecondAvg(long count, long time) {
@@ -97,8 +87,7 @@ public class NumberUtil {
 	/**
 	 * 把null转换为0.
 	 * 
-	 * @param num
-	 *            整型对象
+	 * @param num 整型对象
 	 * @return 整数
 	 */
 	public static int toInt(Number num) {
@@ -143,8 +132,7 @@ public class NumberUtil {
 	/**
 	 * 把null和非正数转成false
 	 * 
-	 * @param num
-	 *            长整型
+	 * @param num 长整型
 	 * @return boolean
 	 */
 	public static boolean toBool(Long num) {
@@ -159,10 +147,8 @@ public class NumberUtil {
 	/**
 	 * 返回整数值，为null返回默认整数
 	 * 
-	 * @param num
-	 *            长整型对象
-	 * @param defaultValue
-	 *            默认整数
+	 * @param num 长整型对象
+	 * @param defaultValue 默认整数
 	 * @return 整数值
 	 */
 	// public static int toInt(Long num, int defaultValue) {
@@ -176,10 +162,8 @@ public class NumberUtil {
 	/**
 	 * 返回整数值，为null返回默认整数值
 	 * 
-	 * @param num
-	 *            整型对象
-	 * @param defaultValue
-	 *            默认整数值
+	 * @param num 整型对象
+	 * @param defaultValue 默认整数值
 	 * @return 整数值
 	 */
 	public static int toInt(Number num, int defaultValue) {
@@ -194,10 +178,8 @@ public class NumberUtil {
 	/**
 	 * 返回float值，为null返回默认值
 	 * 
-	 * @param num
-	 *            Float对象
-	 * @param defaultValue
-	 *            默认值
+	 * @param num Float对象
+	 * @param defaultValue 默认值
 	 * @return float值
 	 */
 	public static float toFloat(Float num, float defaultValue) {
@@ -222,8 +204,7 @@ public class NumberUtil {
 	/**
 	 * 字符串转成整型，null或者长度为0的字符串返回null
 	 * 
-	 * @param str
-	 *            字符串
+	 * @param str 字符串
 	 * @return 整型
 	 */
 	public static Integer toInteger(String str) {
@@ -238,8 +219,7 @@ public class NumberUtil {
 	/**
 	 * 字符串转成长整型，null或者长度为0的字符串返回null
 	 * 
-	 * @param str
-	 *            字符串
+	 * @param str 字符串
 	 * @return 整型
 	 */
 	public static Long toLong(String str) {
@@ -254,8 +234,7 @@ public class NumberUtil {
 	/**
 	 * 返回布尔值，把null转成false
 	 * 
-	 * @param obj
-	 *            布尔对象
+	 * @param obj 布尔对象
 	 * @return boolean
 	 */
 	public static boolean toBool(Boolean obj) {
@@ -279,8 +258,7 @@ public class NumberUtil {
 	/**
 	 * 返回整数值，null转成0
 	 * 
-	 * @param num
-	 *            Object对象
+	 * @param num Object对象
 	 * @return 整数值
 	 */
 	// @Deprecated
@@ -305,8 +283,7 @@ public class NumberUtil {
 	/**
 	 * 返回长整型值，null返回0
 	 * 
-	 * @param num
-	 *            长整型对象
+	 * @param num 长整型对象
 	 * @return 长整型值
 	 */
 	public static long toLong(Long num) {
@@ -321,8 +298,7 @@ public class NumberUtil {
 	/**
 	 * 返回长整型值，null转为0
 	 * 
-	 * @param num
-	 *            Double对象
+	 * @param num Double对象
 	 * @return 长整型值
 	 */
 	public static long toLong(Double num) {
@@ -337,10 +313,8 @@ public class NumberUtil {
 	/**
 	 * 返回长整型值，null返回默认值
 	 * 
-	 * @param num
-	 *            Double对象
-	 * @param def
-	 *            默认值
+	 * @param num Double对象
+	 * @param def 默认值
 	 * @return 长整型值
 	 */
 	public static long toLong(Double num, int def) {
@@ -355,10 +329,8 @@ public class NumberUtil {
 	/**
 	 * 计算默认起始记录
 	 * 
-	 * @param pageid
-	 *            分页编号
-	 * @param size
-	 *            分页大小
+	 * @param pageid 分页编号
+	 * @param size 分页大小
 	 * @return 当前分页的起始记录编号
 	 */
 	public static int getPageStart(int pageId, int size) {
@@ -374,8 +346,7 @@ public class NumberUtil {
 	/**
 	 * 把null或0转成null
 	 * 
-	 * @param num
-	 *            整型对象
+	 * @param num 整型对象
 	 * @return 整型对象
 	 */
 	public static Integer zeroToNull(Integer num) {
@@ -452,8 +423,7 @@ public class NumberUtil {
 	/**
 	 * 判断是否大于0
 	 * 
-	 * @param num
-	 *            Double对象
+	 * @param num Double对象
 	 * @return boolean
 	 */
 	public static boolean isGreaterZero(Double num) {
@@ -466,8 +436,7 @@ public class NumberUtil {
 	/**
 	 * 判断是否大于0
 	 * 
-	 * @param num
-	 *            Long对象
+	 * @param num Long对象
 	 * @return boolean
 	 */
 	public static boolean isGreaterZero(Long num) {
@@ -480,8 +449,7 @@ public class NumberUtil {
 	/**
 	 * 格式化十进制数，分隔千位
 	 * 
-	 * @param num
-	 *            十进制数
+	 * @param num 十进制数
 	 * @return 格式化后的数值
 	 */
 	public static String format(double num) {
@@ -500,27 +468,25 @@ public class NumberUtil {
 	 * 保留小数点N位.
 	 * 
 	 * @param num
-	 * @param n
-	 *            N位小数点
+	 * @param n N位小数点
 	 * @return
 	 */
 	public static double scale(double num, int n) {
 		double scale = Math.pow(10, n);
-		return (double) (num * scale) / scale;
+		return ((int) (num * scale)) / scale;
 	}
 
 	/**
 	 * 保留小数点N位.
 	 * 
 	 * @param num
-	 * @param n
-	 *            N位小数点
+	 * @param n N位小数点
 	 * @return
 	 */
 	public static float scale(float num, int n) {
 		float scale = (float) Math.pow(10, n);
 		// System.out.println("scale:" + scale);
-		return ((float) (num * scale)) / scale;
+		return ((int) (num * scale)) / scale;
 	}
 
 	public static int random(int max) {
