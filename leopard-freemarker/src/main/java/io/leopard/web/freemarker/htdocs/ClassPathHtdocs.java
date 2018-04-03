@@ -127,6 +127,9 @@ public abstract class ClassPathHtdocs extends HttpServlet implements IHtdocs {
 		else if (filename.endsWith(".jpg")) {
 			return "image/jpg";
 		}
+		else if (filename.endsWith(".gif")) {
+			return "image/gif";
+		}
 		else if (filename.endsWith(".ico")) {
 			return "image/webp";
 		}
