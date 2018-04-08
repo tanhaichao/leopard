@@ -72,7 +72,7 @@ public class SearcherImpl implements Searcher {
 		return clusterName;
 	}
 
-	public void setClusterName(String c) {
+	public void setClusterName(String clusterName) {
 		this.clusterName = clusterName;
 	}
 
