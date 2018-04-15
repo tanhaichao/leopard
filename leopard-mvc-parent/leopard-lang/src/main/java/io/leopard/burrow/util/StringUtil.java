@@ -481,8 +481,8 @@ public class StringUtil {// NOPMD
 	 * @return
 	 */
 	public static String firstCharToLowerCase(String word) {
-		if (word == null) {
-			return null;
+		if (word == null || word.length() == 0) {
+			return word;
 		}
 		if (word.length() == 1) {
 			return word.toLowerCase();
@@ -505,8 +505,8 @@ public class StringUtil {// NOPMD
 	 * @return
 	 */
 	public static String firstCharToUpperCase(String word) {
-		if (word == null) {
-			return null;
+		if (word == null || word.length() == 0) {
+			return word;
 		}
 		if (word.length() == 1) {
 			return word.toUpperCase();
