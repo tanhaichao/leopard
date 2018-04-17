@@ -1,8 +1,8 @@
 package io.leopard.web.view;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.Map;
@@ -16,32 +16,12 @@ import org.springframework.web.servlet.view.AbstractUrlBasedView;
 
 public class DownloadView extends ModelAndView {
 
-	public DownloadView(final String filename, final String name) {
-		AbstractUrlBasedView view = new AbstractUrlBasedView() {
-			@Override
-			protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-				String name2 = URLEncoder.encode(name, "UTF-8");
-				response.setContentType("application/force-download");
-				response.addHeader("Content-Disposition", "attachment;filename=" + name2);
+	public DownloadView(final String filename, final String name) throws FileNotFoundException {
+		this(new File(filename), name);
+	}
 
-				File file = new File(filename);
-
-				InputStream inputStream = new FileInputStream(file);
-				BufferedInputStream bis = new BufferedInputStream(inputStream);
-				byte[] bytes = new byte[1024];
-				ServletOutputStream out = response.getOutputStream();
-				int readLength = 0;
-				while ((readLength = bis.read(bytes)) != -1) {
-					out.write(bytes, 0, readLength);
-				}
-				// TODO ahai 释放资源
-				inputStream.close();
-				bis.close();
-				out.flush();
-				out.close();
-			}
-		};
-		super.setView(view);
+	public DownloadView(final File file, final String name) throws FileNotFoundException {
+		this(new FileInputStream(file), name);
 	}
 
 	public DownloadView(final InputStream input, final String name) {
