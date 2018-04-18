@@ -35,7 +35,7 @@ public class FreeMarkerUtil {
 	// </bean>
 	private static FreeMarkerConfigurer configurer;
 
-	protected static FreeMarkerConfigurer getFreeMarkerConfigurer(ApplicationContext applicationContext, String templateLoaderPath) {
+	public static FreeMarkerConfigurer getFreeMarkerConfigurer(ApplicationContext applicationContext, String templateLoaderPath) {
 		Map<String, Object> freemarkerVariables = new HashMap<String, Object>();
 		freemarkerVariables.put("xml_escape", "fmXmlEscape");
 		freemarkerVariables.put("replaceParam", new ReplaceParamTemplateMethod());
