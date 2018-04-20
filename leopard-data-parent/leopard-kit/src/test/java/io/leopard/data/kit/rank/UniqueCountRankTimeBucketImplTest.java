@@ -19,7 +19,7 @@ public class UniqueCountRankTimeBucketImplTest {
 
 	public UniqueCountRankTimeBucketImplTest() {
 		redis = new RedisMemoryImpl();
-		redis = RedisFactory.create("112.126.75.27:6311");
+		redis = RedisFactory.create("127.0.0.1:6311");
 
 		rank.setKey("CountRankTimeBucket");
 		rank.setRedis(redis);
