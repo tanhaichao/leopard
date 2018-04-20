@@ -16,7 +16,7 @@ public class MongoImplIntegrationTest {
 	private Mongo mongo = newInstance();
 
 	public Mongo newInstance() {
-		MongoImpl mongo = new MongoImpl("112.126.75.27:27017", "test", "users");
+		MongoImpl mongo = new MongoImpl("127.0.0.1:27017", "test", "users");
 		mongo.init();
 		return mongo;
 	}
