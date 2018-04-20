@@ -28,7 +28,7 @@ import redis.clients.jedis.ZParams;
 //@Ignore
 public class RedisImplTest {
 
-	private RedisImpl redis = RedisFactory.create("112.126.75.27:6311:leopardredisxxx");
+	private RedisImpl redis = RedisFactory.create("127.0.0.1:6311:redispassword");
 
 	private RedisImpl redisTransactionImpl = redis;
 	private final String key = "key";
