@@ -12,7 +12,7 @@ public class CaptchaServiceImplTest {
 	private CaptchaServiceImpl seccodeService = new CaptchaServiceImpl();
 
 	public CaptchaServiceImplTest() {
-		Jdbc jdbc = JdbcFactory.creaeJdbcMysqlImpl("112.126.75.27", "example", "example", "leopard");
+		Jdbc jdbc = JdbcFactory.creaeJdbcMysqlImpl("127.0.0.1", "example", "example", "example");
 		seccodeService.setJdbc(jdbc);
 		seccodeService.setTableName("captcha");
 		seccodeService.init();
