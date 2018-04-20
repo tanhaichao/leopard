@@ -11,7 +11,7 @@ public class NewCounterKitRedisImplTest {
 	private NewCounterKitRedisImpl newCounterKitRedisImpl = new NewCounterKitRedisImpl();
 
 	public NewCounterKitRedisImplTest() {
-		Redis redis = RedisFactory.create("112.126.75.27:6311");
+		Redis redis = RedisFactory.create("127.0.0.1:6311");
 		newCounterKitRedisImpl.setRedis(redis);
 		newCounterKitRedisImpl.setKey("new_invited_count");
 	}
