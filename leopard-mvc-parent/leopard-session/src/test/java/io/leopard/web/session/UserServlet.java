@@ -36,7 +36,7 @@ public class UserServlet extends HttpServlet {
 	// @Test
 	// public void testRedis() throws Exception {
 	// StoreMemoryImpl.setEnable(false);
-	// Redis redis = RedisFactory.create("112.126.75.27:6311");
+	// Redis redis = RedisFactory.create("127.0.0.1:6311");
 	// StoreRedisImpl.setRedis(redis);
 	// JettyServer.start("src/test/webapp");
 	// String result = Httpnb.doGet("http://localhost/index");
