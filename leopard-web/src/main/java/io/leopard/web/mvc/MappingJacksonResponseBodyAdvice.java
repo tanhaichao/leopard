@@ -20,7 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.leopard.data.env.EnvUtil;
 import io.leopard.mvc.trynb.ResultModifierImpl;
-import io.leopard.web.mvc.json.MvcOutputJson;
+import io.leopard.web.mvc.json.MvcJsonGenerator;
 import io.leopard.web.servlet.JsonDebugger;
 
 public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Object> {
@@ -32,6 +32,8 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 	@Value("${leopard.mvc.json.format}")
 	private String format;
+
+	private MvcJsonGenerator mvcJsonGenerator = new MvcJsonGenerator();
 
 	@Override
 	public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -70,7 +72,7 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 
 		String json = null;
 		try {
-			json = MvcOutputJson.toJson(map, isFormat);
+			json = mvcJsonGenerator.toJson(map, isFormat);
 		}
 		catch (JsonProcessingException e) {
 			Throwable t = e.getCause();

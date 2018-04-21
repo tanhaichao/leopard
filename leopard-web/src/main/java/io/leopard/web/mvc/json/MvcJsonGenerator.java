@@ -12,13 +12,19 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import io.leopard.web.xparam.resolver.UnderlineNameConfiger;
 
-public class MvcOutputJson {
+/**
+ * MVC层JSON生成器
+ * 
+ * @author 谭海潮
+ *
+ */
+public class MvcJsonGenerator {
 
-	private static ObjectWriter formatWriter;
+	private ObjectWriter formatWriter;
 
-	private static ObjectMapper mapper; // can reuse, share
+	private ObjectMapper mapper; // can reuse, share
 
-	static {
+	public MvcJsonGenerator() {
 		Iterator<ModuleSerializer> iterator = ServiceLoader.load(ModuleSerializer.class).iterator();
 		// voFiller.init();
 		// Onum序列化
@@ -48,7 +54,7 @@ public class MvcOutputJson {
 		}
 	}
 
-	public static String toJson(Object data, boolean format) throws JsonProcessingException {
+	public String toJson(Object data, boolean format) throws JsonProcessingException {
 		String json = null;
 		if (format) {
 			json = formatWriter.writeValueAsString(data);
