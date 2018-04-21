@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-data-parent</artifactId>
-		<version>0.9.12-SNAPSHOT</version>
+		<version>0.9.12</version>
 	</parent>
 	<artifactId>leopard-kit</artifactId>
 	<name>Leopard-Kit</name>
@@ -13,22 +13,22 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-redis</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jdbc</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-exception</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-util</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-timer</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 	</dependencies>
 </project>

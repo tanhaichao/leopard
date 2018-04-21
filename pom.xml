@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.leopard</groupId>
 	<artifactId>leopard</artifactId>
-	<version>0.9.12-SNAPSHOT</version>
+	<version>0.9.12</version>
 	<packaging>pom</packaging>
 
 	<name>Leopard</name>
@@ -146,9 +146,9 @@
 	</dependencyManagement>
 
 	<scm>
-		<url>https://github.com/tanhaichao/leopard</url>
-		<connection>scm:svn:https://github.com/tanhaichao/leopard/trunk</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard/trunk</developerConnection>
+		<url>https://github.com/tanhaichao/leopard/tags/leopard-0.9.12</url>
+		<connection>scm:svn:https://github.com/tanhaichao/leopard/tags/leopard-0.9.12</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard/tags/leopard-0.9.12</developerConnection>
 	</scm>
 
 	<issueManagement>

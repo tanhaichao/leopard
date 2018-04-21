@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-data-parent</artifactId>
-		<version>0.9.12-SNAPSHOT</version>
+		<version>0.9.12</version>
 	</parent>
 	<artifactId>leopard-oracle</artifactId>
 
@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jdbc</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 	</dependencies>
 	<repositories>

@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-pay-parent</artifactId>
-		<version>0.9.12-SNAPSHOT</version>
+		<version>0.9.12</version>
 	</parent>
 	<artifactId>leopard-pay-weixin</artifactId>
 	<description>微信支付</description>
@@ -33,22 +33,22 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-datatype</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-lang</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jdbc</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-json</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 	</dependencies>
 </project>

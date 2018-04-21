@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-test-parent</artifactId>
-		<version>0.9.12-SNAPSHOT</version>
+		<version>0.9.12</version>
 	</parent>
 	<artifactId>leopard-test</artifactId>
 	<name>测试类库</name>
@@ -44,23 +44,23 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>javahost</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jdbc</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-util</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-schema</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -72,7 +72,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-treedata</artifactId>
-			<version>0.9.12-SNAPSHOT</version>
+			<version>0.9.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.javassist</groupId>
