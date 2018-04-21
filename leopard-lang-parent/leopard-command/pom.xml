@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-lang-parent</artifactId>
-		<version>0.9.12</version>
+		<version>0.9.13-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-command</artifactId>
 	<name>Leopard-Command</name>
@@ -17,7 +17,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-timer</artifactId>
-			<version>0.9.12</version>
+			<version>0.9.13-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

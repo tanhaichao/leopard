@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard.topnb</groupId>
 		<artifactId>topnb</artifactId>
-		<version>0.9.12</version>
+		<version>0.9.13-SNAPSHOT</version>
 	</parent>
 	<artifactId>topnb-profiler</artifactId>
 	<name>TopNB-Profiler</name>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>io.leopard.topnb</groupId>
 			<artifactId>topnb-web</artifactId>
-			<version>0.9.12</version>
+			<version>0.9.13-SNAPSHOT</version>
 		</dependency>
 		<!-- test -->
 		<dependency>

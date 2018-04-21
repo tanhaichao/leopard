@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-mvc-parent</artifactId>
-		<version>0.9.12</version>
+		<version>0.9.13-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-passport</artifactId>
 	<name>Leopard-Passport</name>
@@ -52,7 +52,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-xparam</artifactId>
-			<version>0.9.12</version>
+			<version>0.9.13-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>

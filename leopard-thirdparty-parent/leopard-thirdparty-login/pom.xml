@@ -3,7 +3,7 @@
   <parent>
     <groupId>io.leopard</groupId>
     <artifactId>leopard-thirdparty-parent</artifactId>
-    <version>0.9.12</version>
+    <version>0.9.13-SNAPSHOT</version>
   </parent>
   <artifactId>leopard-thirdparty-login</artifactId>
   <description>第三方登录接口</description>

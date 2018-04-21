@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-parent-default</artifactId>
-		<version>0.9.12</version>
+		<version>0.9.13-SNAPSHOT</version>
 		<relativePath>../leopard-parent-default/pom.xml</relativePath>
 	</parent>
 	<groupId>io.leopard</groupId>
