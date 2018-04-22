@@ -10,7 +10,15 @@ public class JdbcFactory {
 	}
 
 	public static JdbcMysqlImpl creaeJdbcMysqlImpl(String host, String database, String user, String password, int idleConnectionTestPeriod) {
-		String url = "jdbc:mysql://" + host + ":3306/" + database + "?useUnicode=true&characterEncoding=UTF8";
+		return creaeJdbcMysqlImpl(host, 3306, database, user, password, idleConnectionTestPeriod);
+	}
+
+	public static JdbcMysqlImpl creaeJdbcMysqlImpl(String host, int port, String database, String user, String password) {
+		return creaeJdbcMysqlImpl(host, port, database, user, password, 0);
+	}
+
+	public static JdbcMysqlImpl creaeJdbcMysqlImpl(String host, int port, String database, String user, String password, int idleConnectionTestPeriod) {
+		String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?useUnicode=true&characterEncoding=UTF8";
 		MysqlDsnDataSource dataSource = new MysqlDsnDataSource();
 		dataSource.setMaxPoolSize(15);
 		dataSource.setUser(user);
