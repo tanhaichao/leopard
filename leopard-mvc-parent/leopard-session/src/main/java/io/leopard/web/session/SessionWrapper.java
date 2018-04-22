@@ -88,6 +88,7 @@ public class SessionWrapper implements HttpSession {
 	 * @param value
 	 */
 	public void setCacheAttribute(String key, Object value) {
+		value = JsonSerializer.serialize(value);
 		this.getMap().put(key, value);
 	}
 
