@@ -36,7 +36,7 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	public XParamBeanPostProcessor() {
-		logger.info("XParamBeanPostProcessor new...");
+		// logger.info("XParamBeanPostProcessor new...");
 	}
 
 	@Autowired
@@ -61,7 +61,7 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 	 * @param adapter
 	 */
 	protected void registerHandlerMethodArgumentResolver(RequestMappingHandlerAdapter adapter) {
-		logger.info("registerHandlerMethodArgumentResolver...");
+		// logger.info("registerHandlerMethodArgumentResolver...");
 
 		List<HandlerMethodArgumentResolver> customArgumentResolvers = adapter.getCustomArgumentResolvers();
 		// new Exception("registerHandlerMethodArgumentResolver customArgumentResolvers:" + customArgumentResolvers).printStackTrace();
