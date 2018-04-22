@@ -1,7 +1,5 @@
 package io.leopard.web.session;
 
-import io.leopard.json.Json;
-
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -9,6 +7,8 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
+
+import io.leopard.json.Json;
 
 @SuppressWarnings("deprecation")
 public class SessionWrapper implements HttpSession {
@@ -79,6 +79,16 @@ public class SessionWrapper implements HttpSession {
 
 		String json = Json.toJson(this.getMap());
 		Store.getInstance().set(getSessionKey(sid), json, expiry);
+	}
+
+	/**
+	 * 只在内存中生效
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public void setCacheAttribute(String key, Object value) {
+		this.getMap().put(key, value);
 	}
 
 	@Override
