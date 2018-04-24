@@ -1,7 +1,7 @@
 package io.leopard.data.env;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 
 /**
  * linux服务器环境(除hudson)

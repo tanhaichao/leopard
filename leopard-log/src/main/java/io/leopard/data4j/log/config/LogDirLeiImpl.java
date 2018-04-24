@@ -1,6 +1,6 @@
 package io.leopard.data4j.log.config;
 
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 
 public class LogDirLeiImpl implements LogDirLei {
 

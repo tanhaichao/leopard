@@ -1,6 +1,6 @@
 package io.leopard.data.env;
 
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 
 /**
  * windows开发环境
