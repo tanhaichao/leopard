@@ -10,4 +10,10 @@ public class StringUtilTest {
 		System.out.println(uuid);
 	}
 
+	@Test
+	public void generateNumberKey() {
+		String number = StringUtil.generateNumberKey(10);
+		System.out.println("number:" + number);
+	}
+
 }

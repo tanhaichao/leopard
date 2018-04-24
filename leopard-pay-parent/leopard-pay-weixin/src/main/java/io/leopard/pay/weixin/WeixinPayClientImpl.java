@@ -2,7 +2,6 @@ package io.leopard.pay.weixin;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,6 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 
-import io.leopard.burrow.util.StringUtil;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.json.Json;
 import io.leopard.lang.DecimalUtil;

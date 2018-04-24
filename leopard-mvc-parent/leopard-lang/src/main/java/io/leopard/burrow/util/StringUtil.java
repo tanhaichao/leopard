@@ -10,8 +10,8 @@ import java.util.Set;
 import java.util.UUID;
 //import org.apache.commons.codec.binary.Base64;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import io.leopard.burrow.lang.AssertUtil;
 
@@ -58,7 +58,7 @@ public class StringUtil {// NOPMD
 	public static String generateNumberKey(int len) {
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < len; i++) {
-			builder.append(RandomUtils.nextInt(10));
+			builder.append(RandomUtils.nextInt(0, 10));
 		}
 		return builder.toString();
 	}
