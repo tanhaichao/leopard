@@ -1,7 +1,7 @@
 package io.leopard.data.kit.password;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import io.leopard.core.exception.forbidden.PasswordWrongException;
 import io.leopard.util.EncryptUtil;

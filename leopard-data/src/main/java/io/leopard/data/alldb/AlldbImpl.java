@@ -1,11 +1,11 @@
 package io.leopard.data.alldb;
 
-import io.leopard.jdbc.Jdbc;
-import io.leopard.redis.Redis;
-
 import java.util.Date;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
+
+import io.leopard.jdbc.Jdbc;
+import io.leopard.redis.Redis;
 
 public class AlldbImpl implements Alldb {
 
@@ -127,7 +127,7 @@ public class AlldbImpl implements Alldb {
 
 	@Override
 	public Memdb memdb() {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 }

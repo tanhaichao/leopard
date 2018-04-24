@@ -2,7 +2,7 @@ package io.leopard.data.signature;
 
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import io.leopard.burrow.util.DateTime;
 import io.leopard.burrow.util.DateUtil;

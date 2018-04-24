@@ -1,6 +1,6 @@
 package io.leopard.data4j.log;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang.SystemUtils;
 
 import io.leopard.data4j.log.config.LogConfigLeiImpl;

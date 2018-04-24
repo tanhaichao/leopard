@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StringUtils;
 
@@ -43,22 +43,22 @@ public class StaticResource implements Resource {
 
 	@Override
 	public boolean isReadable() {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 	@Override
 	public boolean isOpen() {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 	@Override
 	public URL getURL() throws IOException {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 	@Override
 	public URI getURI() throws IOException {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class StaticResource implements Resource {
 
 	@Override
 	public Resource createRelative(String relativePath) throws IOException {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 	@Override

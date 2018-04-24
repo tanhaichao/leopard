@@ -1,12 +1,12 @@
 package io.leopard.data.counter;
 
-import io.leopard.redis.Redis;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+
+import io.leopard.redis.Redis;
 
 public class CounterRedisImpl implements Counter {
 
