@@ -1,6 +1,6 @@
 package io.leopard.data.env;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
 public class EnvUtil {
@@ -81,7 +81,7 @@ public class EnvUtil {
 	 * @return
 	 */
 	public static boolean isWebserver() {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 	/**

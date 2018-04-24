@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.BeanFactory;
 
 public class XargResolverImpl implements XargResolver {
@@ -35,7 +35,7 @@ public class XargResolverImpl implements XargResolver {
 
 	@Override
 	public Object invoke(MethodInvocation invocation) {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 }

@@ -1,15 +1,15 @@
 package io.leopard.monitor.model;
 
-import io.leopard.burrow.refect.ClassTypeUtil;
-
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.reflect.FieldUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
+
+import io.leopard.burrow.refect.ClassTypeUtil;
 
 public class BaseInfoBuilder {
 	private final BaseInfo baseInfo = new BaseInfo();

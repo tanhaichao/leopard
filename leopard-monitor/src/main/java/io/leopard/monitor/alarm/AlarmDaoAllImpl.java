@@ -3,7 +3,7 @@ package io.leopard.monitor.alarm;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 
 public class AlarmDaoAllImpl implements AlarmDao {
 
@@ -29,7 +29,7 @@ public class AlarmDaoAllImpl implements AlarmDao {
 
 	@Override
 	public boolean isNeedSend(String message) {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 }

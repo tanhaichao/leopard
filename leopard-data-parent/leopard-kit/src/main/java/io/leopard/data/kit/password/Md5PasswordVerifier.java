@@ -1,6 +1,6 @@
 package io.leopard.data.kit.password;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
 import io.leopard.core.exception.forbidden.PasswordWrongException;
@@ -29,12 +29,12 @@ public class Md5PasswordVerifier implements PasswordVerifier {
 
 	@Override
 	public void check(String username, String password, String salt, String dbPassword) throws PasswordWrongException {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 	@Override
 	public String makeToken(String dbEncryptedPassword) {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 }

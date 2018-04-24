@@ -1,6 +1,6 @@
 package io.leopard.test;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfigurationAttributes;
 import org.springframework.test.context.MergedContextConfiguration;
@@ -53,7 +53,7 @@ public class TestContextLoader implements SmartContextLoader {
 
 	@Override
 	public String[] processLocations(Class<?> clazz, String... locations) {
-		throw new NotImplementedException();
+		throw new NotImplementedException("not impl.");
 	}
 
 }
