@@ -2,6 +2,7 @@ package io.leopard.data.env;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,7 +47,7 @@ public class PropertyPlaceholderLeiImpl implements PropertyPlaceholderLei {
 		String content;
 		try {
 			InputStream input = resource.getInputStream();
-			content = IOUtils.toString(input);
+			content = IOUtils.toString(input, Charset.defaultCharset());
 		}
 		catch (IOException e) {
 			throw new RuntimeException(e.getMessage());
