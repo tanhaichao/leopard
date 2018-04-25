@@ -2,7 +2,7 @@ package io.leopard.data.env;
 
 import java.util.Properties;
 
-public class ResolvePlaceholderLeiImpl implements ResolvePlaceholderLei {
+public class PlaceholderResolverImpl implements PlaceholderResolver {
 
 	// 配置文件里不存在的占位符时触发该接口.
 	@Override

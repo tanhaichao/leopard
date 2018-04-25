@@ -12,7 +12,7 @@ import io.leopard.commons.utility.AESUtil;
 
 public class PropertyPlaceholderLeiImplTest {
 
-	private PropertyPlaceholderLeiImpl impl = new PropertyPlaceholderLeiImpl();
+	private PropertyFileResolverImpl impl = new PropertyFileResolverImpl();
 
 	@Test
 	public void getResources() throws IOException {

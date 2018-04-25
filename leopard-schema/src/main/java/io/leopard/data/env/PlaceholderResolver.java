@@ -8,7 +8,7 @@ import java.util.Properties;
  * @author 阿海
  *
  */
-public interface ResolvePlaceholderLei {
+public interface PlaceholderResolver {
 	/**
 	 * 配置文件里不存在的占位符时触发该接口.
 	 * 
