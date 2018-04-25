@@ -4,6 +4,10 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 
+import io.leopard.jdbc.datasource.JdbcDataSource;
+
+//TODO 待删除的类
+@Deprecated
 public class JdbcMysqlImplFactoryBean extends JdbcMysqlImpl {
 	private String host;
 	private String database;

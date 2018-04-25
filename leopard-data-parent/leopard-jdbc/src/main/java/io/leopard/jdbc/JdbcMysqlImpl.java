@@ -25,6 +25,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import io.leopard.jdbc.builder.InsertBuilder;
 import io.leopard.jdbc.builder.ReplaceBuilder;
 import io.leopard.jdbc.builder.SqlBuilder;
+import io.leopard.jdbc.datasource.JdbcDataSource;
 import io.leopard.jdbc.logger.JdbcLogger;
 import io.leopard.jdbc.logger.JdbcLoggerImpl;
 import io.leopard.lang.Page;

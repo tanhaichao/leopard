@@ -1,9 +1,9 @@
-package io.leopard.jdbc;
-
-import io.leopard.jdbc.MysqlDsnDataSource;
+package io.leopard.jdbc.datasource;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import io.leopard.jdbc.datasource.MysqlDsnDataSource;
 
 public class MysqlDsnDataSourceTest {
 

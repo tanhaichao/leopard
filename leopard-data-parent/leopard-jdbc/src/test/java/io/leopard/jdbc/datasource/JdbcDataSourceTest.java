@@ -1,4 +1,4 @@
-package io.leopard.jdbc;
+package io.leopard.jdbc.datasource;
 
 import java.sql.SQLException;
 
@@ -7,6 +7,8 @@ import javax.sql.DataSource;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import io.leopard.jdbc.datasource.JdbcDataSource;
 
 public class JdbcDataSourceTest {
 

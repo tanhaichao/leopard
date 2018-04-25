@@ -1,6 +1,4 @@
-package io.leopard.jdbc;
-
-import io.leopard.jdbc.ProxyDataSource;
+package io.leopard.jdbc.datasource;
 
 import java.beans.PropertyVetoException;
 import java.sql.SQLException;
@@ -10,6 +8,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import io.leopard.jdbc.datasource.ProxyDataSource;
 
 public class ProxyDataSourceTest {
 	// ComboPooledDataSource comboPooledDataSource = (ComboPooledDataSource)

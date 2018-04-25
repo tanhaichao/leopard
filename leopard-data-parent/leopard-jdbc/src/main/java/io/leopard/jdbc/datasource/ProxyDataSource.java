@@ -1,4 +1,4 @@
-package io.leopard.jdbc;
+package io.leopard.jdbc.datasource;
 
 import java.beans.PropertyVetoException;
 import java.io.PrintWriter;
@@ -18,6 +18,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import io.leopard.jdbc.JdbcConnectionListener;
+import io.leopard.jdbc.ProxyConnection;
 
 /**
  * DataSource代理，为了出错时输出Jdbc配置信息，方便查找原因.

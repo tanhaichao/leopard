@@ -1,7 +1,7 @@
 package io.leopard.jdbc;
 
 import io.leopard.jdbc.JdbcMysqlImpl;
-import io.leopard.jdbc.MysqlDsnDataSource;
+import io.leopard.jdbc.datasource.MysqlDsnDataSource;
 
 public class JdbcFactory {
 

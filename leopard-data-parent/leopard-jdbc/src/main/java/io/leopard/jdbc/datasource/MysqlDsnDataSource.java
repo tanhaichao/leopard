@@ -1,9 +1,11 @@
-package io.leopard.jdbc;
+package io.leopard.jdbc.datasource;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.util.StringUtils;
+
+import io.leopard.jdbc.JdbcUrlInfo;
 
 /**
  * 数据源实现

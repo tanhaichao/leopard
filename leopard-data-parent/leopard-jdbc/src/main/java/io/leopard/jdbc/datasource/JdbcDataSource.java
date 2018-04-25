@@ -1,4 +1,4 @@
-package io.leopard.jdbc;
+package io.leopard.jdbc.datasource;
 
 import java.io.PrintWriter;
 import java.sql.Connection;
