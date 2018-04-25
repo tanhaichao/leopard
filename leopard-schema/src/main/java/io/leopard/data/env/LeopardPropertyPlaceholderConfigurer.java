@@ -1,21 +1,26 @@
 package io.leopard.data.env;
 
-import java.util.Map;
-import java.util.Map.Entry;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.context.annotation.Primary;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 
+/**
+ * Leopard属性占位符配置器
+ * 
+ * @author 谭海潮
+ *
+ */
 public class LeopardPropertyPlaceholderConfigurer extends org.springframework.beans.factory.config.PropertyPlaceholderConfigurer {
 
-	private ResolvePlaceholderLei resolvePlaceholderLei;
+	@Autowired
+	private PlaceholderResolver placeholderResolver;
+
+	@Autowired
+	private PropertyFileResolverImpl propertyFileResolver;
 
 	public LeopardPropertyPlaceholderConfigurer() {
 		// System.err.println("LeopardPropertyPlaceholderConfigurer new.");
@@ -29,78 +34,31 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 	@PostConstruct
 	public void init() {
 		logger.info("init:" + this.getClass().getName());
-	}
-
-	@Override
-	public void setBeanFactory(BeanFactory beanFactory) {
-		// logger.info("setBeanFactory:" + beanFactory.getClass().getName());
-		super.setBeanFactory(beanFactory);
-		PropertyDecoder propertyDecoder;
-		try {
-			propertyDecoder = beanFactory.getBean(PropertyDecoder.class);
-		}
-		catch (NoUniqueBeanDefinitionException e) {
-			logger.error(e.getMessage(), e);
-			propertyDecoder = new PropertyDecoderImpl();
-		}
-		catch (NoSuchBeanDefinitionException e) {
-			// logger.error(e.getMessage(), e);
-			propertyDecoder = new PropertyDecoderImpl();
-		}
-
-		this.resolvePlaceholderLei = getBean(beanFactory, ResolvePlaceholderLei.class);
-		// logger.info("resolvePlaceholderLei:" + resolvePlaceholderLei);
 
 		String env = EnvUtil.getEnv();
-		PropertyPlaceholderLeiImpl propertyPlaceholderLeiImpl = new PropertyPlaceholderLeiImpl();
-		propertyPlaceholderLeiImpl.setPropertyDecoder(propertyDecoder);
-		super.setLocations(propertyPlaceholderLeiImpl.getResources(env));
-	}
-
-	public <T> T getBean(BeanFactory beanFactory, Class<T> requiredType) throws BeansException {
-		DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
-		Map<String, T> matchingBeans = factory.getBeansOfType(requiredType);
-		if (matchingBeans.isEmpty()) {
-			throw new NoSuchBeanDefinitionException(requiredType);
+		Resource[] locations;
+		try {
+			locations = propertyFileResolver.getResources(env);
 		}
-		if (matchingBeans.size() == 1) {
-			return matchingBeans.entrySet().iterator().next().getValue();
+		catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
 		}
-		for (Entry<String, T> entry : matchingBeans.entrySet()) {
-			T bean = entry.getValue();
-			// TODO 还没有支持Bean有AOP
-			Primary primary = bean.getClass().getDeclaredAnnotation(Primary.class);
-			if (primary != null) {
-				return bean;
-			}
-		}
-		throw new NoUniqueBeanDefinitionException(requiredType, matchingBeans.keySet());
+		super.setLocations(locations);
 	}
 
 	@Override
 	// 执行顺序:2
 	protected String resolvePlaceholder(String placeholder, Properties props) {
-		// System.err.println("resolvePlaceholderLei2 placeholder:" + placeholder);
 		String defaultValue = super.resolvePlaceholder(placeholder, props);
-		// if (value == null) {
-		// System.err.println("resolvePlaceholderLei:" + resolvePlaceholderLei.getClass().getName());
-		return resolvePlaceholderLei.resolvePlaceholder(placeholder, props, defaultValue);
-		// }
-		// return value;
+		return placeholderResolver.resolvePlaceholder(placeholder, props, defaultValue);
 	}
 
-	// @Override
-	// public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-	// logger.info("postProcessBeanFactory");
-	// super.postProcessBeanFactory(beanFactory);
-	// }
-
-	private Properties props;
+	private Properties properties;
 
 	@Override
 	protected void convertProperties(Properties props) {
 		super.convertProperties(props);
-		this.props = props;
+		this.properties = props;
 	}
 
 	/**
@@ -110,7 +68,7 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 	 * @return
 	 */
 	public String getProperty(String name) {
-		return props.getProperty(name);
+		return properties.getProperty(name);
 	}
 
 }
