@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 
 import io.leopard.burrow.lang.LeopardValidUtil;
 import io.leopard.data.kit.password.PassportTokenUtil;
-import io.leopard.web.passport.PassportCheckerHandlerMethodImpl;
+import io.leopard.web.passport.ParameterNameResolver;
 import io.leopard.web.passport.PassportGroup;
 import io.leopard.web.passport.PassportValidator;
 import io.leopard.web.servlet.CookieUtil;
@@ -76,16 +76,13 @@ public class PassportValidatorAdminImpl implements PassportValidator {
 		return false;
 	}
 
-	private PassportCheckerHandlerMethodImpl passportChecker = new PassportCheckerHandlerMethodImpl("sessAdminId");
-
 	@Override
 	public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
 		String uri = request.getRequestURI();
 		if (uri.startsWith("/admin/")) {
 			// return true;
 		}
-		Boolean isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
-		return isNeedCheckLogin;
+		return ParameterNameResolver.hasParameterName(handler, "sessAdminId");
 	}
 
 }
