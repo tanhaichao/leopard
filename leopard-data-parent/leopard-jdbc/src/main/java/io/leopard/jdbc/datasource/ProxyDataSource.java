@@ -204,53 +204,6 @@ public class ProxyDataSource implements DataSource {
 		return inetAddress.getHostAddress();
 	}
 
-	public static String getJdbcUrl(String host, int port, String database) {
-		String jdbcUrl = "jdbc:mysql://" + host + ":" + port + "/" + database + "?useUnicode=true&characterEncoding=UTF8";// UTF8,utf8mb4
-		return jdbcUrl;
-	}
-
-	public static ProxyDataSource createDataSource(String driverClass, String jdbcUrl, String user, String password, int maxPoolSize, int idleConnectionTestPeriod) {
-		if (StringUtils.isEmpty(driverClass)) {
-			// System.err.println("驱动程序没有设置.");
-			driverClass = "org.gjt.mm.mysql.Driver";
-		}
-
-		logger.info("createDataSource jdbcUrl:" + jdbcUrl);
-		// ComboPooledDataSource dataSource = new ComboPooledDataSource();
-		ComboPooledDataSource dataSource = new ComboPooledDataSource();
-		try {
-			// dataSource.setDriverClass("org.mariadb.jdbc.Driver");
-			// dataSource.setDriverClass("org.gjt.mm.mysql.Driver");
-			dataSource.setDriverClass(driverClass);
-		}
-		catch (PropertyVetoException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		dataSource.setJdbcUrl(jdbcUrl);
-		dataSource.setUser(user);
-		dataSource.setPassword(password);
-		dataSource.setTestConnectionOnCheckout(false);
-
-		// testConnectionOnCheckout
-		// 如果设置为true,每次从池中取一个连接，将做一下测试，使用automaticTestTable 或者 preferredTestQuery,
-		// 做一条查询语句.看看连接好不好用，不好用，就关闭它，重新从池中拿一个.
-		// idleConnectionTestPeriod
-		// 设置在池中的没有被使用的连接，是否定时做测试，看看这个连接还可以用吗？
-
-		// <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
-		// <property name="idleConnectionTestPeriod" value="60" />
-		dataSource.setIdleConnectionTestPeriod(idleConnectionTestPeriod);
-
-		dataSource.setInitialPoolSize(1);
-		dataSource.setMinPoolSize(1);
-		dataSource.setMaxPoolSize(maxPoolSize);
-		dataSource.setAcquireIncrement(1);
-		dataSource.setAcquireRetryAttempts(1);
-		dataSource.setMaxIdleTime(7200);
-		dataSource.setMaxStatements(0);
-		return new ProxyDataSource(dataSource);
-	}
-
 	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
 		throw new SQLFeatureNotSupportedException("Not Implemented.");
 	}

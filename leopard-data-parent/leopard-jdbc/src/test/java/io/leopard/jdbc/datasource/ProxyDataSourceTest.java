@@ -82,17 +82,6 @@ public class ProxyDataSourceTest {
 		// proxyDataSource.printInfo();
 	}
 
-	@Test
-	public void getJdbcUrl() {
-		String url = ProxyDataSource.getJdbcUrl("host", 3306, "leopard");
-		// System.out.println("url:" + url);
-		Assert.assertEquals("jdbc:mysql://host:3306/leopard?useUnicode=true&characterEncoding=UTF8", url);
-	}
-
-	@Test
-	public void createDataSource() throws PropertyVetoException {
-		String jdbcUrl = ProxyDataSource.getJdbcUrl("host", 3306, "leopard");
-		ProxyDataSource.createDataSource("org.gjt.mm.mysql.Driver", jdbcUrl, "user", "password", 10, 60);
-	}
+	
 
 }
