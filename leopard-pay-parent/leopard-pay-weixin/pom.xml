@@ -20,6 +20,10 @@
 					<groupId>ch.qos.logback</groupId>
 					<artifactId>logback-classic</artifactId>
 				</exclusion>
+				<exclusion><!-- 和xmlpull重复 -->
+					<groupId>xpp3</groupId>
+					<artifactId>xpp3_min</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
