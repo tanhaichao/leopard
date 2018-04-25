@@ -54,6 +54,12 @@
 			<version>1.9.5</version>
 			<scope>compile</scope>
 
+			<exclusions>
+				<exclusion>
+					<groupId>org.objenesis</groupId>
+					<artifactId>objenesis</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 
