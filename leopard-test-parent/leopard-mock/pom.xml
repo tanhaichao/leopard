@@ -41,11 +41,22 @@
 
 
 		<!-- mock -->
+		<!-- 这会包含hamcrest-core，所以不用
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<scope>compile</scope>
 		</dependency>
+		 -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.5</version>
+			<scope>compile</scope>
+
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
