@@ -132,6 +132,16 @@ public class PassportUtil {
 	 * @return
 	 */
 	public static PassportGroup getPassportGroup(PassportValidator validator) {
+		{
+			while (true) {
+				if (validator instanceof PassportValidatorWrapper) {
+					validator = ((PassportValidatorWrapper) validator).getPassportValidator();
+				}
+				else {
+					break;
+				}
+			}
+		}
 		Class<?> clazz = validator.getClass();
 		while (true) {
 			String name = clazz.getName();
