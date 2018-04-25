@@ -23,8 +23,14 @@ import org.springframework.core.io.Resource;
  */
 public class LeopardPropertyPlaceholderConfigurer extends org.springframework.beans.factory.config.PropertyPlaceholderConfigurer {
 
+	/**
+	 * 占位符解析器
+	 */
 	private PlaceholderResolver placeholderResolver;
 
+	/**
+	 * 属性文件解析器
+	 */
 	private PropertyFileResolver propertyFileResolver;
 
 	public LeopardPropertyPlaceholderConfigurer() {
