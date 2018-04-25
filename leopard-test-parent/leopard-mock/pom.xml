@@ -84,11 +84,15 @@
 			<artifactId>powermock-module-junit4</artifactId>
 			<scope>compile</scope>
 		</dependency>
+		
+		<!--因为和powermock-api-mockito有类重复，20180425注释 
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-easymock</artifactId>
 			<scope>compile</scope>
 		</dependency>
+		-->
+		
 		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>
