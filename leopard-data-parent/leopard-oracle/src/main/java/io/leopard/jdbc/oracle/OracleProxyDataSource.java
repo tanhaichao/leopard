@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import io.leopard.jdbc.ProxyDataSource;
+import io.leopard.jdbc.datasource.ProxyDataSource;
 
 public class OracleProxyDataSource extends ProxyDataSource {
 
