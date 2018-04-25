@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class PassportValidatorWrapper implements PassportValidator {
 
-	private PassportValidator passportValidator;
+	protected PassportValidator passportValidator;
 
 	public PassportValidatorWrapper(PassportValidator passportValidator) {
 		if (passportValidator == null) {
