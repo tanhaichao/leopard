@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.HandlerCollection;
@@ -29,18 +31,30 @@ public class MyJettyServer implements WebServer {
 		List<ServerConnector> list = new ArrayList<ServerConnector>();
 		int defaultPort = this.getDefaultPort(port);
 		if (defaultPort != port) {
-			ServerConnector connector = new ServerConnector(this.server);
+			ServerConnector connector = createServerConnector(this.server);
 			connector.setPort(defaultPort);
 			list.add(connector);
 		}
 		{
-			ServerConnector connector = new ServerConnector(this.server);
+			ServerConnector connector = createServerConnector(this.server);
 			connector.setPort(port);
 			list.add(connector);
 		}
 		// connector0.setMaxIdleTime(30000);
 		// connector0.setRequestHeaderSize(8192);
 		return list;
+	}
+
+	protected ServerConnector createServerConnector(Server server) {
+		HttpConfiguration httpConfig = new HttpConfiguration();
+		// http_config.setSecureScheme("https");
+		// http_config.setSecurePort(8443);
+		// http_config.setOutputBufferSize(32768);
+		// http_config.setRequestHeaderSize(8192);
+		// http_config.setResponseHeaderSize(8192);
+		httpConfig.setSendServerVersion(false);
+		httpConfig.setSendDateHeader(false);
+		return new ServerConnector(server, new HttpConnectionFactory(httpConfig));
 	}
 
 	protected int getDefaultPort(int port) {

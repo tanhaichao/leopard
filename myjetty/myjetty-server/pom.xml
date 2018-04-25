@@ -14,7 +14,11 @@
 	这个版本websocket有问题 20170706
 		<jetty.version>9.4.6.v20170531</jetty.version>
 		 -->
+		 <!--
+		 20180425换成了9.49 
 		<jetty.version>9.4.5.v20170502</jetty.version>
+		 -->
+		<jetty.version>9.4.9.v20180320</jetty.version>
 		<jetty.jsp.version>9.3.0.M1</jetty.jsp.version>
 	</properties>
 
