@@ -33,9 +33,9 @@ public class DataSourceManager {
 		return clazz;
 	}
 
-	public static Class<?> getJdbcMysqlImpl() {
-		return findClass(JdbcMysqlImpl.class);
-	}
+//	public static Class<?> getJdbcMysqlImpl() {
+//		return findClass(JdbcMysqlImpl.class);
+//	}
 
 	public static Class<?> getJdbcDataSource() {
 		return findClass(JdbcDataSource.class);
@@ -45,9 +45,9 @@ public class DataSourceManager {
 		return findClass(NosqlMysqlImpl.class);
 	}
 
-	public static Class<?> getMysqlDsnDataSource() {
-		return findClass(MysqlDsnDataSource.class);
-	}
+//	public static Class<?> getMysqlDsnDataSource() {
+//		return findClass(MysqlDsnDataSource.class);
+//	}
 
 	public static Class<?> getMemcacheRedisImpl() {
 		return findClass(MemcacheRedisImpl.class);

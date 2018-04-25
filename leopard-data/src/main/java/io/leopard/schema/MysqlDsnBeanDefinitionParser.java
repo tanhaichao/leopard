@@ -12,6 +12,8 @@ import org.w3c.dom.Element;
 
 import io.leopard.data.env.EnvUtil;
 import io.leopard.data.schema.RegisterComponentUtil;
+import io.leopard.jdbc.JdbcMysqlImpl;
+import io.leopard.jdbc.datasource.MysqlDsnDataSource;
 
 /**
  * MySQL数据源标签
@@ -66,7 +68,7 @@ public class MysqlDsnBeanDefinitionParser implements BeanDefinitionParser {
 		}
 		createDataSource(dataSourceId, element, parserContext);
 
-		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSourceManager.getJdbcMysqlImpl());
+		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(JdbcMysqlImpl.class);
 		builder.addPropertyReference("dataSource", dataSourceId);
 		builder.setScope(BeanDefinition.SCOPE_SINGLETON);
 		// builder.setAutowireMode(AutowireCapableBeanFactory.AUTOWIRE_NO);
@@ -80,7 +82,7 @@ public class MysqlDsnBeanDefinitionParser implements BeanDefinitionParser {
 		final String maxPoolSize = element.getAttribute("maxPoolSize");
 		final String port = element.getAttribute("port");
 
-		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSourceManager.getMysqlDsnDataSource());
+		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(MysqlDsnDataSource.class);
 
 		builder.addPropertyValue("url", "${" + name + ".jdbc.url}");
 		builder.addPropertyValue("user", "${" + name + ".jdbc.username}");

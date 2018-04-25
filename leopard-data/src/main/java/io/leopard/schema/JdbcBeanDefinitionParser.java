@@ -10,6 +10,7 @@ import org.w3c.dom.Element;
 
 import io.leopard.data.env.EnvUtil;
 import io.leopard.data.schema.RegisterComponentUtil;
+import io.leopard.jdbc.JdbcMysqlImpl;
 
 public class JdbcBeanDefinitionParser implements BeanDefinitionParser {
 
@@ -26,7 +27,7 @@ public class JdbcBeanDefinitionParser implements BeanDefinitionParser {
 
 		this.createDataSource(dataSourceId, element, parserContext);
 
-		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSourceManager.getJdbcMysqlImpl());
+		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(JdbcMysqlImpl.class);
 		builder.addPropertyReference("dataSource", dataSourceId);
 		builder.setScope(BeanDefinition.SCOPE_SINGLETON);
 		return RegisterComponentUtil.registerComponent(parserContext, builder, jdbcId);
