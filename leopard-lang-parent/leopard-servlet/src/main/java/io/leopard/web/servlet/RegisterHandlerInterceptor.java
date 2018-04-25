@@ -3,6 +3,8 @@ package io.leopard.web.servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.Mergeable;
 import org.springframework.beans.MutablePropertyValues;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 //TODO ahai 在site项目必须实现BeanPostProcessor接口才能成功配置拦截器.
 public abstract class RegisterHandlerInterceptor implements HandlerInterceptor, BeanFactoryAware, BeanPostProcessor, Mergeable {
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
