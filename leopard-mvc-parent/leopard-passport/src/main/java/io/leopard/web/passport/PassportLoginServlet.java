@@ -13,6 +13,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 
+import io.leopard.jdbc.LeopardBeanFactoryAware;
+
 /**
  * 性能监控数据
  * 
@@ -32,7 +34,8 @@ public class PassportLoginServlet extends HttpServlet {
 		}
 		boolean flag;
 		try {
-			flag = Finder.getInstance().find(type).login(request, response);
+			PassportValidatorFinder passportValidatorFinder = LeopardBeanFactoryAware.getBeanFactory().getBean(PassportValidatorFinder.class);
+			flag = passportValidatorFinder.find(type).login(request, response);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);

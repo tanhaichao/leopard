@@ -7,14 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.method.HandlerMethod;
 
 import io.leopard.web.servlet.RegisterHandlerInterceptor;
-import io.leopard.web.xparam.Nologin;
 
 /**
  * 检查是否已登录.
@@ -29,46 +26,25 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private Finder finder = Finder.getInstance();
-
-	@Override
-	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-		super.setBeanFactory(beanFactory);
-		// System.err.println("setBeanFactory setBeanFactory:" + beanFactory);
-		finder.setBeanFactory(beanFactory);
-	}
+	@Autowired
+	private PassportValidatorFinder passportValidatorFinder;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		// logger.info("preHandle:" + request.getRequestURI());
-		List<PassportValidator> list = finder.find(request, handler);
+		List<PassportValidator> list = passportValidatorFinder.find(request, handler);
 		for (PassportValidator validator : list) {
-			Object account = validator.validate(request, response);
+			Object account = PassportUtil.validateAndStore(validator, request, response);
 			// logger.info("validator:" + validator + " handler:" + handler + " account:" + account);
 			if (account == null) {
-				// HandlerMethod method = (HandlerMethod) handler;
-				// Nologin nologin = method.getMethodAnnotation(Nologin.class);
-				// if (nologin == null) {
-				boolean isNeedLogin = isNeedLogin(handler);
-				if (isNeedLogin) {
-					validator.showLoginBox(request, response);
+				boolean isNeedCheckLogin = PassportUtil.isNeedCheckLogin(validator, request, handler);
+				if (isNeedCheckLogin) {
+					PassportUtil.showLoginBox(validator, request, response);
 					return false;
 				}
 			}
 		}
 		return true;
-	}
-
-	/**
-	 * 判断handler是否需要登录检查.
-	 * 
-	 * @param handler
-	 * @return
-	 */
-	public static boolean isNeedLogin(Object handler) {
-		HandlerMethod method = (HandlerMethod) handler;
-		Nologin nologin = method.getMethodAnnotation(Nologin.class);
-		return (nologin == null);
 	}
 
 }
