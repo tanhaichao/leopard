@@ -96,6 +96,13 @@ public class Finder {
 		return anno.value();
 	}
 
+	/**
+	 * 根据Handler匹配通行证登录验证器
+	 * 
+	 * @param request
+	 * @param handler
+	 * @return
+	 */
 	public List<PassportValidator> find(HttpServletRequest request, Object handler) {
 		List<PassportValidator> list = new ArrayList<PassportValidator>();
 		for (PassportValidator validator : this.list) {
