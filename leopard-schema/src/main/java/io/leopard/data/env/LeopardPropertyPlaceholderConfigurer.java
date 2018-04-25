@@ -15,6 +15,12 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 
+/**
+ * Leopard属性占位符配置器
+ * 
+ * @author 谭海潮
+ *
+ */
 public class LeopardPropertyPlaceholderConfigurer extends org.springframework.beans.factory.config.PropertyPlaceholderConfigurer {
 
 	private PlaceholderResolver placeholderResolver;
