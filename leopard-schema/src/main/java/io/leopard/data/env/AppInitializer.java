@@ -8,5 +8,8 @@ package io.leopard.data.env;
  */
 public interface AppInitializer {
 
+	/**
+	 * 在注册各种Bean之前就调用
+	 */
 	void init();
 }
