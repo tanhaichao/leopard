@@ -1,6 +1,8 @@
 package io.leopard.jdbc.datasource;
 
 import java.beans.PropertyVetoException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,6 +32,25 @@ public class DataSourceBuilder {
 	public static String getJdbcUrl(String host, int port, String database) {
 		String jdbcUrl = "jdbc:mysql://" + host + ":" + port + "/" + database + "?useUnicode=true&characterEncoding=UTF8";// UTF8,utf8mb4
 		return jdbcUrl;
+	}
+
+	public static JdbcUrlInfo parseUrl(String url) {
+		String regex = "jdbc:mysql://(.*?):([0-9]+)/([a-z0-9A-Z_]+)";
+
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(url);
+		if (!m.find()) {
+			throw new IllegalArgumentException("JdbcUrl[" + url + "]不符合规则.");
+		}
+		String host = m.group(1);
+		int port = Integer.parseInt(m.group(2));
+		String database = m.group(3);
+
+		JdbcUrlInfo jdbcUrlInfo = new JdbcUrlInfo();
+		jdbcUrlInfo.setDatabase(database);
+		jdbcUrlInfo.setPort(port);
+		jdbcUrlInfo.setHost(host);
+		return jdbcUrlInfo;
 	}
 
 	public ProxyDataSource createDataSource(String driverClass, String jdbcUrl, String user, String password, int maxPoolSize, int idleConnectionTestPeriod) {

@@ -1,4 +1,4 @@
-package io.leopard.jdbc;
+package io.leopard.jdbc.datasource;
 
 public class JdbcUrlInfo {
 

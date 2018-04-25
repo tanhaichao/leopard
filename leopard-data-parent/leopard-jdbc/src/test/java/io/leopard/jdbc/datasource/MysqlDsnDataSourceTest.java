@@ -18,17 +18,4 @@ public class MysqlDsnDataSourceTest {
 		Assert.assertEquals("leopard", dataSource.getDatabase());
 	}
 
-	@Test
-	public void parseUrl() {
-		MysqlDsnDataSource dataSource = new MysqlDsnDataSource();
-		try {
-			dataSource.parseUrl("url");
-			Assert.fail("怎么没有抛异常?");
-		}
-		catch (IllegalArgumentException e) {
-
-		}
-
-	}
-
 }

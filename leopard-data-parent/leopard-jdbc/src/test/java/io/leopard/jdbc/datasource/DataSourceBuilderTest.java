@@ -20,4 +20,15 @@ public class DataSourceBuilderTest {
 		new DataSourceBuilder().createDataSource("org.gjt.mm.mysql.Driver", jdbcUrl, "user", "password", 10, 60);
 	}
 
+	@Test
+	public void parseUrl() {
+		try {
+			DataSourceBuilder.parseUrl("url");
+			Assert.fail("怎么没有抛异常?");
+		}
+		catch (IllegalArgumentException e) {
+
+		}
+
+	}
 }
