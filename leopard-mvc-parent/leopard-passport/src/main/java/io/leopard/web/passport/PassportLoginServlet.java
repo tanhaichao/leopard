@@ -28,23 +28,25 @@ public class PassportLoginServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String type = request.getParameter("type");
-		if (StringUtils.isEmpty(type)) {
-			type = "sessUid";
-		}
-		boolean flag;
 		try {
-			PassportValidatorFinder passportValidatorFinder = LeopardBeanFactoryAware.getSingleBean(PassportValidatorFinder.class);
-			flag = passportValidatorFinder.find(type).login(request, response);
+			login(request, response);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			this.output(response, e.getMessage());
 			return;
 		}
+	}
+
+	protected void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String type = request.getParameter("type");
+		if (StringUtils.isEmpty(type)) {
+			type = "sessUid";
+		}
+		PassportValidatorFinder passportValidatorFinder = LeopardBeanFactoryAware.getSingleBean(PassportValidatorFinder.class);
+		boolean flag = passportValidatorFinder.find(type).login(request, response);
 		if (!flag) {
-			this.output(response, "未实现PassportValidate.login接口");
-			return;
+			throw new RuntimeException("未实现PassportValidate.login接口");
 		}
 	}
 
