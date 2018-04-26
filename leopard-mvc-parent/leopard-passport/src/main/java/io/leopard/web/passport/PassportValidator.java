@@ -48,7 +48,7 @@ public interface PassportValidator {
 	 * 
 	 * @param request
 	 * @param response
-	 * @return 未实现返回null，已实现跳转返回true，未跳转返回false
+	 * @return true:已跳转，false:未跳转
 	 * @throws Exception
 	 */
 	boolean login(HttpServletRequest request, HttpServletResponse response) throws Exception;
