@@ -41,6 +41,10 @@ public class LeopardBeanFactoryAware implements BeanFactoryAware {
 	 * @throws BeansException
 	 */
 	public static <T> T getSingleBean(Class<T> requiredType) throws BeansException {
+		return getSingleBean(beanFactory, requiredType);
+	}
+
+	public static <T> T getSingleBean(BeanFactory beanFactory, Class<T> requiredType) throws BeansException {
 		DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
 		Map<String, T> matchingBeans = factory.getBeansOfType(requiredType);
 		if (matchingBeans.isEmpty()) {
