@@ -62,6 +62,7 @@ public class PassportUtil {
 		else {
 			sessionStore = group.session();
 		}
+		// logger.info("validator:" + validator.getClass().getName() + " sessionStore:" + sessionStore + " sessionAttributeName:" + sessionAttributeName);
 		if (sessionStore) {
 			Object passport = request.getSession().getAttribute(sessionAttributeName);
 			if (passport != null) {
