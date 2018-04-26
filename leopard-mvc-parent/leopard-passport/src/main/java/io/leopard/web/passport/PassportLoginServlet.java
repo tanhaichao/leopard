@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 
+import io.leopard.mvc.trynb.ErrorUtil;
 import io.leopard.spring.LeopardBeanFactoryAware;
 
 /**
@@ -32,8 +33,9 @@ public class PassportLoginServlet extends HttpServlet {
 			login(request, response);
 		}
 		catch (Exception e) {
+			String message = ErrorUtil.parseMessage(e);
 			logger.error(e.getMessage(), e);
-			this.output(response, e.getMessage());
+			this.output(response, message);
 			return;
 		}
 	}

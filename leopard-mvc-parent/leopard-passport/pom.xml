@@ -47,7 +47,11 @@
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-json</artifactId>
 		</dependency>
-
+		<dependency><!-- PassportLoginServlet用到 -->
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-trynb</artifactId>
+			<version>0.9.13-SNAPSHOT</version>
+		</dependency>
 		<!-- test -->
 		<dependency>
 			<groupId>io.leopard</groupId>
