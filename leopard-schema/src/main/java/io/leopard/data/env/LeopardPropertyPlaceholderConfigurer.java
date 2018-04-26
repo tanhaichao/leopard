@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.io.Resource;
 
-import io.leopard.jdbc.LeopardBeanFactoryAware;
+import io.leopard.spring.LeopardBeanFactoryAware;
 
 /**
  * Leopard属性占位符配置器
@@ -45,8 +45,8 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
 		super.setBeanFactory(beanFactory);
-		this.placeholderResolver = LeopardBeanFactoryAware.getSingleBean(beanFactory, PlaceholderResolver.class);
-		this.propertyFileResolver = LeopardBeanFactoryAware.getSingleBean(beanFactory, PropertyFileResolver.class);
+		this.placeholderResolver = LeopardBeanFactoryAware.getSingleBean(PlaceholderResolver.class);
+		this.propertyFileResolver = LeopardBeanFactoryAware.getSingleBean(PropertyFileResolver.class);
 
 		String env = EnvUtil.getEnv();
 		Resource[] locations;

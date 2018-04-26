@@ -14,13 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import io.leopard.burrow.lang.AssertUtil;
 import io.leopard.burrow.util.ListUtil;
-import io.leopard.jdbc.LeopardBeanFactoryAware;
 import io.leopard.monitor.alarm.AlarmModule;
 import io.leopard.monitor.alarm.AlarmService;
 import io.leopard.monitor.model.MonitorConfig;
 import io.leopard.monitor.model.RedisInfo;
 import io.leopard.redis.Redis;
 import io.leopard.redis.RedisImpl;
+import io.leopard.spring.LeopardBeanFactoryAware;
 
 public class RedisMonitor implements IMonitor {
 

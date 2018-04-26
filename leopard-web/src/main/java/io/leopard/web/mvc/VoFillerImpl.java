@@ -8,7 +8,7 @@ import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 
-import io.leopard.jdbc.LeopardBeanFactoryAware;
+import io.leopard.spring.LeopardBeanFactoryAware;
 
 public class VoFillerImpl implements VoFiller {
 	private List<VoFiller> fillerHandlers;

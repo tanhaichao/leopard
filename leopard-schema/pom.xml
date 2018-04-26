@@ -43,7 +43,7 @@
 		</dependency>
 		<dependency><!-- 要使用LeopardBeanFactoryAware -->
 			<groupId>io.leopard</groupId>
-			<artifactId>leopard-jdbc</artifactId>
+			<artifactId>leopard-servlet</artifactId>
 			<version>0.9.13-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

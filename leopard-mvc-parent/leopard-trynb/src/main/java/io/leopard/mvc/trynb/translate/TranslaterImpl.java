@@ -2,7 +2,7 @@ package io.leopard.mvc.trynb.translate;
 
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
-import io.leopard.jdbc.LeopardBeanFactoryAware;
+import io.leopard.spring.LeopardBeanFactoryAware;
 
 public class TranslaterImpl implements Translater {
 

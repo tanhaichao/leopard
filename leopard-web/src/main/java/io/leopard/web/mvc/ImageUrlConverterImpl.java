@@ -3,7 +3,7 @@ package io.leopard.web.mvc;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
-import io.leopard.jdbc.LeopardBeanFactoryAware;
+import io.leopard.spring.LeopardBeanFactoryAware;
 
 public class ImageUrlConverterImpl implements ImageUrlConverter {
 
