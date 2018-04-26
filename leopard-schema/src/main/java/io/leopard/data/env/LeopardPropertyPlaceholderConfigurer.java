@@ -1,19 +1,14 @@
 package io.leopard.data.env;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
+
+import io.leopard.jdbc.LeopardBeanFactoryAware;
 
 /**
  * Leopard属性占位符配置器
@@ -50,8 +45,8 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
 		super.setBeanFactory(beanFactory);
-		this.placeholderResolver = getBean(beanFactory, PlaceholderResolver.class);
-		this.propertyFileResolver = getBean(beanFactory, PropertyFileResolver.class);
+		this.placeholderResolver = LeopardBeanFactoryAware.getSingleBean(beanFactory, PlaceholderResolver.class);
+		this.propertyFileResolver = LeopardBeanFactoryAware.getSingleBean(beanFactory, PropertyFileResolver.class);
 
 		String env = EnvUtil.getEnv();
 		Resource[] locations;
@@ -62,36 +57,6 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 			throw new RuntimeException(e.getMessage(), e);
 		}
 		super.setLocations(locations);
-	}
-
-	/**
-	 * getBean
-	 * 
-	 * LeopardPropertyPlaceholderConfigurer初始化时，@Autowired注解还没有起作用
-	 * 
-	 * @param beanFactory
-	 * @param requiredType
-	 * @return
-	 * @throws BeansException
-	 */
-	public <T> T getBean(BeanFactory beanFactory, Class<T> requiredType) throws BeansException {
-		DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
-		Map<String, T> matchingBeans = factory.getBeansOfType(requiredType);
-		if (matchingBeans.isEmpty()) {
-			throw new NoSuchBeanDefinitionException(requiredType);
-		}
-		if (matchingBeans.size() == 1) {
-			return matchingBeans.entrySet().iterator().next().getValue();
-		}
-		for (Entry<String, T> entry : matchingBeans.entrySet()) {
-			T bean = entry.getValue();
-			// TODO 还没有支持Bean有AOP
-			Primary primary = bean.getClass().getDeclaredAnnotation(Primary.class);
-			if (primary != null) {
-				return bean;
-			}
-		}
-		throw new NoUniqueBeanDefinitionException(requiredType, matchingBeans.keySet());
 	}
 
 	@Override
