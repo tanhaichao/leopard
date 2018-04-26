@@ -45,8 +45,8 @@ public class LeopardPropertyPlaceholderConfigurer extends org.springframework.be
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
 		super.setBeanFactory(beanFactory);
-		this.placeholderResolver = LeopardBeanFactoryAware.getSingleBean(PlaceholderResolver.class);
-		this.propertyFileResolver = LeopardBeanFactoryAware.getSingleBean(PropertyFileResolver.class);
+		this.placeholderResolver = LeopardBeanFactoryAware.getSingleBean(beanFactory, PlaceholderResolver.class);
+		this.propertyFileResolver = LeopardBeanFactoryAware.getSingleBean(beanFactory, PropertyFileResolver.class);
 
 		String env = EnvUtil.getEnv();
 		Resource[] locations;
