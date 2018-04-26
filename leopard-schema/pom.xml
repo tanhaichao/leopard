@@ -41,5 +41,10 @@
 			<artifactId>leopard-lang</artifactId>
 			<version>0.9.13-SNAPSHOT</version>
 		</dependency>
+		<dependency><!-- 要使用LeopardBeanFactoryAware -->
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-jdbc</artifactId>
+			<version>0.9.13-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
