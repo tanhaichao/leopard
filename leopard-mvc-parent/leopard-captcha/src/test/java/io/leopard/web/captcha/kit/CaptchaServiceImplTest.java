@@ -11,7 +11,7 @@ public class CaptchaServiceImplTest {
 
 	private CaptchaServiceImpl seccodeService = new CaptchaServiceImpl();
 
-	public CaptchaServiceImplTest() {
+	public CaptchaServiceImplTest() throws Exception {
 		Jdbc jdbc = JdbcFactory.creaeJdbcMysqlImpl("127.0.0.1", "example", "example", "example");
 		seccodeService.setJdbc(jdbc);
 		seccodeService.setTableName("captcha");

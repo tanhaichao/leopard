@@ -75,7 +75,7 @@ public class JdbcMysqlImplFactoryBean extends JdbcMysqlImpl {
 	}
 
 	@PostConstruct
-	public void init() {
+	public void init() throws Exception {
 		{
 			DataSource dataSource = super.getDataSource();
 			if (dataSource != null) {

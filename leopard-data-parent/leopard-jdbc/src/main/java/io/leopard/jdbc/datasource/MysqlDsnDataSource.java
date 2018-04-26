@@ -22,7 +22,7 @@ public class MysqlDsnDataSource extends JdbcDataSource {
 	}
 
 	@Override
-	public void init() {
+	public void init() throws Exception {
 		JdbcUrlInfo jdbcUrlInfo = DataSourceBuilder.parseUrl(url);
 		// String jdbcUrl = ProxyDataSource.getJdbcUrl(jdbcUrlInfo.getHost(),
 		// jdbcUrlInfo.getPort(), jdbcUrlInfo.getDatabase());

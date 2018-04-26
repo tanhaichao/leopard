@@ -126,7 +126,7 @@ public class JdbcDataSource implements DataSource {
 		// System.err.println("driverClass:" + driverClass);
 	}
 
-	public void init() {
+	public void init() throws Exception {
 		// String jdbcUrl = "jdbc:mysql://" + host + ":" + port + "/" + database + "?useUnicode=true&characterEncoding=UTF8";
 		// ComboPooledDataSource dataSource = new ComboPooledDataSource();
 		// dataSource.setDriverClass("org.gjt.mm.mysql.Driver");
@@ -143,6 +143,7 @@ public class JdbcDataSource implements DataSource {
 		// dataSource.setMaxStatements(0);
 		String jdbcUrl = DataSourceBuilder.getJdbcUrl(host, port, database);
 		this.dataSource = DataSourceBuilder.getDataSourceBuilder().createDataSource(driverClass, jdbcUrl, user, password, maxPoolSize, idleConnectionTestPeriod);
+
 	}
 
 	public void destroy() {

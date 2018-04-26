@@ -53,7 +53,7 @@ public class DataSourceBuilder {
 		return jdbcUrlInfo;
 	}
 
-	public ProxyDataSource createDataSource(String driverClass, String jdbcUrl, String user, String password, int maxPoolSize, int idleConnectionTestPeriod) {
+	public ProxyDataSource createDataSource(String driverClass, String jdbcUrl, String user, String password, int maxPoolSize, int idleConnectionTestPeriod) throws Exception {
 		if (StringUtils.isEmpty(driverClass)) {
 			// System.err.println("驱动程序没有设置.");
 			driverClass = "org.gjt.mm.mysql.Driver";

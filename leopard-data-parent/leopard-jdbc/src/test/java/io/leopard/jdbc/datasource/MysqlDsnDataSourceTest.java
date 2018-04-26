@@ -8,7 +8,7 @@ import io.leopard.jdbc.datasource.MysqlDsnDataSource;
 public class MysqlDsnDataSourceTest {
 
 	@Test
-	public void MysqlDsnDataSource() {
+	public void MysqlDsnDataSource() throws Exception {
 		MysqlDsnDataSource dataSource = new MysqlDsnDataSource();
 
 		dataSource.setUrl("jdbc:mysql://127.0.0.2:3306/leopard");

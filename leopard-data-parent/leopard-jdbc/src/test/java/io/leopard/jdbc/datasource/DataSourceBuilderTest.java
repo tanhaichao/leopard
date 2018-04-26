@@ -15,7 +15,7 @@ public class DataSourceBuilderTest {
 	}
 
 	@Test
-	public void createDataSource() throws PropertyVetoException {
+	public void createDataSource() throws Exception {
 		String jdbcUrl = DataSourceBuilder.getJdbcUrl("host", 3306, "leopard");
 		new DataSourceBuilder().createDataSource("org.gjt.mm.mysql.Driver", jdbcUrl, "user", "password", 10, 60);
 	}
