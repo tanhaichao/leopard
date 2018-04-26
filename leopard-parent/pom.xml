@@ -14,102 +14,9 @@
 
 
 
+
 	<!-- 小牛云配置 start -->
 	<profiles>
-		<profile>
-			<id>xiaoniu-windows</id>
-			<activation>
-				<file>
-					<exists>/Users/tanmr/xiaoniu</exists>
-				</file>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>io.xiaoniu</groupId>
-					<artifactId>webide-local</artifactId>
-					<version>0.1-SNAPSHOT</version>
-				</dependency>
-				<!-- <dependency> <groupId>io.leopard</groupId> <artifactId>autocode-all</artifactId> <version>0.1-SNAPSHOT</version> <scope>provided</scope> </dependency> -->
-			</dependencies>
-
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>io.leopard</groupId>
-							<artifactId>myjetty-maven-plugin</artifactId>
-							<version>0.9.13-SNAPSHOT</version>
-							<dependencies>
-								<dependency>
-									<groupId>io.xiaoniu</groupId>
-									<artifactId>niujetty-classpath</artifactId>
-									<version>0.1-SNAPSHOT</version>
-								</dependency>
-								<dependency>
-									<groupId>io.leopard</groupId>
-									<artifactId>myini</artifactId>
-									<version>0.1-SNAPSHOT</version>
-								</dependency>
-							</dependencies>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>build-helper-maven-plugin</artifactId>
-						<version>1.7</version>
-						<executions>
-							<execution>
-								<id>add-source</id>
-								<phase>generate-sources</phase>
-								<goals>
-									<goal>add-source</goal>
-								</goals>
-								<configuration>
-									<sources>
-										<source>gen/main/java</source>
-									</sources>
-								</configuration>
-							</execution>
-							<execution>
-								<id>add-test-source</id>
-								<phase>generate-test-sources</phase>
-								<goals>
-									<goal>add-test-source</goal>
-								</goals>
-								<configuration>
-									<tasks>
-										<echo>add integration sources</echo>
-									</tasks>
-									<sources>
-										<source>src/mvcunit/java</source>
-										<source>src/apimock/java</source>
-										<source>gen/test/java</source>
-									</sources>
-								</configuration>
-							</execution>
-
-							<execution>
-								<id>add-resource</id>
-								<phase>generate-resources</phase>
-								<goals>
-									<goal>add-resource</goal>
-								</goals>
-								<configuration>
-									<resources>
-										<resource>
-											<directory>gen/main/resources</directory>
-										</resource>
-									</resources>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
 		<profile>
 			<id>xiaoniu-linux</id>
 			<activation>
@@ -120,9 +27,11 @@
 			<dependencies>
 				<dependency>
 					<groupId>io.xiaoniu</groupId>
-					<artifactId>webide-local</artifactId>
+					<artifactId>webide-local-${project.packaging}</artifactId>
 					<version>0.1-SNAPSHOT</version>
+					<type>pom</type>
 				</dependency>
+				<!-- <dependency> <groupId>io.leopard</groupId> <artifactId>autocode-all</artifactId> <version>0.1-SNAPSHOT</version> <scope>provided</scope> </dependency> -->
 			</dependencies>
 
 			<build>
