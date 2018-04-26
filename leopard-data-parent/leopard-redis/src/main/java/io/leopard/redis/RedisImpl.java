@@ -43,6 +43,7 @@ public class RedisImpl extends AbstractRedis implements Redis {
 	private IJedisPool pool;
 
 	protected String server;
+
 	protected String password;
 
 	public RedisImpl() {
@@ -156,7 +157,7 @@ public class RedisImpl extends AbstractRedis implements Redis {
 	 * @param e
 	 * @return
 	 */
-	protected String getErrorMessage(Exception e) {
+	protected String error(Exception e) {
 
 		String ip;
 		try {
@@ -179,8 +180,8 @@ public class RedisImpl extends AbstractRedis implements Redis {
 		}
 		// ahai 20131026 新版redis连接池的异常信息已经包含了IP和端口信息.
 		catch (JedisConnectionException e) {
-			String message = this.getErrorMessage(e);
-			throw new JedisConnectionException(message, e);
+			this.error(e);
+			throw new JedisConnectionException(e.getMessage(), e);
 			// throw e;
 		}
 		// finally {
@@ -450,9 +451,9 @@ public class RedisImpl extends AbstractRedis implements Redis {
 		}
 		catch (JedisConnectionException e) {
 			this.returnBrokenResource(jedis);
-			String message = this.getErrorMessage(e);
+			this.error(e);
 			// message += " key:" + key;
-			throw new JedisConnectionException(message, e);
+			throw new JedisConnectionException(e.getMessage(), e);
 		}
 		catch (RuntimeException e) {
 			this.returnBrokenResource(jedis);
