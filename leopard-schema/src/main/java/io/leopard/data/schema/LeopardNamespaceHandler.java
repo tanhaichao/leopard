@@ -10,13 +10,10 @@ import io.leopard.data.env.AppInitializerImpl;
 public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
+	private BeanDefinitionParserRegister beanDefinitionParserRegister = new BeanDefinitionParserRegister();
+
 	public LeopardNamespaceHandler() {
 		new AppInitializerImpl().init();
-	}
-
-	public boolean isUseH2() {
-		String useH2 = System.getProperty("useH2");
-		return "true".equals(useH2);
 	}
 
 	@Override
@@ -54,38 +51,14 @@ public class LeopardNamespaceHandler extends NamespaceHandlerSupport {
 		// logger.info("registerParser elementName:" + elementName + " className:" + className);
 		BeanDefinitionParser parser;
 		try {
-			parser = getBeanDefinitionParser(elementName, className);
+			parser = beanDefinitionParserRegister.getBeanDefinitionParser(elementName, className);
 			// logger.info("registerParser elementName:" + elementName + " parser:" + parser);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return;
 		}
-		// try {
-		// parser = (BeanDefinitionParser) Class.forName(className).newInstance();
-		// }
-		// catch (Exception e) {
-		// // throw new RuntimeException(e.getMessage(), e);
-		// return;
-		// }
-
 		registerBeanDefinitionParser(elementName, parser);
 	}
 
-	protected BeanDefinitionParser getBeanDefinitionParser(String elementName, String className) throws Exception {
-		boolean useH2 = isUseH2();
-		if (!useH2) {
-			return (BeanDefinitionParser) Class.forName(className).newInstance();
-		}
-
-		String h2ClassName = className.replace("io.leopard.schema", "io.leopard.schema.h2");
-		Class<?> clazz;
-		try {
-			clazz = Class.forName(h2ClassName);
-		}
-		catch (ClassNotFoundException e) {
-			clazz = Class.forName(className);
-		}
-		return (BeanDefinitionParser) clazz.newInstance();
-	}
 }
