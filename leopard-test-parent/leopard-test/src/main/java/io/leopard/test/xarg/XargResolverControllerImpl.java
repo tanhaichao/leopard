@@ -11,6 +11,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
+import io.leopard.util.CtClassUtil;
+
 public class XargResolverControllerImpl implements XargResolver {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
