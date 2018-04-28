@@ -17,22 +17,25 @@ public class CtClassUtil {
 
 	static {
 		pool.insertClassPath(new ClassClassPath(CtClassUtil.class));
+
+		// // 20170827 支持 module_merge
+		// pool.insertClassPath(new LoaderClassPath(Thread.currentThread().getContextClassLoader()));
 	}
 
-	public static CtClass getClass(Class<?> clazz) {
-		try {
-			return pool.get(clazz.getName());
-		}
-		catch (NotFoundException e) {
-			Throwable error = e.getCause();
-			if (error instanceof RuntimeException) {
-				throw (RuntimeException) error;
-			}
-			if (error instanceof Exception) {
-				throw new RuntimeException(error.getMessage(), error);
-			}
-			throw new RuntimeException(e.getMessage(), e);
-		}
+	public static CtClass getClass(Class<?> clazz) throws NotFoundException {
+		// try {
+		return pool.get(clazz.getName());
+		// }
+		// catch (NotFoundException e) {
+		// Throwable error = e.getCause();
+		// if (error instanceof RuntimeException) {
+		// throw (RuntimeException) error;
+		// }
+		// if (error instanceof Exception) {
+		// throw new RuntimeException(error.getMessage(), error);
+		// }
+		// throw new RuntimeException(e.getMessage(), e);
+		// }
 	}
 
 	public static CtMethod getMethod(Class<?> clazz, Method method) throws NotFoundException {
@@ -58,36 +61,22 @@ public class CtClassUtil {
 	 * @param clazz
 	 * @param method
 	 * @return
+	 * @throws NotFoundException
 	 */
 	public static String[] getParameterNames(Method method) {
 		// AssertUtil.assertNotNull(method, "参数method不能为空.");
 		Class<?> clazz = method.getDeclaringClass();
-		return getParameterNames(clazz, method);
+		try {
+			return getParameterNames(clazz, method);
+		}
+		catch (NotFoundException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
 	}
 
-	public static String[] getParameterNames(Class<?> clazz, Method method) {
-
-		CtMethod ctMethod;
-		try {
-			ctMethod = CtClassUtil.getMethod(clazz, method);
-		}
-		catch (NotFoundException e) {
-			Throwable error = e.getCause();
-			if (error instanceof RuntimeException) {
-				throw (RuntimeException) error;
-			}
-			if (error instanceof Exception) {
-				throw new RuntimeException(error.getMessage(), error);
-			}
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		String[] names;
-		try {
-			names = getParameterNames(ctMethod);
-		}
-		catch (NotFoundException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
+	public static String[] getParameterNames(Class<?> clazz, Method method) throws NotFoundException {
+		CtMethod ctMethod = CtClassUtil.getMethod(clazz, method);
+		String[] names = getParameterNames(ctMethod);
 		// System.err.println("getParameterNames methodName:" + method.toGenericString() + " names:" + StringUtils.join(names, ", "));
 		return names;
 	}
