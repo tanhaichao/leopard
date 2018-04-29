@@ -319,6 +319,21 @@ public class RequestUtil {
 		String requestedWith = request.getHeader("X-Requested-With");
 		return "XMLHttpRequest".equals(requestedWith);
 	}
+
+	/**
+	 * 根据path获取第一个目录
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public static String getFirstFolder(String path) {
+		int index = path.indexOf("/", 1);
+		if (index == -1) {
+			return null;
+		}
+		return path.substring(0, index + 1);
+	}
+
 	// public static void test() {
 	// logger.info("test");
 	// }
