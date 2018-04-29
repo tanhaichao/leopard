@@ -15,7 +15,7 @@ public interface ResourceHandler {
 
 	/**
 	 * 
-	 * @param uri URL(已经做过路径安全性检查)
+	 * @param uri URL(已经做过路径安全性检查，并做了重复的/过滤)
 	 * @param request
 	 * @param response
 	 * @return
