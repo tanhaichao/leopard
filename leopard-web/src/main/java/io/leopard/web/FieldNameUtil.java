@@ -6,6 +6,7 @@ package io.leopard.web;
  * @author 阿海
  *
  */
+@Deprecated
 public class FieldNameUtil {
 
 	/**
