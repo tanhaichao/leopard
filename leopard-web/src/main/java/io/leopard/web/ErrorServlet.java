@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import io.leopard.mvc.trynb.ErrorUtil;
+
 /**
  * 错误页面
  * 
@@ -35,7 +37,7 @@ public class ErrorServlet extends HttpServlet {
 		else {
 			Throwable exception = (Throwable) obj;
 			logger.error(exception.getMessage(), exception);
-			message = exception.getMessage();
+			message = ErrorUtil.parseMessage(exception);
 		}
 
 		response.setContentType("text/html; charset=utf-8");
