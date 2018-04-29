@@ -5,6 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.core.io.Resource;
 
+/**
+ * 资源文件处理器
+ * 
+ * @author 谭海潮
+ *
+ */
 public interface ResourceHandler {
 
 	/**
