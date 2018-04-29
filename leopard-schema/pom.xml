@@ -45,6 +45,7 @@
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-servlet</artifactId>
 			<version>0.9.13-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 </project>
