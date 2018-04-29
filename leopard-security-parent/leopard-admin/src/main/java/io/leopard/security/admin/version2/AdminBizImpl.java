@@ -2,8 +2,6 @@ package io.leopard.security.admin.version2;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +26,7 @@ public class AdminBizImpl implements AdminBiz {
 	@Autowired
 	private AdminService adminService;
 
-	@Resource // 允许为空
+	@Autowired(required = false) // 允许为空
 	private AdminApi adminApi;
 
 	@Autowired
