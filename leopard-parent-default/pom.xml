@@ -41,7 +41,11 @@
 				<artifactId>leopard-httpnb</artifactId>
 				<version>0.9.13-SNAPSHOT</version>
 			</dependency>
-
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-bdb</artifactId>
+				<version>0.9.13-SNAPSHOT</version>
+			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-timer</artifactId>
