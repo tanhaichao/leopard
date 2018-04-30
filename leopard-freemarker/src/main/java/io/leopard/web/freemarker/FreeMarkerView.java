@@ -66,8 +66,21 @@ public class FreeMarkerView extends org.springframework.web.servlet.view.freemar
 	}
 
 	public void render(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, ?> model = this.getModel();
-		super.render(model, request, response);
+		super.render(null, request, response);
+	}
+
+	/**
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	// at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1286)
+	@Override
+	public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 忽略DispatcherServlet.render传进来的model
+		super.render(this.getModel(), request, response);
 	}
 
 	@Override
