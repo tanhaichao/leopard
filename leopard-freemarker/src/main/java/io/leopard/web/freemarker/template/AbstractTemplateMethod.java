@@ -54,6 +54,7 @@ public abstract class AbstractTemplateMethod implements TemplateMethodModelEx, T
 			throw e;
 		}
 		catch (RuntimeException e) {
+			logger.error("key:" + this.getKey() + " clazz:" + this.getClass().getName());
 			throw e;
 		}
 		catch (Exception e) {
