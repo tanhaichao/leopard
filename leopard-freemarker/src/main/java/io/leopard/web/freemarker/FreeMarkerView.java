@@ -19,9 +19,9 @@ import freemarker.template.Template;
 
 public class FreeMarkerView extends org.springframework.web.servlet.view.freemarker.FreeMarkerView {
 
-	private String folder;
+	protected String folder;
 
-	private ModelMap model;
+	protected ModelMap model;
 
 	public FreeMarkerView() {
 	}
