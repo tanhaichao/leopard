@@ -66,7 +66,7 @@ public class FreeMarkerView extends org.springframework.web.servlet.view.freemar
 	}
 
 	public void render(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		super.render(null, request, response);
+		render(null, request, response);
 	}
 
 	/**
