@@ -41,8 +41,7 @@ public class JstlFunctions {
 	/**
 	 * 对html标签进行转义
 	 * 
-	 * @param str
-	 *            html标签
+	 * @param str html标签
 	 * @return 转义后的字符串
 	 */
 	public static String escapeHTMLTags(final String str) {
@@ -52,8 +51,7 @@ public class JstlFunctions {
 	/**
 	 * 对字符串进行URL编码
 	 * 
-	 * @param str
-	 *            字符串
+	 * @param str 字符串
 	 * @return 编码后的字符串
 	 */
 	public static String urlEncode(final String str) {

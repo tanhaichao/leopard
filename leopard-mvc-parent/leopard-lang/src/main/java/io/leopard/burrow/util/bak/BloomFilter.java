@@ -4,15 +4,17 @@ import java.util.BitSet;
 
 public class BloomFilter {
 	private BitSet bitSet;
+
 	private int bitSetSize;
+
 	private int addedElements;
+
 	private int hashFunctionNumber;
 
 	/**
 	 * 构造一个布隆过滤器
 	 * 
-	 * @param n
-	 *            当前过滤器预计所要包含的记录.
+	 * @param n 当前过滤器预计所要包含的记录.
 	 */
 	public BloomFilter(int n) {
 		this.hashFunctionNumber = 8;

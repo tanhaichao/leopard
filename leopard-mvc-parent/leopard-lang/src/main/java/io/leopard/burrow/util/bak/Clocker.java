@@ -4,6 +4,7 @@ package io.leopard.burrow.util.bak;
 
 public class Clocker {
 	private long start;
+
 	private long time;
 
 	/**
