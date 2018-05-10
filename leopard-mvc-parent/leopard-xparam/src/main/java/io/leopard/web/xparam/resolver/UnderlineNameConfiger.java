@@ -26,9 +26,12 @@ public class UnderlineNameConfiger {
 		enable = !"false".equals(underline);
 	}
 
-	private static boolean enable = true;
+	private static Boolean enable = true;
 
 	public static boolean isEnable() {
+		if (enable == null) {
+			throw new RuntimeException("未初始化.");
+		}
 		return enable;
 	}
 
