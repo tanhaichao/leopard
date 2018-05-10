@@ -8,11 +8,11 @@
 
 	<!-- 
 	<bean class="io.leopard.aop.LeopardAopBeanPostProcessor" />
+	<bean class="io.leopard.data.AutoResourceBeanPostProcessor" />
 	 -->
 	
 	<bean class="io.leopard.data4j.pubsub.PubSubBeanPostProcessor" />
 	<bean class="io.leopard.data.alldb.AlldbBeanPostProcessor" />
-	<bean class="io.leopard.data.AutoResourceBeanPostProcessor" />
 	<bean class="io.leopard.spring.LeopardBeanFactoryAware" />
 
 </beans>
