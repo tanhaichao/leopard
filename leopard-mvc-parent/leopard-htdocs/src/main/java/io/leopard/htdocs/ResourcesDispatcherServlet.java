@@ -137,13 +137,13 @@ public class ResourcesDispatcherServlet extends DispatcherServlet {
 	@Override
 	protected void noHandlerFound(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String path = request.getRequestURI();
-		logger.warn("noHandlerFound:" + path);
+		logger.warn("noHandlerFound start:" + path);
 		Resource resource = this.getResource(path, request, response);
 		if (resource != null && resource.exists()) {
 			this.transform(request, response, resource);
 			return;
 		}
-		// System.err.println("noHandlerFound end:" + uri);
+		logger.warn("noHandlerFound end:" + path);
 		super.noHandlerFound(request, response);
 	}
 
