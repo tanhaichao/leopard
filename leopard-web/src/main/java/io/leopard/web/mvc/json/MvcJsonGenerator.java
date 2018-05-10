@@ -7,10 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-
-import io.leopard.web.xparam.resolver.UnderlineNameConfiger;
 
 /**
  * MVC层JSON生成器
@@ -38,18 +35,18 @@ public class MvcJsonGenerator {
 			}
 		}
 
-		boolean enable = UnderlineNameConfiger.isEnable();
-		// System.err.println("MappingJacksonResponseBodyAdvice underline:" + underline + " enable:" + enable);
-		if (enable) {
-			mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-			// mapper.registerModule(module);
-			// formatWriter = mapper.writer().withDefaultPrettyPrinter();
-			// mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
-		}
-		else {
-			mapper = new ObjectMapper();
-			// mapper = new ObjectMapper();
-		}
+		// boolean enable = UnderlineNameConfiger.isEnable();
+		// // System.err.println("MappingJacksonResponseBodyAdvice underline:" + underline + " enable:" + enable);
+		// if (enable) {
+		// mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+		// // mapper.registerModule(module);
+		// // formatWriter = mapper.writer().withDefaultPrettyPrinter();
+		// // mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+		// }
+		// else {
+		mapper = new ObjectMapper();
+		// mapper = new ObjectMapper();
+		// }
 		mapper.registerModule(module);
 		formatWriter = mapper.writer().withDefaultPrettyPrinter();
 	}
