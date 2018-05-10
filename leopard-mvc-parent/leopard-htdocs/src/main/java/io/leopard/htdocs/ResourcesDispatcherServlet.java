@@ -126,7 +126,7 @@ public class ResourcesDispatcherServlet extends DispatcherServlet {
 				// logger.info("path:" + path);
 				Resource resource = handler.doHandler(path, request, response);
 				if (resource != null && resource.exists()) {
-					logger.info("handler:" + handler.getClass().getSimpleName() + " resource:" + resource.exists() + " path:" + path);
+					// logger.info("handler:" + handler.getClass().getSimpleName() + " resource:" + resource.exists() + " path:" + path);
 					return resource;
 				}
 			}
@@ -137,13 +137,13 @@ public class ResourcesDispatcherServlet extends DispatcherServlet {
 	@Override
 	protected void noHandlerFound(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String path = request.getRequestURI();
-		logger.warn("noHandlerFound start:" + path);
+		// logger.warn("noHandlerFound start:" + path);
 		Resource resource = this.getResource(path, request, response);
 		if (resource != null && resource.exists()) {
 			this.transform(request, response, resource);
 			return;
 		}
-		logger.warn("noHandlerFound end:" + path);
+		// logger.warn("noHandlerFound end:" + path);
 		super.noHandlerFound(request, response);
 	}
 
