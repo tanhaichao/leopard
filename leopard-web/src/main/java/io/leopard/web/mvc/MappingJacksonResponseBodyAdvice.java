@@ -3,6 +3,7 @@ package io.leopard.web.mvc;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +34,12 @@ public class MappingJacksonResponseBodyAdvice implements ResponseBodyAdvice<Obje
 	@Value("${leopard.mvc.json.format}")
 	private String format;
 
-	private MvcJsonGenerator mvcJsonGenerator = new MvcJsonGenerator();
+	private MvcJsonGenerator mvcJsonGenerator;
+
+	@PostConstruct
+	public void init() {
+		mvcJsonGenerator = new MvcJsonGenerator();
+	}
 
 	@Override
 	public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
