@@ -126,7 +126,7 @@ public class ResourcesDispatcherServlet extends DispatcherServlet {
 				// logger.info("path:" + path);
 				Resource resource = handler.doHandler(path, request, response);
 				if (resource != null && resource.exists()) {
-					// logger.info("handler:" + handler.getClass().getSimpleName() + " resource:" + resource.exists());
+					logger.info("handler:" + handler.getClass().getSimpleName() + " resource:" + resource.exists() + " path:" + path);
 					return resource;
 				}
 			}
