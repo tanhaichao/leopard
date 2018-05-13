@@ -77,7 +77,7 @@ public class ExtensiveDomain {
 	 * @return
 	 */
 	public boolean match(String serverName) {
-		logger.warn("match serverName:" + serverName);
+		// logger.warn("match serverName:" + serverName);
 		if (!nonList.isEmpty()) {
 			int index = 0;
 			for (String domain : nonList) {
