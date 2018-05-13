@@ -44,7 +44,9 @@ public class HeaderExpression extends AbstractNameValueExpression<String> {
 	protected boolean matchName(HttpServletRequest request) {
 		// logger.info("matchName name:" + name + " request:" + request.getHeader(name));
 		if ("Host".equals(name)) {
-			return matchExtensiveDomain(request);
+			if (extensiveDomain.hasDomainExpression()) {
+				return matchExtensiveDomain(request);
+			}
 		}
 		return request.getHeader(name) != null;
 	}
