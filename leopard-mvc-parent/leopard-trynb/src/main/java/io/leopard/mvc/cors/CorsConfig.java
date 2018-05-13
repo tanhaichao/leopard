@@ -45,10 +45,6 @@ public class CorsConfig {
 		if (StringUtils.isEmpty(referer)) {
 			return null;
 		}
-		return getHostAndPort(referer);
-	}
-
-	protected String getHostAndPort(String referer) {
 		URL url;
 		try {
 			url = new URL(referer);
@@ -57,13 +53,17 @@ public class CorsConfig {
 			return null;
 		}
 		String host = url.getHost();
-
 		boolean matched = allowOriginResolver.match(host);
 		// System.err.println("host:" + host + " matched:" + matched + " originRegexList:" + originRegexList);
 		if (!matched) {
 			return null;
 		}
 
+		return getHostAndPort(url);
+	}
+
+	public static String getHostAndPort(URL url) {
+		String host = url.getHost();
 		int port = url.getPort();
 		String scheme = url.getProtocol();
 		StringBuilder sb = new StringBuilder(48);
