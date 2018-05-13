@@ -45,6 +45,10 @@ public class CorsConfig {
 		if (StringUtils.isEmpty(referer)) {
 			return null;
 		}
+		return getHostAndPort(referer);
+	}
+
+	public String getHostAndPort(String referer) {
 		URL url;
 		try {
 			url = new URL(referer);
@@ -58,7 +62,6 @@ public class CorsConfig {
 		if (!matched) {
 			return null;
 		}
-
 		return getHostAndPort(url);
 	}
 
