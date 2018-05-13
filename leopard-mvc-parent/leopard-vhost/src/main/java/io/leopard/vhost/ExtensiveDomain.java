@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * 泛域名配置
  * 
@@ -13,10 +16,20 @@ import java.util.Set;
  */
 public class ExtensiveDomain {
 
+	protected Log logger = LogFactory.getLog(this.getClass());
+
 	protected final List<String> nonList = new ArrayList<String>();
+
 	protected final List<String> nonIgnoreList = new ArrayList<String>();
+
+	/**
+	 * 泛型域名正则表达式
+	 */
 	protected final List<String> regexList = new ArrayList<String>();
 
+	/**
+	 * 忽略泛型匹配的域名
+	 */
 	private final Set<String> IGNORE_DOMAIN_SET = new HashSet<String>();
 
 	/**
@@ -48,7 +61,14 @@ public class ExtensiveDomain {
 		regexList.add(regex + "$");
 	}
 
+	/**
+	 * 匹配域名
+	 * 
+	 * @param serverName
+	 * @return
+	 */
 	public boolean match(String serverName) {
+		logger.warn("match serverName:" + serverName);
 		if (!nonList.isEmpty()) {
 			int index = 0;
 			for (String domain : nonList) {
@@ -66,8 +86,8 @@ public class ExtensiveDomain {
 			return false;
 		}
 		for (String regex : regexList) {
-			boolean matches = serverName.matches(regex);
-			if (matches) {
+			boolean matched = serverName.matches(regex);
+			if (matched) {
 				return true;
 			}
 		}

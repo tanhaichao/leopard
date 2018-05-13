@@ -36,6 +36,7 @@ public class VhostRequestMappingInfoBuilder implements RequestMappingInfoBuilder
 
 		List<String> hostList = new ArrayList<>();
 		for (String host : hosts) {
+			logger.warn("host:" + host);
 			if (host.startsWith("*.")) {// 泛域名
 				extensiveDomain.addExtensiveDomain(host);
 			}

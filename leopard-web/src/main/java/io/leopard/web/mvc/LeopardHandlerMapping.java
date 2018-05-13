@@ -31,7 +31,7 @@ import io.leopard.redis.Redis;
 import io.leopard.vhost.ExtensiveDomain;
 import io.leopard.vhost.RequestMappingInfoBuilder;
 import io.leopard.vhost.RequestMappingInfoBuilderImpl;
-import io.leopard.web.mvc.condition.ServerNameRequestCondition;
+import io.leopard.web.mvc.condition.ExtensiveDomainRequestCondition;
 import io.leopard.web.session.StoreRedisImpl;
 
 public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
@@ -125,7 +125,7 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 				i++;
 			}
 		}
-		RequestCondition<?> customCondition = new ServerNameRequestCondition(extensiveDomain, headers);
+		RequestCondition<?> customCondition = new ExtensiveDomainRequestCondition(extensiveDomain, headers);
 		return new RequestMappingInfo(new PatternsRequestCondition(patterns, getUrlPathHelper(), getPathMatcher(), false, this.useTrailingSlashMatch(), this.getFileExtensions()),
 				new RequestMethodsRequestCondition(annotation.method()), new ParamsRequestCondition(annotation.params()), new HeadersRequestCondition(),
 				new ConsumesRequestCondition(annotation.consumes(), headers), new ProducesRequestCondition(annotation.produces(), headers, getContentNegotiationManager()), customCondition);
