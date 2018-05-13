@@ -1,6 +1,8 @@
 package io.leopard.vhost;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -31,8 +33,22 @@ public class VhostRequestMappingInfoBuilder implements RequestMappingInfoBuilder
 		if (hosts == null || hosts.length == 0) {
 			return;
 		}
-		String host = StringUtils.join(hosts, ", ");
-		headers.put("Host", host);
+
+		List<String> hostList = new ArrayList<>();
+		for (String host : hosts) {
+			if (host.startsWith("*.")) {// 泛域名
+				extensiveDomain.addExtensiveDomain(host);
+			}
+			else {
+				hostList.add(host);
+			}
+		}
+
+		if (!hostList.isEmpty()) {
+			String host = StringUtils.join(hostList, ", ");
+			headers.put("Host", host);
+		}
+
 	}
 
 	/**
