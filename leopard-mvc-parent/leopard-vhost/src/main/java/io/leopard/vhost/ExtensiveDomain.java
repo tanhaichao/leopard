@@ -62,6 +62,15 @@ public class ExtensiveDomain {
 	}
 
 	/**
+	 * 判断是否有域名表达式
+	 * 
+	 * @return
+	 */
+	public boolean hasDomainExpression() {
+		return !nonList.isEmpty() || !regexList.isEmpty();
+	}
+
+	/**
 	 * 匹配域名
 	 * 
 	 * @param serverName
