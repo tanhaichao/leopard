@@ -3,13 +3,16 @@ package io.leopard.web.mvc;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import io.leopard.web.servlet.ServerInitializerImpl;
 
@@ -17,11 +20,25 @@ public class LeopardDispatcherServlet extends OptionsDispatcherServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	@Autowired(required = false)
+	private List<ModelAndViewRender> renderList;
+
 	public LeopardDispatcherServlet() {
 		// System.err.println("classLoader:" + this.getClass().getClassLoader());
 		new ServerInitializerImpl().run();
 	}
 
+	@Override
+	protected void render(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if (renderList != null) {
+			for (ModelAndViewRender render : renderList) {
+				render.render(mv, request, response);
+			}
+		}
+		super.render(mv, request, response);
+	}
+
+	@Override
 	protected void noHandlerFound(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String uri = request.getRequestURI();
 		String mimeType = getServletContext().getMimeType(uri);
