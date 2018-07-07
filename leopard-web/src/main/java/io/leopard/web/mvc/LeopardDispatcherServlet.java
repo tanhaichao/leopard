@@ -3,14 +3,18 @@ package io.leopard.web.mvc;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.BeanFactoryUtils;
+import org.springframework.core.annotation.AnnotationAwareOrderComparator;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,8 +24,21 @@ public class LeopardDispatcherServlet extends OptionsDispatcherServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired(required = false)
 	private List<ModelAndViewRender> renderList;
+
+	@Override
+	protected WebApplicationContext initWebApplicationContext() {
+		WebApplicationContext context = super.initWebApplicationContext();
+		{
+			Map<String, ModelAndViewRender> matchingBeans = BeanFactoryUtils.beansOfTypeIncludingAncestors(context, ModelAndViewRender.class, true, false);
+			if (!matchingBeans.isEmpty()) {
+				this.renderList = new ArrayList<ModelAndViewRender>(matchingBeans.values());
+				AnnotationAwareOrderComparator.sort(this.renderList);
+			}
+		}
+
+		return context;
+	}
 
 	public LeopardDispatcherServlet() {
 		// System.err.println("classLoader:" + this.getClass().getClassLoader());
@@ -30,6 +47,7 @@ public class LeopardDispatcherServlet extends OptionsDispatcherServlet {
 
 	@Override
 	protected void render(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// logger.info("render:" + mv.getClass().getName() + " renderList:" + renderList);
 		if (renderList != null) {
 			for (ModelAndViewRender render : renderList) {
 				render.render(mv, request, response);
