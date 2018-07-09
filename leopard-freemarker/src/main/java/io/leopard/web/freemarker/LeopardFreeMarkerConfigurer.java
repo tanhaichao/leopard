@@ -31,6 +31,14 @@ public class LeopardFreeMarkerConfigurer extends FreeMarkerConfigurer implements
 		this.freemarkerVariables = variables;
 	}
 
+	public Map<String, Object> getFreemarkerVariables() {
+		return freemarkerVariables;
+	}
+
+	public Properties getFreemarkerSettings() {
+		return freemarkerSettings;
+	}
+
 	private Properties freemarkerSettings;
 
 	@Override
