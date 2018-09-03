@@ -567,6 +567,16 @@ public interface Jdbc {
 
 	<T> Page<T> queryForPage(String sql, Class<T> elementType, StatementParameter param);
 
+	/**
+	 * 查询分页数据(数据量大时，总记录条数计算存在性能问题，请慎用)
+	 * 
+	 * @param sql
+	 * @param elementType
+	 * @param param
+	 * @param start
+	 * @param size
+	 * @return
+	 */
 	<T> Page<T> queryForPage(String sql, Class<T> elementType, StatementParameter param, int start, int size);
 
 	void destroy();
