@@ -561,10 +561,33 @@ public interface Jdbc {
 
 	<T> Paging<T> queryForPaging(String sql, Class<T> elementType, StatementParameter param, int start, int size);
 
+	/**
+	 * 查询分页数据
+	 * 
+	 * @param sql
+	 * @param elementType
+	 * @return
+	 */
 	<T> Page<T> queryForPage(String sql, Class<T> elementType);
 
+	/**
+	 * 查询分页数据
+	 * 
+	 * @param sql
+	 * @param elementType
+	 * @param params
+	 * @return
+	 */
 	<T> Page<T> queryForPage(String sql, Class<T> elementType, Object... params);
 
+	/**
+	 * 查询分页数据
+	 * 
+	 * @param sql
+	 * @param elementType
+	 * @param param
+	 * @return
+	 */
 	<T> Page<T> queryForPage(String sql, Class<T> elementType, StatementParameter param);
 
 	/**
