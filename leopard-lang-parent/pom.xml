@@ -24,11 +24,9 @@
 		<module>leopard-timer</module>
 		<module>leopard-command</module>
 		<module>leopard-servlet</module>
-		<module>leopard-json</module>
 		<module>leopard-httpnb</module>
 		<module>leopard-exception</module>
 		<module>leopard-util</module>
-		<module>leopard-datatype</module>
 	</modules>
 
 </project>
