@@ -14,12 +14,9 @@
 	</parent>
 
 	<modules>
-		<module>leopard-jdbc</module>
-		<module>leopard-redis</module>
 		<module>leopard-memcache</module>
 		<module>leopard-mongo</module>
 		<module>leopard-memdb</module>
-		<module>leopard-cache</module>
 		<module>leopard-queue</module>
 		<module>leopard-dfs</module>
 		<module>leopard-kit</module>
