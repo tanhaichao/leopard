@@ -255,7 +255,6 @@
 		<module>leopard-web</module>
 		<module>leopard-freemarker</module>
 
-		<module>javahost</module>
 		<module>leopard-lang-parent</module>
 		<module>leopard-test-parent</module>
 		<module>leopard-data-parent</module>
