@@ -43,7 +43,7 @@ public class LeopardValidUtil {
 	/**
 	 * 验证uid是否合法 .
 	 * 
-	 * @param yyuid
+	 * @param uid
 	 * @return 合法 false 非法true
 	 */
 	public static boolean isValidUid(long uid) {
