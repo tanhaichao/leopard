@@ -41,7 +41,7 @@ public class LeopardValidUtil {
 	}
 
 	/**
-	 * 验证yyuid是否合法 .
+	 * 验证uid是否合法 .
 	 * 
 	 * @param yyuid
 	 * @return 合法 false 非法true
